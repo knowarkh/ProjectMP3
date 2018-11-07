@@ -1,0 +1,38 @@
+Exporter une table sur mongoDB
+./mongoexport --db projet --collection musique --out musique.json
+
+Sauvegarder la bd
+./mongodump
+
+Ajouter un donnée
+db.nomTable.insertOne({key : value})
+
+Ajouter des données 
+db.nomTable.insertMany([{key : value}, {key2 : value2}])
+
+Chercher des données
+db.nomTable.find({condition1, condition2}, [{ argumentsVoulu}])
+
+-- Mots clés pour les recherches
+
+$gt, $gte Plus grand que (greater than)"a" : {"$gt" : 10}
+
+$lt, $lte <, ≤ Plus petit que (less than)
+	
+
+"a" : {"$lt" : 10} $ne ≄ Différent de (not equal)
+	
+"a" : {"$ne" : 10} $in, $nin ∈, ∉ Fait parti de (ou ne doit pas)
+"a" : {"$in" : [10, 12, 15, 18] } 
+
+"a" : {“$or” : [{"$gt" : 10}, {“$lt” : 5} ] } $or ៴ OU logique		
+
+"a" : {“$and” : [{"$lt" : 10}, {“$gt” : 5} ] } $and ៱ ET logique	
+
+“a" : {“$not” : {"$lt" : 10} } $not ￢ Négation	
+
+“a” : {“$exists” : 1} $exists ∃ La clé existe dans le document 
+	
+“a” : {“$size” : 5} test sur la taille d'une liste (uniquement par égalité)
+
+$elemMatch : {"grade" : "C","score" : {$l t :40}} permet de 

@@ -1,0 +1,29 @@
+db.morceau.insertOne(
+    {
+	titre: null,
+	annee: null,
+	duree: null,
+	nbEcoute: null,
+	nbLike: null,
+	nbPoints: null,
+	nbPartage: null,
+	cheminMP3: null,
+	cover: null,
+	album: {
+	    id: null,
+	    titre: null
+	},
+	artiste: {
+	    id: null,
+	    nom: null
+	},
+	playlist: {
+	    id: null,
+	    nom: null,
+	    utilisateur: {
+		id: null,
+		token: null
+	    }
+	}
+    }
+)

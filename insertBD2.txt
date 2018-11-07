@@ -1,0 +1,128 @@
+db.morceau.insertMany([
+    {
+	titre: "Cookies4Ever",
+    annee : 2017,
+	duree: 219,
+	nbEcoute: 7321,
+	nbLike: 1223,
+	nbPoints: 12632,
+	nbPartage: 2342,
+	cheminMP3: "/music/Les Mousquetaires/Cookies4Ever.mp3",
+	cover: "/cover/Les Mousquetaires/Cookies4Ever.png",
+    album : {
+        id : 10,
+        titre : "Cookies4Ever"
+        },
+    artiste: {
+        id : 0,
+        nom : "Les Mousquetaires",
+        },
+    playlist : null
+    },
+    {
+	titre: "Levan Polka",
+    annee : 2012,
+	duree: 225,
+	nbEcoute: 34000000,
+	nbLike: 1000000,
+	nbPoints: 12632,
+	nbPartage: 600321,
+	cheminMP3: "/music/Hatsune_Miku/Levan_Polka.mp3",
+	cover: "/cover/Hatsune_Miku/Levan_Polka.png",
+    album : null,
+    artiste: {
+        id : 1,
+        nom : "Hatsune Miku"
+        },
+    playlist : null
+    },
+    {
+	titre: "Mondoy",
+    annee : 2016,
+	duree: 280,
+	nbEcoute: 102388850,
+	nbLike: 1100000,
+	nbPoints: 12632,
+	nbPartage: 1530874,
+	cheminMP3: "/music/TheFatRat/Monody.mp3",
+	cover: "/cover/TheFatRat/Monody.png",
+    artiste: {
+        id : 2,
+        nom : "TheFatRat"
+    },
+    album : null,
+    playlist : {
+        id : 10,
+        nom : "theFatRat",
+        utilisateur : {
+            id : 410,
+            token : 98765
+            }
+        }
+    },
+    {
+	titre: "lilies",
+    annee : 2012,
+	duree: 520,
+	nbEcoute: 280000,
+	nbLike: 5200,
+	nbPoints: 22632,
+	nbPartage: 23442,
+	cheminMP3: "/music/LilyPichu/lilies.mp3",
+	cover: "/cover/LilyPichu/lilies.png",
+    album : "Lilies",
+    artiste: {
+        id : 3,
+        nom : "LyliPichu"
+        },
+    playlist : {
+        id : 11,
+        nom : "Lilies",
+        utilisateur : {
+            id : 411,
+            token : 98275
+            }
+        }
+    },
+    {
+	titre: "The other side of Sorrow",
+    annee : 2015,
+	duree: 150,
+	nbEcoute: 64000,
+	nbLike: 23000,
+	nbPoints: 12632,
+	nbPartage: 1245,
+	cheminMP3: "/music/Holy_Priest/The_other_side_of_Sorrow.mp3",
+	cover: "/cover/Holy_Priest/The_other_side_of_Sorrow.png",
+    album : "Eternal Senia soundtrack",
+    artiste: {
+        id : 4,
+        nom : "Holy Priest"
+        },
+    playlist : {
+        id : 12,
+        nom : "Eternal Senia soundtrack",
+        utilisateur : {
+            id : 412,
+            token : 98375
+            }
+        }
+    },
+    {
+	titre: "Septette for the Dead Princess",
+    annee : 2002,
+	duree: 230,
+	nbEcoute: 1274784,
+	nbLike: 268824,
+	nbPoints: 12632,
+	nbPartage: 75246,
+	cheminMP3: "/music/ZUN/Septette_for_the_Dead_Princess",
+	cover: "/cover/ZUN/Septette_for_the_Dea_Princess",
+    artiste: {
+        id : 5,
+        nom : "ZUN"   
+        },
+    album : "Touhou 6 soundtrack",
+    playlist : null
+    }]
+)
