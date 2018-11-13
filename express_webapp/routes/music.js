@@ -31,20 +31,23 @@ router.post('/add', function(req,res){
     var music = new database.Musique();
 
     music.titre = req.body.titre;
+    music.album = req.body.album;
+    music.artiste = req.body.artiste;
+    music.cheminMP3 = req.body.cheminMP3;
+    music.cover = req.body.cover;
     music.annee = req.body.annee;
     music.duree = req.body.duree;
+    music.styles = req.body.styles;
+    music.listePoints = req.body.listePoints;
     music.nbEcoute = req.body.nbEcoute;
     music.nbLike = req.body.nbLike;
-    music.listePoints = req.body.listePoints;
     music.nbPartage = req.body.nbPartage;
-    music.album.titreA = req.body.albumA;
-    music.artiste.nom = req.body.nom;
 
     music.save(function(err){
         if(err) {
             res.send(err);
         }
-        res.send({message : 'Ajout de la musique réussite !'})
+        res.send({message : 'Ajout de la musique réussit !'})
     })
 })
 
