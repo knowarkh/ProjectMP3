@@ -53,6 +53,42 @@ router.post('/add', function(req,res){
 
 //PUT
 
+router.put('/maj/:id', function(req, res) {
+    database.Musique.findById(req.params.id, function(err, music) {
+        if (err) {
+            res.send(err);
+        }
+
+        music.titre = req.body.titre;
+        music.album = req.body.album;
+        music.artiste = req.body.artiste;
+        music.cheminMP3 = req.body.cheminMP3;
+        music.cover = req.body.cover;
+        music.annee = req.body.annee;
+        music.duree = req.body.duree;
+        music.styles = req.body.styles;
+        music.listePoints = req.body.listePoints;
+        music.nbEcoute = req.body.nbEcoute;
+        music.nbLike = req.body.nbLike;
+        music.nbPartage = req.body.nbPartage;
+
+        music.save(function(err) {
+            if(err) {
+                res.send(err);
+            }
+            res.json({message : 'MAJ réussite'});
+        });
+    });
+})
+
+router.delete('/remove/:id', function(req, res) {
+    database.Musique.remove({_id: req.params.id}, function(err, music){
+        if (err){
+            res.send(err);
+        }
+        res.json({message:"Musique supprimée"});
+    });
+})
 
 //DELETE
 
