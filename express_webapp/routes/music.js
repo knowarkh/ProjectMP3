@@ -7,7 +7,8 @@ router.get('/', function(req, res, next) {
     res.send('respond with a resource');
 });
 
-// GET
+// ========== GET ==========
+//Find all
 router.get('/find', function(req,res){
 	database.Musique.find(function(err, music){
         if (err){
@@ -17,7 +18,8 @@ router.get('/find', function(req,res){
     });
 })
 
-router.get('/find/:id', function(req,res){
+// Find by ID
+router.get('/find/id/:id', function(req,res){
 	database.Musique.findById(req.params.id, function(err, music) {
         if (err) {
             res.send(err);
@@ -26,7 +28,18 @@ router.get('/find/:id', function(req,res){
     });
 })
 
-//POST
+// Find by title
+
+router.get('/find/titre/:title', function(req,res){
+	database.Musique.find({titre: req.params.title}, function(err, music) {
+        if (err) {
+            res.send(err);
+        }
+        res.json(music);
+    });
+})
+
+// ========== POST ==========
 router.post('/add', function(req,res){
     var music = new database.Musique();
 
@@ -51,7 +64,7 @@ router.post('/add', function(req,res){
     })
 })
 
-//PUT
+// ========== PUT ==========
 
 router.put('/maj/:id', function(req, res) {
     database.Musique.findById(req.params.id, function(err, music) {
@@ -90,7 +103,7 @@ router.delete('/remove/:id', function(req, res) {
     });
 })
 
-//DELETE
+// ========== DELETE ==========
 
 
 module.exports = router;
