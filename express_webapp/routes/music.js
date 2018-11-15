@@ -28,10 +28,54 @@ router.get('/find/id/:id', function(req,res){
     });
 })
 
-// Find by title
+// Find by titre
 
 router.get('/find/titre/:title', function(req,res){
 	database.Musique.find({titre: req.params.title}, function(err, music) {
+        if (err) {
+            res.send(err);
+        }
+        res.json(music);
+    });
+})
+
+// Find by artiste
+
+router.get('/find/artiste/:artiste', function(req,res){
+	database.Musique.find({artiste: req.params.artiste}, function(err, music) {
+        if (err) {
+            res.send(err);
+        }
+        res.json(music);
+    });
+})
+
+// Find by album
+
+router.get('/find/album/:album', function(req,res){
+	database.Musique.find({album: req.params.album}, function(err, music) {
+        if (err) {
+            res.send(err);
+        }
+        res.json(music);
+    });
+})
+
+// Find by Styles
+
+router.get('/find/styles/:styles', function(req,res){
+	database.Musique.find({styles: req.params.styles}, function(err, music) {
+        if (err) {
+            res.send(err);
+        }
+        res.json(music);
+    });
+})
+
+// Find by annee
+
+router.get('/find/annee/:annee', function(req,res){
+	database.Musique.find({annee: req.params.annee}, function(err, music) {
         if (err) {
             res.send(err);
         }
