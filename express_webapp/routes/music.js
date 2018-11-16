@@ -61,10 +61,10 @@ router.get('/find/album/:album', function(req,res){
     });
 })
 
-// Find by Styles
+// Find by genre
 
-router.get('/find/styles/:styles', function(req,res){
-	database.Musique.find({styles: req.params.styles}, function(err, music) {
+router.get('/find/genre/:genre', function(req,res){
+	database.Musique.find({genre: req.params.genre}, function(err, music) {
         if (err) {
             res.send(err);
         }
@@ -94,7 +94,7 @@ router.post('/add', function(req,res){
     music.cover = req.body.cover;
     music.annee = req.body.annee;
     music.duree = req.body.duree;
-    music.styles = req.body.styles;
+    music.genre = req.body.genre;
     music.listePoints = req.body.listePoints;
     music.nbEcoute = req.body.nbEcoute;
     music.nbLike = req.body.nbLike;
@@ -123,7 +123,7 @@ router.put('/maj/:id', function(req, res) {
         music.cover = req.body.cover;
         music.annee = req.body.annee;
         music.duree = req.body.duree;
-        music.styles = req.body.styles;
+        music.genre = req.body.genre;
         music.listePoints = req.body.listePoints;
         music.nbEcoute = req.body.nbEcoute;
         music.nbLike = req.body.nbLike;

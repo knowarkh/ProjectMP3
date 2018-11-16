@@ -13,14 +13,14 @@ db.once('open', function (){
 });
 
 var musicSchema = mongoose.Schema({
-    titre: String,
+    titre: { type: String, required: true },
 	album: String,
 	artiste: String,
 	cheminMP3: String,
 	cover: String,
 	annee: Number,
 	duree: Number,
-    styles: [String],
+    genre: [String],
 	listePoints: [Number],
 	nbEcoute: Number,
 	nbLike: Number,
