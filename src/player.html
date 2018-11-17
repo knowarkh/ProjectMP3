@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="PlayerMP3"/>
+    <meta name="author" content="Work in Progress">
+	<!-- <link rel="icon" type="Images/png" href="Images/icon.png" /> -->
+	<title>Fasma</title>
+
+    <!-- Custom styles for this template -->
+    <link href="start.css" rel="stylesheet">
+	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+<!-- onlick -->
+	<div id="player">
+
+		<div id="cover">
+			<img id="image_cover" src="", alt="" />
+		</div>
+
+		<div id="informations">
+			<div id="info_header">
+				<div id="info_music">
+					<p id="artiste_name"> </p>
+					<p id="music_name"> </p>
+				</div>
+				<div id="action_barre">
+					<button type="button" id="like_button" onlick="like()">
+						<img id="like_icon" src="", alt="" />
+						<p id="like_nb"></p>
+					</button>
+					<button type="button" id="share_button" onlick="share()">
+						<img id="share_icon" src="", alt="" />
+						<p id="share_txt">Partager</p>
+					</button>
+				</div>
+			</div>
+
+			<div id="info_body">
+				<audio id="audio">
+					<source src="" type="">
+					<source src="" type="">
+				</audio>
+
+				<div id="waveform" onlick="goTo()">
+					<div id="waveform_hover">
+					</div>
+				</div>
+			</div>
+
+			<div id="info_foot">
+				<div id="time">
+					<p id="current_time"> </p>
+					<p id="separator" class="color"> / </p>
+					<p id="total_time"> </p>
+				</div>
+				<div id="buttons_group">
+					<img id="previous_btn" class="color" src="", alt="" onlick="previous()"/>
+					<img id="play_pause_btn" class="color" src="", alt="" onlick="playPause()" />
+					<img id="next_btn" class="color" src="", alt="" onlick="next()" />
+					<img id="sound_btn" class="color" src="", alt="" onlick="sound()" />
+					<div id="sound_bar" class="color" >
+						<div id="sound_level" ></div>
+					</div>
+				</div>
+				<div id="community">
+					<div id="view">
+						<img id="view_img" src="", alt="" />
+						<p id="views_nb"></p>
+					</div>
+					<div id="comments">
+						<img id="comments_img" src="", alt="" />
+						<p id="comments_nb"></p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>
