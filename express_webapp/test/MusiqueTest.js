@@ -2,7 +2,7 @@ var expect = require('chai').expect;
 var database = require('../bin/db-connection');
 
 describe('music', function() {
-    it('should be invalid if titre, cheminMP3, duree, listePoints are empty', function(done) {
+    it('should be invalid if titre, cheminMP3, duree are empty', function(done) {
         var m = new database.Musique();
 
         m.validate(function(err) {

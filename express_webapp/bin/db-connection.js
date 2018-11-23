@@ -21,7 +21,7 @@ var musicSchema = mongoose.Schema({
 	annee: Number,
 	duree: { type: Number, required: true },
     genre: [String],
-	listePoints: [Number],
+	listePoint: [Number],
 	nbEcoute: Number,
 	nbLike: Number,
     nbPartage: Number

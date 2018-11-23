@@ -95,7 +95,7 @@ router.post('/add', function(req,res){
     music.annee = req.body.annee;
     music.duree = req.body.duree;
     music.genre = req.body.genre;
-    music.listePoints = req.body.listePoints;
+    music.listePoint = req.body.listePoint;
     music.nbEcoute = req.body.nbEcoute;
     music.nbLike = req.body.nbLike;
     music.nbPartage = req.body.nbPartage;
@@ -124,7 +124,7 @@ router.put('/maj/:id', function(req, res) {
         music.annee = req.body.annee;
         music.duree = req.body.duree;
         music.genre = req.body.genre;
-        music.listePoints = req.body.listePoints;
+        music.listePoint = req.body.listePoint;
         music.nbEcoute = req.body.nbEcoute;
         music.nbLike = req.body.nbLike;
         music.nbPartage = req.body.nbPartage;
