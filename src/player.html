@@ -20,72 +20,34 @@
 </head>
 
 <body>
-	<div id="player">
 
-		<div id="cover">
-			<img id="image_cover" src="", alt="" />
-		</div>
-
-		<div id="informations">
-			<div id="info_header">
-				<div id="info_music">
-					<p id="artiste_name"> </p>
-					<p id="music_name"> </p>
-				</div>
-				<div id="action_barre">
-					<button type="button" id="like_button" onclick="like()">
-						<img id="like_icon" src="", alt="" />
-						<p id="like_nb"></p>
-					</button>
-					<button type="button" id="share_button" onclick="share()">
-						<img id="share_icon" src="", alt="" />
-						<p id="share_txt">Partager</p>
-					</button>
-				</div>
-			</div>
-
-			<div id="info_body">
-				<audio id="audio">
-					<source src="" type="">
-					<source src="" type="">
-				</audio>
-
-				<div id="waveform">
-					<div id="waveform_hover" onclick="goTo()">
-						<div id="waveform_top" class="color"></div>
-						<div id="waveform_mirror" class="color"></div>
-					</div>
-				</div>
-			</div>
-
-			<div id="info_foot">
-				<div id="time">
-					<p id="current_time"> </p>
-					<p id="separator" class="color"> / </p>
-					<p id="total_time"> </p>
-				</div>
-				<div id="buttons_group">
-					<img id="previous_btn" class="color" src="", alt="" onclick="previous()"/>
-					<img id="play_pause_btn" class="color" src="", alt="" onclick="playPause()" />
-					<img id="next_btn" class="color" src="", alt="" onclick="next()" />
-					<img id="sound_btn" class="color" src="", alt="" onclick="showSound()" />
-					<div id="sound_bar" class="color" onclick="changeVolume()" >
-						<div id="sound_level"></div>
-					</div>
-				</div>
-				<div id="community">
-					<div id="view">
-						<img id="view_img" src="", alt="" />
-						<p id="views_nb"></p>
-					</div>
-					<div id="comments">
-						<img id="comments_img" src="", alt="" />
-						<p id="comments_nb"></p>
-					</div>
-				</div>
+	<div class='audioplayer'>
+		<div class='infos'>
+			<div class='artiste'>Nom de l'artiste</div>
+			<div class='titre'>Nom du morceau</div>
+			<div class='statistiques'>
+				<div class='nb-lectures'>16,5M</div>
+				<div class='nb-commentaires'>280</div>
 			</div>
 		</div>
+		<div class='visuel'></div>
+		<div class='temps'>
+			<div class='en-cours'>1:31</div>
+			<div class='total'>3:11</div>
+		</div>
+		<div class='controls'>
+			<button class='prev'>Précédent</button>
+			<button class='play-pause play'>Lecture</button>
+			<button class='next'>Suivant</button>
+			<button class='volume' data-vaue='90'>Volume</button>
+		</div>
+		<div class='social'>
+			<button class='like'>333K</button>
+			<button class='share'>Partager</button>
+		</div>
+		<div class="waveform"></div>
 	</div>
+
 
 </body>
 </html>
