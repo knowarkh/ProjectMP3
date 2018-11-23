@@ -138,6 +138,8 @@ router.put('/maj/:id', function(req, res) {
     });
 })
 
+// ========== DELETE ==========
+
 router.delete('/remove/:id', function(req, res) {
     database.Musique.remove({_id: req.params.id}, function(err, music){
         if (err){
@@ -147,7 +149,6 @@ router.delete('/remove/:id', function(req, res) {
     });
 })
 
-// ========== DELETE ==========
 
 
 module.exports = router;
