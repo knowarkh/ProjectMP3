@@ -1,46 +1,87 @@
 body {
   background-color: lightblue;
+  font: Garuda;
 }
 
 .audioplayer {
-  margin: 5em;
-  background-color: white;
-  display: flex;
-  flex-wrap: nowrap;
-  max-height: 250px;
+    position: relative;
+    margin: 5em;
+    background-color: white;
+    /* display: flex; */
+    /* flex-wrap: nowrap; */
+    /* max-height: 250px; */
+    /* display: table; */
+    /* width: 100%; */
+    height: 200px;
 }
 
 .audioplayer .visuel {
-  order: 1;
-  background-color: green;
-  margin-right: 15px:
+    position: absolute;
+    background-color: green;
+    margin-right: 15px;
+    background: url(ImagineDragons_Zero.jpg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 100%;
+    height: 100%;
+    /* margin: 10px; */
+    /* z-index: 1; */
 }
-
-.audioplayer .autres{
-  order: 2;
-  flex: 1;
-}
-
-.audioplayer .visuel img {
-  display: block;
-  width: 160px;
-  height: 160px;
-  margin-right: 15px
-}
-
 
 .audioplayer .infos {
+    position: absolute;
+    /* order: 1; */
+    /* display: flex; */
+    align-items: flex-start;
+    margin: 0 0 6px 0;
+    padding: 7px;
+    z-index: 2;
+}
+
+.audioplayer .infos .artiste {
+  /* order: 1; */
+  /* font-size: 12px; */
+  /* font-weight: 100; */
+  /* color: #999; */
+  /* padding-top: 3px; */
+  /* flex: 1; */
+}
+
+.audioplayer .infos .titre {
+  /* order: 2; */
+  /* flex: 3; */
+}
+
+.audioplayer .infos .statistiques {
+  /* order: 3; */
+  /* flex: 1; */
+  /* text-align: right; */
+  /* display: flex; */
+  /* position: absolute; */
+  /* right: 0; */
+  /* bottom: 0; */
 }
 
 .audioplayer .social {
+    /* order: 2; */
+    /* align-self: flex-end; */
+    position: absolute;
 }
 
 .audioplayer .waveform {
-  background-color: red;
+    position: absolute;
+    /* order: 3; */
+    background-color: red;
+    /* height: 60px; */
 }
 
 .audioplayer .temps {
+    position: absolute;
+    /* order: 4; */
 }
-
 .audioplayer .controls {
+    position: absolute;
+    /* top: 5px; */
+    /* right: 5px; */
+    /* order: 5; */
 }
