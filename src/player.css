@@ -1,87 +1,100 @@
 body {
   background-color: lightblue;
-  font: Garuda;
+  font-family: sans-serif;
 }
 
 .audioplayer {
     position: relative;
-    margin: 5em;
     background-color: white;
-    /* display: flex; */
-    /* flex-wrap: nowrap; */
-    /* max-height: 250px; */
-    /* display: table; */
-    /* width: 100%; */
-    height: 200px;
+    height: 100%;
+    width: 100%;
+    min-height: 150px;
+    min-width: 150px;
+    /* max-height: 300px;
+    max-width: 300px; */
 }
 
 .audioplayer .visuel {
     position: absolute;
     background-color: green;
-    margin-right: 15px;
     background: url(ImagineDragons_Zero.jpg);
     background-repeat: no-repeat;
     background-size: contain;
     width: 100%;
     height: 100%;
-    /* margin: 10px; */
-    /* z-index: 1; */
 }
 
 .audioplayer .infos {
     position: absolute;
-    /* order: 1; */
-    /* display: flex; */
-    align-items: flex-start;
-    margin: 0 0 6px 0;
-    padding: 7px;
-    z-index: 2;
+    top: 0;
+    display: flex;
+    margin-left: 150px;
 }
 
 .audioplayer .infos .artiste {
-  /* order: 1; */
-  /* font-size: 12px; */
-  /* font-weight: 100; */
-  /* color: #999; */
-  /* padding-top: 3px; */
-  /* flex: 1; */
+    margin: 10px;
+    margin-top: 13px;
+    color: #999;
+    font-size: 12px;
 }
 
 .audioplayer .infos .titre {
-  /* order: 2; */
-  /* flex: 3; */
-}
-
-.audioplayer .infos .statistiques {
-  /* order: 3; */
-  /* flex: 1; */
-  /* text-align: right; */
-  /* display: flex; */
-  /* position: absolute; */
-  /* right: 0; */
-  /* bottom: 0; */
-}
-
-.audioplayer .social {
-    /* order: 2; */
-    /* align-self: flex-end; */
-    position: absolute;
+    margin: 10px;
+    margin-top: 11px;
 }
 
 .audioplayer .waveform {
     position: absolute;
-    /* order: 3; */
     background-color: red;
-    /* height: 60px; */
+    margin-left: 150px;
+    width: 100%;
+    height: 50%;
+    top: 30%;
+}
+
+.audioplayer .controls {
+    position: absolute;
+    bottom: 0;
+    left: 42%;
 }
 
 .audioplayer .temps {
     position: absolute;
-    /* order: 4; */
+    bottom: 0;
+    display: flex;
+    margin-left: 150px;
 }
-.audioplayer .controls {
+
+.audioplayer .temps .en-cours {
+  margin: 5px;
+}
+
+.audioplayer .temps .total {
+  margin: 5px;
+}
+
+.audioplayer .statistiques {
+  position: absolute;
+  display: flex;
+  bottom: 5px;
+  right: 20px;
+
+}
+
+.audioplayer .social {
     position: absolute;
-    /* top: 5px; */
-    /* right: 5px; */
-    /* order: 5; */
+    top: 10px;
+    right: 20px;
+}
+
+
+.audioplayer .social>button {
+    border: 1px solid #ccc;
+    padding: 8px 16px;
+    cursor: pointer;
+    background-color: white;
+}
+
+.audioplayer .social>button:hover {
+    background-color: #e7e7e7;
 }
