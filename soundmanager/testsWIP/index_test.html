@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+
+<title>Test SoundManager 2</title>
+<meta charset="utf-8" />
+<!--<link rel="stylesheet" href="test.css" />-->
+<!--La première étape consiste à inclure le script principal de SoundManager-->
+<script type="text/javascript" src="script/soundmanager2.js"></script>
+
+<!--Cette première ligne sert à définir l'emplacement du répertoire "swf"
+ajouter une deuxième ligne, pour contrôler les éventuelles erreurs-->
+<script type="text/javascript">
+soundManager.url = 'swf/';
+soundManager.debugMode = true;
+
+//Le premier paramètre sera l'id du son créé. Mettez ce que vous voulez.
+//Le deuxième paramètre, c'est le lien relatif vers le son. Tout simplement.
+
+soundManager.onload = function() {
+	soundManager.play("premier_son","musique/arturo-i-hate-you.mp3");
+}
+
+</script>
+
+</head>
+<body>
+<h1>TEST</h1>
+
+
+</body>
+
+</html>
