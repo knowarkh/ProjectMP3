@@ -1,87 +1,214 @@
 body {
-  background-color: lightblue;
-  font: Garuda;
+  background-color: var(--background);
+  font-family: sans-serif;
 }
+
+/* ========= COLORS ========= */
+
+:root{
+  --primary: #f95800;
+  --background: lightblue;
+}
+
+
+/* ========= AUDIOPLAYER ========= */
 
 .audioplayer {
     position: relative;
-    margin: 5em;
     background-color: white;
-    /* display: flex; */
-    /* flex-wrap: nowrap; */
-    /* max-height: 250px; */
-    /* display: table; */
-    /* width: 100%; */
-    height: 200px;
+    height: 100%;
+    width: 100%;
+    min-height: 150px;
+    min-width: 150px;
+    /* max-height: 300px;
+    max-width: 300px; */
 }
+
+/* ========= VISUEL ========= */
 
 .audioplayer .visuel {
     position: absolute;
     background-color: green;
-    margin-right: 15px;
     background: url(ImagineDragons_Zero.jpg);
     background-repeat: no-repeat;
     background-size: contain;
     width: 100%;
     height: 100%;
-    /* margin: 10px; */
-    /* z-index: 1; */
 }
+
+/* ========= INFOS ========= */
 
 .audioplayer .infos {
     position: absolute;
-    /* order: 1; */
-    /* display: flex; */
-    align-items: flex-start;
-    margin: 0 0 6px 0;
-    padding: 7px;
-    z-index: 2;
+    top: 0;
+    display: flex;
+    margin-left: 150px;
 }
 
 .audioplayer .infos .artiste {
-  /* order: 1; */
-  /* font-size: 12px; */
-  /* font-weight: 100; */
-  /* color: #999; */
-  /* padding-top: 3px; */
-  /* flex: 1; */
+    margin: 10px;
+    margin-top: 13px;
+    color: #9b9b9b;
+    font-size: 12px;
 }
 
 .audioplayer .infos .titre {
-  /* order: 2; */
-  /* flex: 3; */
+    margin: 10px;
+    margin-top: 11px;
 }
 
-.audioplayer .infos .statistiques {
-  /* order: 3; */
-  /* flex: 1; */
-  /* text-align: right; */
-  /* display: flex; */
-  /* position: absolute; */
-  /* right: 0; */
-  /* bottom: 0; */
-}
-
-.audioplayer .social {
-    /* order: 2; */
-    /* align-self: flex-end; */
-    position: absolute;
-}
+/* ========= WAVEFORM ========= */
 
 .audioplayer .waveform {
     position: absolute;
-    /* order: 3; */
     background-color: red;
-    /* height: 60px; */
+    margin-left: 150px;
+    width: 100%;
+    left: 0;
+    height: 45%;
+    top: 25%;
+    display: block;
 }
+
+
+/* ========= CONTROLS ========= */
+
+.audioplayer .controls {
+    position: absolute;
+    bottom: 3px;
+    left: 49%;
+}
+
+.audioplayer .controls button {
+    background-color: var(--primary);
+    border-radius: 50%;
+    border: none;
+    text-indent: -100000px;
+    margin: 0 4px;
+}
+
+.audioplayer .controls .play-pause {
+    content: '';
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iOCIgaGVpZ2h0PSIxNCIgdmlld0JveD0iMCAwIDggMTQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHRpdGxlPlBsYXkgMjg8L3RpdGxlPjxwYXRoIGQ9Ik0wIDE0bDEuODQ2LTdMMCAwbDggNy04IDd6IiBmaWxsPSIjRkZGIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiLz48L3N2Zz4=);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 12px 18px;
+    width: 35px;
+    height: 35px;
+}
+
+.audioplayer .controls .prev {
+    content: '';
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iOCIgaGVpZ2h0PSIxMiIgdmlld0JveD0iMCAwIDggMTIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHRpdGxlPlBhdXNlIDI4PC90aXRsZT48cGF0aCBkPSJNNSAwdjEyaDNWMEg1ek0wIDB2MTJoM1YwSDB6IiBmaWxsPSIjRkZGIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiLz48L3N2Zz4=);
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 25px;
+    height: 25px;
+}
+
+.audioplayer .controls .next {
+    content: '';
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iOCIgaGVpZ2h0PSIxMiIgdmlld0JveD0iMCAwIDggMTIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHRpdGxlPlBhdXNlIDI4PC90aXRsZT48cGF0aCBkPSJNNSAwdjEyaDNWMEg1ek0wIDB2MTJoM1YwSDB6IiBmaWxsPSIjRkZGIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiLz48L3N2Zz4=);
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 25px;
+    height: 25px;
+}
+
+.audioplayer .controls .volume {
+    content: '';
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCI+PHBhdGggZmlsbD0iIzMzMyIgZD0iTTQgOWg0LjAwMkwxMiA1djE0Yy0yLjQ0Ni0yLjY2Ny0zLjc3OC00LTMuOTk4LTRINFY5em0xMCA0YTEgMSAwIDAgMCAwLTJWOWEzIDMgMCAwIDEgMCA2di0yeiIvPjwvc3ZnPgo=);
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 25px;
+    height: 25px;
+    margin-left: 10px;
+}
+
+/* ========= TEMPS ========= */
 
 .audioplayer .temps {
     position: absolute;
-    /* order: 4; */
+    bottom: 7px;
+    display: flex;
+    margin-left: 155px;
 }
-.audioplayer .controls {
+
+.audioplayer .temps .en-cours, .audioplayer .temps .total {
+    margin: 5px;
+    font-size: 11px;
+}
+
+.audioplayer .temps .en-cours::after{
+    content: '/';
+    padding-left: 10px;
+    color: var(--primary);
+    font-weight: bold;
+}
+
+/* ========= STATISTIQUES ========= */
+
+.audioplayer .statistiques {
     position: absolute;
-    /* top: 5px; */
-    /* right: 5px; */
-    /* order: 5; */
+    display: flex;
+    bottom: 7px;
+    right: 20px;
+    color: #9b9b9b;
+    font-size: 12px;
+}
+
+.audioplayer .statistiques .nb-lectures{
+    margin-right: 9px;
+}
+
+.audioplayer .statistiques .nb-lectures::before {
+    content: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48dGl0bGU+c3RhdHNfcGxheSA0PC90aXRsZT48cGF0aCBkPSJNNCAxM1YzbDkgNS05IDV6IiBmaWxsPSIjOTk5IiBmaWxsLXJ1bGU9ImV2ZW5vZGQiLz48L3N2Zz4=);
+    vertical-align: top;
+}
+
+.audioplayer .statistiques .nb-commentaires {
+
+}
+
+.audioplayer .statistiques .nb-commentaires::before {
+    content: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48dGl0bGU+c3RhdHNfY29tbWVudDwvdGl0bGU+PHBhdGggZD0iTTUgM2MtMS4xMDUgMC0yIC44ODctMiAyLjAwNnYyLjk4OEMzIDkuMTAyIDMuODg3IDEwIDUgMTBoNmMxLjEwNSAwIDItLjg4NyAyLTIuMDA2VjUuMDA2QTEuOTk4IDEuOTk4IDAgMCAwIDExIDNINXptMCA3djNsMy0zSDV6IiBmaWxsPSIjOTk5IiBmaWxsLXJ1bGU9ImV2ZW5vZGQiLz48L3N2Zz4=);
+    vertical-align: top;
+}
+
+
+/* ========= SOCIAL ========= */
+
+.audioplayer .social {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 12px;
+}
+
+.audioplayer .social>button {
+    border: 1px solid #e5e5e5;
+    border-radius: 3px;
+    padding: 2px 8px;
+    cursor: pointer;
+    background-color: #fff;
+    margin: 0 2px;
+}
+
+.audioplayer .social>button:hover {
+    color: #333;
+    outline: 0;
+    border-color: #ccc;
+}
+
+
+.audioplayer .social .like::before {
+    content: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48dGl0bGU+c3RhdHNfbGlrZXNfZ3JleTwvdGl0bGU+PHBhdGggZD0iTTEwLjgwNSAzYy0yLjAyIDAtMi44MDQgMi4zNDUtMi44MDQgMi4zNDVTNy4yMTMgMyA1LjE5NiAzQzMuNDk0IDMgMS43NDggNC4wOTYgMi4wMyA2LjUxNGMuMzQ0IDIuOTUzIDUuNzI1IDYuNDc5IDUuOTYzIDYuNDg3LjIzOC4wMDggNS43MzgtMy43MjIgNS45ODgtNi41QzE0LjE4OCA0LjIwMSAxMi41MDcgMyAxMC44MDUgM3oiIGZpbGw9IiMyMjIiIGZpbGwtcnVsZT0iZXZlbm9kZCIvPjwvc3ZnPg==);
+    vertical-align: top;
+    padding-right: 5px;
+}
+
+.audioplayer .social .share::before {
+    content: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48dGl0bGU+c3RhdHNfbGlrZXNfZ3JleTwvdGl0bGU+PHBhdGggZD0iTTEwLjgwNSAzYy0yLjAyIDAtMi44MDQgMi4zNDUtMi44MDQgMi4zNDVTNy4yMTMgMyA1LjE5NiAzQzMuNDk0IDMgMS43NDggNC4wOTYgMi4wMyA2LjUxNGMuMzQ0IDIuOTUzIDUuNzI1IDYuNDc5IDUuOTYzIDYuNDg3LjIzOC4wMDggNS43MzgtMy43MjIgNS45ODgtNi41QzE0LjE4OCA0LjIwMSAxMi41MDcgMyAxMC44MDUgM3oiIGZpbGw9IiMyMjIiIGZpbGwtcnVsZT0iZXZlbm9kZCIvPjwvc3ZnPg==);
+    vertical-align: top;
+    padding-right: 5px;
 }
