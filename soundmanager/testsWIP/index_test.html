@@ -1,36 +1,66 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
 
+    <title>Test SoundManager 2</title>
+    <meta charset="utf-8"/>
+    <!--<link rel="stylesheet" href="test.css" />-->
+    <!--La première étape consiste à inclure le script principal de SoundManager-->
+    <script type="text/javascript" src="script/soundmanager2.js"></script>
 
-<title>Test SoundManager 2</title>
-<meta charset="utf-8" />
-<!--<link rel="stylesheet" href="test.css" />-->
-<!--La première étape consiste à inclure le script principal de SoundManager-->
-<script type="text/javascript" src="script/soundmanager2.js"></script>
+    <!--Cette première ligne sert à définir l'emplacement du répertoire "swf"
+    ajouter une deuxième ligne, pour contrôler les éventuelles erreurs-->
+    <!--<script type="text/javascript" language="javascript" src="index_test.js"></script>-->
+    <script type="text/javascript">
+        soundManager.url = 'swf/';
+        soundManager.debugMode = true;
 
-<!--Cette première ligne sert à définir l'emplacement du répertoire "swf"
-ajouter une deuxième ligne, pour contrôler les éventuelles erreurs-->
-<script type="text/javascript">
-soundManager.url = 'swf/';
-soundManager.debugMode = true;
+        //Le premier paramètre sera l'id du son créé. Mettez ce que vous voulez.
+        //Le deuxième paramètre, c'est le lien relatif vers le son. Tout simplement.
 
-//Le premier paramètre sera l'id du son créé. Mettez ce que vous voulez.
-//Le deuxième paramètre, c'est le lien relatif vers le son. Tout simplement.
+        /*soundManager.onload = function() {
+        soundManager.play("premier_son","musique/arturo-i-hate-you.mp3");
+        }*/
 
-soundManager.onload = function() {
-	soundManager.play("premier_son","musique/arturo-i-hate-you.mp3");
-}
+        var mon_son;
+        soundManager.onload = function () {
+            mon_son = soundManager.createSound(
+                {
+                    id: "mon_son",
+                    url: "musique/arturo-i-hate-you.mp3"
+                })
+            //soundManager._writeDebug('sound '+this.id+' ID3 data received');
+            /*var prop = null;
+            var data = '';
+            for (prop in mon_son.id3) {
+                data += prop +': ' + mon_son.id3[prop] + ',';
+            }
+            document.getElementById("info").innerHTML = data;
+            ;*/
+            //mon_son.play();
+        }
 
-</script>
+
+        /*mon_son = soundManager.createSound(
+        {
+        id : "mon_son",
+        url : "musique/arturo-i-hate-you.mp3",
+        onload : function() {
+        document.getElementById("loading").innerHTML = "Chargement terminé !";
+        }
+        });
+        //mon_son.play();*/
+    </script>
 
 </head>
 <body>
-<h1>TEST</h1>
-
-
+<h1>TEST DE FASMA AVEC SOUNDMANAGER2</h1>
+<!--<span id="loading">Chargement en cours...</span>-->
+<button onclick="mon_son.play();">Lire</button>
+<button onclick="mon_son.pause();">Pause</button>
+<button onclick="mon_son.resume();">Reprise</button>
+<!--<button onclick="mon_son.mute();">Passer en mode "muet"</button>
+<button onclick="mon_son.unmute();">Sortir du mode "muet"</button>-->
+<span id="info">INFOS ICI</span>
 </body>
-
 </html>
