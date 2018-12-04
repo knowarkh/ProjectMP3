@@ -28,9 +28,18 @@
                 {
                     id: "mon_son",
                     url: "musique/arturo-i-hate-you.mp3"
-                });
+                })
+            //soundManager._writeDebug('sound '+this.id+' ID3 data received');
+            /*var prop = null;
+            var data = '';
+            for (prop in mon_son.id3) {
+                data += prop +': ' + mon_son.id3[prop] + ',';
+            }
+            document.getElementById("info").innerHTML = data;
+            ;*/
             //mon_son.play();
         }
+
 
         /*mon_son = soundManager.createSound(
         {
@@ -52,5 +61,6 @@
 <button onclick="mon_son.resume();">Reprise</button>
 <!--<button onclick="mon_son.mute();">Passer en mode "muet"</button>
 <button onclick="mon_son.unmute();">Sortir du mode "muet"</button>-->
+<span id="info">INFOS ICI</span>
 </body>
 </html>

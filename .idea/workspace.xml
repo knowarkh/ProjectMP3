@@ -2,6 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b62b310c-d2e1-4270-aa98-072d0a3b7121" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/soundmanager/testsWIP/index_player.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/soundmanager/testsWIP/player.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/soundmanager/testsWIP/player.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/soundmanager/testsWIP/index_test.html" beforeDir="false" afterPath="$PROJECT_DIR$/soundmanager/testsWIP/index_test.html" afterDir="false" />
     </list>
@@ -15,46 +18,86 @@
     <session id="436833242">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="3" />
+          <entry key="project.closed" value="6" />
           <entry key="project.open.time.0" value="2" />
           <entry key="project.open.time.2" value="1" />
           <entry key="project.open.time.4" value="1" />
-          <entry key="project.opened" value="4" />
+          <entry key="project.open.time.5" value="1" />
+          <entry key="project.open.time.6" value="3" />
+          <entry key="project.open.time.7" value="1" />
+          <entry key="project.opened" value="9" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="html" value="1" />
-          <entry key="js" value="1" />
+          <entry key="bat" value="1" />
+          <entry key="css" value="1" />
+          <entry key="html" value="4" />
+          <entry key="js" value="4" />
+          <entry key="sh" value="1" />
+          <entry key="ts" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="HTML" value="1" />
-          <entry key="JavaScript" value="1" />
+          <entry key="Bash" value="1" />
+          <entry key="CSS" value="1" />
+          <entry key="HTML" value="4" />
+          <entry key="JavaScript" value="4" />
+          <entry key="PLAIN_TEXT" value="1" />
+          <entry key="TypeScript" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="html" value="115" />
-          <entry key="js" value="1" />
+          <entry key="css" value="116" />
+          <entry key="html" value="541" />
+          <entry key="js" value="508" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="HTML" value="115" />
-          <entry key="JavaScript" value="1" />
+          <entry key="CSS" value="116" />
+          <entry key="HTML" value="541" />
+          <entry key="JavaScript" value="508" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/soundmanager/testsWIP/index_player.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="457">
+              <caret line="57" column="40" lean-forward="true" selection-start-line="57" selection-start-column="40" selection-end-line="57" selection-end-column="40" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/soundmanager/testsWIP/player.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="716">
+              <caret line="112" column="7" selection-start-line="112" selection-start-column="7" selection-end-line="112" selection-end-column="7" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/soundmanager/testsWIP/player.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1695">
+              <caret line="113" column="98" lean-forward="true" selection-start-line="113" selection-start-column="98" selection-end-line="113" selection-end-column="98" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/soundmanager/testsWIP/index_test.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="671">
-              <caret line="47" column="41" lean-forward="true" selection-start-line="47" selection-start-column="41" selection-end-line="47" selection-end-column="41" />
+            <state relative-caret-position="791">
+              <caret line="63" column="32" lean-forward="true" selection-start-line="63" selection-start-column="32" selection-end-line="63" selection-end-column="32" />
             </state>
           </provider>
         </entry>
@@ -64,9 +107,16 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="HTML File" />
+        <option value="CSS File" />
         <option value="JavaScript File" />
       </list>
     </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>test</find>
+    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -75,6 +125,9 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/soundmanager/testsWIP/index_test.js" />
+        <option value="$PROJECT_DIR$/soundmanager/testsWIP/player.css" />
+        <option value="$PROJECT_DIR$/soundmanager/testsWIP/index_player.html" />
+        <option value="$PROJECT_DIR$/soundmanager/testsWIP/player.js" />
         <option value="$PROJECT_DIR$/soundmanager/testsWIP/index_test.html" />
       </list>
     </option>
@@ -140,6 +193,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -158,16 +212,43 @@
               <item name="soundmanager" type="462c0819:PsiDirectoryNode" />
               <item name="testsWIP" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="ProjectMP3" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ProjectMP3" type="462c0819:PsiDirectoryNode" />
+              <item name="soundmanager" type="462c0819:PsiDirectoryNode" />
+              <item name="testsWIP" type="462c0819:PsiDirectoryNode" />
+              <item name="musique" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ProjectMP3" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ProjectMP3" type="462c0819:PsiDirectoryNode" />
+              <item name="soundmanager" type="462c0819:PsiDirectoryNode" />
+              <item name="testsWIP" type="462c0819:PsiDirectoryNode" />
+              <item name="script" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ProjectMP3" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ProjectMP3" type="462c0819:PsiDirectoryNode" />
+              <item name="soundmanager" type="462c0819:PsiDirectoryNode" />
+              <item name="testsWIP" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../NLS/TP2" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/soundmanager/testsWIP" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -195,16 +276,22 @@
       <workItem from="1542276522191" duration="73000" />
       <workItem from="1542981120882" duration="288000" />
       <workItem from="1542981577454" duration="3106000" />
+      <workItem from="1542988118776" duration="388000" />
+      <workItem from="1543479027923" duration="2279000" />
+      <workItem from="1543568720642" duration="9120000" />
+      <workItem from="1543767272968" duration="5281000" />
+      <workItem from="1543914582100" duration="4449000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="4087000" />
+    <option name="totallyTimeSpent" value="25604000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="25" width="1922" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18676628" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19743863" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -232,13 +319,53 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/soundmanager/testsWIP/index_test.js">
+    <entry file="file://$PROJECT_DIR$/soundmanager/testsWIP/index_test.js" />
+    <entry file="file://$PROJECT_DIR$/soundmanager/testsWIP/script/soundmanager2-jsmin.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-918" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/soundmanager/testsWIP/script/soundmanager2.js">
       <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/soundmanager/testsWIP/src/make-flash8.bat">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/soundmanager/testsWIP/src/make-flash8.sh">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.dom.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="293">
+          <caret line="5152" column="13" selection-start-line="5152" selection-start-column="13" selection-end-line="5152" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/soundmanager/testsWIP/player.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="716">
+          <caret line="112" column="7" selection-start-line="112" selection-start-column="7" selection-end-line="112" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/soundmanager/testsWIP/index_player.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="457">
+          <caret line="57" column="40" lean-forward="true" selection-start-line="57" selection-start-column="40" selection-end-line="57" selection-end-column="40" />
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/soundmanager/testsWIP/index_test.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="671">
-          <caret line="47" column="41" lean-forward="true" selection-start-line="47" selection-start-column="41" selection-end-line="47" selection-end-column="41" />
+        <state relative-caret-position="791">
+          <caret line="63" column="32" lean-forward="true" selection-start-line="63" selection-start-column="32" selection-end-line="63" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/soundmanager/testsWIP/player.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1695">
+          <caret line="113" column="98" lean-forward="true" selection-start-line="113" selection-start-column="98" selection-end-line="113" selection-end-column="98" />
         </state>
       </provider>
     </entry>

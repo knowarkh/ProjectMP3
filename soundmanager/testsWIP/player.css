@@ -1,0 +1,118 @@
+h1 {
+    font-family: arial, tahoma, verdana, "sans serif";
+    color : #2784cc;
+    text-transform : uppercase;
+    letter-spacing : 0.3em;
+    text-align : center;
+}
+
+h2 {
+    font-family: arial, tahoma, verdana, "sans serif";
+    color : #cc7c29;
+    text-transform : uppercase;
+    letter-spacing : 0.3em;
+}
+
+#lecteur {
+    width:450px;
+    float:left;
+    margin-bottom:20px;
+    position:absolute;
+    left: 50%;
+    top: 50%;
+    height: 300px;
+    margin-left: -225px;
+    margin-top: -225px;
+}
+
+#controls {
+    text-align:center;
+}
+
+#controls #loop {
+    background-position:50% 50%;
+}
+#controls #volume {
+    cursor:pointer;
+    background-position:0 50%;
+}
+
+#avancement {
+    text-align:center;
+    position:relative;
+}
+
+#test {
+    text-align:left;
+    width:420px;
+    margin:auto;
+}
+
+#chargement {
+    width:420px;
+    height:10px;
+    /*background-image:url("images/arr_charg2.png");*/
+    background-position:-420px 50%;
+    background-repeat:no-repeat;
+    margin-top:10px;"
+}
+
+#barre {
+    position:absolute;
+    margin-top:29px;
+    /*background-image:url("images/arr_barre2.png");*/
+    background-position:-420px 50%;
+    background-repeat:no-repeat;
+    height:12px;
+    width:420px;
+    cursor:pointer;
+}
+
+#playlist {
+    width:350px;
+    position:absolute;
+    padding-left:20px;
+    border:1px solid #cc7c29;
+    line-height:30px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    border-bottom: 1px solid #ddd;
+    padding: 5px;
+    text-align: left;
+}
+
+tr:hover {
+    background-color: #f5f5f5;
+}
+
+#playlist a {
+    color:black;
+    text-decoration:none;
+}
+
+#playlist a:hover {
+    text-decoration:underline;
+}
+
+#playlist img {
+    border:0;
+    vertical-align:middle;
+}
+
+#top, #bottom {
+    padding:15px;
+    margin:auto;
+}
+
+#tagid3 {
+    text-align : center;
+    color : #2784cc;
+    padding:5px;
+    width:225px;
+}
