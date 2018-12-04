@@ -23,7 +23,7 @@ Music.prototype.hasStype = function(style){
   return this.style.includes(style);
 }
 
-var test = JSON.stringify({
+var test_music = JSON.stringify({
   "album" : "Origins",
   "artiste" : "Imagine Dragons",
   "cover" : "/src/cover.png",
@@ -37,3 +37,5 @@ var test = JSON.stringify({
   "genre" : ["rock alternatif"],
   "annee" : "2015"
 });
+
+exports.Music = Music.prototype;
