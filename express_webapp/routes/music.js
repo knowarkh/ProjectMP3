@@ -1,10 +1,12 @@
 var express = require('express');
 var router = express.Router();
 var database = require('../bin/db-connection');
+var path = require('path');
 
 /* GET music listing. */
 router.get('/', function(req, res, next) {
-    res.send('respond with a resource');
+    res.render('player');
+    // res.sendFile(path.join( '/home/zmondy/Bureau/Devoirs/S2IMa/ProjectMP3/express_webapp/views/player.html'));
 });
 
 // ========== GET ==========
