@@ -1,17 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="5e31afb8-8d02-4175-a014-293913ab2a69" name="Default" comment="">
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/player_mobile.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/player.css" afterPath="$PROJECT_DIR$/src/player.css" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
+=======
+    <list default="true" id="b62b310c-d2e1-4270-aa98-072d0a3b7121" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/soundmanager/testsWIP/index_player.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/soundmanager/testsWIP/player.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/soundmanager/testsWIP/player.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/soundmanager/testsWIP/index_test.html" beforeDir="false" afterPath="$PROJECT_DIR$/soundmanager/testsWIP/index_test.html" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+>>>>>>> b20a691619f837a3cb9beee6b66a9aba23025650
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+<<<<<<< HEAD
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf>
@@ -21,10 +33,79 @@
             <state relative-caret-position="-471">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
+=======
+  <component name="FUSProjectUsageTrigger">
+    <session id="436833242">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="6" />
+          <entry key="project.open.time.0" value="2" />
+          <entry key="project.open.time.2" value="1" />
+          <entry key="project.open.time.4" value="1" />
+          <entry key="project.open.time.5" value="1" />
+          <entry key="project.open.time.6" value="3" />
+          <entry key="project.open.time.7" value="1" />
+          <entry key="project.opened" value="9" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="bat" value="1" />
+          <entry key="css" value="1" />
+          <entry key="html" value="4" />
+          <entry key="js" value="4" />
+          <entry key="sh" value="1" />
+          <entry key="ts" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="Bash" value="1" />
+          <entry key="CSS" value="1" />
+          <entry key="HTML" value="4" />
+          <entry key="JavaScript" value="4" />
+          <entry key="PLAIN_TEXT" value="1" />
+          <entry key="TypeScript" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="css" value="116" />
+          <entry key="html" value="541" />
+          <entry key="js" value="508" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="CSS" value="116" />
+          <entry key="HTML" value="541" />
+          <entry key="JavaScript" value="508" />
+        </counts>
+      </usages-collector>
+    </session>
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/soundmanager/testsWIP/index_player.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="457">
+              <caret line="57" column="40" lean-forward="true" selection-start-line="57" selection-start-column="40" selection-end-line="57" selection-end-column="40" />
             </state>
           </provider>
         </entry>
       </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/soundmanager/testsWIP/player.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="716">
+              <caret line="112" column="7" selection-start-line="112" selection-start-column="7" selection-end-line="112" selection-end-column="7" />
+>>>>>>> b20a691619f837a3cb9beee6b66a9aba23025650
+            </state>
+          </provider>
+        </entry>
+      </file>
+<<<<<<< HEAD
       <file leaf-file-name="player.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/player.css">
           <provider selected="true" editor-type-id="text-editor">
@@ -38,10 +119,18 @@
                 <element signature="e#5346#7926#2" expanded="true" />
                 <element signature="e#8171#10751#2" expanded="true" />
               </folding>
+=======
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/soundmanager/testsWIP/player.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1695">
+              <caret line="113" column="98" lean-forward="true" selection-start-line="113" selection-start-column="98" selection-end-line="113" selection-end-column="98" />
+>>>>>>> b20a691619f837a3cb9beee6b66a9aba23025650
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
       <file leaf-file-name="player_mobile.css" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/player_mobile.css">
           <provider selected="true" editor-type-id="text-editor">
@@ -55,6 +144,13 @@
                 <element signature="e#5120#7700#1" expanded="true" />
                 <element signature="e#7889#10469#1" expanded="true" />
               </folding>
+=======
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/soundmanager/testsWIP/index_test.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="791">
+              <caret line="63" column="32" lean-forward="true" selection-start-line="63" selection-start-column="32" selection-end-line="63" selection-end-column="32" />
+>>>>>>> b20a691619f837a3cb9beee6b66a9aba23025650
             </state>
           </provider>
         </entry>
@@ -64,14 +160,24 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+<<<<<<< HEAD
         <option value="CSS File" />
+=======
+        <option value="HTML File" />
+        <option value="CSS File" />
+        <option value="JavaScript File" />
+>>>>>>> b20a691619f837a3cb9beee6b66a9aba23025650
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
+<<<<<<< HEAD
       <find>infos</find>
       <find>red</find>
+=======
+      <find>test</find>
+>>>>>>> b20a691619f837a3cb9beee6b66a9aba23025650
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -80,20 +186,33 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/src/player_mobile.css" />
         <option value="$PROJECT_DIR$/src/player.css" />
+=======
+        <option value="$PROJECT_DIR$/soundmanager/testsWIP/index_test.js" />
+        <option value="$PROJECT_DIR$/soundmanager/testsWIP/player.css" />
+        <option value="$PROJECT_DIR$/soundmanager/testsWIP/index_player.html" />
+        <option value="$PROJECT_DIR$/soundmanager/testsWIP/player.js" />
+        <option value="$PROJECT_DIR$/soundmanager/testsWIP/index_test.html" />
+>>>>>>> b20a691619f837a3cb9beee6b66a9aba23025650
       </list>
     </option>
   </component>
   <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+<<<<<<< HEAD
   <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER">
     <package-json value="$PROJECT_DIR$/package.json" />
   </component>
+=======
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+>>>>>>> b20a691619f837a3cb9beee6b66a9aba23025650
   <component name="JsGulpfileManager">
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="NodeModulesDirectoryManager">
+<<<<<<< HEAD
     <handled-path value="$PROJECT_DIR$/node_modules" />
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
@@ -154,6 +273,119 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
   </component>
+=======
+    <handled-path value="$PROJECT_DIR$/express_webapp/node_modules" />
+  </component>
+  <component name="NodePackageJsonFileManager">
+    <packageJsonPaths>
+      <path value="$PROJECT_DIR$/express_webapp/package.json" />
+      <path value="$PROJECT_DIR$/node_modules/balanced-match/package.json" />
+      <path value="$PROJECT_DIR$/node_modules/body-parser/package.json" />
+      <path value="$PROJECT_DIR$/node_modules/brace-expansion/package.json" />
+      <path value="$PROJECT_DIR$/node_modules/bytes/package.json" />
+      <path value="$PROJECT_DIR$/node_modules/commander/package.json" />
+      <path value="$PROJECT_DIR$/node_modules/concat-map/package.json" />
+      <path value="$PROJECT_DIR$/node_modules/content-type/package.json" />
+      <path value="$PROJECT_DIR$/node_modules/debug/package.json" />
+      <path value="$PROJECT_DIR$/node_modules/depd/package.json" />
+      <path value="$PROJECT_DIR$/node_modules/ee-first/package.json" />
+      <path value="$PROJECT_DIR$/node_modules/ejs/package.json" />
+      <path value="$PROJECT_DIR$/node_modules/express-generator/package.json" />
+      <path value="$PROJECT_DIR$/node_modules/http-errors/package.json" />
+      <path value="$PROJECT_DIR$/node_modules/iconv-lite/package.json" />
+      <path value="$PROJECT_DIR$/node_modules/inherits/package.json" />
+      <path value="$PROJECT_DIR$/node_modules/media-typer/package.json" />
+      <path value="$PROJECT_DIR$/node_modules/mime-db/package.json" />
+      <path value="$PROJECT_DIR$/node_modules/mime-types/package.json" />
+      <path value="$PROJECT_DIR$/node_modules/minimatch/package.json" />
+      <path value="$PROJECT_DIR$/node_modules/minimist/package.json" />
+      <path value="$PROJECT_DIR$/node_modules/mkdirp/package.json" />
+      <path value="$PROJECT_DIR$/node_modules/ms/package.json" />
+      <path value="$PROJECT_DIR$/node_modules/on-finished/package.json" />
+      <path value="$PROJECT_DIR$/node_modules/qs/package.json" />
+      <path value="$PROJECT_DIR$/node_modules/raw-body/package.json" />
+      <path value="$PROJECT_DIR$/node_modules/safer-buffer/package.json" />
+      <path value="$PROJECT_DIR$/node_modules/setprototypeof/package.json" />
+      <path value="$PROJECT_DIR$/node_modules/sorted-object/package.json" />
+      <path value="$PROJECT_DIR$/node_modules/soundmanager2/package.json" />
+      <path value="$PROJECT_DIR$/node_modules/statuses/package.json" />
+      <path value="$PROJECT_DIR$/node_modules/type-is/package.json" />
+      <path value="$PROJECT_DIR$/node_modules/unpipe/package.json" />
+      <path value="$PROJECT_DIR$/soundmanager/package.json" />
+    </packageJsonPaths>
+  </component>
+  <component name="PhpServers">
+    <servers />
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="260" />
+    <option name="y" value="52" />
+    <option name="width" value="1400" />
+    <option name="height" value="1000" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="ProjectMP3" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ProjectMP3" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ProjectMP3" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ProjectMP3" type="462c0819:PsiDirectoryNode" />
+              <item name="soundmanager" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ProjectMP3" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ProjectMP3" type="462c0819:PsiDirectoryNode" />
+              <item name="soundmanager" type="462c0819:PsiDirectoryNode" />
+              <item name="testsWIP" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ProjectMP3" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ProjectMP3" type="462c0819:PsiDirectoryNode" />
+              <item name="soundmanager" type="462c0819:PsiDirectoryNode" />
+              <item name="testsWIP" type="462c0819:PsiDirectoryNode" />
+              <item name="musique" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ProjectMP3" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ProjectMP3" type="462c0819:PsiDirectoryNode" />
+              <item name="soundmanager" type="462c0819:PsiDirectoryNode" />
+              <item name="testsWIP" type="462c0819:PsiDirectoryNode" />
+              <item name="script" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ProjectMP3" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ProjectMP3" type="462c0819:PsiDirectoryNode" />
+              <item name="soundmanager" type="462c0819:PsiDirectoryNode" />
+              <item name="testsWIP" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../NLS/TP2" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/soundmanager/testsWIP" />
+    </key>
+  </component>
+>>>>>>> b20a691619f837a3cb9beee6b66a9aba23025650
   <component name="RunDashboard">
     <option name="ruleStates">
       <list>
@@ -166,6 +398,7 @@
       </list>
     </option>
   </component>
+<<<<<<< HEAD
   <component name="RunManager">
     <configuration default="true" type="CodeceptionConfigurationType" factoryName="Codeception">
       <PhpTestRunnerSettings />
@@ -240,10 +473,32 @@
       <option name="presentableId" value="Default" />
       <updated>1544598288055</updated>
       <workItem from="1544598289586" duration="3171000" />
+=======
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b62b310c-d2e1-4270-aa98-072d0a3b7121" name="Default Changelist" comment="" />
+      <created>1542269123393</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1542269123393</updated>
+      <workItem from="1542269125967" duration="620000" />
+      <workItem from="1542276522191" duration="73000" />
+      <workItem from="1542981120882" duration="288000" />
+      <workItem from="1542981577454" duration="3106000" />
+      <workItem from="1542988118776" duration="388000" />
+      <workItem from="1543479027923" duration="2279000" />
+      <workItem from="1543568720642" duration="9120000" />
+      <workItem from="1543767272968" duration="5281000" />
+      <workItem from="1543914582100" duration="4449000" />
+>>>>>>> b20a691619f837a3cb9beee6b66a9aba23025650
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
+<<<<<<< HEAD
     <option name="totallyTimeSpent" value="3171000" />
   </component>
   <component name="ToolWindowManager">
@@ -272,10 +527,42 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="processedProjectFiles" value="true" />
+=======
+    <option name="totallyTimeSpent" value="25604000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-1" y="25" width="1922" height="1056" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19743863" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32976446" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="9" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Terminal" order="10" />
+      <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Database" order="3" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+>>>>>>> b20a691619f837a3cb9beee6b66a9aba23025650
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
+<<<<<<< HEAD
   <component name="XDebuggerManager">
     <breakpoint-manager />
     <watches-manager />
@@ -316,6 +603,56 @@
             <element signature="e#5120#7700#1" expanded="true" />
             <element signature="e#7889#10469#1" expanded="true" />
           </folding>
+=======
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/soundmanager/testsWIP/index_test.js" />
+    <entry file="file://$PROJECT_DIR$/soundmanager/testsWIP/script/soundmanager2-jsmin.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-918" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/soundmanager/testsWIP/script/soundmanager2.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/soundmanager/testsWIP/src/make-flash8.bat">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/soundmanager/testsWIP/src/make-flash8.sh">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.dom.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="293">
+          <caret line="5152" column="13" selection-start-line="5152" selection-start-column="13" selection-end-line="5152" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/soundmanager/testsWIP/player.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="716">
+          <caret line="112" column="7" selection-start-line="112" selection-start-column="7" selection-end-line="112" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/soundmanager/testsWIP/index_player.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="457">
+          <caret line="57" column="40" lean-forward="true" selection-start-line="57" selection-start-column="40" selection-end-line="57" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/soundmanager/testsWIP/index_test.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="791">
+          <caret line="63" column="32" lean-forward="true" selection-start-line="63" selection-start-column="32" selection-end-line="63" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/soundmanager/testsWIP/player.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1695">
+          <caret line="113" column="98" lean-forward="true" selection-start-line="113" selection-start-column="98" selection-end-line="113" selection-end-column="98" />
+>>>>>>> b20a691619f837a3cb9beee6b66a9aba23025650
         </state>
       </provider>
     </entry>
