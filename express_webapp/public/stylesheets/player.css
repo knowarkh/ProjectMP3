@@ -29,7 +29,7 @@ body {
 .audioplayer .visuel {
     position: absolute;
     background-color: green;
-    background: url(ImagineDragons_Zero.jpg);
+    background: url(../images/ImagineDragons_Zero.jpg);
     background-repeat: no-repeat;
     background-size: contain;
     width: 100vh;

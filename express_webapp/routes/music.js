@@ -1,10 +1,11 @@
 var express = require('express');
 var router = express.Router();
 var database = require('../bin/db-connection');
+var path = require('path');
 
 /* GET music listing. */
 router.get('/', function(req, res, next) {
-    res.send('respond with a resource');
+    res.render('player');
 });
 
 // ========== GET ==========
@@ -137,6 +138,65 @@ router.put('/maj/:id', function(req, res) {
         });
     });
 })
+
+// addLike(int id) +1
+
+router.put('/maj/like/:id', function(req, res) {
+    // Find --> like
+    database.Musique.findById(req.params.id, function(err, music) {
+        if (err) {
+            res.send(err);
+        }
+
+        let cookies = music.nbLike + 1
+        music.nbLike = cookies;
+
+        music.save(function(err) {
+            if(err) {
+                res.send(err);
+            }
+            res.json({message : 'MAJ réussite'});
+        });
+    });
+})
+
+// addNumbeOfShare(int id)
+
+router.put('/maj/share/:id', function(req, res) {
+    database.Musique.findById(req.params.id, function(err, music) {
+        if (err) {
+            res.send(err);
+        }
+
+        music.nbPartage = req.body.nbPartage;
+
+        music.save(function(err) {
+            if(err) {
+                res.send(err);
+            }
+            res.json({message : 'MAJ réussite'});
+        });
+    });
+})
+
+// addComment(int id)
+
+// router.put('/maj/like/:id', function(req, res) {
+//     database.Musique.findById(req.params.id, function(err, music) {
+//         if (err) {
+//             res.send(err);
+//         }
+//         music.nbLike = req.body.nbLike;
+//
+//         music.save(function(err) {
+//             if(err) {
+//                 res.send(err);
+//             }
+//             res.json({message : 'MAJ réussite'});
+//         });
+//     });
+// })
+
 
 // ========== DELETE ==========
 
