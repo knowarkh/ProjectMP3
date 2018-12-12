@@ -13,7 +13,7 @@ function createWaveForm() {
 
     let x_bar = 0;
     let y_bar = 0;
-    let width_bar = 2;
+    let width_bar = width_reflectWave / 400;
     let height_bar = 0;
 
     primarySVG.setAttribute("xmlns", svgns);
