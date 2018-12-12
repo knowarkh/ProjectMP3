@@ -1,5 +1,3 @@
-/* https://www.flaticon.com/search?word=next */
-
 body {
   background-color: var(--background);
   font-family: sans-serif;
@@ -17,6 +15,7 @@ body {
 
 .audioplayer {
     display: flex;
+    flex-direction: column;
     position: relative;
     background-color: white;
     height: 100vh;
@@ -28,9 +27,7 @@ body {
 
 .audioplayer .visuel {
     position: absolute;
-    background-color: green;
-    background: url(../images/ImagineDragons_Zero.jpg);
-    background-repeat: no-repeat;
+    background: url(ImagineDragons_Zero.jpg) no-repeat;
     background-size: contain;
     width: 100vh;
     height: 200px;
@@ -41,42 +38,34 @@ body {
 /* ========= INFOS ========= */
 
 .audioplayer .infos {
-    position: absolute;
-    top: 0;
     display: flex;
+    margin: 5px 0 5px 0;
 }
 
 .audioplayer .infos .artiste {
-    margin: 10px;
-    margin-top: 13px;
+    margin: 13px 10px 10px;
     color: #9b9b9b;
     font-size: 12px;
 }
 
 .audioplayer .infos .titre {
-    margin: 10px;
-    margin-top: 11px;
+    margin: 11px 10px 10px;
 }
 
 /* ========= WAVEFORM ========= */
 
 .audioplayer .waveform {
-    position: absolute;
-    background-color: red;
-    width: 100%;
-    /* left: 0; */
-    height: 45%;
-    top: 25%;
-    display: block;
+    /*background-color: red;*/
+    flex: 3;
 }
 
 
 /* ========= CONTROLS ========= */
 
 .audioplayer .controls {
-    position: absolute;
-    bottom: 3px;
-    left: 49%;
+    flex: 1;
+    text-align: center;
+    margin: 5px;
 }
 
 .audioplayer .controls button {
@@ -154,8 +143,9 @@ body {
 
 .audioplayer .temps {
     position: absolute;
-    bottom: 7px;
+    bottom: 13px;
     display: flex;
+    margin-left: 15px;
 }
 
 .audioplayer .temps .en-cours, .audioplayer .temps .total {
@@ -175,7 +165,7 @@ body {
 .audioplayer .statistiques {
     position: absolute;
     display: flex;
-    bottom: 7px;
+    bottom: 13px;
     right: 20px;
     color: #9b9b9b;
     font-size: 12px;
@@ -204,7 +194,7 @@ body {
 
 .audioplayer .social {
     position: absolute;
-    top: 10px;
+    top: 12px;
     right: 20px;
     font-size: 12px;
 }
