@@ -1,0 +1,45 @@
+doctype html
+html
+  head
+    meta(charset='UTF-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    meta(name='description', content='PlayerMP3')
+    meta(name='author', content='Work in Progress')
+    // <link rel="icon" type="Images/png" href="Images/icon.png" />
+    title Fasma
+    // Custom styles for this template
+    link(rel='stylesheet', href='/stylesheets/player.css')
+    script(src='/javascripts/player.js')
+    // HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries
+    //if lt IE 9
+      script(src='https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js')
+      script(src='https://oss.maxcdn.com/respond/1.4.2/respond.min.js')
+  body
+    .audioplayer
+      .visuel
+      .infos
+        .artiste Nom de l'artiste
+        .titre Nom du morceau
+      .waveform
+      .controls
+        button.prev Précédent
+        button.play-pause.play Lecture
+        button.next Suivant
+        // <button class='volume volume-on' data-value='90'>Volume</button>
+        // <button class='volume volume-off' data-value='90'>Volume</button>
+        // <button class='volume volume-off is-active' data-value='90'>Volume</button>
+        button.volume.volume-on.is-active(data-value='90') Volume
+        .volume.slider
+          .volume_sliderTotale
+          .volume_sliderProgress
+          .volume_sliderBtn
+      .temps
+        .en-cours 1:31
+        .total 3:11
+      .statistiques
+        .nb-lectures 16,5M
+        .nb-commentaires 280
+      .social
+        button.like 333K
+        button.share Partager

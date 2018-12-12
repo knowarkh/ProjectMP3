@@ -1,10 +1,11 @@
 var express = require('express');
 var router = express.Router();
 var database = require('../bin/db-connection');
+var path = require('path');
 
 /* GET music listing. */
 router.get('/', function(req, res, next) {
-    res.send('respond with a resource');
+    res.render('player');
 });
 
 // ========== GET ==========
@@ -61,10 +62,10 @@ router.get('/find/album/:album', function(req,res){
     });
 })
 
-// Find by Styles
+// Find by genre
 
-router.get('/find/styles/:styles', function(req,res){
-	database.Musique.find({styles: req.params.styles}, function(err, music) {
+router.get('/find/genre/:genre', function(req,res){
+	database.Musique.find({genre: req.params.genre}, function(err, music) {
         if (err) {
             res.send(err);
         }
@@ -94,8 +95,8 @@ router.post('/add', function(req,res){
     music.cover = req.body.cover;
     music.annee = req.body.annee;
     music.duree = req.body.duree;
-    music.styles = req.body.styles;
-    music.listePoints = req.body.listePoints;
+    music.genre = req.body.genre;
+    music.listePoint = req.body.listePoint;
     music.nbEcoute = req.body.nbEcoute;
     music.nbLike = req.body.nbLike;
     music.nbPartage = req.body.nbPartage;
@@ -123,8 +124,8 @@ router.put('/maj/:id', function(req, res) {
         music.cover = req.body.cover;
         music.annee = req.body.annee;
         music.duree = req.body.duree;
-        music.styles = req.body.styles;
-        music.listePoints = req.body.listePoints;
+        music.genre = req.body.genre;
+        music.listePoint = req.body.listePoint;
         music.nbEcoute = req.body.nbEcoute;
         music.nbLike = req.body.nbLike;
         music.nbPartage = req.body.nbPartage;
@@ -138,6 +139,67 @@ router.put('/maj/:id', function(req, res) {
     });
 })
 
+// addLike(int id) +1
+
+router.put('/maj/like/:id', function(req, res) {
+    // Find --> like
+    database.Musique.findById(req.params.id, function(err, music) {
+        if (err) {
+            res.send(err);
+        }
+
+        let cookies = music.nbLike + 1
+        music.nbLike = cookies;
+
+        music.save(function(err) {
+            if(err) {
+                res.send(err);
+            }
+            res.json({message : 'MAJ réussite'});
+        });
+    });
+})
+
+// addNumbeOfShare(int id)
+
+router.put('/maj/share/:id', function(req, res) {
+    database.Musique.findById(req.params.id, function(err, music) {
+        if (err) {
+            res.send(err);
+        }
+
+        music.nbPartage = req.body.nbPartage;
+
+        music.save(function(err) {
+            if(err) {
+                res.send(err);
+            }
+            res.json({message : 'MAJ réussite'});
+        });
+    });
+})
+
+// addComment(int id)
+
+// router.put('/maj/like/:id', function(req, res) {
+//     database.Musique.findById(req.params.id, function(err, music) {
+//         if (err) {
+//             res.send(err);
+//         }
+//         music.nbLike = req.body.nbLike;
+//
+//         music.save(function(err) {
+//             if(err) {
+//                 res.send(err);
+//             }
+//             res.json({message : 'MAJ réussite'});
+//         });
+//     });
+// })
+
+
+// ========== DELETE ==========
+
 router.delete('/remove/:id', function(req, res) {
     database.Musique.remove({_id: req.params.id}, function(err, music){
         if (err){
@@ -147,7 +209,6 @@ router.delete('/remove/:id', function(req, res) {
     });
 })
 
-// ========== DELETE ==========
 
 
 module.exports = router;

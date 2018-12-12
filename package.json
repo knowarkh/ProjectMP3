@@ -1,0 +1,25 @@
+{
+  "name": "ProjectMP3",
+  "version": "1.0.0",
+  "description": "Player MP3",
+  "main": "index.js",
+  "dependencies": {
+    "express-generator": "^4.16.0",
+    "body-parser": "^1.18.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/knowarkh/ProjectMP3.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/knowarkh/ProjectMP3/issues"
+  },
+  "homepage": "https://github.com/knowarkh/ProjectMP3#readme"
+}
