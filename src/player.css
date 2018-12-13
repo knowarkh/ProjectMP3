@@ -61,6 +61,11 @@ body {
     flex-direction: column;
 }
 
+.waveform{
+  display: flex;
+  flex-direction: column;
+}
+
 
 /* ========= CONTROLS ========= */
 
