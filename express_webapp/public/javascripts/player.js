@@ -3,7 +3,6 @@
 
 requestGet("http://localhost:3000/music/find",function(musics){
   res = JSON.parse( musics )[0];
-  console.log(res);
 
 
    var artiste = document.querySelector('.artiste');
@@ -19,7 +18,19 @@ requestGet("http://localhost:3000/music/find",function(musics){
   dureeMax.innerHTML = calculeDuree(res["duree"]);
 
   createWaveForm(res['listePoint']);
-  let music = new Music(res);
-  console.log(music);
-  music.play();
-})
+
+  // soundManager.onerror = function () { // En cas d'erreur
+  //     alert("Fasma a rencontré une erreur.");
+  // }
+  //
+  //   console.log(res);
+  //   let sound = soundManager.createSound( // On crée un son pour chaque lien de la playlist
+  //       {
+  //           id: res['titre'] +"-"+res['artiste'], // Id arbitraire : piste0, piste1, etc.
+  //           url: res['cheminMP3']
+  //         });
+  //
+  //   console.log(sound);
+  //   sound.play();
+  // }
+);
