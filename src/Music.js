@@ -1,8 +1,8 @@
 class Music extends SMSound{
 
     constructor(jsonFile){
-      super();
       let data = JSON.parse(jsonFile);
+      super({"id" : data.titre + "-" + data.artiste, "url" : data.cheminMP3});
 
       this.url = data.cheminMP3;
 
@@ -41,7 +41,7 @@ Music.prototype.whileplaying = function(){
 
 Music.prototype.onfinish = function(){
   this.unload();
-  
+
 }
 
 
