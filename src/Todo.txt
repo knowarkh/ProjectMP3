@@ -2,3 +2,4 @@
 - Faire version mobile en mode app
 - Découper les CSS en 2 fichiers différents
   --> Suivant mediaqueries dnas le html
+- Privatisation des fonctions JS
