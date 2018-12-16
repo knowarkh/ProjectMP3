@@ -1,5 +1,5 @@
 class Lecteur{
-  let soundManager;
+  let sound;
 
   constructor(){
     this.currentTime = 0;
@@ -7,6 +7,8 @@ class Lecteur{
     this.repeatMode = false;
     this.playlist = new Playlist();
     this.currentUser = undefined;
+    this.sound = null;
+
     //TODO soundManager gestion
   }
 }
