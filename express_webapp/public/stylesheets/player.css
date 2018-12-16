@@ -55,7 +55,7 @@ body {
 /* ========= WAVEFORM ========= */
 
 .audioplayer .waveform {
-    background-color: red;
+    /*background-color: red;*/
     flex: 3;
     display: flex;
     flex-direction: column;
