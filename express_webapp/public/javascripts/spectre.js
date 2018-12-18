@@ -1,3 +1,7 @@
+/**
+ * Create a waveform with the given array
+ * @param dotsList array of INT position to make the waveform
+ */
 function createWaveForm(dotsList) {
     let spectre = document.getElementsByClassName("waveform")[0];
 
@@ -6,15 +10,15 @@ function createWaveForm(dotsList) {
     spectre.innerHTML = "";
 
     let svgns = "http://www.w3.org/2000/svg";
+
     let primarySVG = document.createElementNS(svgns, "svg");
-
     let reflectSVG = document.createElementNS(svgns, "svg");
-    let width_primaryWave = spectre.clientWidth;
-
-    let height_primaryWave = Math.round(spectre.clientHeight * 2 /3);
-    let width_reflectWave = width_primaryWave;
-
-    let height_reflectWave = Math.round(spectre.clientHeight / 3);
+    
+    let primaryWaveWidth = spectre.clientWidth;
+    let primaryWaveHeight = Math.round(spectre.clientHeight * 2 /3);
+    
+    let reflectWaveWidth = primaryWaveWidth;
+    let reflectWaveHeight = Math.round(spectre.clientHeight / 3);
 
     //JSON data
     let data = dotsList;
@@ -23,101 +27,99 @@ function createWaveForm(dotsList) {
     let nbBars = dotsList.length;
     let x_bar = 0;
     let y_bar = 0;
-    let width_bar = 2.5;
-
-    let height_bar = 0;
+    
+    let barWidth = 2.5;
+    let barHeight = 0;
 
     /**Find the size and the number of bars show in the soundwave */
 
     /** Size
-     * @Deprecated*/
+     * @Deprecated
+     */
 
-    let possibleWidthBar = width_reflectWave / nbBars;
+    let possibleWidthBar = reflectWaveWidth / nbBars;
 
     // while(possibleWidthBar <= minSizeBar){
     //   nbBars--;
-    //   possibleWidthBar = width_reflectWave/nbBars
+    //   possibleWidthBar = reflectWaveWidth/nbBars
     // }
 
-    //width_bar = possibleWidthBar;
+    //barWidth = possibleWidthBar;
 
     /** Number of bar */
 
     let numberOfBarToRemove = 0;
 
-    while((nbBars - numberOfBarToRemove) * width_bar > width_primaryWave ){
+    while((nbBars - numberOfBarToRemove) * barWidth > primaryWaveWidth ){
         numberOfBarToRemove++;
     }
 
     data = getAvgDotList(data, numberOfBarToRemove);
     nbBars -= numberOfBarToRemove;
 
-
+    /**
+     * Create the primary waveform
+     */
 
     primarySVG.setAttribute("xmlns", svgns);
+
     //Set the rigth size of the primary waveform
+    primarySVG.setAttribute("width", primaryWaveWidth);
+    primarySVG.setAttribute("height", primaryWaveHeight);
 
-    primarySVG.setAttribute("width", width_primaryWave);
-    primarySVG.setAttribute("height", height_primaryWave);
-
-    //Create and add every string of the primary waveform
-
+    //Create and add every bar of the primary waveform
     for (let i = 0; i < nbBars; i++) {
         let newRect = document.createElementNS(svgns, "rect");
-        //  height_bar = getRandomInt(height_primaryWave);
-        height_bar = getCorrectHeight("primary", data[i]);
+        barHeight = getCorrectHeight("primary", data[i]);
 
-
-        let y_bar = height_primaryWave - height_bar;
+        let y_bar = primaryWaveHeight - barHeight;
         newRect.setAttributeNS(null, "x", x_bar);
         newRect.setAttributeNS(null, "y", y_bar);
-        newRect.setAttributeNS(null, "width", "" + width_bar);
-        newRect.setAttributeNS(null, "height", "" + height_bar);
+        newRect.setAttributeNS(null, "width", "" + barWidth);
+        newRect.setAttributeNS(null, "height", "" + barHeight);
         newRect.setAttributeNS(null, "rx", "0");
         newRect.setAttributeNS(null, "style", "fill:#333333; stroke:#CCCCCC; stroke-width:0.5");
-        x_bar += width_bar;
+        x_bar += barWidth;
         primarySVG.appendChild(newRect);
     }
+    //Add to the div the primary waveform
     spectre.appendChild(primarySVG);
 
-    //Reflect part
+    /** Create the reflect waveform */
     x_bar = 0;
     y_bar = 0;
 
     reflectSVG.setAttribute("xmlns", svgns);
+
     //Set the rigth size of the reflect waveform
+    reflectSVG.setAttribute("width", reflectWaveWidth);
+    reflectSVG.setAttribute("height", reflectWaveHeight);
 
-    reflectSVG.setAttribute("width", width_reflectWave);
-    reflectSVG.setAttribute("height", height_reflectWave);
-
-    //Create and add every string of the reflect waveform
-
+    //Create and add every bar of the reflect waveform
     for (let i = 0; i < nbBars; i++) {
         let newRect = document.createElementNS(svgns, "rect");
-        //height_bar = getRandomInt(height_reflectWave * 2 / 3);
-        height_bar = getCorrectHeight("reflect", data[i]);
+        barHeight = getCorrectHeight("reflect", data[i]);
 
-        //y_bar = height_reflectWave - height_bar;
         newRect.setAttributeNS(null, "x", x_bar);
         newRect.setAttributeNS(null, "y", y_bar);
-        newRect.setAttributeNS(null, "width", "" + width_bar);
-        newRect.setAttributeNS(null, "height", "" + height_bar);
+        newRect.setAttributeNS(null, "width", "" + barWidth);
+        newRect.setAttributeNS(null, "height", "" + barHeight);
         newRect.setAttributeNS(null, "rx", "0");
         newRect.setAttributeNS(null, "style", "fill:#888888; stroke:#CCCCCC; stroke-width:0.5");
-        x_bar += width_bar;
+        x_bar += barWidth;
         reflectSVG.appendChild(newRect);
     }
+    //Add to the div the reflect waveform
     spectre.appendChild(reflectSVG);
 
-
+    /**
+     * Get the height of a bar after a resize proportionally to the waveform's div
+     * @param type - primary or reflect, define which algorithm will be used
+     * @param value - the height of the bar, wanted to be resize
+     * @returns the transformed value or null if the type ins't both "primary" or "reflect"
+     */
     function getCorrectHeight(type, value) {
-
         value = (value * spectre.clientHeight) / maxSizeBar;
-
-        /*if (value > height_primaryWave){
-            //let ratio = 1 /(value / height_primaryWave);
-            value = value * 0.8;
-        }*/
         if (type === "primary") {
             return value * 2 / 3 ;
         } else if (type === "reflect") {
@@ -127,19 +129,36 @@ function createWaveForm(dotsList) {
         }
     }
 
-
+    /**
+     * Do a recursive deep course, which do a average and remove of a number of point given
+     * @param dotList - array of int, which represent the waveform
+     * @param numberOfDotsRemove - Number of dot wanted to be removed
+     * @returns a new array of int with the average value and the good number of dots
+     */
     function getAvgDotList(dotList, numberOfDotsRemove){
+        //Do a clone of the dotList given, to not edit it
         let res = JSON.parse(JSON.stringify(dotList));
+
+        /**
+         * The recursive part of the function, will do the deep course and edit the dots
+         * @param dotList - array of dot given earlier
+         * @param numberOfDotsRemove - number of dots given earlier
+         * @param begin - start of the section which be used
+         * @param end - end od the section which be used
+         */
         function transformAvgDotList(dotList, numberOfDotsRemove, begin = 0, end = dotList.length-1) {
+            //Part which do the work
             if (numberOfDotsRemove === 1) {
                 let val1 = (dotList[end - 1] == null)?dotList[end] : dotList[end - 1]*0.9;
                 let val2 = (dotList[end] == null)? dotList[end - 1] : dotList[end]*0.9;
                 let avgValue = (val1 + val2) / 2 ;
-                dotList[end] = null;
+                dotList[end] = null; //Instead of removing the value, put a null, this will not edit the dotList in action and prevent some bugs
                 dotList[end - 1] = avgValue;
             }
+            //Call part
             else if(numberOfDotsRemove >= 2) {
                 if (numberOfDotsRemove % 2 === 0) {
+                    //Math.floor and Math.ceil is used to do a great division of the array
                     transformAvgDotList(dotList, numberOfDotsRemove / 2, begin, Math.floor(begin/2) + Math.floor(end / 2));
                     transformAvgDotList(dotList, numberOfDotsRemove / 2, Math.floor(begin/2) + Math.ceil(end / 2), end);
                 } else {
@@ -149,6 +168,8 @@ function createWaveForm(dotsList) {
             }
         }
         transformAvgDotList(res, numberOfDotsRemove);
+
+        //Remove all null value 
         while(res.indexOf(null) !== -1){
             res.splice(res.indexOf(null),1 );
         }
