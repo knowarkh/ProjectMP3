@@ -28,7 +28,7 @@ body {
 
 .audioplayer .visuel {
     position: absolute;
-    background: url(../images/ImagineDragons_Zero.jpg) no-repeat;
+    background: url(../images/ImagineDragons/Zero.jpg) no-repeat;
     background-size: contain;
     width: 100vh;
     height: 200px;
