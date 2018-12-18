@@ -1,3 +1,6 @@
+/**
+ * Class used to control the playlist and the music
+ */
 class Playlist {
   constructor(){
     this.musicList = [];
@@ -6,6 +9,10 @@ class Playlist {
   }
 }
 
+/**
+ * Put the new position of the current music in the playlist
+ * @param {int} newPosition - The new position of the current music
+ */
 Playlist.prototype.setCurrentPosition = function(newPosition){
   if(newPosition < this.musicList.length && newPosition >= 0){
     this.currentPosition = newPosition;
@@ -13,14 +20,27 @@ Playlist.prototype.setCurrentPosition = function(newPosition){
   }
 };
 
+/**
+ * Get the current position of the playlist
+ * @returns {Music} - the current position of the playlist
+ */
 Playlist.prototype.getCurrentPosition = function(){
   return this.currentPosition;
 };
 
+/**
+ * Get the current Music
+ * @returns {Music} - the current Music
+ */
 Playlist.prototype.getCurrentMusic = function(){
   return this.currentMusic;
 };
 
+/**
+ * Get a Music with a position to the playlist
+ * @param position - int - Position into the playlist
+ * @returns {Music} - Music object
+ */
 Playlist.prototype.getMusic = function(position){
   if(this.musicList[position] != null){
     return this.musicList[position];
@@ -29,12 +49,21 @@ Playlist.prototype.getMusic = function(position){
   }
 };
 
+/**
+ * Add a Music to the playlist
+ * @param  music - {Music} object
+ */
 Playlist.prototype.addMusic = function(music){
   if(this.currentMusic == null)
     this.currentMusic = music;
   this.musicList.push(music);
 };
 
+/**
+ * Remove a music with the Music given
+ * @param music - Music to remove
+ * @returns {boolean} - true if success, else otherwise
+ */
 Playlist.prototype.removeMusicByMusic = function(music){
   if(this.musicList.includes(music) && music !== this.currentMusic){
     if(this.musicList.indexOf(music) < this.currentPosition)
@@ -44,6 +73,11 @@ Playlist.prototype.removeMusicByMusic = function(music){
   }else{return false;}
 };
 
+/**
+ * Remove a music with the position into the playlist
+ * @param position - position to remove
+ * @returns {boolean} - true if success, else otherwise
+ */
 Playlist.prototype.removeMusicByPosition = function(position){
   if(this.musicList[position] != null && this.musicList[position] !== this.currentMusic){
     if(position < this.currentPosition)
@@ -53,7 +87,9 @@ Playlist.prototype.removeMusicByPosition = function(position){
   }else{return false;}
 };
 
-
+/**
+ * Change if possible the current position for currentPosition + 1
+ */
 Playlist.prototype.next = function(){
   if(this.currentPosition < this.musicList.length -1){
     this.currentPosition++;
@@ -61,45 +97,12 @@ Playlist.prototype.next = function(){
   }
 };
 
+/**
+ * Change if possible the current position for currentPosition - 1
+ */
 Playlist.prototype.previous = function(){
   if(this.currentPosition > 0){
     this.currentPosition--;
     this.currentMusic = this.musicList[this.currentPosition];
   }
 };
-//
-// var test_playlist1 = JSON.stringify({
-//   "album" : "Origins",
-//   "artiste" : "Imagine Dragons",
-//   "cover" : "/src/cover.png",
-//   "duree" : "390",
-//   "cheminMP3" : "src/music/zero.mp3",
-//   "titre" : "Zero",
-//   "listePoint" : ["1","23","66",83,1,23,11,85,24,98],
-//   "nbEcoute" : "1232434",
-//   "nbLike" : "86342",
-//   "nbPartage" : "43526",
-//   "genre" : ["rock alternatif"],
-//   "annee" : "2015"
-// });
-//
-// var test_playlist2 = JSON.stringify({
-//   "album" : "One More Light",
-//   "artiste" : "Linkin Park",
-//   "cover" : "/src/cover.png",
-//   "duree" : "396",
-//   "cheminMP3" : "src/music/battle_symphony.mp3",
-//   "titre" : "Battle Symphony",
-//   "listePoint" : ["1","23","66",83,1,23,11,85,24,98],
-//   "nbEcoute" : "1232434",
-//   "nbLike" : "86342",
-//   "nbPartage" : "43526",
-//   "genre" : ["alternatif"],
-//   "annee" : "2017"
-// });
-//
-// var m1 = new Music(test_playlist1);
-// var m2 = new Music(test_playlist2);
-// var play = new Playlist();
-// play.addMusic(m1);
-// play.addMusic(m2);
