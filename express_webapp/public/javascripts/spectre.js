@@ -169,7 +169,7 @@ function createWaveForm(dotsList) {
         }
         transformAvgDotList(res, numberOfDotsRemove);
 
-        //Remove all null value 
+        //Remove all null value
         while(res.indexOf(null) !== -1){
             res.splice(res.indexOf(null),1 );
         }

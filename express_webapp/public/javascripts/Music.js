@@ -1,7 +1,14 @@
+/**
+ *
+ */
 class Music{
 
+    /**
+     * Constructor of the Music
+     * @param jsonFile - a JSONFile will contains all information about a music. The file must come from a REST request to the database
+     */
     constructor(jsonFile){
-      let data = JSON.parse(jsonFile);
+      let data = jsonFile;
 
       this.album = data.album;
       this.artistName = data.artiste;
@@ -22,21 +29,5 @@ class Music{
 
 Music.prototype.hasStype = function(style){
   return this.style.includes(style);
-}
+};
 
-// var test_music = JSON.stringify({
-//   "album" : "Origins",
-//   "artiste" : "Imagine Dragons",
-//   "cover" : "/src/cover.png",
-//   "duree" : "390",
-//   "cheminMP3" : "src/music/zero.mp3",
-//   "titre" : "Zero",
-//   "listePoint" : ["1","23","66",83,1,23,11,85,24,98],
-//   "nbEcoute" : "1232434",
-//   "nbLike" : "86342",
-//   "nbPartage" : "43526",
-//   "genre" : ["rock alternatif"],
-//   "annee" : "2015"
-// });
-
-//exports.Music = Music.prototype;
