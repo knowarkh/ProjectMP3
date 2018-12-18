@@ -30,7 +30,7 @@ function createWaveForm(dotsList) {
     let x_bar = 0;
     let y_bar = 0;
     
-    let barWidth = 2.5;
+    let barWidth = 4;
     let barHeight = 0;
 
     /**Find the size and the number of bars show in the soundwave */
@@ -84,7 +84,7 @@ function createWaveForm(dotsList) {
         newRect.setAttributeNS(null, "width", "" + barWidth);
         newRect.setAttributeNS(null, "height", "" + barHeight);
         newRect.setAttributeNS(null, "rx", "0");
-        newRect.setAttributeNS(null, "style", "fill:#333333; stroke:#CCCCCC; stroke-width:0.5");
+        newRect.setAttributeNS(null, "style", "fill:#333333; stroke:#CCCCCC; stroke-width:2px");
         x_bar += barWidth;
         primarySVG.appendChild(newRect);
     }

@@ -81,6 +81,19 @@ body {
     flex-direction: column;
 }
 
+.audioplayer .waveform .bar-up {
+    fill: #eceaed !important;
+    stroke: #a9a9a9 !important;
+    stroke-width: 1px !important;
+}
+
+
+.audioplayer .waveform .bar-down {
+    fill: #c7c3cb !important;
+    stroke: #a9a9a9 !important;
+    stroke-width: 1px !important;
+}
+
 /* ========= CONTROLS ========= */
 
 .audioplayer .controls {
