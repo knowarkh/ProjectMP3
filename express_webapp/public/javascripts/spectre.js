@@ -1,25 +1,30 @@
 function createWaveForm(dotsList) {
     let spectre = document.getElementsByClassName("waveform")[0];
+
+    /** Reset the content of the waveform */
+
+    spectre.innerHTML = "";
+
     let svgns = "http://www.w3.org/2000/svg";
-
     let primarySVG = document.createElementNS(svgns, "svg");
+
     let reflectSVG = document.createElementNS(svgns, "svg");
-
     let width_primaryWave = spectre.clientWidth;
-    let height_primaryWave = Math.round(spectre.clientHeight);
 
+    let height_primaryWave = Math.round(spectre.clientHeight * 2 /3);
     let width_reflectWave = width_primaryWave;
+
     let height_reflectWave = Math.round(spectre.clientHeight / 3);
 
     //JSON data
     let data = dotsList;
+    let maxSizeBar = Math.max.apply(null,dotsList);
 
-    let minSizeBar = 3;
     let nbBars = dotsList.length;
-
     let x_bar = 0;
     let y_bar = 0;
     let width_bar = 2.5;
+
     let height_bar = 0;
 
     /**Find the size and the number of bars show in the soundwave */
@@ -63,7 +68,7 @@ function createWaveForm(dotsList) {
         height_bar = getCorrectHeight("primary", data[i]);
 
 
-        y_bar = height_primaryWave - height_bar;
+        let y_bar = height_primaryWave - height_bar;
         newRect.setAttributeNS(null, "x", x_bar);
         newRect.setAttributeNS(null, "y", y_bar);
         newRect.setAttributeNS(null, "width", "" + width_bar);
@@ -106,14 +111,15 @@ function createWaveForm(dotsList) {
 
 
     function getCorrectHeight(type, value) {
-        if (value > height_primaryWave){
+
+        value = (value * spectre.clientHeight) / maxSizeBar;
+
+        /*if (value > height_primaryWave){
             //let ratio = 1 /(value / height_primaryWave);
-
-
-            value = value * ratio * 0.8;
-        }
+            value = value * 0.8;
+        }*/
         if (type === "primary") {
-            return value;
+            return value * 2 / 3 ;
         } else if (type === "reflect") {
             return value / 3;
         } else {

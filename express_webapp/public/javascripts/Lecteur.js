@@ -66,6 +66,8 @@ class Lecteur {
         document.getElementsByClassName("like")[0].addEventListener("click", this.like.bind(this));
 
         document.getElementsByClassName("share")[0].addEventListener("click", this.share.bind(this));
+
+        window.addEventListener("resize", this.drawSpectrum.bind(this));
     }
 }
 
