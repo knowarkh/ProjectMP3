@@ -3,7 +3,7 @@
 let manager = new Lecteur();
 
 requestGet("http://localhost:3000/music/find",function(musics){
-  res = JSON.stringify(JSON.parse( musics )[0]);
+  let res = JSON.parse( musics )[0];
 
   manager.addMusic(new Music(res));
 
