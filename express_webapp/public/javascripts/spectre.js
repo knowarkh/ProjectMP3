@@ -158,11 +158,19 @@ function createWaveForm(dotsList) {
         function transformAvgDotList(dotList, numberOfDotsRemove, begin = 0, end = dotList.length-1) {
             //Part which do the work
             if (numberOfDotsRemove === 1) {
-                let val1 = (dotList[end - 1] == null)?dotList[end] : dotList[end - 1]*0.9;
-                let val2 = (dotList[end] == null)? dotList[end - 1] : dotList[end]*0.9;
-                let avgValue = (val1 + val2) / 2 ;
-                dotList[end] = null; //Instead of removing the value, put a null, this will not edit the dotList in action and prevent some bugs
-                dotList[end - 1] = avgValue;
+                if(end-begin % 2 ===0){
+                    let val1 = (dotList[end - 1] == null)?dotList[end] : dotList[end - 1]*0.9;
+                    let val2 = (dotList[end] == null)? dotList[end - 1] : dotList[end]*0.9;
+                    let avgValue = (val1 + val2) / 2 ;
+                    dotList[end] = null; //Instead of removing the value, put a null, this will not edit the dotList in action and prevent some bugs
+                    dotList[end - 1] = avgValue;
+                }else{
+                    let val1 = (dotList[begin + 1] == null)?dotList[begin] : dotList[begin + 1]*0.9;
+                    let val2 = (dotList[begin] == null)? dotList[begin + 1] : dotList[begin]*0.9;
+                    let avgValue = (val1 + val2) / 2 ;
+                    dotList[begin] = null; //Instead of removing the value, put a null, this will not edit the dotList in action and prevent some bugs
+                    dotList[begin + 1] = avgValue;
+                }
             }
             //Call part
             else if(numberOfDotsRemove >= 2) {
