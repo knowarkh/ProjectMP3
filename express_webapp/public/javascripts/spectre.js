@@ -20,6 +20,8 @@ function createWaveForm(dotsList) {
     let reflectWaveWidth = primaryWaveWidth;
     let reflectWaveHeight = Math.round(spectre.clientHeight / 3);
 
+    let className = "bar";
+
     //JSON data
     let data = dotsList;
     let maxSizeBar = Math.max.apply(null,dotsList);
@@ -73,6 +75,10 @@ function createWaveForm(dotsList) {
         barHeight = getCorrectHeight("primary", data[i]);
 
         let y_bar = primaryWaveHeight - barHeight;
+
+        newRect.classList.add(className + "-up");
+        newRect.classList.add(className + "-up-"+i);
+
         newRect.setAttributeNS(null, "x", x_bar);
         newRect.setAttributeNS(null, "y", y_bar);
         newRect.setAttributeNS(null, "width", "" + barWidth);
@@ -99,6 +105,9 @@ function createWaveForm(dotsList) {
     for (let i = 0; i < nbBars; i++) {
         let newRect = document.createElementNS(svgns, "rect");
         barHeight = getCorrectHeight("reflect", data[i]);
+
+        newRect.classList.add(className + "-down");
+        newRect.classList.add(className + "-down-"+i);
 
         newRect.setAttributeNS(null, "x", x_bar);
         newRect.setAttributeNS(null, "y", y_bar);
