@@ -40,7 +40,7 @@ class Lecteur {
     drawMusicData() {
         let currentMusic = this.playlist.getCurrentMusic();
         if (currentMusic != null) {
-            document.getElementsByClassName("visuel")[0].style.background = "url(../images/" + currentMusic.coverPath + ")";
+            document.getElementsByClassName("visuel")[0].style.background = "url(" + currentMusic.coverPath + ") no-repeat cover 50% 50%";
             document.getElementsByClassName("artiste")[0].innerHTML = currentMusic.artistName;
             document.getElementsByClassName("titre")[0].innerHTML = currentMusic.title;
             document.getElementsByClassName("total")[0].innerHTML = secondsToReadableTime(currentMusic.duration);
