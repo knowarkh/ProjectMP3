@@ -4,7 +4,7 @@ var options = {
     server: { socketOptions: { keepAlive: 300000, connectTimeoutMS: 30000 } },
     replset: { socketOptions: { keepAlive: 300000, connectTimeoutMS : 30000 } }
 };
-var urlmongo = "mongodb://localhost:27017/player";
+var urlmongo = "mongodb://ubsbase04:27017/PRJSYNTH_2018_3PTLX1_C";
 mongoose.connect(urlmongo, options);
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'Erreur lors de la connexion'));
