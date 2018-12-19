@@ -85,6 +85,8 @@ class Lecteur {
 
         document.getElementsByClassName("share")[0].addEventListener("click", this.share.bind(this));
 
+        document.querySelector(".audioplayer .controls .volume").addEventListener("click", this.mute.bind(this));
+
         window.addEventListener("resize", this.drawSpectrum.bind(this));
     }
 }
@@ -95,6 +97,9 @@ class Lecteur {
  */
 Lecteur.prototype.setVolume = function (newVolume) {
     this.volume = newVolume;
+    if(this.sound !== null){
+        this.sound.setVolume(newVolume);
+    }
 };
 
 /**
@@ -114,7 +119,8 @@ Lecteur.prototype.play_pause = function () {
             this.sound = soundManager.createSound({
                 id: currentMusic['title'] + "-" + currentMusic['artistName'], // Id arbitraire : piste0, piste1, etc.
                 url: currentMusic['musicPath'],
-                whileplaying: this.drawMusicTime.bind(this)
+                whileplaying: this.drawMusicTime.bind(this),
+                volume : this.volume
             });
             this.sound.play();
             playButton.classList.remove("play");
@@ -198,6 +204,23 @@ Lecteur.prototype.addMusic = function (music) {
     this.playlist.addMusic(music);
     if (firstMusic) {
         this.repaint();
+    }
+};
+
+Lecteur.prototype.mute = function(){
+    let volume = document.querySelector(".audioplayer .controls .volume");
+
+    if(volume.classList.contains('volume-on')) {
+        volume.classList.remove('volume-on');
+        volume.classList.add('volume-off');
+        if(this.sound !== null)
+            this.sound.setVolume(0);
+    }
+    else {
+        volume.classList.remove('volume-off');
+        volume.classList.add('volume-on');
+        if(this.sound !== null)
+            this.sound.setVolume(this.volume);
     }
 };
 
