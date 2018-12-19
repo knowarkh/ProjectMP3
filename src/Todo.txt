@@ -1,3 +1,2 @@
 - Faire une dégradé sur le spectre
-  --> Suivant mediaqueries dans le html
 - Privatisation des fonctions JS
