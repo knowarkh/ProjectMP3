@@ -16,7 +16,6 @@ describe('Music.js', function() {
         "genre" : ["rock alternatif"],
         "annee" : "2015"
       });
-        console.log(test);  
         var m = new test.Music(test_music);
 
         expect(m.hasStype("rock alternatif")).to.be.true;
