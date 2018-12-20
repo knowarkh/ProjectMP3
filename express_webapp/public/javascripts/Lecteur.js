@@ -19,18 +19,26 @@ class Lecteur {
     /** Private functions */
 
     /**
-     * Will colorize to the given point
-     * @param position {int} Number of the bar will be the last
+     * Will colorize to the current point of playing
      */
-    colorWaveTo(position){
+    colorWaveToCurrentPos(){
+        this.clearColorWave();
 
+        let waveform = document.querySelector(".waveform");
+        let barPosition =  Math.ceil(this.sound.position / this.sound.duration * waveform.children[0].childElementCount);
+        for(let position = 0; position <= barPosition; position++){
+            waveform.children[0].children[position].classList.add("played");
+            waveform.children[1].children[position].classList.add("played");
+        }
     }
 
     /**
      * Will remove the class "played" of all bars of the waveform
      */
     clearColorWave(){
-
+        for(let elem of document.querySelectorAll(".bar-up ,.bar-down")){
+            elem.classList.remove("played");
+        }
     }
 
     /**
@@ -41,7 +49,6 @@ class Lecteur {
         for(let elem of document.querySelectorAll(".bar-up ,.bar-down")){
             elem.addEventListener("click", function(target){
                 this.goTo(Number(target.target.attributes.data_position.value));
-                console.log(this.sound);
             }.bind(this));
         }
     }
@@ -53,11 +60,12 @@ class Lecteur {
         if (this.sound != null){
             document.getElementsByClassName("en-cours")[0].innerHTML = miliSecondsToReadableTime(this.sound.position);
 
-            let waveform = document.querySelector(".waveform");
-            let barPosition =  Math.ceil(this.sound.position / this.sound.duration * waveform.children[0].childElementCount);
-            //waveform.children[0].children[barPosition].setAttributeNS(null,"style","fill:#f95800!important");
-            waveform.children[0].children[barPosition].classList.add("played");
-            waveform.children[1].children[barPosition].classList.add("played");
+            this.colorWaveToCurrentPos();
+            // let waveform = document.querySelector(".waveform");
+            // let barPosition =  Math.ceil(this.sound.position / this.sound.duration * waveform.children[0].childElementCount);
+            // //waveform.children[0].children[barPosition].setAttributeNS(null,"style","fill:#f95800!important");
+            // waveform.children[0].children[barPosition].classList.add("played");
+            // waveform.children[1].children[barPosition].classList.add("played");
         }
 
     }
@@ -143,6 +151,9 @@ Lecteur.prototype.play_pause = function () {
 
         //If don't have any current sound in play
         if (this.sound == null) {
+            //Reset the waveform color in case of a new music
+            this.clearColorWave();
+
             //Create a new Sound
             this.sound = soundManager.createSound({
                 id: currentMusic['title'] + "-" + currentMusic['artistName'], // Id arbitraire : piste0, piste1, etc.
@@ -218,10 +229,12 @@ Lecteur.prototype.showVolume = function () {
  * @param newPosition {int} the position of the cursor when it's click
  */
 Lecteur.prototype.goTo = function (newPosition) {
-    let pourcentil = (newPosition / document.querySelector(".waveform").children[0].childElementCount);
-    let newTime = pourcentil * this.sound.duration;
-    this.currentTime = newTime / 1000;
-    this.sound.setPosition(newTime);
+    if(this.sound != null){
+        let pourcentil = (newPosition / document.querySelector(".waveform").children[0].childElementCount);
+        let newTime = pourcentil * this.sound.duration;
+        this.currentTime = newTime / 1000;
+        this.sound.setPosition(newTime);
+    }
 };
 
 /**
@@ -237,6 +250,9 @@ Lecteur.prototype.addMusic = function (music) {
     }
 };
 
+/**
+ * Toggle the sound or not
+ */
 Lecteur.prototype.mute = function(){
     let volume = document.querySelector(".audioplayer .controls .volume");
 
