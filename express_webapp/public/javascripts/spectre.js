@@ -84,7 +84,6 @@ function createWaveForm(dotsList) {
         newRect.setAttributeNS(null, "width", "" + barWidth);
         newRect.setAttributeNS(null, "height", "" + barHeight);
         newRect.setAttributeNS(null, "rx", "0");
-        newRect.setAttributeNS(null, "style", "fill:#333333; stroke:#CCCCCC; stroke-width:2px");
         x_bar += barWidth;
         primarySVG.appendChild(newRect);
     }
@@ -107,14 +106,13 @@ function createWaveForm(dotsList) {
         barHeight = getCorrectHeight("reflect", data[i]);
 
         newRect.classList.add(className + "-down");
-        newRect.classList.add(className + "-down-"+i);
 
+        newRect.setAttributeNS(null, "data_position", i);
         newRect.setAttributeNS(null, "x", x_bar);
         newRect.setAttributeNS(null, "y", y_bar);
         newRect.setAttributeNS(null, "width", "" + barWidth);
         newRect.setAttributeNS(null, "height", "" + barHeight);
         newRect.setAttributeNS(null, "rx", "0");
-        newRect.setAttributeNS(null, "style", "fill:#888888; stroke:#CCCCCC; stroke-width:0.5");
         x_bar += barWidth;
         reflectSVG.appendChild(newRect);
     }

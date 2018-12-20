@@ -19,6 +19,21 @@ class Lecteur {
     /** Private functions */
 
     /**
+     * Will colorize to the given point
+     * @param position {int} Number of the bar will be the last
+     */
+    colorWaveTo(position){
+
+    }
+
+    /**
+     * Will remove the class "played" of all bars of the waveform
+     */
+    clearColorWave(){
+
+    }
+
+    /**
      * Will draw the waveform at this position
      */
     drawSpectrum() {
@@ -35,8 +50,15 @@ class Lecteur {
      * Will draw current time of the current music each second
      */
     drawMusicTime() {
-        if (this.sound != null)
+        if (this.sound != null){
             document.getElementsByClassName("en-cours")[0].innerHTML = miliSecondsToReadableTime(this.sound.position);
+
+            let waveform = document.querySelector(".waveform");
+            let barPosition =  Math.ceil(this.sound.position / this.sound.duration * waveform.children[0].childElementCount);
+            //waveform.children[0].children[barPosition].setAttributeNS(null,"style","fill:#f95800!important");
+            waveform.children[0].children[barPosition].classList.add("played");
+            waveform.children[1].children[barPosition].classList.add("played");
+        }
 
     }
 
