@@ -77,7 +77,7 @@ function createWaveForm(dotsList) {
         let y_bar = primaryWaveHeight - barHeight;
 
         newRect.classList.add(className + "-up");
-        newRect.classList.add(className + "-up-"+i);
+        newRect.setAttributeNS(null,"data_position", i);
 
         newRect.setAttributeNS(null, "x", x_bar);
         newRect.setAttributeNS(null, "y", y_bar);

@@ -23,6 +23,12 @@ class Lecteur {
      */
     drawSpectrum() {
         createWaveForm(this.playlist.getCurrentMusic().listPoints);
+        for(let elem of document.querySelectorAll(".bar-up ,.bar-down")){
+            elem.addEventListener("click", function(target){
+                this.goTo(Number(target.target.attributes.data_position.value));
+                console.log(this.sound);
+            }.bind(this));
+        }
     }
 
     /**
@@ -190,8 +196,10 @@ Lecteur.prototype.showVolume = function () {
  * @param newPosition {int} the position of the cursor when it's click
  */
 Lecteur.prototype.goTo = function (newPosition) {
-    this.currentTime = newPosition;
-    this.playlist.getCurrentMusic().setPosition(newPosition);
+    let pourcentil = (newPosition / document.querySelector(".waveform").children[0].childElementCount);
+    let newTime = pourcentil * this.sound.duration;
+    this.currentTime = newTime / 1000;
+    this.sound.setPosition(newTime);
 };
 
 /**
