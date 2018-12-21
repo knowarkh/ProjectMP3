@@ -134,7 +134,7 @@ class Lecteur {
     drawMusicData() {
         let currentMusic = this.playlist.getCurrentMusic();
         if (currentMusic != null) {
-            document.getElementsByClassName("visuel")[0].style.background = "url(" + currentMusic.coverPath + ") no-repeat cover 50% 50%";
+            document.getElementsByClassName("visuel")[0].style.background = "url(" + currentMusic.coverPath + ")";
             document.getElementsByClassName("artiste")[0].innerHTML = currentMusic.artistName;
             document.getElementsByClassName("titre")[0].innerHTML = currentMusic.title;
             document.getElementsByClassName("total")[0].innerHTML = secondsToReadableTime(currentMusic.duration);
@@ -158,18 +158,19 @@ class Lecteur {
     setListener() {
         document.getElementsByClassName("prev")[0].addEventListener("click", function () {
             this.playlist.previous();
-            this.sound.stop();
-            this.sound.unload();
-            this.sound = null;
+
+            if(this.sound != null){
+                this.sound.stop();
+                this.sound.unload();
+                this.sound = null;
+            }
+
+            this.repaint();
+
             this.play_pause();
         }.bind(this));
-        document.getElementsByClassName("next")[0].addEventListener("click", function () {
-            this.playlist.next();
-            this.sound.stop();
-            this.sound.unload();
-            this.sound = null;
-            this.play_pause();
-        }.bind(this));
+        document.getElementsByClassName("next")[0].addEventListener("click", this.next.bind(this));
+
         document.getElementsByClassName("play-pause")[0].addEventListener("click", this.play_pause.bind(this));
 
         document.getElementsByClassName("volume")[0].addEventListener("click", this.showVolume.bind(this));
@@ -216,7 +217,8 @@ Lecteur.prototype.play_pause = function () {
                 id: currentMusic['title'] + "-" + currentMusic['artistName'], // Id arbitraire : piste0, piste1, etc.
                 url: currentMusic['musicPath'],
                 whileplaying: this.drawMusicTime.bind(this),
-                volume: this.volume
+                volume: this.volume,
+                onfinish: this.next.bind(this)
             });
             this.sound.play();
             playButton.classList.remove("play");
@@ -291,7 +293,7 @@ Lecteur.prototype.goTo = function (newPosition) {
         let newTime = pourcentil * this.sound.duration;
         this.currentTime = newTime / 1000;
         this.sound.setPosition(newTime);
-        this.colorWaveToCurrentPosOnClick();
+        this.colorWaveToCurrentPos();
     }
 };
 
@@ -328,4 +330,24 @@ Lecteur.prototype.mute = function () {
     }
 };
 
+/**
+ * Override the Playlist to add the SoundManager's functions
+ */
+Lecteur.prototype.next = function(){
+    if(this.sound != null){
+        this.sound.stop();
+        this.sound.unload();
+        this.sound = null;
+
+        if(this.playlist.currentPosition < this.playlist.musicList.length - 1){
+            this.playlist.next();
+            this.play_pause();
+        }else{
+            document.getElementsByClassName("play-pause")[0].classList.remove("pause");
+            document.getElementsByClassName("play-pause")[0].classList.add("play");
+        }
+
+        this.repaint();
+    }
+};
 

@@ -3,9 +3,10 @@
 let manager = new Lecteur();
 
 requestGet("http://localhost:3000/music/find",function(musics){
-  let res = JSON.parse( musics )[0];
+  let res = JSON.parse( musics );
 
-  manager.addMusic(new Music(res));
+  manager.addMusic(new Music(res[0]));
+  manager.addMusic(new Music(res[1]));
 
   //  var artiste = document.querySelector('.artiste');
   //  var titre = document.querySelector('.titre');
