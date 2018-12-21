@@ -75,6 +75,18 @@ body {
     transition: fill 1s ease-in-out;
 }
 
+.audioplayer .waveform .bar-up.hover-back {
+    fill: #c33900 !important;
+    border: solid black 1px !important;
+    transition: fill 1s ease-in-out;
+}
+
+.audioplayer .waveform .bar-up.hover-front {
+fill: #993600 !important;
+border: solid black 1px !important;
+transition: fill 1s ease-in-out;
+}
+
 .audioplayer .waveform .bar-down {
 fill: #acacac !important;
 stroke: white !important;
@@ -87,6 +99,17 @@ stroke-width: 1px !important;
     transition: fill 1s ease-in-out;
 }
 
+.audioplayer .waveform .bar-down.hover-back {
+    fill: rgba(195, 52, 0, 0.68) !important;
+    border: solid black 1px !important;
+    transition: fill 1s ease-in-out;
+}
+
+.audioplayer .waveform .bar-down.hover-front {
+    fill: rgba(153, 51, 0, 0.68) !important;
+    border: solid black 1px !important;
+    transition: fill 1s ease-in-out;
+}
 
 /* ========= CONTROLS ========= */
 

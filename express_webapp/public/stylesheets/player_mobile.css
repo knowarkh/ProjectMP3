@@ -87,11 +87,22 @@ body {
     stroke-width: 1px !important;
 }
 
+.audioplayer .waveform .bar-up.played {
+    fill: #f95800 !important;
+    border: solid black 1px !important;
+    transition: fill 1s ease-in-out;
+}
 
 .audioplayer .waveform .bar-down {
     fill: #c7c3cb !important;
     stroke: #a9a9a9 !important;
     stroke-width: 1px !important;
+}
+
+.audioplayer .waveform .bar-down.played {
+    fill: rgba(255, 91, 0, 0.68) !important;
+    border: solid black 1px !important;
+    transition: fill 1s ease-in-out;
 }
 
 /* ========= CONTROLS ========= */

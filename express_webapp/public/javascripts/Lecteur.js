@@ -21,23 +21,82 @@ class Lecteur {
     /**
      * Will colorize to the current point of playing
      */
-    colorWaveToCurrentPos(){
-        this.clearColorWave();
-
+    colorWaveToCurrentPos() {
+        let hasBeenHoverBack = false;
         let waveform = document.querySelector(".waveform");
-        let barPosition =  Math.ceil(this.sound.position / this.sound.duration * waveform.children[0].childElementCount);
-        for(let position = 0; position <= barPosition; position++){
-            waveform.children[0].children[position].classList.add("played");
-            waveform.children[1].children[position].classList.add("played");
+        let barPosition = Math.ceil(this.sound.position / this.sound.duration * waveform.children[0].childElementCount);
+
+        let bar_up;
+        let bar_bottom;
+
+        for (let position = 0; position <= barPosition; position++) {
+            bar_up = waveform.children[0].children[position];
+            bar_bottom = waveform.children[1].children[position];
+
+            //Check if the new position get the "hover-front" class, remove it
+            if (bar_up.classList.contains("hover-front") || bar_bottom.classList.contains("hover-front")) {
+                bar_up.classList.remove("hover-front");
+                bar_bottom.classList.remove("hover-front");
+            }
+
+            bar_up.classList.add("played");
+            bar_bottom.classList.add("played");
+
+            //Check if a "hover-back" class is set
+            if (bar_up.classList.contains("hover-back") || bar_bottom.classList.contains("hover-back"))
+                hasBeenHoverBack = true;
+
+            //If one of the bar get the "hover-back" class, add it to all nex bars
+            if (hasBeenHoverBack)
+                if (!bar_up.classList.contains("hover-back") || !bar_bottom.classList.contains("hover-back")) {
+                    bar_bottom.classList.add("hover-back");
+                    bar_up.classList.add("hover-back");
+                }
         }
+    }
+
+
+    /**
+     * Will colorize to the current point of playing of the hovered point
+     * @param pos {int} number of the bar hovered
+     */
+    colorWaveToHoverPos(pos) {
+        let waveform = document.querySelector(".waveform");
+        let barPosition;
+        if (this.sound == null) {
+            barPosition = 0;
+        } else {
+            barPosition = Math.ceil(this.sound.position / this.sound.duration * waveform.children[0].childElementCount);
+        }
+        if (barPosition <= pos) {
+            for (let position = barPosition; position <= pos; position++) {
+                waveform.children[0].children[position].classList.add("hover-front");
+                waveform.children[1].children[position].classList.add("hover-front");
+            }
+        } else {
+            for (let position = pos; position <= barPosition; position++) {
+                waveform.children[0].children[position].classList.add("hover-back");
+                waveform.children[1].children[position].classList.add("hover-back");
+            }
+        }
+
     }
 
     /**
      * Will remove the class "played" of all bars of the waveform
      */
-    clearColorWave(){
-        for(let elem of document.querySelectorAll(".bar-up ,.bar-down")){
+    clearColorWave() {
+        for (let elem of document.querySelectorAll(".bar-up ,.bar-down")) {
             elem.classList.remove("played");
+            elem.classList.remove("hover-front");
+            elem.classList.remove("hover-back");
+        }
+    }
+
+    clearColorHoverWave() {
+        for (let elem of document.querySelectorAll(".bar-up.hover-front,.bar-up.hover-back ,.bar-down.hover-front,.bar-down.hover-back")) {
+            elem.classList.remove("hover-front");
+            elem.classList.remove("hover-back");
         }
     }
 
@@ -46,10 +105,16 @@ class Lecteur {
      */
     drawSpectrum() {
         createWaveForm(this.playlist.getCurrentMusic().listPoints);
-        for(let elem of document.querySelectorAll(".bar-up ,.bar-down")){
-            elem.addEventListener("click", function(target){
+
+        for (let elem of document.querySelectorAll(".bar-up ,.bar-down")) {
+            elem.addEventListener("click", function (target) {
+                this.clearColorWave();
                 this.goTo(Number(target.target.attributes.data_position.value));
             }.bind(this));
+            elem.addEventListener("mouseover", function (target) {
+                this.colorWaveToHoverPos(Number(target.target.attributes.data_position.value));
+            }.bind(this));
+            elem.addEventListener("mouseout", this.clearColorHoverWave.bind(this));
         }
     }
 
@@ -57,17 +122,10 @@ class Lecteur {
      * Will draw current time of the current music each second
      */
     drawMusicTime() {
-        if (this.sound != null){
+        if (this.sound != null) {
             document.getElementsByClassName("en-cours")[0].innerHTML = miliSecondsToReadableTime(this.sound.position);
-
             this.colorWaveToCurrentPos();
-            // let waveform = document.querySelector(".waveform");
-            // let barPosition =  Math.ceil(this.sound.position / this.sound.duration * waveform.children[0].childElementCount);
-            // //waveform.children[0].children[barPosition].setAttributeNS(null,"style","fill:#f95800!important");
-            // waveform.children[0].children[barPosition].classList.add("played");
-            // waveform.children[1].children[barPosition].classList.add("played");
         }
-
     }
 
     /**
@@ -84,7 +142,6 @@ class Lecteur {
             document.getElementsByClassName("nb-commentaires")[0].innerHTML = currentMusic.numberComment;
             document.getElementsByClassName("like")[0].innerHTML = currentMusic.numberLike;
         }
-
     }
 
     /**
@@ -133,7 +190,7 @@ class Lecteur {
  */
 Lecteur.prototype.setVolume = function (newVolume) {
     this.volume = newVolume;
-    if(this.sound !== null){
+    if (this.sound !== null) {
         this.sound.setVolume(newVolume);
     }
 };
@@ -159,7 +216,7 @@ Lecteur.prototype.play_pause = function () {
                 id: currentMusic['title'] + "-" + currentMusic['artistName'], // Id arbitraire : piste0, piste1, etc.
                 url: currentMusic['musicPath'],
                 whileplaying: this.drawMusicTime.bind(this),
-                volume : this.volume
+                volume: this.volume
             });
             this.sound.play();
             playButton.classList.remove("play");
@@ -229,11 +286,12 @@ Lecteur.prototype.showVolume = function () {
  * @param newPosition {int} the position of the cursor when it's click
  */
 Lecteur.prototype.goTo = function (newPosition) {
-    if(this.sound != null){
+    if (this.sound != null) {
         let pourcentil = (newPosition / document.querySelector(".waveform").children[0].childElementCount);
         let newTime = pourcentil * this.sound.duration;
         this.currentTime = newTime / 1000;
         this.sound.setPosition(newTime);
+        this.colorWaveToCurrentPosOnClick();
     }
 };
 
@@ -253,19 +311,19 @@ Lecteur.prototype.addMusic = function (music) {
 /**
  * Toggle the sound or not
  */
-Lecteur.prototype.mute = function(){
+Lecteur.prototype.mute = function () {
     let volume = document.querySelector(".audioplayer .controls .volume");
 
-    if(volume.classList.contains('volume-on')) {
+    if (volume.classList.contains('volume-on')) {
         volume.classList.remove('volume-on');
         volume.classList.add('volume-off');
-        if(this.sound !== null)
+        if (this.sound !== null)
             this.sound.setVolume(0);
     }
     else {
         volume.classList.remove('volume-off');
         volume.classList.add('volume-on');
-        if(this.sound !== null)
+        if (this.sound !== null)
             this.sound.setVolume(this.volume);
     }
 };
