@@ -159,7 +159,7 @@ class Lecteur {
         document.getElementsByClassName("prev")[0].addEventListener("click", function () {
             this.playlist.previous();
 
-            if(this.sound != null){
+            if (this.sound != null) {
                 this.sound.stop();
                 this.sound.unload();
                 this.sound = null;
@@ -333,21 +333,16 @@ Lecteur.prototype.mute = function () {
 /**
  * Override the Playlist to add the SoundManager's functions
  */
-Lecteur.prototype.next = function(){
-    if(this.sound != null){
+Lecteur.prototype.next = function () {
+    this.playlist.next();
+    if (this.sound != null) {
         this.sound.stop();
         this.sound.unload();
         this.sound = null;
-
-        if(this.playlist.currentPosition < this.playlist.musicList.length - 1){
-            this.playlist.next();
-            this.play_pause();
-        }else{
-            document.getElementsByClassName("play-pause")[0].classList.remove("pause");
-            document.getElementsByClassName("play-pause")[0].classList.add("play");
-        }
-
-        this.repaint();
     }
+
+    this.play_pause();
+
+    this.repaint();
 };
 
