@@ -262,7 +262,9 @@ Lecteur.prototype.play_pause = function () {
 Lecteur.prototype.like = function () {
     //TODO faire une vraie réponse
     requestPost("/fasma/addLike", {id: this.playlist.getCurrentMusic().id}, console.log);
-    this.drawMusicData();
+
+    let likeNumber = document.getElementsByClassName("like")[0];
+    likeNumber.innerHTML = Number(likeNumber.innerHTML) + 1;
 };
 
 /**
