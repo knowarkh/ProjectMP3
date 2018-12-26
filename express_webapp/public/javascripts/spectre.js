@@ -1,8 +1,9 @@
 /**
  * Create a waveform with the given array
- * @param dotsList array of INT position to make the waveform
+ * @param {array} dotsList array of INT position to make the waveform
+ * @param {int} percentilePlayed - percentile of the current music, if exist. Used to find the position of the bar which match with the position of the music on the spectrum
  */
-function createWaveForm(dotsList) {
+function createWaveForm(dotsList, percentilePlayed = 0) {
     let spectre = document.getElementsByClassName("waveform")[0];
 
     /** Reset the content of the waveform */
@@ -59,8 +60,11 @@ function createWaveForm(dotsList) {
     data = getAvgDotList(data, numberOfBarToRemove);
     nbBars -= numberOfBarToRemove;
 
+    //Position which represent the current position of the music
+    let barPlayedPosition = Math.ceil(nbBars * percentilePlayed);
+
     /**
-     * Create the primary waveform
+     * Create the waveform
      */
 
     primarySVG.setAttribute("xmlns", svgns);
@@ -69,53 +73,60 @@ function createWaveForm(dotsList) {
     primarySVG.setAttribute("width", primaryWaveWidth);
     primarySVG.setAttribute("height", primaryWaveHeight);
 
-    //Create and add every bar of the primary waveform
-    for (let i = 0; i < nbBars; i++) {
-        let newRect = document.createElementNS(svgns, "rect");
-        barHeight = getCorrectHeight("primary", data[i]);
-
-        let y_bar = primaryWaveHeight - barHeight;
-
-        newRect.classList.add(className + "-up");
-        newRect.setAttributeNS(null,"data_position", i);
-
-        newRect.setAttributeNS(null, "x", x_bar);
-        newRect.setAttributeNS(null, "y", y_bar);
-        newRect.setAttributeNS(null, "width", "" + barWidth);
-        newRect.setAttributeNS(null, "height", "" + barHeight);
-        newRect.setAttributeNS(null, "rx", "0");
-        x_bar += barWidth;
-        primarySVG.appendChild(newRect);
-    }
-    //Add to the div the primary waveform
-    spectre.appendChild(primarySVG);
-
-    /** Create the reflect waveform */
-    x_bar = 0;
-    y_bar = 0;
-
+    
     reflectSVG.setAttribute("xmlns", svgns);
 
     //Set the rigth size of the reflect waveform
     reflectSVG.setAttribute("width", reflectWaveWidth);
     reflectSVG.setAttribute("height", reflectWaveHeight);
 
-    //Create and add every bar of the reflect waveform
     for (let i = 0; i < nbBars; i++) {
-        let newRect = document.createElementNS(svgns, "rect");
+        /** Create and add every bar of the primary waveform*/
+        let primaryRect = document.createElementNS(svgns, "rect");
+        barHeight = getCorrectHeight("primary", data[i]);
+
+        y_bar = primaryWaveHeight - barHeight;
+
+        primaryRect.classList.add(className + "-up");
+        primaryRect.setAttributeNS(null,"data_position", i);
+
+        primaryRect.setAttributeNS(null, "x", x_bar);
+        primaryRect.setAttributeNS(null, "y", y_bar);
+        primaryRect.setAttributeNS(null, "width", "" + barWidth);
+        primaryRect.setAttributeNS(null, "height", "" + barHeight);
+        primaryRect.setAttributeNS(null, "rx", "0");
+        primarySVG.appendChild(primaryRect);
+
+
+        /** Create and add every bar of the reflect waveform */
+
+        let reflectRect = document.createElementNS(svgns, "rect");
         barHeight = getCorrectHeight("reflect", data[i]);
 
-        newRect.classList.add(className + "-down");
+        reflectRect.classList.add(className + "-down");
 
-        newRect.setAttributeNS(null, "data_position", i);
-        newRect.setAttributeNS(null, "x", x_bar);
-        newRect.setAttributeNS(null, "y", y_bar);
-        newRect.setAttributeNS(null, "width", "" + barWidth);
-        newRect.setAttributeNS(null, "height", "" + barHeight);
-        newRect.setAttributeNS(null, "rx", "0");
+        reflectRect.setAttributeNS(null, "data_position", i);
+        reflectRect.setAttributeNS(null, "x", x_bar);
+        reflectRect.setAttributeNS(null, "y", 0);
+        reflectRect.setAttributeNS(null, "width", "" + barWidth);
+        reflectRect.setAttributeNS(null, "height", "" + barHeight);
+        reflectRect.setAttributeNS(null, "rx", "0");
+        reflectSVG.appendChild(reflectRect);
+
+        /** Common part */
+
+        //Add the width of a bar to the next position of the bar
         x_bar += barWidth;
-        reflectSVG.appendChild(newRect);
+
+        //check if this position have been played or not, and add the "played-flash" class
+        if(i <= barPlayedPosition){
+            primaryRect.classList.add("played-flash");
+            reflectRect.classList.add("played-flash");
+        }
+
     }
+    //Add to the div the primary waveform
+    spectre.appendChild(primarySVG);
     //Add to the div the reflect waveform
     spectre.appendChild(reflectSVG);
 

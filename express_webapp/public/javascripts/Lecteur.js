@@ -104,7 +104,15 @@ class Lecteur {
      * Will draw the waveform at this position
      */
     drawSpectrum() {
-        createWaveForm(this.playlist.getCurrentMusic().listPoints);
+        this.clearColorWave();
+
+        if(this.sound != null){
+            let barPositionPercentil = this.sound.position / this.sound.duration;
+
+            createWaveForm(this.playlist.getCurrentMusic().listPoints, barPositionPercentil);
+        }else{
+            createWaveForm(this.playlist.getCurrentMusic().listPoints);
+        }
 
         for (let elem of document.querySelectorAll(".bar-up ,.bar-down")) {
             elem.addEventListener("click", function (target) {
