@@ -17,7 +17,7 @@ router.get('/find', function(req,res){
         }
         res.json(music);
     });
-})
+});
 
 // Find by ID
 router.get('/find/id/:id', function(req,res){
@@ -27,7 +27,7 @@ router.get('/find/id/:id', function(req,res){
         }
         res.json(music);
     });
-})
+});
 
 // Find by titre
 
@@ -38,7 +38,7 @@ router.get('/find/titre/:title', function(req,res){
         }
         res.json(music);
     });
-})
+});
 
 // Find by artiste
 
@@ -49,7 +49,7 @@ router.get('/find/artiste/:artiste', function(req,res){
         }
         res.json(music);
     });
-})
+});
 
 // Find by album
 
@@ -60,7 +60,7 @@ router.get('/find/album/:album', function(req,res){
         }
         res.json(music);
     });
-})
+});
 
 // Find by genre
 
@@ -71,7 +71,7 @@ router.get('/find/genre/:genre', function(req,res){
         }
         res.json(music);
     });
-})
+});
 
 // Find by annee
 
@@ -82,7 +82,7 @@ router.get('/find/annee/:annee', function(req,res){
         }
         res.json(music);
     });
-})
+});
 
 // ========== POST ==========
 router.post('/add', function(req,res){
@@ -107,7 +107,7 @@ router.post('/add', function(req,res){
         }
         res.send({message : 'Ajout de la musique réussit !'})
     })
-})
+});
 
 // ========== PUT ==========
 
@@ -137,7 +137,7 @@ router.put('/maj/:id', function(req, res) {
             res.json({message : 'MAJ réussite'});
         });
     });
-})
+});
 
 // addLike(int id) +1
 
@@ -158,7 +158,7 @@ router.put('/maj/like/:id', function(req, res) {
             res.json({message : 'MAJ réussite'});
         });
     });
-})
+});
 
 // addNumbeOfShare(int id)
 
@@ -177,7 +177,7 @@ router.put('/maj/share/:id', function(req, res) {
             res.json({message : 'MAJ réussite'});
         });
     });
-})
+});
 
 // addComment(int id)
 
@@ -207,7 +207,7 @@ router.delete('/remove/:id', function(req, res) {
         }
         res.json({message:"Musique supprimée"});
     });
-})
+});
 
 
 

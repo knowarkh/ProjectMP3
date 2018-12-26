@@ -7,7 +7,7 @@
  * --------------------------------
  * Source files:
  * demo/play-mp3-links/script/inlineplayer.js
- * demo/page-player/script/page-player.js
+ * demo/page-player/script/page-testWithDB.js
  * demo/mp3-player-button/script/mp3-player-button.js
  * demo/360-player/script/berniecode-animator.js
  * demo/360-player/script/360player.js

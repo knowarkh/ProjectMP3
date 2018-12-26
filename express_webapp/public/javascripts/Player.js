@@ -1,7 +1,7 @@
 /**
  * Class will do every music based actions
  */
-class Lecteur {
+class Player {
     //let soundManager;
 
     constructor() {//TODO ajouter json de musique, on créer une première musique pour instanciation
@@ -174,7 +174,6 @@ class Lecteur {
             }
 
             this.repaint();
-
             this.play_pause();
         }.bind(this));
         document.getElementsByClassName("next")[0].addEventListener("click", this.next.bind(this));
@@ -197,7 +196,7 @@ class Lecteur {
  * Set the new volume
  * @param {int} newVolume
  */
-Lecteur.prototype.setVolume = function (newVolume) {
+Player.prototype.setVolume = function (newVolume) {
     this.volume = newVolume;
     if (this.sound !== null) {
         this.sound.setVolume(newVolume);
@@ -208,7 +207,7 @@ Lecteur.prototype.setVolume = function (newVolume) {
  *  Use to set on play or on pause state the current music, if no current music is null, create it and launch it if
  *  possible
  */
-Lecteur.prototype.play_pause = function () {
+Player.prototype.play_pause = function () {
     let currentMusic = this.playlist.getCurrentMusic();
 
     //If not undefined
@@ -259,9 +258,9 @@ Lecteur.prototype.play_pause = function () {
 /**
  * Will add a like to the database and add 1 to the number of like show
  */
-Lecteur.prototype.like = function () {
+Player.prototype.like = function () {
     //TODO faire une vraie réponse
-    requestPost("/fasma/addLike", {id: this.playlist.getCurrentMusic().id}, console.log);
+    Connexion.addLike(this.playlist.getCurrentMusic().id, console.log);
 
     let likeNumber = document.getElementsByClassName("like")[0];
     likeNumber.innerHTML = Number(likeNumber.innerHTML) + 1;
@@ -270,7 +269,7 @@ Lecteur.prototype.like = function () {
 /**
  * Will add a comment to the database, the current screen and add 1 for the number of comments
  */
-Lecteur.prototype.addComment = function () {
+Player.prototype.addComment = function () {
     //TODO faire une vraie réponse
     requestPost("/fasma/addLikeComment", {
         id: this.playlist.getCurrentMusic().id,
@@ -282,14 +281,14 @@ Lecteur.prototype.addComment = function () {
 /**
  * Will create and give a embed version of the player
  */
-Lecteur.prototype.share = function () {
+Player.prototype.share = function () {
 
 };
 
 /**
  * Will show the pop-up volume and allow to set the new volume
  */
-Lecteur.prototype.showVolume = function () {
+Player.prototype.showVolume = function () {
 
 };
 
@@ -297,7 +296,7 @@ Lecteur.prototype.showVolume = function () {
  * Set the new position of the music and change the CSS of the waveform's bars
  * @param newPosition {int} the position of the cursor when it's click
  */
-Lecteur.prototype.goTo = function (newPosition) {
+Player.prototype.goTo = function (newPosition) {
     if (this.sound != null) {
         let pourcentil = (newPosition / document.querySelector(".waveform").children[0].childElementCount);
         let newTime = pourcentil * this.sound.duration;
@@ -311,7 +310,7 @@ Lecteur.prototype.goTo = function (newPosition) {
  * Add a music and if this is the first, draw information about this music
  * @param {Music} music
  */
-Lecteur.prototype.addMusic = function (music) {
+Player.prototype.addMusic = function (music) {
     let firstMusic = this.playlist.getCurrentMusic() == null;
 
     this.playlist.addMusic(music);
@@ -323,7 +322,7 @@ Lecteur.prototype.addMusic = function (music) {
 /**
  * Toggle the sound or not
  */
-Lecteur.prototype.mute = function () {
+Player.prototype.mute = function () {
     let volume = document.querySelector(".audioplayer .controls .volume");
 
     if (volume.classList.contains('volume-on')) {
@@ -343,7 +342,7 @@ Lecteur.prototype.mute = function () {
 /**
  * Override the Playlist to add the SoundManager's functions
  */
-Lecteur.prototype.next = function () {
+Player.prototype.next = function () {
     this.playlist.next();
     if (this.sound != null) {
         this.sound.stop();

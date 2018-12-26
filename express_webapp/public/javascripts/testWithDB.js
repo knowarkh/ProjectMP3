@@ -1,8 +1,8 @@
 
 
-let manager = new Lecteur();
+let manager = new Player();
 
-requestGet("http://localhost:3000/music/find",function(musics){
+Connexion.getAllMusics(function(musics){
   let res = JSON.parse( musics );
 
   manager.addMusic(new Music(res[0]));
