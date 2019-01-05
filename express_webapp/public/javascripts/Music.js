@@ -10,6 +10,7 @@ class Music{
     constructor(jsonFile){
       let data = jsonFile;
 
+      this.id = Number(data.id);
       this.album = data.album;
       this.artistName = data.artiste;
       this.coverPath = data.cover;

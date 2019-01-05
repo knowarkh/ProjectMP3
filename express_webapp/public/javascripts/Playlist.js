@@ -93,8 +93,10 @@ Playlist.prototype.removeMusicByPosition = function(position){
 Playlist.prototype.next = function(){
   if(this.currentPosition < this.musicList.length -1){
     this.currentPosition++;
-    this.currentMusic = this.musicList[this.currentPosition];
+  }else{
+      this.currentPosition = 0;
   }
+    this.currentMusic = this.musicList[this.currentPosition];
 };
 
 /**
