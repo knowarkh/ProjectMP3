@@ -1,25 +1,26 @@
-let volume = document.querySelector(".audioplayer .controls .volume");
+let volume_button = document.querySelector(".audioplayer .controls .volume .volume_button");
+let volume_span = document.querySelector(".audioplayer .controls .volume");
 
-volume.addEventListener("click", mute);
-volume.addEventListener("mouseover", volumeMouseOver);
-volume.addEventListener("mouseout", volumeMouseOut);
+volume_button.addEventListener("click", mute);
+volume_button.addEventListener("mouseover", volumeMouseOver);
+volume_button.addEventListener("mouseout", volumeMouseOut);
 
 
 function mute(){
-    if(volume.classList.contains('volume-on')) {
-        volume.classList.remove('volume-on');
-        volume.classList.add('volume-off');
+    if(volume_button.classList.contains('volume-on')) {
+        volume_button.classList.remove('volume-on');
+        volume_button.classList.add('volume-off');
     }
     else {
-        volume.classList.remove('volume-off');
-        volume.classList.add('volume-on');
+        volume_button.classList.remove('volume-off');
+        volume_button.classList.add('volume-on');
     }
 }
 
 function volumeMouseOver(){
-    volume.classList.add('is-active');
+    volume_span.classList.add('is-active');
 }
 
 function volumeMouseOut(){
-    volume.classList.remove('is-active');
+    volume_span.classList.remove('is-active');
 }
