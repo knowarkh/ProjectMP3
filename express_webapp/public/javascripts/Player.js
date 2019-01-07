@@ -131,7 +131,7 @@ class Player {
      */
     drawMusicTime() {
         if (this.sound != null) {
-            document.getElementsByClassName("en-cours")[0].innerHTML = miliSecondsToReadableTime(this.sound.position);
+            document.querySelector(".audioplayer .en-cours").innerHTML = miliSecondsToReadableTime(this.sound.position);
             this.colorWaveToCurrentPos();
         }
     }
@@ -142,13 +142,13 @@ class Player {
     drawMusicData() {
         let currentMusic = this.playlist.getCurrentMusic();
         if (currentMusic != null) {
-            document.getElementsByClassName("visuel")[0].style.background = "url(" + currentMusic.coverPath + ")";
-            document.getElementsByClassName("artiste")[0].innerHTML = currentMusic.artistName;
-            document.getElementsByClassName("titre")[0].innerHTML = currentMusic.title;
-            document.getElementsByClassName("total")[0].innerHTML = secondsToReadableTime(currentMusic.duration);
-            document.getElementsByClassName("nb-lectures")[0].innerHTML = currentMusic.numberView;
-            document.getElementsByClassName("nb-commentaires")[0].innerHTML = currentMusic.numberComment;
-            document.getElementsByClassName("like")[0].innerHTML = currentMusic.numberLike;
+            document.querySelector(".audioplayer .visuel").style.background = "url(" + currentMusic.coverPath + ")";
+            document.querySelector(".audioplayer .artiste").innerHTML = currentMusic.artistName;
+            document.querySelector(".audioplayer .titre").innerHTML = currentMusic.title;
+            document.querySelector(".audioplayer .total").innerHTML = secondsToReadableTime(currentMusic.duration);
+            document.querySelector(".audioplayer .nb-lectures").innerHTML = currentMusic.numberView;
+            document.querySelector(".audioplayer .nb-commentaires").innerHTML = currentMusic.numberComment;
+            document.querySelector(".audioplayer .like").innerHTML = currentMusic.numberLike;
         }
     }
 
@@ -164,7 +164,7 @@ class Player {
      * Set all listeners of each actions
      */
     setListener() {
-        document.getElementsByClassName("prev")[0].addEventListener("click", function () {
+        document.querySelector(".audioplayer .prev").addEventListener("click", function () {
             this.playlist.previous();
 
             if (this.sound != null) {
@@ -176,15 +176,15 @@ class Player {
             this.repaint();
             this.play_pause();
         }.bind(this));
-        document.getElementsByClassName("next")[0].addEventListener("click", this.next.bind(this));
+        document.querySelector(".audioplayer .next").addEventListener("click", this.next.bind(this));
 
-        document.getElementsByClassName("play-pause")[0].addEventListener("click", this.play_pause.bind(this));
+        document.querySelector(".audioplayer .play-pause").addEventListener("click", this.play_pause.bind(this));
 
-        document.getElementsByClassName("volume")[0].addEventListener("click", this.showVolume.bind(this));
+        document.querySelector(".audioplayer .volume").addEventListener("click", this.showVolume.bind(this));
 
-        document.getElementsByClassName("like")[0].addEventListener("click", this.like.bind(this));
+        document.querySelector(".audioplayer .like").addEventListener("click", this.like.bind(this));
 
-        document.getElementsByClassName("share")[0].addEventListener("click", this.share.bind(this));
+        document.querySelector(".audioplayer .share").addEventListener("click", this.share.bind(this));
 
         document.querySelector(".audioplayer .controls .volume").addEventListener("click", this.mute.bind(this));
 
@@ -212,7 +212,7 @@ Player.prototype.play_pause = function () {
 
     //If not undefined
     if (currentMusic != null) {
-        let playButton = document.getElementsByClassName("play-pause")[0];
+        let playButton = document.querySelector(".audioplayer .play-pause");
 
         //If don't have any current sound in play
         if (this.sound == null) {
@@ -262,7 +262,7 @@ Player.prototype.like = function () {
     //TODO faire une vraie réponse
     Connexion.addLike(this.playlist.getCurrentMusic().id, console.log);
 
-    let likeNumber = document.getElementsByClassName("like")[0];
+    let likeNumber = document.querySelector(".audioplayer .like");
     likeNumber.innerHTML = Number(likeNumber.innerHTML) + 1;
 };
 
