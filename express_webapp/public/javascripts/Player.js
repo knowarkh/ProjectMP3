@@ -23,7 +23,7 @@ class Player {
      */
     colorWaveToCurrentPos() {
         let hasBeenHoverBack = false;
-        let waveform = document.querySelector(".waveform");
+        let waveform = document.querySelector(".audioplayer .waveform");
         let barPosition = Math.ceil(this.sound.position / this.sound.duration * waveform.children[0].childElementCount);
 
         let bar_up;
@@ -61,7 +61,7 @@ class Player {
      * @param pos {int} number of the bar hovered
      */
     colorWaveToHoverPos(pos) {
-        let waveform = document.querySelector(".waveform");
+        let waveform = document.querySelector(".audioplayer .waveform");
         let barPosition;
         if (this.sound == null) {
             barPosition = 0;
@@ -86,7 +86,7 @@ class Player {
      * Will remove the class "played" of all bars of the waveform
      */
     clearColorWave() {
-        for (let elem of document.querySelectorAll(".bar-up ,.bar-down")) {
+        for (let elem of document.querySelectorAll(".audioplayer .bar-up ,.audioplayer .bar-down")) {
             elem.classList.remove("played");
             elem.classList.remove("hover-front");
             elem.classList.remove("hover-back");
@@ -94,7 +94,7 @@ class Player {
     }
 
     clearColorHoverWave() {
-        for (let elem of document.querySelectorAll(".bar-up.hover-front,.bar-up.hover-back ,.bar-down.hover-front,.bar-down.hover-back")) {
+        for (let elem of document.querySelectorAll(".audioplayer .bar-up.hover-front, .audioplayer .bar-up.hover-back , .audioplayer .bar-down.hover-front, .audioplayer .bar-down.hover-back")) {
             elem.classList.remove("hover-front");
             elem.classList.remove("hover-back");
         }
@@ -114,7 +114,7 @@ class Player {
             createWaveForm(this.playlist.getCurrentMusic().listPoints);
         }
 
-        for (let elem of document.querySelectorAll(".bar-up ,.bar-down")) {
+        for (let elem of document.querySelectorAll(".audioplayer .bar-up , .audioplayer .bar-down")) {
             elem.addEventListener("click", function (target) {
                 this.clearColorWave();
                 this.goTo(Number(target.target.attributes.data_position.value));
