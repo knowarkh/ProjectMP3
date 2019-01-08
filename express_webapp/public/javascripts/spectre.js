@@ -4,7 +4,7 @@
  * @param {int} percentilePlayed - percentile of the current music, if exist. Used to find the position of the bar which match with the position of the music on the spectrum
  */
 function createWaveForm(dotsList, percentilePlayed = 0) {
-    let spectre = document.getElementsByClassName("waveform")[0];
+    let spectre = document.querySelector(".audioplayer .waveform");
 
     /** Reset the content of the waveform */
 
