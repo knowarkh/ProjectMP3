@@ -1,3 +1,5 @@
 - Faire un dégradé sur le spectre
 - Privatisation des fonctions JS
 - Attention pb version mobile spectre
+- CSS : Refactorisation
+- CSS : Volume version mobile
