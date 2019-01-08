@@ -26,16 +26,11 @@ html
         button.prev Précédent
         button.play-pause.play Lecture
         button.next Suivant
-        //- .volume
-        button.volume.volume-on.is-active(data-value='90') Volume
-        // volume__sliderWrapper
-        .volume.slider 
-          // volume__sliderBackground
-          .volume_sliderTotale
-          // volume__sliderProgress
-          .volume_sliderProgress
-          // volume__sliderHandles
-          .volume_sliderBtn
+        span.volume
+          button.volume_button.volume-on(data-value='90') Volume
+          .volume_slider
+            .volume_sliderTotale
+              input.volume-input-range(type='range', min='0', max='100', value='0')
       .temps
         .en-cours 0:00
         .total 3:11

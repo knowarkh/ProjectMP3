@@ -181,13 +181,17 @@ class Player {
 
         document.querySelector(".audioplayer .play-pause").addEventListener("click", this.play_pause.bind(this));
 
-        document.querySelector(".audioplayer .volume").addEventListener("click", this.showVolume.bind(this));
-
         document.querySelector(".audioplayer .like").addEventListener("click", this.like.bind(this));
 
         document.querySelector(".audioplayer .share").addEventListener("click", this.share.bind(this));
 
-        document.querySelector(".audioplayer .controls .volume").addEventListener("click", this.mute.bind(this));
+        document.querySelector(".audioplayer .controls .volume .volume_button").addEventListener("click", this.mute.bind(this));
+
+        document.querySelector(".audioplayer .controls .volume").addEventListener("mouseover", this.volumeMouseOver.bind(this));
+
+        document.querySelector(".audioplayer .controls .volume").addEventListener("mouseout", this.volumeMouseOut.bind(this));
+
+        document.querySelector(".audioplayer .controls .volume input[type=range].volume-input-range").addEventListener("input", this.targetVolume.bind(this));
 
         window.addEventListener("resize", this.drawSpectrum.bind(this));
     }
@@ -287,10 +291,29 @@ Player.prototype.share = function () {
 };
 
 /**
- * Will show the pop-up volume and allow to set the new volume
+ * Will show the pop-up volume
  */
-Player.prototype.showVolume = function () {
+Player.prototype.volumeMouseOver = function () {
+    document.querySelector(".audioplayer .controls .volume").classList.add('is-active');
+};
 
+/**
+ * Will hide the pop-up volume
+ */
+Player.prototype.volumeMouseOut = function () {
+    document.querySelector(".audioplayer .controls .volume").classList.remove('is-active');
+};
+
+/**
+ * Will hide the pop-up volume
+ * @param e event
+ */
+Player.prototype.targetVolume = function (e) {
+    var min = e.target.min,
+        max = e.target.max,
+        val = e.target.value;
+
+    e.target.style.backgroundSize = (val - min) * 100 / (max - min) + '% 100%';
 };
 
 /**
@@ -324,7 +347,7 @@ Player.prototype.addMusic = function (music) {
  * Toggle the sound or not
  */
 Player.prototype.mute = function () {
-    let volume = document.querySelector(".audioplayer .controls .volume");
+    let volume = document.querySelector(".audioplayer .controls .volume .volume_button");
 
     if (volume.classList.contains('volume-on')) {
         volume.classList.remove('volume-on');
@@ -355,4 +378,3 @@ Player.prototype.next = function () {
 
     this.repaint();
 };
-
