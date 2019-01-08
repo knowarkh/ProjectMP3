@@ -9,6 +9,7 @@ volume_input.addEventListener('input', targetVolume);
 volume_span.addEventListener("mouseover", volumeMouseOver);
 volume_span.addEventListener("mouseout", volumeMouseOut);
 
+
 function mute(){
     if(volume_button.classList.contains('volume-on')) {
         volume_button.classList.remove('volume-on');
