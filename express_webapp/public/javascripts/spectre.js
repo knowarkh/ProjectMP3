@@ -125,6 +125,7 @@ function createWaveForm(dotsList, percentilePlayed = 0) {
         }
 
     }
+
     //Add to the div the primary waveform
     spectre.appendChild(primarySVG);
     //Add to the div the reflect waveform

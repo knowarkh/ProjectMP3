@@ -23,7 +23,7 @@ class Player {
      */
     colorWaveToCurrentPos() {
         let hasBeenHoverBack = false;
-        let waveform = document.querySelector(".audioplayer .waveform");
+        let waveform = document.querySelector(".audioplayer .waveform ");
         let barPosition = Math.ceil(this.sound.position / this.sound.duration * waveform.children[0].childElementCount);
 
         let bar_up;
@@ -61,7 +61,7 @@ class Player {
      * @param pos {int} number of the bar hovered
      */
     colorWaveToHoverPos(pos) {
-        let waveform = document.querySelector(".audioplayer .waveform");
+        let waveform = document.querySelector(".audioplayer .waveform ");
         let barPosition;
         if (this.sound == null) {
             barPosition = 0;
@@ -132,6 +132,7 @@ class Player {
     drawMusicTime() {
         if (this.sound != null) {
             document.querySelector(".audioplayer .en-cours").innerHTML = miliSecondsToReadableTime(this.sound.position);
+
             this.colorWaveToCurrentPos();
         }
     }
@@ -321,7 +322,7 @@ Player.prototype.targetVolume = function (e) {
  */
 Player.prototype.goTo = function (newPosition) {
     if (this.sound != null) {
-        let pourcentil = (newPosition / document.querySelector(".waveform").children[0].childElementCount);
+        let pourcentil = (newPosition / document.querySelector(".audioplayer .waveform ").children[0].childElementCount);
         let newTime = pourcentil * this.sound.duration;
         this.currentTime = newTime / 1000;
         this.sound.setPosition(newTime);
