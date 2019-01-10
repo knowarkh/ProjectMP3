@@ -13,6 +13,7 @@ db.once('open', function () {
 });
 
 var musicSchema = mongoose.Schema({
+    id: {type: Number, required: true},
     titre: {type: String, required: true},
     album: String,
     artiste: String,
@@ -24,7 +25,8 @@ var musicSchema = mongoose.Schema({
     listePoint: [Number],
     nbEcoute: Number,
     nbLike: Number,
-    nbPartage: Number
+    nbPartage: Number,
+    nbComment: Number
 });
 
 var Musique = mongoose.model('Music', musicSchema);
