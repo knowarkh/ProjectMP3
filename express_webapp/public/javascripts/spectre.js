@@ -138,7 +138,7 @@ function createWaveForm(dotsList, percentilePlayed = 0) {
     primarySVG.setAttribute("width", primaryWaveWidth);
     primarySVG.setAttribute("height", primaryWaveHeight);
     //primarySVG.setAttribute("viewBox","0 0 " + primaryWaveWidth + " " + primaryWaveHeight);
-    primarySVG.classList.add("test");
+    primarySVG.classList.add("sprectrumContainer");
 
 
     reflectSVG.setAttribute("xmlns", svgns);
@@ -147,7 +147,7 @@ function createWaveForm(dotsList, percentilePlayed = 0) {
     reflectSVG.setAttribute("width", reflectWaveWidth);
     reflectSVG.setAttribute("height", reflectWaveHeight);
     //reflectSVG.setAttribute("viewBox","0 0 " + reflectWaveWidth + " " + reflectWaveHeight);
-    reflectSVG.classList.add("test");
+    reflectSVG.classList.add("sprectrumContainer");
 
     for (let i = 0; i < nbBars; i++) {
         /** Create and add every bar of the primary waveform*/

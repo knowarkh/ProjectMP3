@@ -22,7 +22,7 @@ class Player {
      */
     colorWaveToCurrentPos() {
         let hasBeenHoverBack = false;
-        let waveform = document.querySelectorAll(".audioplayer .waveform .test");
+        let waveform = document.querySelectorAll(".audioplayer .waveform .sprectrumContainer");
         let barPosition = Math.ceil(this.sound.position / this.sound.duration * waveform[0].childElementCount);
 
         let bar_up;
@@ -60,7 +60,7 @@ class Player {
      * @param pos {int} number of the bar hovered
      */
     colorWaveToHoverPos(pos) {
-        let waveform = document.querySelectorAll(".audioplayer .waveform .test");
+        let waveform = document.querySelectorAll(".audioplayer .waveform .sprectrumContainer");
         let barPosition;
         if (this.sound == null) {
             barPosition = 0;
@@ -322,7 +322,7 @@ Player.prototype.targetVolume = function (e) {
  */
 Player.prototype.goTo = function (newPosition) {
     if (this.sound != null) {
-        let pourcentil = (newPosition / document.querySelector(".audioplayer .waveform .test").childElementCount);
+        let pourcentil = (newPosition / document.querySelector(".audioplayer .waveform .sprectrumContainer").childElementCount);
         let newTime = pourcentil * this.sound.duration;
         this.currentTime = newTime / 1000;
         this.sound.setPosition(newTime);
@@ -340,6 +340,16 @@ Player.prototype.addMusic = function (music) {
 
     this.playlist.addMusic(music);
     if (firstMusic) {
+        let currentMusic = this.playlist.getCurrentMusic();
+        this.sound = soundManager.createSound({
+            id: currentMusic['title'] + "-" + currentMusic['artistName'], // Id arbitraire : piste0, piste1, etc.
+            url: currentMusic['musicPath'],
+            whileplaying: this.drawMusicTime.bind(this),
+            volume: this.volume,
+            onfinish: this.next.bind(this)
+        });
+        this.sound.play();
+        this.sound.pause();
         this.repaint();
     }
 };
