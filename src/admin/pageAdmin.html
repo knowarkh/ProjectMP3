@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>admin</title>
+    <link rel="stylesheet" type="text/css" href="pageAdmin.css"/>
+    <script type="text/javascript" src="pageAdmin.js"></script>
+</head>
+<body>
+<h1>PAGE ADMINISTRATION</h1>
+
+<div>
+    <h2>UPLOAD ZONE</h2>
+    <div id="upload">
+        <div>
+            <span>UPLOAD COVER</span>
+            <input type="file" id="myCover">
+            <button class="button1" onclick="myFunction()">Test1</button>
+        </div>
+        <div>
+            <span>UPLOAD MUSIC</span>
+            <input type="file" id="mySound">
+            <button class="button1" onclick="myFunction()">Test2</button>
+        </div>
+    </div>
+</div>
+
+<div id="champs">
+    <h2>SAISIR LES INFORMATIONS SUIVANTES</h2>
+    <form name="myForm" method="POST">
+        <div>
+            <div>
+                <label><span>TITRE</span></label>
+            </div>
+            <div>
+                <input type="text" name="titre" value="Titre">
+            </div>
+        </div>
+
+        <div>
+            <div>
+                <label><span>ALBUM</span></label>
+            </div>
+            <div>
+                <input type="text" name="album" value="Album">
+            </div>
+        </div>
+
+        <div>
+            <div>
+                <label><span>ARTISTE</span></label>
+            </div>
+            <div>
+                <input type="text" name="artiste" value="Artiste">
+            </div>
+        </div>
+
+        <div>
+            <div>
+                <label><span>GENRE</span></label>
+            </div>
+            <div>
+                <input type="text" name="genre" value="Genre">
+            </div>
+        </div>
+
+        <div>
+            <div>
+                <label><span>ANNEE</span></label>
+            </div>
+            <div>
+                <input type="text" name="annee" value="Année">
+            </div>
+        </div>
+
+        <div>
+            <input id="send" type="button" value="Envoyer" onclick="console.log('Envoi des infos')">
+        </div>
+
+    </form>
+</div>
+
+</body>
+</html>
