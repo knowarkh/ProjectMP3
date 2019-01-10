@@ -14,7 +14,7 @@ function createWaveForm(dotsList, percentilePlayed = 0) {
 
     let primarySVG = document.createElementNS(svgns, "svg");
     let reflectSVG = document.createElementNS(svgns, "svg");
-    //let SVGRules =
+    let SVGRules = document.createElementNS(svgns, "svg");
 
     let primaryWaveWidth = spectre.clientWidth;
     let primaryWaveHeight = Math.round(spectre.clientHeight * 2 / 3);
@@ -64,7 +64,7 @@ function createWaveForm(dotsList, percentilePlayed = 0) {
 
     let gradientBarUpHoverFront = gradientBarUp.cloneNode();
     gradientBarUpHoverFront.setAttribute("id", "waveformStyleBarUpHoverFront");
-    gradientBarUpHoverFront.innerHTML = "<stop offset='0%' stop-color='#F0F0F0' />\n" + "<stop offset='100%' stop-color='993600' />\n";
+    gradientBarUpHoverFront.innerHTML = "<stop offset='0%' stop-color='#F0F0F0' />\n" + "<stop offset='100%' stop-color='#993600' />\n";
     defBlock.appendChild(gradientBarUpHoverFront);
 
     /** Bottom part */
@@ -90,7 +90,13 @@ function createWaveForm(dotsList, percentilePlayed = 0) {
     defBlock.appendChild(gradientBarDownHoverFront);
 
     //Add the def block - MUST BE BEFORE the other svg to be used AND in a svg
-    primarySVG.appendChild(defBlock);
+    SVGRules.appendChild(defBlock);
+
+    SVGRules.setAttribute("width",0);
+    SVGRules.setAttribute("height",0);
+
+
+    spectre.appendChild(SVGRules);
 
 
     /**Find the size and the number of bars show in the soundwave */
