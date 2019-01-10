@@ -287,6 +287,7 @@ Player.prototype.addComment = function () {
  */
 Player.prototype.share = function () {
 
+
 };
 
 /**
