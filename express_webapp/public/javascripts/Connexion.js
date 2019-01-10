@@ -1,5 +1,6 @@
 
 class Connexion{
+
     /**
      * Will process a get request to the URL and applied the callback at the end of the request
      * @param url {string} - target of the request
@@ -14,7 +15,7 @@ class Connexion{
                 callback(this.responseText);
             }
         };
-
+        //xhttp.setRequestHeader("Access-Control-Allow-Origin","");
         xhttp.open("GET", url, true);
         xhttp.send();
     }
@@ -34,7 +35,8 @@ class Connexion{
         };
 
         xhttp.open("POST", url, true);
-        xhttp.setRequestHeader("Content-type", "application/json");
+        //xhttp.setRequestHeader("Content-type", "application/json");
+        xhttp.setRequestHeader("Access-Control-Allow-Origin","*");
         xhttp.send(values);
     }
 
