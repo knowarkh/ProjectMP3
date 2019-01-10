@@ -48,7 +48,7 @@ function createWaveForm(dotsList, percentilePlayed = 0) {
     gradientBarUp.setAttribute("x1", "0");
     gradientBarUp.setAttribute("y1", "0");
     gradientBarUp.setAttribute("x2", "0");
-    gradientBarUp.setAttribute("y2", "100%");
+    gradientBarUp.setAttribute("y2", "70%");
     gradientBarUp.innerHTML = "<stop offset='0%' stop-color='#F0F0F0' />\n" +"<stop offset='100%' stop-color='#646464' />\n";
     defBlock.appendChild(gradientBarUp);
 
@@ -137,6 +137,7 @@ function createWaveForm(dotsList, percentilePlayed = 0) {
     //Set the rigth size of the primary waveform
     primarySVG.setAttribute("width", primaryWaveWidth);
     primarySVG.setAttribute("height", primaryWaveHeight);
+    //primarySVG.setAttribute("viewBox","0 0 " + primaryWaveWidth + " " + primaryWaveHeight);
     primarySVG.classList.add("waveform");
 
 
@@ -145,6 +146,7 @@ function createWaveForm(dotsList, percentilePlayed = 0) {
     //Set the rigth size of the reflect waveform
     reflectSVG.setAttribute("width", reflectWaveWidth);
     reflectSVG.setAttribute("height", reflectWaveHeight);
+    //reflectSVG.setAttribute("viewBox","0 0 " + reflectWaveWidth + " " + reflectWaveHeight);
     reflectSVG.classList.add("waveform");
 
     for (let i = 0; i < nbBars; i++) {
