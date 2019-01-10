@@ -96,8 +96,8 @@ body {
 .audioplayer .waveform .bar-up.hover-front {
     border: solid black 1px !important;
     fill: #993600 !important;
-transition: fill 1s ease-in-out;
-   stroke: url(#waveformStyleBarUpHoverFront) !important;
+    transition: fill 1s ease-in-out;
+    stroke: url(#waveformStyleBarUpHoverFront) !important;
 
 }
 
@@ -127,7 +127,7 @@ transition: fill 1s ease-in-out;
 .audioplayer .waveform .bar-down.hover-front {
     fill: rgba(153, 51, 0, 0.68) !important;
     transition: fill 1s ease-in-out;
-   stroke: url(#waveformStyleBarDownHoverFront) !important;
+    stroke: url(#waveformStyleBarDownHoverFront) !important;
 }
 
 /* ========= CONTROLS ========= */
