@@ -3,3 +3,4 @@
 - Attention pb version mobile spectre
 - CSS : Refactorisation
 - CSS : Volume version mobile
+- CSS : Ajouter color pour IE
