@@ -69,7 +69,7 @@ function Player() {
                 waveform[0].children[position].classList.add("hover-front");
                 waveform[1].children[position].classList.add("hover-front");
             }
-        } else { //TODO trouver la raison de ce bug >.<
+        } else {
             for (let position = pos; position <= barPosition; position++) {
                 waveform[0].children[position].classList.add("hover-back");
                 waveform[1].children[position].classList.add("hover-back");
@@ -79,7 +79,7 @@ function Player() {
     };
 
     /**
-     * Will remove the class "played" of all bars of the waveform
+     * Will remove the class "played" and "hover" of all bars of the waveform
      */
     this.clearColorWave= function() {
         for (let elem of document.querySelectorAll(".audioplayer .bar-up ,.audioplayer .bar-down")) {
@@ -89,6 +89,9 @@ function Player() {
         }
     };
 
+    /**
+     * Will remove the class "hover" of all bars of the waveform
+     */
     this.clearColorHoverWave= function() {
         for (let elem of document.querySelectorAll(".audioplayer .bar-up.hover-front, .audioplayer .bar-up.hover-back , .audioplayer .bar-down.hover-front, .audioplayer .bar-down.hover-back")) {
             elem.classList.remove("hover-front");
@@ -97,15 +100,38 @@ function Player() {
     };
 
     /**
+     * Will remove the class "spectrumHoverTime" and clear the time
+     */
+    this.clearHoverTime = function(){
+        let currentTime = document.querySelector(".audioplayer .en-cours");
+        currentTime.classList.remove("spectrumHoverTime");
+        currentTime.innerText = miliSecondsToReadableTime(this.sound.position);
+    };
+
+
+    /**
+     * Show the current time of the music according to the hovered position of the spectrum and add class "spectrumHoverTime"
+     * @param position
+     */
+    this.drawHoverTime = function(position){
+        let currentTime = document.querySelector(".audioplayer .en-cours");
+        if(!currentTime.classList.contains("spectrumHoverTime")){
+            currentTime.classList.add("spectrumHoverTime");
+            currentTime.innerText = secondsToReadableTime(position);
+        }
+    };
+
+
+    /**
      * Will draw the waveform at this position
      */
     this.drawSpectrum= function() {
         this.clearColorWave();
 
         if(this.sound != null){
-            let barPositionPercentil = this.sound.position / this.sound.duration;
+            let barPositionPercentile = this.sound.position / this.sound.duration;
 
-            createWaveForm(this.playlist.getCurrentMusic().listPoints, barPositionPercentil);
+            createWaveForm(this.playlist.getCurrentMusic().listPoints, barPositionPercentile);
         }else{
             createWaveForm(this.playlist.getCurrentMusic().listPoints);
         }
@@ -117,8 +143,12 @@ function Player() {
             }.bind(this));
             elem.addEventListener("mouseover", function (target) {
                 this.colorWaveToHoverPos(Number(target.target.attributes.data_position.value));
+                this.drawHoverTime(Number(target.target.attributes.data_position.value))
             }.bind(this));
-            elem.addEventListener("mouseout", this.clearColorHoverWave.bind(this));
+            elem.addEventListener("mouseout", function(){
+                this.clearColorHoverWave();
+                this.clearHoverTime();
+            }.bind(this));
         }
     };
 
@@ -127,7 +157,10 @@ function Player() {
      */
     this.drawMusicTime= function() {
         if (this.sound != null) {
-            document.querySelector(".audioplayer .en-cours").innerHTML = miliSecondsToReadableTime(this.sound.position);
+
+            let currentTime = document.querySelector(".audioplayer .en-cours");
+            if(!currentTime.classList.contains("spectrumHoverTime"))
+                currentTime.innerText = miliSecondsToReadableTime(this.sound.position);
 
             this.colorWaveToCurrentPos();
         }
@@ -140,12 +173,12 @@ function Player() {
         let currentMusic = this.playlist.getCurrentMusic();
         if (currentMusic != null) {
             document.querySelector(".audioplayer .visuel").style.background = "url(" + currentMusic.coverPath + ")";
-            document.querySelector(".audioplayer .artiste").innerHTML = currentMusic.artistName;
-            document.querySelector(".audioplayer .titre").innerHTML = currentMusic.title;
-            document.querySelector(".audioplayer .total").innerHTML = secondsToReadableTime(currentMusic.duration);
-            document.querySelector(".audioplayer .nb-lectures").innerHTML = currentMusic.numberView;
-            document.querySelector(".audioplayer .nb-commentaires").innerHTML = currentMusic.numberComment;
-            document.querySelector(".audioplayer .like").innerHTML = currentMusic.numberLike;
+            document.querySelector(".audioplayer .artiste").innerText = currentMusic.artistName;
+            document.querySelector(".audioplayer .titre").innerText = currentMusic.title;
+            document.querySelector(".audioplayer .total").innerText = secondsToReadableTime(currentMusic.duration);
+            document.querySelector(".audioplayer .nb-lectures").innerText = currentMusic.numberView;
+            document.querySelector(".audioplayer .nb-commentaires").innerText = currentMusic.numberComment;
+            document.querySelector(".audioplayer .like").innerText = currentMusic.numberLike;
         }
     };
 
@@ -223,6 +256,8 @@ function Player() {
             this.setVolume(value);
         }
     };
+
+
 
     /** Finish the "construction" of the manager */
     this.setListener();
@@ -316,7 +351,7 @@ Player.prototype.like = function () {
     Connexion.addLike(this.playlist.getCurrentMusic().id, console.log);
 
     let likeNumber = document.querySelector(".audioplayer .like");
-    likeNumber.innerHTML = Number(likeNumber.innerHTML) + 1;
+    likeNumber.innerText = Number(likeNumber.innerText) + 1;
 };
 
 /**
