@@ -1,10 +1,9 @@
 /**
  * Class will do every music based actions
  */
-class Player {
+function Player() {
     //let soundManager;
 
-    constructor() {
         this.currentTime = 0;
         this.volume = 50;
         this.repeatMode = false;
@@ -12,15 +11,13 @@ class Player {
         this.currentUser = undefined;
         this.sound = null;
 
-        this.setListener();
-    }
 
     /** Private functions */
 
     /**
      * Will colorize to the current point of playing
      */
-    colorWaveToCurrentPos() {
+    this.colorWaveToCurrentPos = function() {
         let hasBeenHoverBack = false;
         let waveform = document.querySelectorAll(".audioplayer .waveform .sprectrumContainer");
         let barPosition = Math.ceil(this.sound.position / this.sound.duration * waveform[0].childElementCount);
@@ -52,14 +49,14 @@ class Player {
                     bar_up.classList.add("hover-back");
                 }
         }
-    }
+    };
 
 
     /**
      * Will colorize to the current point of playing of the hovered point
      * @param pos {int} number of the bar hovered
      */
-    colorWaveToHoverPos(pos) {
+    this.colorWaveToHoverPos= function(pos) {
         let waveform = document.querySelectorAll(".audioplayer .waveform .sprectrumContainer");
         let barPosition;
         if (this.sound == null) {
@@ -79,30 +76,30 @@ class Player {
             }
         }
 
-    }
+    };
 
     /**
      * Will remove the class "played" of all bars of the waveform
      */
-    clearColorWave() {
+    this.clearColorWave= function() {
         for (let elem of document.querySelectorAll(".audioplayer .bar-up ,.audioplayer .bar-down")) {
             elem.classList.remove("played");
             elem.classList.remove("hover-front");
             elem.classList.remove("hover-back");
         }
-    }
+    };
 
-    clearColorHoverWave() {
+    this.clearColorHoverWave= function() {
         for (let elem of document.querySelectorAll(".audioplayer .bar-up.hover-front, .audioplayer .bar-up.hover-back , .audioplayer .bar-down.hover-front, .audioplayer .bar-down.hover-back")) {
             elem.classList.remove("hover-front");
             elem.classList.remove("hover-back");
         }
-    }
+    };
 
     /**
      * Will draw the waveform at this position
      */
-    drawSpectrum() {
+    this.drawSpectrum= function() {
         this.clearColorWave();
 
         if(this.sound != null){
@@ -123,23 +120,23 @@ class Player {
             }.bind(this));
             elem.addEventListener("mouseout", this.clearColorHoverWave.bind(this));
         }
-    }
+    };
 
     /**
      * Will draw current time of the current music each second
      */
-    drawMusicTime() {
+    this.drawMusicTime= function() {
         if (this.sound != null) {
             document.querySelector(".audioplayer .en-cours").innerHTML = miliSecondsToReadableTime(this.sound.position);
 
             this.colorWaveToCurrentPos();
         }
-    }
+    };
 
     /**
      * Draw all information about the music, called when the music is loaded
      */
-    drawMusicData() {
+    this.drawMusicData= function() {
         let currentMusic = this.playlist.getCurrentMusic();
         if (currentMusic != null) {
             document.querySelector(".audioplayer .visuel").style.background = "url(" + currentMusic.coverPath + ")";
@@ -150,20 +147,20 @@ class Player {
             document.querySelector(".audioplayer .nb-commentaires").innerHTML = currentMusic.numberComment;
             document.querySelector(".audioplayer .like").innerHTML = currentMusic.numberLike;
         }
-    }
+    };
 
     /**
      * Call functions of "first" draw when a new music is loaded
      */
-    repaint() {
+    this.repaint = function() {
         this.drawSpectrum();
         this.drawMusicData();
-    }
+    };
 
     /**
      * Set all listeners of each actions
      */
-    setListener() {
+    this.setListener= function() {
         document.querySelector(".audioplayer .prev").addEventListener("click", function () {
             this.playlist.previous();
 
@@ -193,7 +190,10 @@ class Player {
         document.querySelector(".audioplayer .controls .volume input[type=range].volume-input-range").addEventListener("input", this.targetVolume.bind(this));
 
         window.addEventListener("resize", this.drawSpectrum.bind(this));
-    }
+    };
+
+    this.setListener();
+
 }
 
 /**

@@ -1,12 +1,11 @@
 /**
  * Class used to control the playlist and the music
  */
-class Playlist {
-  constructor(){
+function Playlist() {
     this.musicList = [];
     this.currentPosition = 0;
     this.currentMusic = null;
-  }
+
 }
 
 /**

@@ -1,13 +1,12 @@
 /**
  *
  */
-class Music{
+function Music(jsonFile){
 
     /**
      * Constructor of the Music
      * @param jsonFile - a JSONFile will contains all information about a music. The file must come from a REST request to the database
      */
-    constructor(jsonFile){
       let data = jsonFile;
 
       this.id = Number(data.id);
@@ -24,7 +23,7 @@ class Music{
       this.numberComment = Number(data.nbComment);
       this.style = data.genre;
       this.year = Number(data.annee);
-    }
+
 
 }
 
