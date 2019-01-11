@@ -1,13 +1,18 @@
+
+/* ==================================================== */
+/*                  Version ordinateur                  */
+/* ==================================================== */
+
+
 body {
-  /*background-color: var(--background);*/
-  font-family: sans-serif;
+    font-family: sans-serif;
 }
 
 /* ========= COLORS ========= */
 
 :root{
-  --primary: #f95800;
-  --background: lightblue;
+    --primary: #f95800;
+    --secondary: #9b9b9b;
 }
 
 
@@ -28,14 +33,12 @@ body {
 
 .audioplayer .visuel {
     position: absolute;
-    /*background: url(../images/Imagine_Dragons/Zero.jpg) no-repeat;*/
     background-position: 50% 50% !important;
     background-repeat: no-repeat !important;
     background-size: contain !important;
     width: 200px;
     height: 200px;
     left: 0;
-
 }
 
 
@@ -49,6 +52,7 @@ body {
 .audioplayer .infos .artiste {
     margin: 13px 10px 10px;
     color: #9b9b9b;
+    color: var(--secondary);
     font-size: 12px;
 }
 
@@ -96,8 +100,8 @@ body {
 .audioplayer .waveform .bar-up.hover-front {
     border: solid black 1px !important;
     fill: #993600 !important;
-transition: fill 1s ease-in-out;
-   stroke: url(#waveformStyleBarUpHoverFront) !important;
+    transition: fill 1s ease-in-out;
+    stroke: url(#waveformStyleBarUpHoverFront) !important;
 
 }
 
@@ -127,7 +131,7 @@ transition: fill 1s ease-in-out;
 .audioplayer .waveform .bar-down.hover-front {
     fill: rgba(153, 51, 0, 0.68) !important;
     transition: fill 1s ease-in-out;
-   stroke: url(#waveformStyleBarDownHoverFront) !important;
+    stroke: url(#waveformStyleBarDownHoverFront) !important;
 }
 
 /* ========= CONTROLS ========= */
@@ -138,6 +142,7 @@ transition: fill 1s ease-in-out;
 }
 
 .audioplayer .controls button {
+    background-color: #f95800;
     background-color: var(--primary);
     border-radius: 50%;
     border: none;
@@ -326,14 +331,20 @@ input[type=range].volume-input-range::-ms-fill-lower {
     margin-left: 15px;
 }
 
-.audioplayer .temps .en-cours, .audioplayer .temps .total {
+.audioplayer .temps .en-cours,
+.audioplayer .temps .total {
     margin: 5px;
     font-size: 11px;
 }
 
+.audioplayer .temps .en-cours{
+    color: #f95800;
+    color: var(--primary);
+}
 .audioplayer .temps .en-cours::after{
     content: '/';
     padding-left: 10px;
+    color: #f95800;
     color: var(--primary);
     font-weight: bold;
 }
@@ -346,6 +357,7 @@ input[type=range].volume-input-range::-ms-fill-lower {
     bottom: 13px;
     right: 20px;
     color: #9b9b9b;
+    color: var(--secondary);
     font-size: 12px;
 }
 
@@ -358,15 +370,10 @@ input[type=range].volume-input-range::-ms-fill-lower {
     vertical-align: top;
 }
 
-.audioplayer .statistiques .nb-commentaires {
-
-}
-
 .audioplayer .statistiques .nb-commentaires::before {
     content: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48dGl0bGU+c3RhdHNfY29tbWVudDwvdGl0bGU+PHBhdGggZD0iTTUgM2MtMS4xMDUgMC0yIC44ODctMiAyLjAwNnYyLjk4OEMzIDkuMTAyIDMuODg3IDEwIDUgMTBoNmMxLjEwNSAwIDItLjg4NyAyLTIuMDA2VjUuMDA2QTEuOTk4IDEuOTk4IDAgMCAwIDExIDNINXptMCA3djNsMy0zSDV6IiBmaWxsPSIjOTk5IiBmaWxsLXJ1bGU9ImV2ZW5vZGQiLz48L3N2Zz4=);
     vertical-align: top;
 }
-
 
 /* ========= SOCIAL ========= */
 
@@ -391,7 +398,6 @@ input[type=range].volume-input-range::-ms-fill-lower {
     outline: 0;
     border-color: #ccc;
 }
-
 
 .audioplayer .social .like::before {
     content: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48dGl0bGU+c3RhdHNfbGlrZXNfZ3JleTwvdGl0bGU+PHBhdGggZD0iTTEwLjgwNSAzYy0yLjAyIDAtMi44MDQgMi4zNDUtMi44MDQgMi4zNDVTNy4yMTMgMyA1LjE5NiAzQzMuNDk0IDMgMS43NDggNC4wOTYgMi4wMyA2LjUxNGMuMzQ0IDIuOTUzIDUuNzI1IDYuNDc5IDUuOTYzIDYuNDg3LjIzOC4wMDggNS43MzgtMy43MjIgNS45ODgtNi41QzE0LjE4OCA0LjIwMSAxMi41MDcgMyAxMC44MDUgM3oiIGZpbGw9IiMyMjIiIGZpbGwtcnVsZT0iZXZlbm9kZCIvPjwvc3ZnPg==);

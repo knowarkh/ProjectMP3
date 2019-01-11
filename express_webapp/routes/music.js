@@ -8,6 +8,10 @@ router.get('/', function(req, res, next) {
     res.render('player');
 });
 
+router.get('/embed', function(req, res, next) {
+    res.render('embed');
+});
+
 // ========== GET ==========
 //Find all
 router.get('/find', function(req,res){
