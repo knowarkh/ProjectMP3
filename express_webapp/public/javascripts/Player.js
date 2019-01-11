@@ -192,6 +192,39 @@ function Player() {
         window.addEventListener("resize", this.drawSpectrum.bind(this));
     };
 
+    /**
+     * Will show the pop-up volume
+     */
+    this.volumeMouseOver = function () {
+        document.querySelector(".audioplayer .controls .volume").classList.add('is-active');
+    };
+
+    /**
+     * Will hide the pop-up volume
+     */
+    this.volumeMouseOut = function () {
+        document.querySelector(".audioplayer .controls .volume").classList.remove('is-active');
+    };
+
+    /**
+     * Modify the value of the volume bar and the volume of the music
+     * @param e {event}
+     */
+    this.targetVolume = function (e) {
+        //The target should be the volume bar
+        let min = e.target.min,
+            max = e.target.max,
+            val = e.target.value;
+
+        let value = (val - min) * 100 / (max - min);
+        e.target.style.backgroundSize = value + '% 100%';
+
+        if(this.sound != null){
+            this.setVolume(value);
+        }
+    };
+
+    /** Finish the "construction" of the manager */
     this.setListener();
     //Use to apply the right color to the background of the input
     let evt = new Event("input");
@@ -304,38 +337,6 @@ Player.prototype.addComment = function () {
 Player.prototype.share = function () {
 
 
-};
-
-/**
- * Will show the pop-up volume
- */
-Player.prototype.volumeMouseOver = function () {
-    document.querySelector(".audioplayer .controls .volume").classList.add('is-active');
-};
-
-/**
- * Will hide the pop-up volume
- */
-Player.prototype.volumeMouseOut = function () {
-    document.querySelector(".audioplayer .controls .volume").classList.remove('is-active');
-};
-
-/**
- * Modify the value of the volume bar and the volume of the music
- * @param e {event}
- */
-Player.prototype.targetVolume = function (e) {
-    //The target should be the volume bar
-    let min = e.target.min,
-        max = e.target.max,
-        val = e.target.value;
-
-    let value = (val - min) * 100 / (max - min);
-    e.target.style.backgroundSize = value + '% 100%';
-
-    if(this.sound != null){
-        this.setVolume(value);
-    }
 };
 
 /**
