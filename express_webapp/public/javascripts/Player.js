@@ -193,6 +193,9 @@ function Player() {
     };
 
     this.setListener();
+    //Use to apply the right color to the background of the input
+    let evt = new Event("input");
+    document.querySelector(".audioplayer .controls .volume input[type=range].volume-input-range").dispatchEvent(evt);
 
 }
 
@@ -204,6 +207,19 @@ Player.prototype.setVolume = function (newVolume) {
     this.volume = newVolume;
     if (this.sound !== null) {
         this.sound.setVolume(newVolume);
+
+        let volume = document.querySelector(".audioplayer .controls .volume .volume_button");
+        if (newVolume === 0) {
+            if (volume.classList.contains('volume-on')) {
+                volume.classList.remove('volume-on');
+                volume.classList.add('volume-off');
+            }
+        }else{
+            if (volume.classList.contains('volume-off')) {
+                volume.classList.remove('volume-off');
+                volume.classList.add('volume-on');
+            }
+        }
     }
 };
 
@@ -305,15 +321,21 @@ Player.prototype.volumeMouseOut = function () {
 };
 
 /**
- * Will hide the pop-up volume
- * @param e event
+ * Modify the value of the volume bar and the volume of the music
+ * @param e {event}
  */
 Player.prototype.targetVolume = function (e) {
-    var min = e.target.min,
+    //The target should be the volume bar
+    let min = e.target.min,
         max = e.target.max,
         val = e.target.value;
 
-    e.target.style.backgroundSize = (val - min) * 100 / (max - min) + '% 100%';
+    let value = (val - min) * 100 / (max - min);
+    e.target.style.backgroundSize = value + '% 100%';
+
+    if(this.sound != null){
+        this.setVolume(value);
+    }
 };
 
 /**
