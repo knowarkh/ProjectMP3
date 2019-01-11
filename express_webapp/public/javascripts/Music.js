@@ -21,7 +21,7 @@ class Music{
       this.numberView = Number(data.nbEcoute);
       this.numberLike = Number(data.nbLike);
       this.numberShare = Number(data.nbPartage);
-      this.numberComment = Number(data.nbCommentaire);
+      this.numberComment = Number(data.nbComment);
       this.style = data.genre;
       this.year = Number(data.annee);
     }
@@ -31,4 +31,3 @@ class Music{
 Music.prototype.hasStype = function(style){
   return this.style.includes(style);
 };
-

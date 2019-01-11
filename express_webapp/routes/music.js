@@ -21,7 +21,7 @@ router.get('/find', function(req,res){
 
 // Find by ID
 router.get('/find/id/:id', function(req,res){
-	database.Musique.findById(req.params.id, function(err, music) {
+	database.Musique.find({id: req.params.id}, function(err, music) {
         if (err) {
             res.send(err);
         }
@@ -88,6 +88,7 @@ router.get('/find/annee/:annee', function(req,res){
 router.post('/add', function(req,res){
     var music = new database.Musique();
 
+    music.id = req.body.id;
     music.titre = req.body.titre;
     music.album = req.body.album;
     music.artiste = req.body.artiste;
@@ -100,6 +101,7 @@ router.post('/add', function(req,res){
     music.nbEcoute = req.body.nbEcoute;
     music.nbLike = req.body.nbLike;
     music.nbPartage = req.body.nbPartage;
+    music.nbComment = req.body.nbComment;
 
     music.save(function(err){
         if(err) {
@@ -112,90 +114,35 @@ router.post('/add', function(req,res){
 // ========== PUT ==========
 
 router.put('/maj/:id', function(req, res) {
-    database.Musique.findById(req.params.id, function(err, music) {
+    database.Musique.update({id: req.params.id}, req.body, function(err, music) {
         if (err) {
             res.send(err);
         }
-
-        music.titre = req.body.titre;
-        music.album = req.body.album;
-        music.artiste = req.body.artiste;
-        music.cheminMP3 = req.body.cheminMP3;
-        music.cover = req.body.cover;
-        music.annee = req.body.annee;
-        music.duree = req.body.duree;
-        music.genre = req.body.genre;
-        music.listePoint = req.body.listePoint;
-        music.nbEcoute = req.body.nbEcoute;
-        music.nbLike = req.body.nbLike;
-        music.nbPartage = req.body.nbPartage;
-
-        music.save(function(err) {
-            if(err) {
-                res.send(err);
-            }
-            res.json({message : 'MAJ réussite'});
-        });
+        res.json({message : 'MAJ réussite'});
     });
 });
 
-// addLike(int id) +1
+// addLike
 
 router.put('/maj/like/:id', function(req, res) {
-    // Find --> like
-    database.Musique.findById(req.params.id, function(err, music) {
+    database.Musique.update({id: req.params.id}, req.body, function(err, music) {
         if (err) {
             res.send(err);
         }
-
-        let cookies = music.nbLike + 1
-        music.nbLike = cookies;
-
-        music.save(function(err) {
-            if(err) {
-                res.send(err);
-            }
-            res.json({message : 'MAJ réussite'});
-        });
+        res.json({message : 'MAJ réussite'});
     });
 });
 
-// addNumbeOfShare(int id)
+// addViews
 
-router.put('/maj/share/:id', function(req, res) {
-    database.Musique.findById(req.params.id, function(err, music) {
+router.put('/maj/views/:id', function(req, res) {
+    database.Musique.update({id: req.params.id}, req.body, function(err, music) {
         if (err) {
             res.send(err);
         }
-
-        music.nbPartage = req.body.nbPartage;
-
-        music.save(function(err) {
-            if(err) {
-                res.send(err);
-            }
-            res.json({message : 'MAJ réussite'});
-        });
+        res.json({message : 'MAJ réussite'});
     });
 });
-
-// addComment(int id)
-
-// router.put('/maj/like/:id', function(req, res) {
-//     database.Musique.findById(req.params.id, function(err, music) {
-//         if (err) {
-//             res.send(err);
-//         }
-//         music.nbLike = req.body.nbLike;
-//
-//         music.save(function(err) {
-//             if(err) {
-//                 res.send(err);
-//             }
-//             res.json({message : 'MAJ réussite'});
-//         });
-//     });
-// })
 
 
 // ========== DELETE ==========

@@ -4,14 +4,13 @@
 class Player {
     //let soundManager;
 
-    constructor() {//TODO ajouter json de musique, on créer une première musique pour instanciation
+    constructor() {
         this.currentTime = 0;
         this.volume = 50;
         this.repeatMode = false;
         this.playlist = new Playlist();
         this.currentUser = undefined;
         this.sound = null;
-        //TODO soundManager gestion
 
         this.setListener();
     }
@@ -23,15 +22,15 @@ class Player {
      */
     colorWaveToCurrentPos() {
         let hasBeenHoverBack = false;
-        let waveform = document.querySelector(".audioplayer .waveform");
-        let barPosition = Math.ceil(this.sound.position / this.sound.duration * waveform.children[0].childElementCount);
+        let waveform = document.querySelectorAll(".audioplayer .waveform .sprectrumContainer");
+        let barPosition = Math.ceil(this.sound.position / this.sound.duration * waveform[0].childElementCount);
 
         let bar_up;
         let bar_bottom;
 
         for (let position = 0; position <= barPosition; position++) {
-            bar_up = waveform.children[0].children[position];
-            bar_bottom = waveform.children[1].children[position];
+            bar_up = waveform[0].children[position];
+            bar_bottom = waveform[1].children[position];
 
             //Check if the new position get the "hover-front" class, remove it
             if (bar_up.classList.contains("hover-front") || bar_bottom.classList.contains("hover-front")) {
@@ -46,9 +45,9 @@ class Player {
             if (bar_up.classList.contains("hover-back") || bar_bottom.classList.contains("hover-back"))
                 hasBeenHoverBack = true;
 
-            //If one of the bar get the "hover-back" class, add it to all nex bars
+            //If one of the bar get the "hover-back" class, add it to all next bars
             if (hasBeenHoverBack)
-                if (!bar_up.classList.contains("hover-back") || !bar_bottom.classList.contains("hover-back")) {
+                if (!bar_up.classList.contains("hover-back") && !bar_bottom.classList.contains("hover-back")) {
                     bar_bottom.classList.add("hover-back");
                     bar_up.classList.add("hover-back");
                 }
@@ -61,22 +60,22 @@ class Player {
      * @param pos {int} number of the bar hovered
      */
     colorWaveToHoverPos(pos) {
-        let waveform = document.querySelector(".audioplayer .waveform");
+        let waveform = document.querySelectorAll(".audioplayer .waveform .sprectrumContainer");
         let barPosition;
         if (this.sound == null) {
             barPosition = 0;
         } else {
-            barPosition = Math.ceil(this.sound.position / this.sound.duration * waveform.children[0].childElementCount);
+            barPosition = Math.ceil(this.sound.position / this.sound.duration * waveform[0].childElementCount);
         }
-        if (barPosition <= pos) {
-            for (let position = barPosition; position <= pos; position++) {
-                waveform.children[0].children[position].classList.add("hover-front");
-                waveform.children[1].children[position].classList.add("hover-front");
+       if (barPosition <= pos) {
+            for (let position = barPosition + 1; position <= pos; position++) {
+                waveform[0].children[position].classList.add("hover-front");
+                waveform[1].children[position].classList.add("hover-front");
             }
-        } else {
+        } else { //TODO trouver la raison de ce bug >.<
             for (let position = pos; position <= barPosition; position++) {
-                waveform.children[0].children[position].classList.add("hover-back");
-                waveform.children[1].children[position].classList.add("hover-back");
+                waveform[0].children[position].classList.add("hover-back");
+                waveform[1].children[position].classList.add("hover-back");
             }
         }
 
@@ -132,6 +131,7 @@ class Player {
     drawMusicTime() {
         if (this.sound != null) {
             document.querySelector(".audioplayer .en-cours").innerHTML = miliSecondsToReadableTime(this.sound.position);
+
             this.colorWaveToCurrentPos();
         }
     }
@@ -287,6 +287,7 @@ Player.prototype.addComment = function () {
  */
 Player.prototype.share = function () {
 
+
 };
 
 /**
@@ -321,10 +322,11 @@ Player.prototype.targetVolume = function (e) {
  */
 Player.prototype.goTo = function (newPosition) {
     if (this.sound != null) {
-        let pourcentil = (newPosition / document.querySelector(".waveform").children[0].childElementCount);
+        let pourcentil = (newPosition / document.querySelector(".audioplayer .waveform .sprectrumContainer").childElementCount);
         let newTime = pourcentil * this.sound.duration;
         this.currentTime = newTime / 1000;
         this.sound.setPosition(newTime);
+        this.clearColorWave();
         this.colorWaveToCurrentPos();
     }
 };
@@ -338,6 +340,16 @@ Player.prototype.addMusic = function (music) {
 
     this.playlist.addMusic(music);
     if (firstMusic) {
+        let currentMusic = this.playlist.getCurrentMusic();
+        this.sound = soundManager.createSound({
+            id: currentMusic['title'] + "-" + currentMusic['artistName'], // Id arbitraire : piste0, piste1, etc.
+            url: currentMusic['musicPath'],
+            whileplaying: this.drawMusicTime.bind(this),
+            volume: this.volume,
+            onfinish: this.next.bind(this)
+        });
+        this.sound.play();
+        this.sound.pause();
         this.repaint();
     }
 };
