@@ -119,4 +119,11 @@ Connexion.prototype.addNumberOfShare = function (idMusic, callback) {
     this.requestPost("http://localhost:3000/music/maj/share/" + idMusic, JSON.parse("{id: idMusic}"), callback);
 };
 
+
+Connexion.prototype.getIdMusicParam = function(){
+    let param = Number(getParameterByName("idMusic", window.location));
+    param = !isNaN(param)? param : null;
+    return param;
+};
+
 var Connexion = new Connexion();

@@ -16,7 +16,7 @@ function Music(jsonFile){
       this.musicPath = data.cheminMP3;
       this.duration = Number(data.duree);
       this.title = data.titre;
-      this.listPoints = data.listePoint.map(function(e){return Number(e);});
+      this.listPoints = data.listePoint;
       this.numberView = Number(data.nbEcoute);
       this.numberLike = Number(data.nbLike);
       this.numberShare = Number(data.nbPartage);

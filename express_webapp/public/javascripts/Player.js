@@ -4,12 +4,13 @@
 function Player() {
     //let soundManager;
 
-        this.currentTime = 0;
-        this.volume = 50;
-        this.repeatMode = false;
-        this.playlist = new Playlist();
-        this.currentUser = undefined;
-        this.sound = null;
+    this.currentTime = 0;
+    this.volume = 50;
+    this.repeatMode = false;
+    this.playlist = new Playlist();
+    this.currentUser = undefined;
+    this.sound = null;
+    this.idMusicToLoad = Connexion.getIdMusicParam();
 
 
     /** Private functions */
@@ -258,12 +259,41 @@ function Player() {
     };
 
 
+    /**
+     * Add a music and if this is the first, draw information about this music
+     * @param {Music} music
+     */
+    this.addMusic = function (music) {
+        let firstMusic = this.playlist.getCurrentMusic() == null;
+
+        this.playlist.addMusic(music);
+        if (firstMusic) {
+            let currentMusic = this.playlist.getCurrentMusic();
+            this.sound = soundManager.createSound({
+                id: currentMusic['title'] + "-" + currentMusic['artistName'], // Id arbitraire : piste0, piste1, etc.
+                url: currentMusic['musicPath'],
+                whileplaying: this.drawMusicTime.bind(this),
+                volume: this.volume,
+                onfinish: this.next.bind(this)
+            });
+            this.sound.play();
+            this.sound.pause();
+            this.repaint();
+        }
+    };
 
     /** Finish the "construction" of the manager */
     this.setListener();
     //Use to apply the right color to the background of the input
     let evt = new Event("input");
     document.querySelector(".audioplayer .controls .volume input[type=range].volume-input-range").dispatchEvent(evt);
+
+    //Check if a musicId exist, if is do, load and add the music to the playlist
+    if(this.idMusicToLoad !== undefined && this.idMusicToLoad != null){
+        Connexion.getMusicById(this.idMusicToLoad,function(music){
+            this.addMusic(new Music(JSON.parse(music)));
+        }.bind(this));
+    }
 
 }
 
@@ -389,28 +419,6 @@ Player.prototype.goTo = function (newPosition) {
     }
 };
 
-/**
- * Add a music and if this is the first, draw information about this music
- * @param {Music} music
- */
-Player.prototype.addMusic = function (music) {
-    let firstMusic = this.playlist.getCurrentMusic() == null;
-
-    this.playlist.addMusic(music);
-    if (firstMusic) {
-        let currentMusic = this.playlist.getCurrentMusic();
-        this.sound = soundManager.createSound({
-            id: currentMusic['title'] + "-" + currentMusic['artistName'], // Id arbitraire : piste0, piste1, etc.
-            url: currentMusic['musicPath'],
-            whileplaying: this.drawMusicTime.bind(this),
-            volume: this.volume,
-            onfinish: this.next.bind(this)
-        });
-        this.sound.play();
-        this.sound.pause();
-        this.repaint();
-    }
-};
 
 /**
  * Toggle the sound or not
