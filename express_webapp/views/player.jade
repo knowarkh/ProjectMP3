@@ -27,7 +27,7 @@ html
           button.volume_button.volume-on(data-value='90') Volume
           .volume_slider
             .volume_sliderTotale
-              input.volume-input-range(type='range', min='0', max='100', value='0')
+              input.volume-input-range(type='range', min='0', max='100', value='50')
       .temps
         .en-cours 0:00
         .total 3:11
@@ -37,6 +37,19 @@ html
       .social
         button.like 333K
         button.share Partager
+      // Modal
+      .modal
+        .modal-content
+          .modal-header
+            span.close ×
+            p Intégrer le player
+          .modal-body
+            p Code d'intégration :
+            input.share-input-text(type="text", value="", readonly='readonly')
+          .modal-footer
+            a Copier
+
+
     script(src="/javascripts/script/soundmanager2.js")
     script(src='/javascripts/Utils.js')
     script(src='/javascripts/Connexion.js')

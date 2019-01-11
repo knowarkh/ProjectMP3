@@ -286,8 +286,31 @@ Player.prototype.addComment = function () {
  * Will create and give a embed version of the player
  */
 Player.prototype.share = function () {
+    var modal = document.querySelector('.audioplayer .modal');
+    var close = document.querySelector(".audioplayer .modal .close");
+    var inputShare = document.querySelector(".audioplayer .modal .modal-body input[type=text].share-input-text");
+    var btnCopy = document.querySelector(".audioplayer .modal .modal-footer");
+    modal.style.display = "block";
 
+    // Close the modal with the close button
+    close.onclick = function() {
+        modal.style.display = "none";
+    }
 
+    // Close the modal by clicking outside it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+    // Copy the select
+    btnCopy.onclick = function() {
+        inputShare.select();
+        document.execCommand("copy");
+    }
+
+    inputShare.value = ('<iframe src="http://localhost:3000/music" width="50%" height="230" frameborder="no" scrolling="no"></iframe>');
 };
 
 /**
