@@ -1,7 +1,7 @@
 
 
 
-let manager = new Player();
+let manager = new Player(Connexion.getIdMusicParam());
 
 
 /*

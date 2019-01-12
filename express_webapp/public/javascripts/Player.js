@@ -1,16 +1,32 @@
 /**
  * Class will do every music based actions
  */
-function Player() {
+function Player(idMusicToLoad = null) {
     //let soundManager;
 
-    this.currentTime = 0;
-    this.volume = 50;
-    this.repeatMode = false;
-    this.playlist = new Playlist();
-    this.currentUser = undefined;
-    this.sound = null;
-    this.idMusicToLoad = Connexion.getIdMusicParam();
+    let constructor = function(){
+        this.currentTime = 0;
+        this.volume = 50;
+        this.repeatMode = false;
+        this.playlist = new Playlist();
+        this.currentUser = undefined;
+        this.sound = null;
+        this.idMusicToLoad = idMusicToLoad;
+
+        /** Finish the "construction" of the manager */
+        this.setListener();
+        //Use to apply the right color to the background of the input
+        let evt = new Event("input");
+        document.querySelector(".audioplayer .controls .volume input[type=range].volume-input-range").dispatchEvent(evt);
+
+        //Check if a musicId exist, if is do, load and add the music to the playlist
+        if(this.idMusicToLoad !== undefined && this.idMusicToLoad != null){
+            Connexion.getMusicById(this.idMusicToLoad,function(music){
+                this.addMusic(new Music(JSON.parse(music)));
+            }.bind(this));
+        }
+
+    }.bind(this);
 
 
     /** Private functions */
@@ -258,6 +274,7 @@ function Player() {
         }
     };
 
+    /** Public functions */
 
     /**
      * Add a music and if this is the first, draw information about this music
@@ -282,18 +299,9 @@ function Player() {
         }
     };
 
-    /** Finish the "construction" of the manager */
-    this.setListener();
-    //Use to apply the right color to the background of the input
-    let evt = new Event("input");
-    document.querySelector(".audioplayer .controls .volume input[type=range].volume-input-range").dispatchEvent(evt);
 
-    //Check if a musicId exist, if is do, load and add the music to the playlist
-    if(this.idMusicToLoad !== undefined && this.idMusicToLoad != null){
-        Connexion.getMusicById(this.idMusicToLoad,function(music){
-            this.addMusic(new Music(JSON.parse(music)));
-        }.bind(this));
-    }
+
+    constructor();
 
 }
 
