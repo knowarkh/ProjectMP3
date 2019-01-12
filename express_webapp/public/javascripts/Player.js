@@ -4,7 +4,7 @@
 function Player(idMusicToLoad = null) {
     //let soundManager;
 
-    let constructor = function(){
+    let constructor = function () {
         this.currentTime = 0;
         this.volume = 50;
         this.repeatMode = false;
@@ -20,8 +20,8 @@ function Player(idMusicToLoad = null) {
         document.querySelector(".audioplayer .controls .volume input[type=range].volume-input-range").dispatchEvent(evt);
 
         //Check if a musicId exist, if is do, load and add the music to the playlist
-        if(this.idMusicToLoad !== undefined && this.idMusicToLoad != null){
-            Connexion.getMusicById(this.idMusicToLoad,function(music){
+        if (this.idMusicToLoad !== undefined && this.idMusicToLoad != null) {
+            Connexion.getMusicById(this.idMusicToLoad, function (music) {
                 this.addMusic(new Music(JSON.parse(music)));
             }.bind(this));
         }
@@ -34,7 +34,7 @@ function Player(idMusicToLoad = null) {
     /**
      * Will colorize to the current point of playing
      */
-    this.colorWaveToCurrentPos = function() {
+    this.colorWaveToCurrentPos = function () {
         let hasBeenHoverBack = false;
         let waveform = document.querySelectorAll(".audioplayer .waveform .sprectrumContainer");
         let barPosition = Math.ceil(this.sound.position / this.sound.duration * waveform[0].childElementCount);
@@ -73,7 +73,7 @@ function Player(idMusicToLoad = null) {
      * Will colorize to the current point of playing of the hovered point
      * @param pos {int} number of the bar hovered
      */
-    this.colorWaveToHoverPos= function(pos) {
+    this.colorWaveToHoverPos = function (pos) {
         let waveform = document.querySelectorAll(".audioplayer .waveform .sprectrumContainer");
         let barPosition;
         if (this.sound == null) {
@@ -81,7 +81,7 @@ function Player(idMusicToLoad = null) {
         } else {
             barPosition = Math.ceil(this.sound.position / this.sound.duration * waveform[0].childElementCount);
         }
-       if (barPosition <= pos) {
+        if (barPosition <= pos) {
             for (let position = barPosition + 1; position <= pos; position++) {
                 waveform[0].children[position].classList.add("hover-front");
                 waveform[1].children[position].classList.add("hover-front");
@@ -98,7 +98,7 @@ function Player(idMusicToLoad = null) {
     /**
      * Will remove the class "played" and "hover" of all bars of the waveform
      */
-    this.clearColorWave= function() {
+    this.clearColorWave = function () {
         for (let elem of document.querySelectorAll(".audioplayer .bar-up ,.audioplayer .bar-down")) {
             elem.classList.remove("played");
             elem.classList.remove("hover-front");
@@ -109,7 +109,7 @@ function Player(idMusicToLoad = null) {
     /**
      * Will remove the class "hover" of all bars of the waveform
      */
-    this.clearColorHoverWave= function() {
+    this.clearColorHoverWave = function () {
         for (let elem of document.querySelectorAll(".audioplayer .bar-up.hover-front, .audioplayer .bar-up.hover-back , .audioplayer .bar-down.hover-front, .audioplayer .bar-down.hover-back")) {
             elem.classList.remove("hover-front");
             elem.classList.remove("hover-back");
@@ -119,7 +119,7 @@ function Player(idMusicToLoad = null) {
     /**
      * Will remove the class "spectrumHoverTime" and clear the time
      */
-    this.clearHoverTime = function(){
+    this.clearHoverTime = function () {
         let currentTime = document.querySelector(".audioplayer .en-cours");
         currentTime.classList.remove("spectrumHoverTime");
         currentTime.innerText = miliSecondsToReadableTime(this.sound.position);
@@ -130,9 +130,9 @@ function Player(idMusicToLoad = null) {
      * Show the current time of the music according to the hovered position of the spectrum and add class "spectrumHoverTime"
      * @param position
      */
-    this.drawHoverTime = function(position){
+    this.drawHoverTime = function (position) {
         let currentTime = document.querySelector(".audioplayer .en-cours");
-        if(!currentTime.classList.contains("spectrumHoverTime")){
+        if (!currentTime.classList.contains("spectrumHoverTime")) {
             currentTime.classList.add("spectrumHoverTime");
             currentTime.innerText = secondsToReadableTime(position);
         }
@@ -142,14 +142,14 @@ function Player(idMusicToLoad = null) {
     /**
      * Will draw the waveform at this position
      */
-    this.drawSpectrum= function() {
+    this.drawSpectrum = function () {
         this.clearColorWave();
 
-        if(this.sound != null){
+        if (this.sound != null) {
             let barPositionPercentile = this.sound.position / this.sound.duration;
 
             createWaveForm(this.playlist.getCurrentMusic().listPoints, barPositionPercentile);
-        }else{
+        } else {
             createWaveForm(this.playlist.getCurrentMusic().listPoints);
         }
 
@@ -162,7 +162,7 @@ function Player(idMusicToLoad = null) {
                 this.colorWaveToHoverPos(Number(target.target.attributes.data_position.value));
                 this.drawHoverTime(Number(target.target.attributes.data_position.value))
             }.bind(this));
-            elem.addEventListener("mouseout", function(){
+            elem.addEventListener("mouseout", function () {
                 this.clearColorHoverWave();
                 this.clearHoverTime();
             }.bind(this));
@@ -172,11 +172,11 @@ function Player(idMusicToLoad = null) {
     /**
      * Will draw current time of the current music each second
      */
-    this.drawMusicTime= function() {
+    this.drawMusicTime = function () {
         if (this.sound != null) {
 
             let currentTime = document.querySelector(".audioplayer .en-cours");
-            if(!currentTime.classList.contains("spectrumHoverTime"))
+            if (!currentTime.classList.contains("spectrumHoverTime"))
                 currentTime.innerText = miliSecondsToReadableTime(this.sound.position);
 
             this.colorWaveToCurrentPos();
@@ -186,7 +186,7 @@ function Player(idMusicToLoad = null) {
     /**
      * Draw all information about the music, called when the music is loaded
      */
-    this.drawMusicData= function() {
+    this.drawMusicData = function () {
         let currentMusic = this.playlist.getCurrentMusic();
         if (currentMusic != null) {
             document.querySelector(".audioplayer .visuel").style.background = "url(" + currentMusic.coverPath + ")";
@@ -202,7 +202,7 @@ function Player(idMusicToLoad = null) {
     /**
      * Call functions of "first" draw when a new music is loaded
      */
-    this.repaint = function() {
+    this.repaint = function () {
         this.drawSpectrum();
         this.drawMusicData();
     };
@@ -210,7 +210,11 @@ function Player(idMusicToLoad = null) {
     /**
      * Set all listeners of each actions
      */
-    this.setListener= function() {
+    this.setListener = function () {
+
+        window.addEventListener("resize", this.drawSpectrum.bind(this));
+
+
         document.querySelector(".audioplayer .prev").addEventListener("click", function () {
             this.playlist.previous();
 
@@ -231,15 +235,23 @@ function Player(idMusicToLoad = null) {
 
         document.querySelector(".audioplayer .share").addEventListener("click", this.share.bind(this));
 
-        document.querySelector(".audioplayer .controls .volume .volume_button").addEventListener("click", this.mute.bind(this));
-
-        document.querySelector(".audioplayer .controls .volume").addEventListener("mouseover", this.volumeMouseOver.bind(this));
-
-        document.querySelector(".audioplayer .controls .volume").addEventListener("mouseout", this.volumeMouseOut.bind(this));
-
         document.querySelector(".audioplayer .controls .volume input[type=range].volume-input-range").addEventListener("input", this.targetVolume.bind(this));
 
-        window.addEventListener("resize", this.drawSpectrum.bind(this));
+        //Applied a different listener in case of mobile version
+        if (window.mobileAndTabletCheck() || detectCompactSize()) {
+            document.querySelector(".audioplayer .controls .volume .volume_button").addEventListener("click", this.volumeMouseOverCompact.bind(this));
+
+            document.querySelector(".audioplayer .controls .volume .volume_button").addEventListener("click", this.volumeMouseOutCompact.bind(this));
+
+        } else {
+
+            document.querySelector(".audioplayer .controls .volume .volume_button").addEventListener("click", this.mute.bind(this));
+
+            document.querySelector(".audioplayer .controls .volume").addEventListener("mouseover", this.volumeMouseOver.bind(this));
+
+            document.querySelector(".audioplayer .controls .volume").addEventListener("mouseout", this.volumeMouseOut.bind(this));
+        }
+
     };
 
     /**
@@ -250,11 +262,44 @@ function Player(idMusicToLoad = null) {
     };
 
     /**
+     * Will show the pop-up volume on compact/mobile version
+     */
+    this.volumeMouseOverCompact = function(){
+        let volumeButton = document.querySelector(".audioplayer .controls .volume");
+
+        if (!volumeButton.classList.contains("volume-timed")) {
+            volumeButton.classList.add('is-active');
+
+            //Little timeout to avoid a instant showing and hiding
+            setTimeout(function () {
+                volumeButton.classList.add('volume-timed');
+            }, 200)
+        }
+    };
+
+    /**
      * Will hide the pop-up volume
      */
     this.volumeMouseOut = function () {
         document.querySelector(".audioplayer .controls .volume").classList.remove('is-active');
     };
+
+    /**
+     * Will hide the pop-up volume on conpact/mobile version
+     */
+    this.volumeMouseOutCompact = function(){
+        let volumeButton = document.querySelector(".audioplayer .controls .volume");
+
+        if (volumeButton.classList.contains("volume-timed")) {
+            volumeButton.classList.remove('is-active');
+
+            //Little timeout to avoid a instant showing and hiding
+            setTimeout(function () {
+                volumeButton.classList.remove('volume-timed');
+            }, 200)
+        }
+    };
+
 
     /**
      * Modify the value of the volume bar and the volume of the music
@@ -269,7 +314,7 @@ function Player(idMusicToLoad = null) {
         let value = (val - min) * 100 / (max - min);
         e.target.style.backgroundSize = value + '% 100%';
 
-        if(this.sound != null){
+        if (this.sound != null) {
             this.setVolume(value);
         }
     };
@@ -296,14 +341,13 @@ function Player(idMusicToLoad = null) {
             this.sound.play();
             this.sound.pause();
             this.repaint();
-        }else{
+        } else {
             //Other case, add the visibility of the "previous" and "next" buttons and put the "volume" button at the right place
             document.querySelector(".audioplayer .controls .prev").style.visibility = "visible";
             document.querySelector(".audioplayer .controls .next").style.visibility = "visible";
             document.querySelector(".audioplayer .controls .volume").style.marginLeft = "0px";
         }
     };
-
 
 
     constructor();
@@ -325,7 +369,7 @@ Player.prototype.setVolume = function (newVolume) {
                 volume.classList.remove('volume-on');
                 volume.classList.add('volume-off');
             }
-        }else{
+        } else {
             if (volume.classList.contains('volume-off')) {
                 volume.classList.remove('volume-off');
                 volume.classList.add('volume-on');
@@ -396,22 +440,22 @@ Player.prototype.play_pause = function () {
 Player.prototype.like = function () {
     let currentMusic = this.playlist.getCurrentMusic();
 
-    if(getCookie("song-"+currentMusic.id+"-alreadyLike") === ""){
+    if (getCookie("song-" + currentMusic.id + "-alreadyLike") === "") {
         Connexion.addLike(currentMusic.id, console.log);
 
         let likeNumber = document.querySelector(".audioplayer .like");
         likeNumber.innerText = Number(likeNumber.innerText) + 1;
         currentMusic.numberLike++;
 
-        setCookie("song-"+currentMusic.id+"-alreadyLike","true",99);
-    }else{
+        setCookie("song-" + currentMusic.id + "-alreadyLike", "true", 99);
+    } else {
         Connexion.removeLike(currentMusic.id, console.log);
 
         let likeNumber = document.querySelector(".audioplayer .like");
         likeNumber.innerText = Number(likeNumber.innerText) - 1;
         currentMusic.numberLike--;
 
-        setCookie("song-"+currentMusic.id+"-alreadyLike","",99);
+        setCookie("song-" + currentMusic.id + "-alreadyLike", "", 99);
     }
 };
 
@@ -438,25 +482,25 @@ Player.prototype.share = function () {
     modal.style.display = "block";
 
     // Close the modal with the close button
-    close.onclick = function() {
+    close.onclick = function () {
         modal.style.display = "none";
     };
 
     // Close the modal by clicking outside it
-    window.onclick = function(event) {
+    window.onclick = function (event) {
         if (event.target === modal) {
             modal.style.display = "none";
         }
     };
 
     // Copy the select
-    btnCopy.onclick = function() {
+    btnCopy.onclick = function () {
         inputShare.select();
         document.execCommand("copy");
     };
 
     let currentMusic = this.playlist.getCurrentMusic();
-    inputShare.value = ('<iframe src="http://localhost:3000/music?idMusic='+ currentMusic.id+'" width="50%" height="230" frameborder="no" scrolling="no"></iframe>');
+    inputShare.value = ('<iframe src="http://localhost:3000/music?idMusic=' + currentMusic.id + '" width="50%" height="230" frameborder="no" scrolling="no"></iframe>');
 };
 
 /**
@@ -486,8 +530,7 @@ Player.prototype.mute = function () {
         volume.classList.add('volume-off');
         if (this.sound !== null)
             this.sound.setVolume(0);
-    }
-    else {
+    } else {
         volume.classList.remove('volume-off');
         volume.classList.add('volume-on');
         if (this.sound !== null)
@@ -512,16 +555,16 @@ Player.prototype.next = function () {
 };
 
 
-Player.prototype.addView = function(){
+Player.prototype.addView = function () {
     let currentMusic = this.playlist.getCurrentMusic();
 
-    if(getCookie("song-"+currentMusic.id+"-alreadyView") === ""){
+    if (getCookie("song-" + currentMusic.id + "-alreadyView") === "") {
         Connexion.addNumberOfView(currentMusic.id, console.log);
 
         let numberView = document.querySelector(".audioplayer .nb-lectures");
         numberView.innerText = Number(numberView.innerText) + 1;
         currentMusic.numberView++;
 
-        setCookie("song-"+currentMusic.id+"-alreadyView","true",1);
+        setCookie("song-" + currentMusic.id + "-alreadyView", "true", 1);
     }
 };
