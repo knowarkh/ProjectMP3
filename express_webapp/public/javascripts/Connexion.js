@@ -1,5 +1,7 @@
 function Connexion() {}
 
+/**             Request constructor              */
+
 /**
  * Will process a get request to the URL and applied the callback at the end of the request
  * @param url {string} - target of the request
@@ -58,6 +60,9 @@ Connexion.prototype.requestPut = function (url, values, callback) {
     xhttp.setRequestHeader("Access-Control-Allow-Origin", "*");
     xhttp.send(values);
 };
+
+/**             Request GET part                 */
+
 
 /**
  * Return all the musics of the database
@@ -122,6 +127,20 @@ Connexion.prototype.getMusicByYear = function (year, callback) {
 };
 
 /**
+ * Allow to get the id (if exist) of the music put in the url
+ * @returns {number}
+ */
+Connexion.prototype.getIdMusicParam = function(){
+    let param = Number(getParameterByName("idMusic", window.location));
+    param = !isNaN(param)? param : null;
+    return param;
+};
+
+
+
+/**             Request PUT part             */
+
+/**
  * Will add a like to the music with the given id and execute the callback
  * @param idMusic {int} - Id of the current targeted
  * @param callback {function} - function which be call after the request
@@ -140,6 +159,15 @@ Connexion.prototype.removeLike = function (idMusic, callback) {
 };
 
 /**
+ * Will add 1 to the number of addView of the music with the given id and execute the callback
+ * @param idMusic {int} - Id of the current targeted
+ * @param callback {function} - function which be call after the request
+ */
+Connexion.prototype.addNumberOfView = function (idMusic, callback) {
+    this.requestPut("http://localhost:3000/music/maj/views/" + idMusic, null, callback);
+};
+
+/**
  * Will add 1 to the number of share of the music with the given id and execute the callback
  * @param idMusic {int} - Id of the current targeted
  * @param callback {function} - function which be call after the request
@@ -148,11 +176,5 @@ Connexion.prototype.addNumberOfShare = function (idMusic, callback) {
     this.requestPut("http://localhost:3000/music/maj/share/" + idMusic, null, callback);
 };
 
-
-Connexion.prototype.getIdMusicParam = function(){
-    let param = Number(getParameterByName("idMusic", window.location));
-    param = !isNaN(param)? param : null;
-    return param;
-};
 
 var Connexion = new Connexion();

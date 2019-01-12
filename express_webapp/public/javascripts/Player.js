@@ -364,6 +364,9 @@ Player.prototype.play_pause = function () {
         }
         //If a Sound is already set
         else {
+            //Add 1 to the value of view if isn't done
+            this.addView();
+
             //If it loaded and played or paused
             if (this.sound.playState) {
                 if (this.sound.paused) {
@@ -394,7 +397,6 @@ Player.prototype.like = function () {
     let currentMusic = this.playlist.getCurrentMusic();
 
     if(getCookie("song-"+currentMusic.id+"-alreadyLike") === ""){
-
         Connexion.addLike(currentMusic.id, console.log);
 
         let likeNumber = document.querySelector(".audioplayer .like");
@@ -409,7 +411,8 @@ Player.prototype.like = function () {
         likeNumber.innerText = Number(likeNumber.innerText) - 1;
         currentMusic.numberLike--;
 
-        setCookie("song-"+currentMusic.id+"-alreadyLike","",99);    }
+        setCookie("song-"+currentMusic.id+"-alreadyLike","",99);
+    }
 };
 
 /**
@@ -437,22 +440,23 @@ Player.prototype.share = function () {
     // Close the modal with the close button
     close.onclick = function() {
         modal.style.display = "none";
-    }
+    };
 
     // Close the modal by clicking outside it
     window.onclick = function(event) {
-        if (event.target == modal) {
+        if (event.target === modal) {
             modal.style.display = "none";
         }
-    }
+    };
 
     // Copy the select
     btnCopy.onclick = function() {
         inputShare.select();
         document.execCommand("copy");
-    }
+    };
 
-    inputShare.value = ('<iframe src="http://localhost:3000/music" width="50%" height="230" frameborder="no" scrolling="no"></iframe>');
+    let currentMusic = this.playlist.getCurrentMusic();
+    inputShare.value = ('<iframe src="http://localhost:3000/music?idMusic='+ currentMusic.id+'" width="50%" height="230" frameborder="no" scrolling="no"></iframe>');
 };
 
 /**
@@ -505,4 +509,19 @@ Player.prototype.next = function () {
     this.play_pause();
 
     this.repaint();
+};
+
+
+Player.prototype.addView = function(){
+    let currentMusic = this.playlist.getCurrentMusic();
+
+    if(getCookie("song-"+currentMusic.id+"-alreadyView") === ""){
+        Connexion.addNumberOfView(currentMusic.id, console.log);
+
+        let numberView = document.querySelector(".audioplayer .nb-lectures");
+        numberView.innerText = Number(numberView.innerText) + 1;
+        currentMusic.numberView++;
+
+        setCookie("song-"+currentMusic.id+"-alreadyView","true",1);
+    }
 };

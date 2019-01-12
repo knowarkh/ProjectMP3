@@ -5467,7 +5467,7 @@ function SoundManager(smURL, smID) {
 
     if (sm2.wmode !== null && (ua.match(/msie 8/i) || (!isIE && !sm2.useHighPerformance)) && navigator.platform.match(/win32|win64/i)) {
       /**
-       * extra-special case: movie doesn't load until scrolled into view when using wmode = anything but 'window' here
+       * extra-special case: movie doesn't load until scrolled into addView when using wmode = anything but 'window' here
        * does not apply when using high performance (position:fixed means on-screen), OR infinite flash load timeout
        * wmode breaks IE 8 on Vista + Win7 too in some cases, as of January 2011 (?)
        */

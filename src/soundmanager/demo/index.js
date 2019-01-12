@@ -458,7 +458,7 @@ if (window.is_home) {
     };
 
     if (navigator.platform.match(/win32/i) && navigator.userAgent.match(/firefox/i)) {
-      // extra-special homepage case (you should never see this), prevent out-of-view SWF load failure WITH high performance AND flashblock AND SWF in a placed element
+      // extra-special homepage case (you should never see this), prevent out-of-addView SWF load failure WITH high performance AND flashblock AND SWF in a placed element
       soundManager.useHighPerformance = false;
     }
 

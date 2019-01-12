@@ -153,14 +153,24 @@ router.put('/maj/removeLike/:id', function(req, res) {
 // addViews
 
 router.put('/maj/views/:id', function(req, res) {
-    database.Musique.update({id: req.params.id}, req.body, function(err, status) {
+    database.Musique.update({id: req.params.id}, {$inc:{nbEcoute : 1}}, function(err, status) {
         if (err) {
             res.send(err);
         }
-        res.json({message : 'MAJ réussite'});
+        res.json(status);
     });
 });
 
+// removeViews
+
+router.put('/maj/removeViews/:id', function(req, res) {
+    database.Musique.update({id: req.params.id}, {$inc:{nbEcoute : -1}}, function(err, status) {
+        if (err) {
+            res.send(err);
+        }
+        res.json(status);
+    });
+});
 
 // ========== DELETE ==========
 
