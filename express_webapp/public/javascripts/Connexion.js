@@ -34,7 +34,27 @@ Connexion.prototype.requestPost = function (url, values, callback) {
     };
 
     xhttp.open("POST", url, true);
-    //xhttp.setRequestHeader("Content-type", "application/json");
+    xhttp.setRequestHeader("Content-type", "application/json");
+    xhttp.setRequestHeader("Access-Control-Allow-Origin", "*");
+    xhttp.send(values);
+};
+
+/**
+ * Will process a get request to the URL and applied the callback at the end of the request
+ * @param url {string} - target of the request
+ * @param values {JSON} - value as JSON format which be send to the server
+ * @param callback {function} - function which be used at the end of the request
+ */
+Connexion.prototype.requestPut = function (url, values, callback) {
+    let xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            callback(this.responseText);
+        }
+    };
+
+    xhttp.open("PUT", url, true);
+    xhttp.setRequestHeader("Content-type", "application/json");
     xhttp.setRequestHeader("Access-Control-Allow-Origin", "*");
     xhttp.send(values);
 };
@@ -107,7 +127,7 @@ Connexion.prototype.getMusicByYear = function (year, callback) {
  * @param callback {function} - function which be call after the request
  */
 Connexion.prototype.addLike = function (idMusic, callback) {
-    this.requestPost("http://localhost:3000/music/maj/like/" + idMusic, JSON.parse("{id: idMusic}"), callback);
+    this.requestPut("http://localhost:3000/music/maj/like/" + idMusic, null, callback);
 };
 
 /**
@@ -116,7 +136,7 @@ Connexion.prototype.addLike = function (idMusic, callback) {
  * @param callback {function} - function which be call after the request
  */
 Connexion.prototype.addNumberOfShare = function (idMusic, callback) {
-    this.requestPost("http://localhost:3000/music/maj/share/" + idMusic, JSON.parse("{id: idMusic}"), callback);
+    this.requestPut("http://localhost:3000/music/maj/share/" + idMusic, null, callback);
 };
 
 

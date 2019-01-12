@@ -118,7 +118,7 @@ router.post('/add', function(req,res){
 // ========== PUT ==========
 
 router.put('/maj/:id', function(req, res) {
-    database.Musique.update({id: req.params.id}, req.body, function(err, music) {
+    database.Musique.update({id: req.params.id}, req.body, function(err, status) {
         if (err) {
             res.send(err);
         }
@@ -129,18 +129,19 @@ router.put('/maj/:id', function(req, res) {
 // addLike
 
 router.put('/maj/like/:id', function(req, res) {
-    database.Musique.update({id: req.params.id}, req.body, function(err, music) {
+    database.Musique.update({id: req.params.id}, {$inc:{nbLike : 1}}, function(err, status) {
         if (err) {
             res.send(err);
         }
-        res.json({message : 'MAJ réussite'});
+        res.json(status);
     });
+
 });
 
 // addViews
 
 router.put('/maj/views/:id', function(req, res) {
-    database.Musique.update({id: req.params.id}, req.body, function(err, music) {
+    database.Musique.update({id: req.params.id}, req.body, function(err, status) {
         if (err) {
             res.send(err);
         }
