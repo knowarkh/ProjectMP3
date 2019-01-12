@@ -29,7 +29,7 @@ router.get('/find/id/:id', function(req,res){
         if (err) {
             res.send(err);
         }
-        res.json(music);
+        res.json(music[0]);
     });
 });
 

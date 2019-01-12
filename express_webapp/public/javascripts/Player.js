@@ -1,26 +1,24 @@
 /**
  * Class will do every music based actions
  */
-class Player {
+function Player() {
     //let soundManager;
 
-    constructor() {
-        this.currentTime = 0;
-        this.volume = 50;
-        this.repeatMode = false;
-        this.playlist = new Playlist();
-        this.currentUser = undefined;
-        this.sound = null;
+    this.currentTime = 0;
+    this.volume = 50;
+    this.repeatMode = false;
+    this.playlist = new Playlist();
+    this.currentUser = undefined;
+    this.sound = null;
+    this.idMusicToLoad = Connexion.getIdMusicParam();
 
-        this.setListener();
-    }
 
     /** Private functions */
 
     /**
      * Will colorize to the current point of playing
      */
-    colorWaveToCurrentPos() {
+    this.colorWaveToCurrentPos = function() {
         let hasBeenHoverBack = false;
         let waveform = document.querySelectorAll(".audioplayer .waveform .sprectrumContainer");
         let barPosition = Math.ceil(this.sound.position / this.sound.duration * waveform[0].childElementCount);
@@ -52,14 +50,14 @@ class Player {
                     bar_up.classList.add("hover-back");
                 }
         }
-    }
+    };
 
 
     /**
      * Will colorize to the current point of playing of the hovered point
      * @param pos {int} number of the bar hovered
      */
-    colorWaveToHoverPos(pos) {
+    this.colorWaveToHoverPos= function(pos) {
         let waveform = document.querySelectorAll(".audioplayer .waveform .sprectrumContainer");
         let barPosition;
         if (this.sound == null) {
@@ -72,43 +70,69 @@ class Player {
                 waveform[0].children[position].classList.add("hover-front");
                 waveform[1].children[position].classList.add("hover-front");
             }
-        } else { //TODO trouver la raison de ce bug >.<
+        } else {
             for (let position = pos; position <= barPosition; position++) {
                 waveform[0].children[position].classList.add("hover-back");
                 waveform[1].children[position].classList.add("hover-back");
             }
         }
 
-    }
+    };
 
     /**
-     * Will remove the class "played" of all bars of the waveform
+     * Will remove the class "played" and "hover" of all bars of the waveform
      */
-    clearColorWave() {
+    this.clearColorWave= function() {
         for (let elem of document.querySelectorAll(".audioplayer .bar-up ,.audioplayer .bar-down")) {
             elem.classList.remove("played");
             elem.classList.remove("hover-front");
             elem.classList.remove("hover-back");
         }
-    }
+    };
 
-    clearColorHoverWave() {
+    /**
+     * Will remove the class "hover" of all bars of the waveform
+     */
+    this.clearColorHoverWave= function() {
         for (let elem of document.querySelectorAll(".audioplayer .bar-up.hover-front, .audioplayer .bar-up.hover-back , .audioplayer .bar-down.hover-front, .audioplayer .bar-down.hover-back")) {
             elem.classList.remove("hover-front");
             elem.classList.remove("hover-back");
         }
-    }
+    };
+
+    /**
+     * Will remove the class "spectrumHoverTime" and clear the time
+     */
+    this.clearHoverTime = function(){
+        let currentTime = document.querySelector(".audioplayer .en-cours");
+        currentTime.classList.remove("spectrumHoverTime");
+        currentTime.innerText = miliSecondsToReadableTime(this.sound.position);
+    };
+
+
+    /**
+     * Show the current time of the music according to the hovered position of the spectrum and add class "spectrumHoverTime"
+     * @param position
+     */
+    this.drawHoverTime = function(position){
+        let currentTime = document.querySelector(".audioplayer .en-cours");
+        if(!currentTime.classList.contains("spectrumHoverTime")){
+            currentTime.classList.add("spectrumHoverTime");
+            currentTime.innerText = secondsToReadableTime(position);
+        }
+    };
+
 
     /**
      * Will draw the waveform at this position
      */
-    drawSpectrum() {
+    this.drawSpectrum= function() {
         this.clearColorWave();
 
         if(this.sound != null){
-            let barPositionPercentil = this.sound.position / this.sound.duration;
+            let barPositionPercentile = this.sound.position / this.sound.duration;
 
-            createWaveForm(this.playlist.getCurrentMusic().listPoints, barPositionPercentil);
+            createWaveForm(this.playlist.getCurrentMusic().listPoints, barPositionPercentile);
         }else{
             createWaveForm(this.playlist.getCurrentMusic().listPoints);
         }
@@ -120,50 +144,57 @@ class Player {
             }.bind(this));
             elem.addEventListener("mouseover", function (target) {
                 this.colorWaveToHoverPos(Number(target.target.attributes.data_position.value));
+                this.drawHoverTime(Number(target.target.attributes.data_position.value))
             }.bind(this));
-            elem.addEventListener("mouseout", this.clearColorHoverWave.bind(this));
+            elem.addEventListener("mouseout", function(){
+                this.clearColorHoverWave();
+                this.clearHoverTime();
+            }.bind(this));
         }
-    }
+    };
 
     /**
      * Will draw current time of the current music each second
      */
-    drawMusicTime() {
+    this.drawMusicTime= function() {
         if (this.sound != null) {
-            document.querySelector(".audioplayer .en-cours").innerHTML = miliSecondsToReadableTime(this.sound.position);
+
+            let currentTime = document.querySelector(".audioplayer .en-cours");
+            if(!currentTime.classList.contains("spectrumHoverTime"))
+                currentTime.innerText = miliSecondsToReadableTime(this.sound.position);
 
             this.colorWaveToCurrentPos();
         }
-    }
+    };
 
     /**
      * Draw all information about the music, called when the music is loaded
      */
-    drawMusicData() {
+    this.drawMusicData= function() {
         let currentMusic = this.playlist.getCurrentMusic();
         if (currentMusic != null) {
             document.querySelector(".audioplayer .visuel").style.background = "url(" + currentMusic.coverPath + ")";
-            document.querySelector(".audioplayer .artiste").innerHTML = currentMusic.artistName;
-            document.querySelector(".audioplayer .titre").innerHTML = currentMusic.title;
-            document.querySelector(".audioplayer .total").innerHTML = secondsToReadableTime(currentMusic.duration);
-            document.querySelector(".audioplayer .nb-lectures").innerHTML = currentMusic.numberView;
-            document.querySelector(".audioplayer .nb-commentaires").innerHTML = currentMusic.numberComment;
-            document.querySelector(".audioplayer .like").innerHTML = currentMusic.numberLike;
+            document.querySelector(".audioplayer .artiste").innerText = currentMusic.artistName;
+            document.querySelector(".audioplayer .titre").innerText = currentMusic.title;
+            document.querySelector(".audioplayer .total").innerText = secondsToReadableTime(currentMusic.duration);
+            document.querySelector(".audioplayer .nb-lectures").innerText = currentMusic.numberView;
+            document.querySelector(".audioplayer .nb-commentaires").innerText = currentMusic.numberComment;
+            document.querySelector(".audioplayer .like").innerText = currentMusic.numberLike;
         }
-    }
+    };
 
     /**
      * Call functions of "first" draw when a new music is loaded
      */
-    repaint() {
+    this.repaint = function() {
         this.drawSpectrum();
         this.drawMusicData();
-    }
+    };
 
     /**
      * Set all listeners of each actions
      */
-    setListener() {
+    this.setListener= function() {
         document.querySelector(".audioplayer .prev").addEventListener("click", function () {
             this.playlist.previous();
 
@@ -193,7 +224,77 @@ class Player {
         document.querySelector(".audioplayer .controls .volume input[type=range].volume-input-range").addEventListener("input", this.targetVolume.bind(this));
 
         window.addEventListener("resize", this.drawSpectrum.bind(this));
+    };
+
+    /**
+     * Will show the pop-up volume
+     */
+    this.volumeMouseOver = function () {
+        document.querySelector(".audioplayer .controls .volume").classList.add('is-active');
+    };
+
+    /**
+     * Will hide the pop-up volume
+     */
+    this.volumeMouseOut = function () {
+        document.querySelector(".audioplayer .controls .volume").classList.remove('is-active');
+    };
+
+    /**
+     * Modify the value of the volume bar and the volume of the music
+     * @param e {event}
+     */
+    this.targetVolume = function (e) {
+        //The target should be the volume bar
+        let min = e.target.min,
+            max = e.target.max,
+            val = e.target.value;
+
+        let value = (val - min) * 100 / (max - min);
+        e.target.style.backgroundSize = value + '% 100%';
+
+        if(this.sound != null){
+            this.setVolume(value);
+        }
+    };
+
+
+    /**
+     * Add a music and if this is the first, draw information about this music
+     * @param {Music} music
+     */
+    this.addMusic = function (music) {
+        let firstMusic = this.playlist.getCurrentMusic() == null;
+
+        this.playlist.addMusic(music);
+        if (firstMusic) {
+            let currentMusic = this.playlist.getCurrentMusic();
+            this.sound = soundManager.createSound({
+                id: currentMusic['title'] + "-" + currentMusic['artistName'], // Id arbitraire : piste0, piste1, etc.
+                url: currentMusic['musicPath'],
+                whileplaying: this.drawMusicTime.bind(this),
+                volume: this.volume,
+                onfinish: this.next.bind(this)
+            });
+            this.sound.play();
+            this.sound.pause();
+            this.repaint();
+        }
+    };
+
+    /** Finish the "construction" of the manager */
+    this.setListener();
+    //Use to apply the right color to the background of the input
+    let evt = new Event("input");
+    document.querySelector(".audioplayer .controls .volume input[type=range].volume-input-range").dispatchEvent(evt);
+
+    //Check if a musicId exist, if is do, load and add the music to the playlist
+    if(this.idMusicToLoad !== undefined && this.idMusicToLoad != null){
+        Connexion.getMusicById(this.idMusicToLoad,function(music){
+            this.addMusic(new Music(JSON.parse(music)));
+        }.bind(this));
     }
+
 }
 
 /**
@@ -204,6 +305,19 @@ Player.prototype.setVolume = function (newVolume) {
     this.volume = newVolume;
     if (this.sound !== null) {
         this.sound.setVolume(newVolume);
+
+        let volume = document.querySelector(".audioplayer .controls .volume .volume_button");
+        if (newVolume === 0) {
+            if (volume.classList.contains('volume-on')) {
+                volume.classList.remove('volume-on');
+                volume.classList.add('volume-off');
+            }
+        }else{
+            if (volume.classList.contains('volume-off')) {
+                volume.classList.remove('volume-off');
+                volume.classList.add('volume-on');
+            }
+        }
     }
 };
 
@@ -267,7 +381,7 @@ Player.prototype.like = function () {
     Connexion.addLike(this.playlist.getCurrentMusic().id, console.log);
 
     let likeNumber = document.querySelector(".audioplayer .like");
-    likeNumber.innerHTML = Number(likeNumber.innerHTML) + 1;
+    likeNumber.innerText = Number(likeNumber.innerText) + 1;
 };
 
 /**
@@ -314,32 +428,6 @@ Player.prototype.share = function () {
 };
 
 /**
- * Will show the pop-up volume
- */
-Player.prototype.volumeMouseOver = function () {
-    document.querySelector(".audioplayer .controls .volume").classList.add('is-active');
-};
-
-/**
- * Will hide the pop-up volume
- */
-Player.prototype.volumeMouseOut = function () {
-    document.querySelector(".audioplayer .controls .volume").classList.remove('is-active');
-};
-
-/**
- * Will hide the pop-up volume
- * @param e event
- */
-Player.prototype.targetVolume = function (e) {
-    var min = e.target.min,
-        max = e.target.max,
-        val = e.target.value;
-
-    e.target.style.backgroundSize = (val - min) * 100 / (max - min) + '% 100%';
-};
-
-/**
  * Set the new position of the music and change the CSS of the waveform's bars
  * @param newPosition {int} the position of the cursor when it's click
  */
@@ -354,28 +442,6 @@ Player.prototype.goTo = function (newPosition) {
     }
 };
 
-/**
- * Add a music and if this is the first, draw information about this music
- * @param {Music} music
- */
-Player.prototype.addMusic = function (music) {
-    let firstMusic = this.playlist.getCurrentMusic() == null;
-
-    this.playlist.addMusic(music);
-    if (firstMusic) {
-        let currentMusic = this.playlist.getCurrentMusic();
-        this.sound = soundManager.createSound({
-            id: currentMusic['title'] + "-" + currentMusic['artistName'], // Id arbitraire : piste0, piste1, etc.
-            url: currentMusic['musicPath'],
-            whileplaying: this.drawMusicTime.bind(this),
-            volume: this.volume,
-            onfinish: this.next.bind(this)
-        });
-        this.sound.play();
-        this.sound.pause();
-        this.repaint();
-    }
-};
 
 /**
  * Toggle the sound or not
