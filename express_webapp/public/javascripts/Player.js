@@ -214,44 +214,22 @@ function Player(idMusicToLoad = null) {
 
         window.addEventListener("resize", this.drawSpectrum.bind(this));
 
-
-        document.querySelector(".audioplayer .prev").addEventListener("click", function () {
-            this.playlist.previous();
-
-            if (this.sound != null) {
-                this.sound.stop();
-                this.sound.unload();
-                this.sound = null;
-            }
-
-            this.repaint();
-            this.play_pause();
-        }.bind(this));
+        document.querySelector(".audioplayer .prev").addEventListener("click", this.previous.bind(this));
         document.querySelector(".audioplayer .next").addEventListener("click", this.next.bind(this));
-
         document.querySelector(".audioplayer .play-pause").addEventListener("click", this.play_pause.bind(this));
-
         document.querySelector(".audioplayer .like").addEventListener("click", this.like.bind(this));
-
         document.querySelector(".audioplayer .share").addEventListener("click", this.share.bind(this));
-
         document.querySelector(".audioplayer .controls .volume input[type=range].volume-input-range").addEventListener("input", this.targetVolume.bind(this));
 
         //Applied a different listener in case of mobile version
         if (window.mobileAndTabletCheck() || detectCompactSize()) {
             document.querySelector(".audioplayer .controls .volume .volume_button").addEventListener("click", this.volumeMouseOverCompact.bind(this));
-
             document.querySelector(".audioplayer .controls .volume .volume_button").addEventListener("click", this.volumeMouseOutCompact.bind(this));
-
         } else {
-
             document.querySelector(".audioplayer .controls .volume .volume_button").addEventListener("click", this.mute.bind(this));
-
             document.querySelector(".audioplayer .controls .volume").addEventListener("mouseover", this.volumeMouseOver.bind(this));
-
             document.querySelector(".audioplayer .controls .volume").addEventListener("mouseout", this.volumeMouseOut.bind(this));
         }
-
     };
 
     /**
@@ -264,7 +242,7 @@ function Player(idMusicToLoad = null) {
     /**
      * Will show the pop-up volume on compact/mobile version
      */
-    this.volumeMouseOverCompact = function(){
+    this.volumeMouseOverCompact = function () {
         let volumeButton = document.querySelector(".audioplayer .controls .volume");
 
         if (!volumeButton.classList.contains("volume-timed")) {
@@ -287,7 +265,7 @@ function Player(idMusicToLoad = null) {
     /**
      * Will hide the pop-up volume on conpact/mobile version
      */
-    this.volumeMouseOutCompact = function(){
+    this.volumeMouseOutCompact = function () {
         let volumeButton = document.querySelector(".audioplayer .controls .volume");
 
         if (volumeButton.classList.contains("volume-timed")) {
@@ -539,7 +517,7 @@ Player.prototype.mute = function () {
 };
 
 /**
- * Override the Playlist to add the SoundManager's functions
+ * Override the Playlist function to add the SoundManager's functions
  */
 Player.prototype.next = function () {
     this.playlist.next();
@@ -554,7 +532,25 @@ Player.prototype.next = function () {
     this.repaint();
 };
 
+/**
+ * Override the Playlist function to add the SoundManager's functions
+ */
+Player.prototype.previous = function () {
+    this.playlist.previous();
 
+    if (this.sound != null) {
+        this.sound.stop();
+        this.sound.unload();
+        this.sound = null;
+    }
+
+    this.repaint();
+    this.play_pause();
+};
+
+/**
+ * Will add 1 to the number of view of the music if the local cookie allow it
+ */
 Player.prototype.addView = function () {
     let currentMusic = this.playlist.getCurrentMusic();
 
