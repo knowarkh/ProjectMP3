@@ -296,6 +296,11 @@ function Player(idMusicToLoad = null) {
             this.sound.play();
             this.sound.pause();
             this.repaint();
+        }else{
+            //Other case, add the visibility of the "previous" and "next" buttons and put the "volume" button at the right place
+            document.querySelector(".audioplayer .controls .prev").style.visibility = "visible";
+            document.querySelector(".audioplayer .controls .next").style.visibility = "visible";
+            document.querySelector(".audioplayer .controls .volume").style.marginLeft = "0px";
         }
     };
 

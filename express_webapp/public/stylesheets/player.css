@@ -178,6 +178,8 @@ body {
     background-position: center;
     width: 25px;
     height: 25px;
+    visibility: hidden;
+
 }
 
 .audioplayer .controls .next {
@@ -187,6 +189,7 @@ body {
     background-position: center;
     width: 25px;
     height: 25px;
+    visibility: hidden;
 }
 
 /* ========= VOLUME ========= */
@@ -214,6 +217,7 @@ body {
 }
 .audioplayer .controls .volume {
     position: relative;
+    margin-left: -39px;
 }
 
 .audioplayer .controls .volume .volume_slider {
