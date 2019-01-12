@@ -138,6 +138,18 @@ router.put('/maj/like/:id', function(req, res) {
 
 });
 
+// removeLike
+
+router.put('/maj/removeLike/:id', function(req, res) {
+    database.Musique.update({id: req.params.id}, {$inc:{nbLike : -1}}, function(err, status) {
+        if (err) {
+            res.send(err);
+        }
+        res.json(status);
+    });
+
+});
+
 // addViews
 
 router.put('/maj/views/:id', function(req, res) {

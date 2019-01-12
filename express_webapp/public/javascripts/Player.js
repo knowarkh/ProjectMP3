@@ -388,13 +388,28 @@ Player.prototype.play_pause = function () {
 
 /**
  * Will add a like to the database and add 1 to the number of like show
+ * If a like button already been pressed, remove the like
  */
 Player.prototype.like = function () {
-    //TODO faire une vraie réponse
-    Connexion.addLike(this.playlist.getCurrentMusic().id, console.log);
+    let currentMusic = this.playlist.getCurrentMusic();
 
-    let likeNumber = document.querySelector(".audioplayer .like");
-    likeNumber.innerText = Number(likeNumber.innerText) + 1;
+    if(getCookie("song-"+currentMusic.id+"-alreadyLike") === ""){
+
+        Connexion.addLike(currentMusic.id, console.log);
+
+        let likeNumber = document.querySelector(".audioplayer .like");
+        likeNumber.innerText = Number(likeNumber.innerText) + 1;
+        currentMusic.numberLike++;
+
+        setCookie("song-"+currentMusic.id+"-alreadyLike","true",99);
+    }else{
+        Connexion.removeLike(currentMusic.id, console.log);
+
+        let likeNumber = document.querySelector(".audioplayer .like");
+        likeNumber.innerText = Number(likeNumber.innerText) - 1;
+        currentMusic.numberLike--;
+
+        setCookie("song-"+currentMusic.id+"-alreadyLike","",99);    }
 };
 
 /**

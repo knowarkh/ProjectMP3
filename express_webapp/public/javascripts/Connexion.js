@@ -131,6 +131,15 @@ Connexion.prototype.addLike = function (idMusic, callback) {
 };
 
 /**
+ * Will remove a like to the music with the given id and execute the callback
+ * @param idMusic {int} - Id of the current targeted
+ * @param callback {function} - function which be call after the request
+ */
+Connexion.prototype.removeLike = function (idMusic, callback) {
+    this.requestPut("http://localhost:3000/music/maj/removeLike/" + idMusic, null, callback);
+};
+
+/**
  * Will add 1 to the number of share of the music with the given id and execute the callback
  * @param idMusic {int} - Id of the current targeted
  * @param callback {function} - function which be call after the request
