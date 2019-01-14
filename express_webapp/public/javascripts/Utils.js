@@ -21,7 +21,7 @@ PlayerUtils.prototype.secondsToReadableTime = function(duree){
  * @returns {string} - Text version of the time
  */
 PlayerUtils.prototype.milliSecondsToReadableTime = function(duree){
-  return this.secondsToReadableTime(Math.floor(duree/1000));
+  return this.secondsToReadableTime(Math.ceil(duree/1000));
 };
 
 /**
