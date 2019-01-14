@@ -136,6 +136,7 @@ function Player(idMusicToLoad = null) {
             currentTime.classList.add("spectrumHoverTime");
             currentTime.innerText = PlayerUtils.secondsToReadableTime(position);
         }
+        //TODO bug sur le temps
     };
 
 
