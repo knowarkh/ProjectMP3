@@ -122,7 +122,7 @@ function Player(idMusicToLoad = null) {
     this.clearHoverTime = function () {
         let currentTime = document.querySelector(".audioplayer .en-cours");
         currentTime.classList.remove("spectrumHoverTime");
-        currentTime.innerText = miliSecondsToReadableTime(this.sound.position);
+        currentTime.innerText = PlayerUtils.milliSecondsToReadableTime(this.sound.position);
     };
 
 
@@ -134,7 +134,7 @@ function Player(idMusicToLoad = null) {
         let currentTime = document.querySelector(".audioplayer .en-cours");
         if (!currentTime.classList.contains("spectrumHoverTime")) {
             currentTime.classList.add("spectrumHoverTime");
-            currentTime.innerText = secondsToReadableTime(position);
+            currentTime.innerText = PlayerUtils.secondsToReadableTime(position);
         }
     };
 
@@ -177,7 +177,7 @@ function Player(idMusicToLoad = null) {
 
             let currentTime = document.querySelector(".audioplayer .en-cours");
             if (!currentTime.classList.contains("spectrumHoverTime"))
-                currentTime.innerText = miliSecondsToReadableTime(this.sound.position);
+                currentTime.innerText = PlayerUtils.milliSecondsToReadableTime(this.sound.position);
 
             this.colorWaveToCurrentPos();
         }
@@ -192,7 +192,7 @@ function Player(idMusicToLoad = null) {
             document.querySelector(".audioplayer .visuel").style.background = "url(" + currentMusic.coverPath + ")";
             document.querySelector(".audioplayer .artiste").innerText = currentMusic.artistName;
             document.querySelector(".audioplayer .titre").innerText = currentMusic.title;
-            document.querySelector(".audioplayer .total").innerText = secondsToReadableTime(currentMusic.duration);
+            document.querySelector(".audioplayer .total").innerText = PlayerUtils.secondsToReadableTime(currentMusic.duration);
             document.querySelector(".audioplayer .nb-lectures").innerText = currentMusic.numberView;
             document.querySelector(".audioplayer .nb-commentaires").innerText = currentMusic.numberComment;
             document.querySelector(".audioplayer .like").innerText = currentMusic.numberLike;
@@ -222,7 +222,7 @@ function Player(idMusicToLoad = null) {
         document.querySelector(".audioplayer .controls .volume input[type=range].volume-input-range").addEventListener("input", this.targetVolume.bind(this));
 
         //Applied a different listener in case of mobile version
-        if (window.mobileAndTabletCheck() || detectCompactSize()) {
+        if (window.mobileAndTabletCheck() || PlayerUtils.detectCompactSize()) {
             document.querySelector(".audioplayer .controls .volume .volume_button").addEventListener("click", this.volumeMouseOverCompact.bind(this));
             document.querySelector(".audioplayer .controls .volume .volume_button").addEventListener("click", this.volumeMouseOutCompact.bind(this));
         } else {
@@ -418,14 +418,14 @@ Player.prototype.play_pause = function () {
 Player.prototype.like = function () {
     let currentMusic = this.playlist.getCurrentMusic();
 
-    if (getCookie("song-" + currentMusic.id + "-alreadyLike") === "") {
+    if (PlayerUtils.getCookie("song-" + currentMusic.id + "-alreadyLike") === "") {
         Connexion.addLike(currentMusic.id, console.log);
 
         let likeNumber = document.querySelector(".audioplayer .like");
         likeNumber.innerText = Number(likeNumber.innerText) + 1;
         currentMusic.numberLike++;
 
-        setCookie("song-" + currentMusic.id + "-alreadyLike", "true", 99);
+        PlayerUtils.setCookie("song-" + currentMusic.id + "-alreadyLike", "true", 99);
     } else {
         Connexion.removeLike(currentMusic.id, console.log);
 
@@ -433,7 +433,7 @@ Player.prototype.like = function () {
         likeNumber.innerText = Number(likeNumber.innerText) - 1;
         currentMusic.numberLike--;
 
-        setCookie("song-" + currentMusic.id + "-alreadyLike", "", 99);
+        PlayerUtils.setCookie("song-" + currentMusic.id + "-alreadyLike", "", 99);
     }
 };
 
@@ -554,13 +554,13 @@ Player.prototype.previous = function () {
 Player.prototype.addView = function () {
     let currentMusic = this.playlist.getCurrentMusic();
 
-    if (getCookie("song-" + currentMusic.id + "-alreadyView") === "") {
+    if (PlayerUtils.getCookie("song-" + currentMusic.id + "-alreadyView") === "") {
         Connexion.addNumberOfView(currentMusic.id, console.log);
 
         let numberView = document.querySelector(".audioplayer .nb-lectures");
         numberView.innerText = Number(numberView.innerText) + 1;
         currentMusic.numberView++;
 
-        setCookie("song-" + currentMusic.id + "-alreadyView", "true", 1);
+        PlayerUtils.setCookie("song-" + currentMusic.id + "-alreadyView", "true", 1);
     }
 };

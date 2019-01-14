@@ -131,7 +131,7 @@ Connexion.prototype.getMusicByYear = function (year, callback) {
  * @returns {number}
  */
 Connexion.prototype.getIdMusicParam = function(){
-    let param = Number(getParameterByName("idMusic", window.location));
+    let param = Number(PlayerUtils.getParameterByName("idMusic", window.location));
     param = !isNaN(param)? param : null;
     return param;
 };
