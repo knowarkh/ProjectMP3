@@ -418,8 +418,10 @@ Player.prototype.play_pause = function () {
 Player.prototype.like = function () {
     let currentMusic = this.playlist.getCurrentMusic();
 
+    //TODO like - Check si déja liké.
     if (PlayerUtils.getCookie("song-" + currentMusic.id + "-alreadyLike") === "") {
         Connexion.addLike(currentMusic.id, console.log);
+        document.querySelector(".audioplayer .like").classList.add("ilikeit");
 
         let likeNumber = document.querySelector(".audioplayer .like");
         likeNumber.innerText = Number(likeNumber.innerText) + 1;
@@ -428,6 +430,7 @@ Player.prototype.like = function () {
         PlayerUtils.setCookie("song-" + currentMusic.id + "-alreadyLike", "true", 99);
     } else {
         Connexion.removeLike(currentMusic.id, console.log);
+        document.querySelector(".audioplayer .like").classList.remove("ilikeit");
 
         let likeNumber = document.querySelector(".audioplayer .like");
         likeNumber.innerText = Number(likeNumber.innerText) - 1;
