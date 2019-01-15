@@ -153,7 +153,7 @@ Connexion.prototype.getPlaylistByName = function(name, callback){
  * @param callback {function} - function which be call after the request
  */
 Connexion.prototype.addLike = function (idMusic, callback) {
-    this.requestPut("http://localhost:3000/music/maj/like/" + idMusic, null, callback);
+    this.requestPut("http://localhost:3000/music/maj/music/like/" + idMusic, null, callback);
 };
 
 /**
@@ -162,7 +162,7 @@ Connexion.prototype.addLike = function (idMusic, callback) {
  * @param callback {function} - function which be call after the request
  */
 Connexion.prototype.removeLike = function (idMusic, callback) {
-    this.requestPut("http://localhost:3000/music/maj/removeLike/" + idMusic, null, callback);
+    this.requestPut("http://localhost:3000/music/maj/music/removeLike/" + idMusic, null, callback);
 };
 
 /**
@@ -171,7 +171,7 @@ Connexion.prototype.removeLike = function (idMusic, callback) {
  * @param callback {function} - function which be call after the request
  */
 Connexion.prototype.addNumberOfView = function (idMusic, callback) {
-    this.requestPut("http://localhost:3000/music/maj/views/" + idMusic, null, callback);
+    this.requestPut("http://localhost:3000/music/maj/music/views/" + idMusic, null, callback);
 };
 
 /**
@@ -180,7 +180,7 @@ Connexion.prototype.addNumberOfView = function (idMusic, callback) {
  * @param callback {function} - function which be call after the request
  */
 Connexion.prototype.addNumberOfShare = function (idMusic, callback) {
-    this.requestPut("http://localhost:3000/music/maj/share/" + idMusic, null, callback);
+    this.requestPut("http://localhost:3000/music/maj/music/share/" + idMusic, null, callback);
 };
 
 /**

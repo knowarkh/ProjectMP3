@@ -13,8 +13,6 @@ function Player(idMusicToLoad = null) {
         this.sound = null;
         this.idMusicToLoad = idMusicToLoad;
 
-        /** Finish the "construction" of the manager */
-        this.setListener();
         //Use to apply the right color to the background of the input
         let evt = new Event("input");
         document.querySelector(".audioplayer .controls .volume input[type=range].volume-input-range").dispatchEvent(evt);
@@ -23,8 +21,13 @@ function Player(idMusicToLoad = null) {
         if (this.idMusicToLoad !== undefined && this.idMusicToLoad != null) {
             Connexion.getMusicById(this.idMusicToLoad, function (music) {
                 this.addMusic(new Music(JSON.parse(music)));
+
+                this.checkCookies();
             }.bind(this));
+
+
         }
+        this.setListener();
 
     }.bind(this);
 
@@ -333,7 +336,10 @@ function Player(idMusicToLoad = null) {
         }
     };
 
-
+    /**
+     * Go search into the database to get all music of the wanted playlist and erase the older playlist/music in play
+     * @param idPlaylistToAdd {int} - id of the playlist into the database
+     */
     this.addPlaylist = function(idPlaylistToAdd){
 
         Connexion.getPlaylistById(idPlaylistToAdd,function(newPlaylist){
@@ -347,6 +353,17 @@ function Player(idMusicToLoad = null) {
 
         }.bind(this));
 
+    };
+
+    /**
+     * Check all the cookie and apply the correct modification to the player
+     */
+    this.checkCookies = function(){
+        let currentMusic = this.playlist.getCurrentMusic();
+
+        if(PlayerUtils.getCookie("song-" + currentMusic.id + "-alreadyLike") !== ""){
+            document.querySelector(".audioplayer .like").classList.add("ilikeit");
+        }
     };
 
     constructor();
@@ -460,6 +477,8 @@ Player.prototype.like = function () {
         PlayerUtils.setCookie("song-" + currentMusic.id + "-alreadyLike", "", 99);
     }
 };
+
+
 
 /**
  * Will add a comment to the database, the current screen and add 1 for the number of comments
