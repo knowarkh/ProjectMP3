@@ -211,6 +211,7 @@ function createWaveForm(dotsList, percentilePlayed = 0) {
      * @returns the transformed value or null if the type ins't both "primary" or "reflect"
      */
     function getCorrectHeight(type, value) {
+        value = value === 0 ? 1 : value;
         value = (value * spectre.clientHeight) / maxSizeBar;
         if (type === "primary") {
             return value * 2 / 3;

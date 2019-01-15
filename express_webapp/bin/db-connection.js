@@ -29,6 +29,14 @@ var musicSchema = mongoose.Schema({
     nbComment: Number
 });
 
+var playlistSchema = mongoose.Schema({
+    id : {type : Number, required : true},
+    name :  {type: String, required: true},
+    listIdMusic : { type : [Number], required : true}
+});
+
 var Musique = mongoose.model('Music', musicSchema);
 
-module.exports.Musique = Musique;
+var Playlist = mongoose.model('Playlist' ,playlistSchema);
+
+module.exports.database = {'Musique': Musique, 'Playlist' : Playlist};

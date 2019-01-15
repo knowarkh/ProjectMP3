@@ -75,6 +75,8 @@ function Player(idMusicToLoad = null) {
      */
     this.colorWaveToHoverPos = function (pos) {
         let waveform = document.querySelectorAll(".audioplayer .waveform .sprectrumContainer");
+        let waveformUp = waveform[0];
+        let waveformDown = waveform[1];
         let barPosition;
         if (this.sound == null) {
             barPosition = 0;
@@ -83,13 +85,13 @@ function Player(idMusicToLoad = null) {
         }
         if (barPosition <= pos) {
             for (let position = barPosition + 1; position <= pos; position++) {
-                waveform[0].children[position].classList.add("hover-front");
-                waveform[1].children[position].classList.add("hover-front");
+                waveformUp.children[position].classList.add("hover-front");
+                waveformDown.children[position].classList.add("hover-front");
             }
         } else {
             for (let position = pos; position <= barPosition; position++) {
-                waveform[0].children[position].classList.add("hover-back");
-                waveform[1].children[position].classList.add("hover-back");
+                waveformUp.children[position].classList.add("hover-back");
+                waveformDown.children[position].classList.add("hover-back");
             }
         }
 
@@ -132,10 +134,14 @@ function Player(idMusicToLoad = null) {
      */
     this.drawHoverTime = function (position) {
         let currentTime = document.querySelector(".audioplayer .en-cours");
+        let nbBarSpectrum = document.querySelectorAll(".audioplayer .waveform .sprectrumContainer")[0].childElementCount -1;
+
         if (!currentTime.classList.contains("spectrumHoverTime")) {
+            let time = position / nbBarSpectrum * this.sound.duration;
+            currentTime.innerText = PlayerUtils.milliSecondsToReadableTime(time);
             currentTime.classList.add("spectrumHoverTime");
-            currentTime.innerText = PlayerUtils.secondsToReadableTime(position);
         }
+        //TODO bug sur le temps
     };
 
 
@@ -327,6 +333,21 @@ function Player(idMusicToLoad = null) {
         }
     };
 
+
+    this.addPlaylist = function(idPlaylistToAdd){
+
+        Connexion.getPlaylistById(idPlaylistToAdd,function(newPlaylist){
+            if(newPlaylist !== "[]"){
+                this.playlist = new Playlist();
+                newPlaylist = JSON.parse(newPlaylist);
+                for (let position in newPlaylist){
+                    this.addMusic(new Music(newPlaylist[position]));
+                }
+            }
+
+        }.bind(this));
+
+    };
 
     constructor();
 
@@ -567,3 +588,5 @@ Player.prototype.addView = function () {
         PlayerUtils.setCookie("song-" + currentMusic.id + "-alreadyView", "true", 1);
     }
 };
+
+

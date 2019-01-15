@@ -69,7 +69,7 @@ Connexion.prototype.requestPut = function (url, values, callback) {
  * @param callback {function} - function which be called at the end of the request
  */
 Connexion.prototype.getAllMusics = function (callback) {
-    this.requestGet("http://localhost:3000/music/find", callback);
+    this.requestGet("http://localhost:3000/music/findAll", callback);
 };
 
 /**
@@ -78,7 +78,7 @@ Connexion.prototype.getAllMusics = function (callback) {
  * @param callback {function} - function which be called at the end of the request
  */
 Connexion.prototype.getMusicById = function (id, callback) {
-    this.requestGet("http://localhost:3000/music/find/id/" + id, callback);
+    this.requestGet("http://localhost:3000/music/find/music/id/" + id, callback);
 };
 
 /**
@@ -87,7 +87,7 @@ Connexion.prototype.getMusicById = function (id, callback) {
  * @param callback {function} - function which be called at the end of the request
  */
 Connexion.prototype.getMusicByTitle = function (title, callback) {
-    this.requestGet("http://localhost:3000/music/find/title/" + title, callback);
+    this.requestGet("http://localhost:3000/music/find/music/title/" + title, callback);
 };
 
 /**
@@ -96,7 +96,7 @@ Connexion.prototype.getMusicByTitle = function (title, callback) {
  * @param callback {function} - function which be called at the end of the request
  */
 Connexion.prototype.getMusicByArtist = function (artistName, callback) {
-    this.requestGet("http://localhost:3000/music/find/artiste/" + artistName, callback);
+    this.requestGet("http://localhost:3000/music/find/music/artiste/" + artistName, callback);
 };
 
 /**
@@ -105,7 +105,7 @@ Connexion.prototype.getMusicByArtist = function (artistName, callback) {
  * @param callback {function} - function which be called at the end of the request
  */
 Connexion.prototype.getMusicByAlbum = function (albumName, callback) {
-    this.requestGet("http://localhost:3000/music/find/album/" + albumName, callback);
+    this.requestGet("http://localhost:3000/music/find/music/album/" + albumName, callback);
 };
 
 /**
@@ -114,7 +114,7 @@ Connexion.prototype.getMusicByAlbum = function (albumName, callback) {
  * @param callback {function} - function which be called at the end of the request
  */
 Connexion.prototype.getMusicByGenre = function (genreName, callback) {
-    this.requestGet("http://localhost:3000/music/find/genre/" + genreName, callback);
+    this.requestGet("http://localhost:3000/music/find/music/genre/" + genreName, callback);
 };
 
 /**
@@ -123,19 +123,26 @@ Connexion.prototype.getMusicByGenre = function (genreName, callback) {
  * @param callback {function} - function which be called at the end of the request
  */
 Connexion.prototype.getMusicByYear = function (year, callback) {
-    this.requestGet("http://localhost:3000/music/find/annee/" + year, callback);
+    this.requestGet("http://localhost:3000/music/find/music/annee/" + year, callback);
 };
 
 /**
- * Allow to get the id (if exist) of the music put in the url
- * @returns {number}
+ * Return the playlist which match with the given id
+ * @param id {int} - Value of the id
+ * @param callback {function} - function which be called at the end of the request
  */
-Connexion.prototype.getIdMusicParam = function(){
-    let param = Number(PlayerUtils.getParameterByName("idMusic", window.location));
-    param = !isNaN(param)? param : null;
-    return param;
+Connexion.prototype.getPlaylistById = function(id, callback){
+    this.requestGet("http://localhost:3000/music/find/playlist/id/" + id, callback);
 };
 
+/**
+ * Return the playlist which match with the given name
+ * @param name {string} - Value of the id
+ * @param callback {function} - function which be called at the end of the request
+ */
+Connexion.prototype.getPlaylistByName = function(name, callback){
+    this.requestGet("http://localhost:3000/music/find/playlist/name/" + name, callback);
+};
 
 
 /**             Request PUT part             */
@@ -176,5 +183,38 @@ Connexion.prototype.addNumberOfShare = function (idMusic, callback) {
     this.requestPut("http://localhost:3000/music/maj/share/" + idMusic, null, callback);
 };
 
+/**
+ * Will add the given idMusic to the given playlist into the database
+ * @param idPlaylist {int} - id of the wanted playlist
+ * @param idMusic {int} - id of the music wanted to add
+ * @param callback {function} - function which be call after the request
+ */
+Connexion.prototype.addMusicToPlaylist = function (idPlaylist, idMusic, callback){
+    this.requestPut("http://localhost:3000/music/maj/playlist/add/" + idPlaylist, JSON.parse('{"idMusic" : '+idMusic+'}'), callback);
+
+};
+
+/**
+ * Will remove the given idMusic to the given playlist into the database
+ * @param idPlaylist {int} - id of the wanted playlist
+ * @param idMusic {int} - id of the music wanted to add
+ * @param callback {function} - function which be call after the request
+ */
+Connexion.prototype.removeMusicToPlaylist = function (idPlaylist, idMusic, callback){
+    this.requestPut("http://localhost:3000/music/maj/playlist/remove/" + idPlaylist, JSON.parse('{"idMusic" : '+idMusic+'}'), callback);
+
+};
+
+/**         Common part          */
+
+/**
+ * Allow to get the id (if exist) of the music put in the url
+ * @returns {number}
+ */
+Connexion.prototype.getIdMusicParam = function(){
+    let param = Number(PlayerUtils.getParameterByName("idMusic", window.location));
+    param = !isNaN(param)? param : null;
+    return param;
+};
 
 var Connexion = new Connexion();
