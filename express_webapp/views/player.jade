@@ -49,18 +49,22 @@ html
               input.share-input-text(type="text", value="", readonly='readonly')
             .modal-footer
               a Copier
-      //- .playlist
-      //-   .tracklist
-      //-     ol.list
-      //-       li.element
-      //-         .image
-      //-         .titre Natural
-      //-         .stats 17k
-      //-       li.element
-      //-         .image
-      //-         .titre Bird
-      //-         .stats 23.5k
-      //-     a.more(href='') Afficher 15 titres
+      .playlist
+        .tracklist
+          ol.list
+            li.element
+              img.image(src="/images/Imagine_Dragons/Zero.jpg")
+              p.numero 1
+              p.titre Natural
+              p.artiste Imagine Dragons
+              p.stats 17k
+            li.element
+              img.image(src="/images/The_Chainsmokers_&_Coldplay/Something_Just_Like_This.jpg")
+              p.numero 2
+              p.titre Bird
+              p.artiste Imagine Dragons
+              p.stats 23.5k
+          a.more(href='') Afficher 15 titres
 
     script(src="/javascripts/script/soundmanager2.js")
     script(src='/javascripts/Utils.js')

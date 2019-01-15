@@ -525,7 +525,55 @@ body {
 /* ========= LIST ========= */
 
 .audioplayer .playlist .tracklist .list{
-    
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.audioplayer .playlist .tracklist .list .element {
+    cursor: pointer;
+    border-bottom: 1px solid #f2f2f2;
+    display: flex;
+}
+
+.audioplayer .playlist .tracklist .list .element:hover {
+    background-color: #f2f2f2;
+}
+
+
+.audioplayer .playlist .tracklist .list .element .image {
+    margin: 9px 9px;
+    background-size: contain !important;
+    width: 20px;
+    height: 20px;
+}
+
+.audioplayer .playlist .tracklist .list .element .numero {
+    margin-right: 5px;
+}
+
+.audioplayer .playlist .tracklist .list .element .titre {
+    margin-right: 5px;
+}
+
+.audioplayer .playlist .tracklist .list .element .artiste {
+    flex: 1;
+    color: var(--secondary);
+    margin-right: 5px;
+}
+
+.audioplayer .playlist .tracklist .list .element .artiste::before {
+    content: '-';
+    padding-right: 5px;
+}
+
+.audioplayer .playlist .tracklist .list .element .stats {
+    margin: 8px 12px;
+}
+
+.audioplayer .playlist .tracklist .list .element .stats::before {
+    content: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48dGl0bGU+c3RhdHNfcGxheSA0PC90aXRsZT48cGF0aCBkPSJNNCAxM1YzbDkgNS05IDV6IiBmaWxsPSIjOTk5IiBmaWxsLXJ1bGU9ImV2ZW5vZGQiLz48L3N2Zz4=);
+    vertical-align: top;
 }
 
 
