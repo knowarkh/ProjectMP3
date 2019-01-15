@@ -107,3 +107,60 @@ Playlist.prototype.previous = function(){
     this.currentMusic = this.musicList[this.currentPosition];
   }
 };
+
+Playlist.prototype.generatePlaylistBlock = function(){
+
+    if(this.musicList.length > 1){
+        let playlistBlock = document.createElement("div");
+        playlistBlock.classList.add("playlist");
+
+        let trackListBlock = document.createElement("div");
+        trackListBlock.classList.add("tracklist");
+
+        let musicList = document.createElement("ol");
+        musicList.classList.add("list");
+
+        for(let index = 0; index < this.musicList.length; index ++){
+            let musicBlock = document.createElement("li");
+            musicBlock.classList.add("element");
+
+            let coverBlock = document.createElement("img");
+            coverBlock.classList.add("image");//TODO attendre Héloïse
+            coverBlock.setAttribute("src",this.musicList[index].coverPath);
+
+            let titleBlock = document.createElement("p");
+            titleBlock.classList.add("titre");
+            titleBlock.innerText = index+1 + " - " + this.musicList[index].title;
+
+            let artistBlock = document.createElement("p");
+            artistBlock.classList.add("artiste");
+            artistBlock.innerText = this.musicList[index].artistName;
+
+            let statsBlock = document.createElement("p");
+            statsBlock.classList.add("stats");
+            statsBlock.innerText = this.musicList[index].numberView;
+
+            musicBlock.appendChild(coverBlock);
+            musicBlock.appendChild(titleBlock);
+            musicBlock.appendChild(statsBlock);
+
+            musicList.appendChild(musicBlock);
+        }
+
+        if(this.musicList.length > 5){
+            let moreBlock = document.createElement("a");
+            moreBlock.classList.add("more");
+            moreBlock.setAttribute("href","");
+
+            musicList.appendChild(moreBlock);
+        }
+
+        playlistBlock.appendChild(trackListBlock);
+        trackListBlock.appendChild(musicList);
+
+
+        document.querySelector(".audioplayer .player").appendChild(playlistBlock);
+
+    }
+
+};
