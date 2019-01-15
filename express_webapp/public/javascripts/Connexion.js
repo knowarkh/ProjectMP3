@@ -194,6 +194,12 @@ Connexion.prototype.addMusicToPlaylist = function (idPlaylist, idMusic, callback
 
 };
 
+/**
+ * Will remove the given idMusic to the given playlist into the database
+ * @param idPlaylist {int} - id of the wanted playlist
+ * @param idMusic {int} - id of the music wanted to add
+ * @param callback {function} - function which be call after the request
+ */
 Connexion.prototype.removeMusicToPlaylist = function (idPlaylist, idMusic, callback){
     this.requestPut("http://localhost:3000/music/maj/playlist/remove/" + idPlaylist, JSON.parse('{"idMusic" : '+idMusic+'}'), callback);
 

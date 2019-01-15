@@ -334,6 +334,21 @@ function Player(idMusicToLoad = null) {
     };
 
 
+    this.addPlaylist = function(idPlaylistToAdd){
+
+        Connexion.getPlaylistById(idPlaylistToAdd,function(newPlaylist){
+            if(newPlaylist !== "[]"){
+                this.playlist = new Playlist();
+                newPlaylist = JSON.parse(newPlaylist);
+                for (let position in newPlaylist){
+                    this.addMusic(new Music(newPlaylist[position]));
+                }
+            }
+
+        }.bind(this));
+
+    };
+
     constructor();
 
 }
@@ -570,3 +585,5 @@ Player.prototype.addView = function () {
         PlayerUtils.setCookie("song-" + currentMusic.id + "-alreadyView", "true", 1);
     }
 };
+
+
