@@ -343,7 +343,7 @@ function Player(idMusicToLoad = null) {
     this.addPlaylist = function(idPlaylistToAdd){
 
         Connexion.getPlaylistById(idPlaylistToAdd,function(newPlaylist){
-            if(newPlaylist !== "[]"){
+            if(newPlaylist !== null && newPlaylist !== "[]"){
                 this.playlist = new Playlist();
                 newPlaylist = JSON.parse(newPlaylist);
                 for (let position in newPlaylist){
