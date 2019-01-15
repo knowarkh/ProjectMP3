@@ -98,17 +98,22 @@ router.get('/find/playlist/id/:id', function(req, res){
         if(err){
             res.send(err);
         }
-        let result = [];
+        let result = {};
         let listIdMusicToSearch = playlist.listIdMusic;
+        let numberOfQueryFinished = 0;
 
         for(let i = 0; i < listIdMusicToSearch.length; i++){
-
             database.database.Musique.findOne({id:listIdMusicToSearch[i]},function(err,music){
-                result.push(music);
-                if(i === listIdMusicToSearch.length - 1){
+                result[listIdMusicToSearch[i]] = music;
+
+                //Use a counter to know if all query is finished
+                numberOfQueryFinished++;
+
+                if(numberOfQueryFinished === listIdMusicToSearch.length){
                     res.json(result);
                 }
             });
+
         }
     });
 });
