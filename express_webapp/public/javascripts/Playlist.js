@@ -56,6 +56,7 @@ Playlist.prototype.addMusic = function(music){
   if(this.currentMusic == null)
     this.currentMusic = music;
   this.musicList.push(music);
+  this.generatePlaylistBlock();
 };
 
 /**
@@ -111,8 +112,14 @@ Playlist.prototype.previous = function(){
 Playlist.prototype.generatePlaylistBlock = function(){
 
     if(this.musicList.length > 1){
-        let playlistBlock = document.createElement("div");
-        playlistBlock.classList.add("playlist");
+        let playlistBlock;
+        if(document.querySelector(".audioplayer .playerlist") !== null){
+            playlistBlock = document.querySelector(".audioplayer .playerlist");
+            playlistBlock.innerHTML = "";
+        }else{
+            playlistBlock = document.createElement("div");
+            playlistBlock.classList.add("playlist");
+        }
 
         let trackListBlock = document.createElement("div");
         trackListBlock.classList.add("tracklist");
@@ -125,12 +132,16 @@ Playlist.prototype.generatePlaylistBlock = function(){
             musicBlock.classList.add("element");
 
             let coverBlock = document.createElement("img");
-            coverBlock.classList.add("image");//TODO attendre Héloïse
+            coverBlock.classList.add("image");
             coverBlock.setAttribute("src",this.musicList[index].coverPath);
+
+            let numberBlock = document.createElement("p");
+            numberBlock.classList.add("numero");
+            numberBlock.innerText = index+1;
 
             let titleBlock = document.createElement("p");
             titleBlock.classList.add("titre");
-            titleBlock.innerText = index+1 + " - " + this.musicList[index].title;
+            titleBlock.innerText = this.musicList[index].title;
 
             let artistBlock = document.createElement("p");
             artistBlock.classList.add("artiste");
@@ -141,7 +152,9 @@ Playlist.prototype.generatePlaylistBlock = function(){
             statsBlock.innerText = this.musicList[index].numberView;
 
             musicBlock.appendChild(coverBlock);
+            musicBlock.appendChild(numberBlock)
             musicBlock.appendChild(titleBlock);
+            musicBlock.appendChild(artistBlock)
             musicBlock.appendChild(statsBlock);
 
             musicList.appendChild(musicBlock);
@@ -151,7 +164,7 @@ Playlist.prototype.generatePlaylistBlock = function(){
             let moreBlock = document.createElement("a");
             moreBlock.classList.add("more");
             moreBlock.setAttribute("href","");
-
+            moreBlock.innerText("Afficher " + this.musicList.length-1 + " titres");
             musicList.appendChild(moreBlock);
         }
 
@@ -159,7 +172,7 @@ Playlist.prototype.generatePlaylistBlock = function(){
         trackListBlock.appendChild(musicList);
 
 
-        document.querySelector(".audioplayer .player").appendChild(playlistBlock);
+        document.querySelector(".audioplayer").appendChild(playlistBlock);
 
     }
 
