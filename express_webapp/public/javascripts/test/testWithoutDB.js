@@ -1,5 +1,4 @@
 
-let manager = new Player();
 
 let music0 = new Music(JSON.parse({
     "id" : 0,

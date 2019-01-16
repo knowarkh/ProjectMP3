@@ -6,7 +6,7 @@ function Player() {
 
     let constructor = function () {
         this.currentTime = 0;
-        this.volume = 50;
+        this.volume = Number(document.querySelector(".audioplayer .controls .volume input[type=range].volume-input-range ").value);
         this.repeatMode = false;
         this.playlist = new Playlist();
         this.currentUser = undefined;
@@ -37,8 +37,15 @@ function Player() {
     /**
      * Create a SoundManagerSound with the currentMusic in the playlist and reload the page
      */
-    let loadMusic = function(){
+    this.loadMusic = function(){
+        if(this.sound !== null){
+            this.sound.stop();
+            this.sound.unload();
+
+        }
+
         let currentMusic = this.playlist.getCurrentMusic();
+
         this.sound = soundManager.createSound({
             id: currentMusic['title'] + "-" + currentMusic['artistName'], // Id arbitraire : piste0, piste1, etc.
             url: currentMusic['musicPath'],
@@ -46,6 +53,12 @@ function Player() {
             volume: this.volume,
             onfinish: this.next.bind(this)
         });
+        
+        if(soundManager.getSoundById(currentMusic.title+"-"+currentMusic.artistName) !== undefined){
+            this.sound.setVolume(this.volume);
+
+        }
+
         this.sound.play();
         this.sound.pause();
         this.repaint();
@@ -164,7 +177,6 @@ function Player() {
             currentTime.innerText = PlayerUtils.milliSecondsToReadableTime(time);
             currentTime.classList.add("spectrumHoverTime");
         }
-        //TODO bug sur le temps
     };
 
 
@@ -267,7 +279,7 @@ function Player() {
      */
     this.setPosition = function(position){
         this.playlist.setCurrentPosition(position);
-        loadMusic();
+        this.loadMusic();
     };
 
     /**
@@ -321,7 +333,7 @@ function Player() {
      * Modify the value of the volume bar and the volume of the music
      * @param e {event}
      */
-    this.targetVolume = function (e) {
+    this.targetVolume = function (e) { //TODO mettre le bon volume au chargement de la musique
         //The target should be the volume bar
         let min = e.target.min,
             max = e.target.max,
@@ -349,7 +361,7 @@ function Player() {
 
             this.playlist.addMusic(music);
             if (firstMusic) {
-                loadMusic();
+                this.loadMusic();
             } else {
                 //Other case, add the visibility of the "previous" and "next" buttons and put the "volume" button at the right place
                 document.querySelector(".audioplayer .controls .prev").style.visibility = "visible";
@@ -371,7 +383,7 @@ function Player() {
 
         this.playlist.addMusic(music);
         if (firstMusic) {
-            loadMusic();
+            this.loadMusic();
         } else {
             //Other case, add the visibility of the "previous" and "next" buttons and put the "volume" button at the right place
             document.querySelector(".audioplayer .controls .prev").style.visibility = "visible";
@@ -578,13 +590,8 @@ Player.prototype.play_pause = function () {
             this.clearColorWave();
 
             //Create a new Sound
-            this.sound = soundManager.createSound({
-                id: currentMusic['title'] + "-" + currentMusic['artistName'], // Id arbitraire : piste0, piste1, etc.
-                url: currentMusic['musicPath'],
-                whileplaying: this.drawMusicTime.bind(this),
-                volume: this.volume,
-                onfinish: this.next.bind(this)
-            });
+            this.loadMusic();
+
             this.sound.play();
             playButton.classList.remove("play");
             playButton.classList.add("pause");
@@ -667,4 +674,4 @@ Player.prototype.addView = function () {
     }
 };
 
-
+var manager = new Player();

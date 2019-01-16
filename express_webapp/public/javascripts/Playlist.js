@@ -152,10 +152,14 @@ Playlist.prototype.generatePlaylistBlock = function(){
             statsBlock.innerText = this.musicList[index].numberView;
 
             musicBlock.appendChild(coverBlock);
-            musicBlock.appendChild(numberBlock)
+            musicBlock.appendChild(numberBlock);
             musicBlock.appendChild(titleBlock);
-            musicBlock.appendChild(artistBlock)
+            musicBlock.appendChild(artistBlock);
             musicBlock.appendChild(statsBlock);
+            musicBlock.addEventListener("click",function(){
+                manager.setPosition(index);
+                manager.play_pause();
+            });
 
             musicList.appendChild(musicBlock);
         }
