@@ -12,9 +12,6 @@ function Player() {
         this.currentUser = undefined;
         this.sound = null;
 
-        //Use to apply the right color to the background of the input
-        let evt = new Event("input");
-        document.querySelector(".audioplayer .controls .volume input[type=range].volume-input-range").dispatchEvent(evt);
 
         //Check if some information is present into the url
         let idMusicToLoad = Connexion.getIdMusicParam();
@@ -29,6 +26,11 @@ function Player() {
         }
 
         this.setListener();
+
+        //Use to apply the right color to the background of the input
+        let evt = new Event("input");
+        document.querySelector(".audioplayer .controls .volume input[type=range].volume-input-range").dispatchEvent(evt);
+
 
     }.bind(this);
 
@@ -265,9 +267,7 @@ function Player() {
      */
     this.setPosition = function(position){
         this.playlist.setCurrentPosition(position);
-
         loadMusic();
-
     };
 
     /**
