@@ -1,7 +1,7 @@
 
 
 
-let manager = new Player(Connexion.getIdMusicParam());
+let manager = new Player();
 /*Connexion.getMusicById(1,function(music){
     manager.addMusic(new Music(JSON.parse(music)));
 });

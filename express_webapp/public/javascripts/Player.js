@@ -1,7 +1,7 @@
 /**
  * Class will do every music based actions
  */
-function Player(idMusicToLoad = null) {
+function Player() {
     //let soundManager;
 
     let constructor = function () {
@@ -11,24 +11,42 @@ function Player(idMusicToLoad = null) {
         this.playlist = new Playlist();
         this.currentUser = undefined;
         this.sound = null;
-        this.idMusicToLoad = idMusicToLoad;
 
         //Use to apply the right color to the background of the input
         let evt = new Event("input");
         document.querySelector(".audioplayer .controls .volume input[type=range].volume-input-range").dispatchEvent(evt);
 
-        //Check if a musicId exist, if is do, load and add the music to the playlist
-        if (this.idMusicToLoad !== undefined && this.idMusicToLoad != null) {
-            Connexion.getMusicById(this.idMusicToLoad, function (music) {
-                this.addMusic(new Music(JSON.parse(music)));
+        //Check if some information is present into the url
+        let idMusicToLoad = Connexion.getIdMusicParam();
+        let idPlaylistToLoad = Connexion.getIdPlaylistParam();
 
-                this.checkCookies();
-            }.bind(this));
-
-
+        if(idPlaylistToLoad !== 0 && idMusicToLoad !== 0){
+            this.addPlaylist(idPlaylistToLoad, idMusicToLoad);
+        }else if(idPlaylistToLoad !== 0){
+            this.addPlaylist(idPlaylistToLoad);
+        }else if(idMusicToLoad !== 0){
+            this.addMusicById(idMusicToLoad);
         }
+
         this.setListener();
 
+    }.bind(this);
+
+    /**
+     * Create a SoundManagerSound with the currentMusic in the playlist and reload the page
+     */
+    let loadMusic = function(){
+        let currentMusic = this.playlist.getCurrentMusic();
+        this.sound = soundManager.createSound({
+            id: currentMusic['title'] + "-" + currentMusic['artistName'], // Id arbitraire : piste0, piste1, etc.
+            url: currentMusic['musicPath'],
+            whileplaying: this.drawMusicTime.bind(this),
+            volume: this.volume,
+            onfinish: this.next.bind(this)
+        });
+        this.sound.play();
+        this.sound.pause();
+        this.repaint();
     }.bind(this);
 
 
@@ -242,6 +260,17 @@ function Player(idMusicToLoad = null) {
     };
 
     /**
+     * Set the position of the playlist to the given position and reload the right music
+     * @param position
+     */
+    this.setPosition = function(position){
+        this.playlist.setCurrentPosition(position);
+
+        loadMusic();
+
+    };
+
+    /**
      * Will show the pop-up volume
      */
     this.volumeMouseOver = function () {
@@ -309,25 +338,40 @@ function Player(idMusicToLoad = null) {
     /** Public functions */
 
     /**
-     * Add a music and if this is the first, draw information about this music
-     * @param {Music} music
+     * Go check in the database if a music match with the id, add the music and if this is the first, draw information about this music
+     * @param idMusic {int} - id of the wanted music
      */
-    this.addMusic = function (music) {
+    this.addMusicById = function (idMusic) {
         let firstMusic = this.playlist.getCurrentMusic() == null;
+
+        Connexion.getMusicById(idMusic, function(music){
+            music = new Music(JSON.parse(music));
+
+            this.playlist.addMusic(music);
+            if (firstMusic) {
+                loadMusic();
+            } else {
+                //Other case, add the visibility of the "previous" and "next" buttons and put the "volume" button at the right place
+                document.querySelector(".audioplayer .controls .prev").style.visibility = "visible";
+                document.querySelector(".audioplayer .controls .next").style.visibility = "visible";
+                document.querySelector(".audioplayer .controls .volume").style.marginLeft = "0px";
+            }
+
+            this.checkCookies();
+
+        }.bind(this));
+    };
+
+    /**
+     * Will add a Music object to the player and playlist
+     * @param music {String} - JSON string which represent a Music Object to add
+     */
+    this.addMusicObject = function(music){
+        let firstMusic = this.playlist.getCurrentMusic() === null;
 
         this.playlist.addMusic(music);
         if (firstMusic) {
-            let currentMusic = this.playlist.getCurrentMusic();
-            this.sound = soundManager.createSound({
-                id: currentMusic['title'] + "-" + currentMusic['artistName'], // Id arbitraire : piste0, piste1, etc.
-                url: currentMusic['musicPath'],
-                whileplaying: this.drawMusicTime.bind(this),
-                volume: this.volume,
-                onfinish: this.next.bind(this)
-            });
-            this.sound.play();
-            this.sound.pause();
-            this.repaint();
+            loadMusic();
         } else {
             //Other case, add the visibility of the "previous" and "next" buttons and put the "volume" button at the right place
             document.querySelector(".audioplayer .controls .prev").style.visibility = "visible";
@@ -336,19 +380,30 @@ function Player(idMusicToLoad = null) {
         }
     };
 
+
     /**
      * Go search into the database to get all music of the wanted playlist and erase the older playlist/music in play
      * @param idPlaylistToAdd {int} - id of the playlist into the database
+     * @param currentMusicId {int} - if present set the current Music to this one
      */
-    this.addPlaylist = function(idPlaylistToAdd){
+    this.addPlaylist = function(idPlaylistToAdd, currentMusicId = null){
 
         Connexion.getPlaylistById(idPlaylistToAdd,function(newPlaylist){
             if(newPlaylist !== null && newPlaylist !== "[]"){
                 this.playlist = new Playlist();
                 newPlaylist = JSON.parse(newPlaylist);
+                //Position = the given position of the
                 for (let position in newPlaylist){
-                    this.addMusic(new Music(newPlaylist[position]));
+                    let music = new Music(newPlaylist[position]);
+                    this.addMusicObject(music);
+
+                    if(music.id === currentMusicId){
+                        this.setPosition(Number(position) - 1);
+                    }
+
                 }
+
+                this.checkCookies();
             }
 
         }.bind(this));
@@ -394,60 +449,27 @@ Player.prototype.setVolume = function (newVolume) {
     }
 };
 
+
+
 /**
- *  Use to set on play or on pause state the current music, if no current music is null, create it and launch it if
- *  possible
+ * Toggle the sound or not
  */
-Player.prototype.play_pause = function () {
-    let currentMusic = this.playlist.getCurrentMusic();
+Player.prototype.mute = function () {
+    let volume = document.querySelector(".audioplayer .controls .volume .volume_button");
 
-    //If not undefined
-    if (currentMusic != null) {
-        let playButton = document.querySelector(".audioplayer .play-pause");
-
-        //If don't have any current sound in play
-        if (this.sound == null) {
-            //Reset the waveform color in case of a new music
-            this.clearColorWave();
-
-            //Create a new Sound
-            this.sound = soundManager.createSound({
-                id: currentMusic['title'] + "-" + currentMusic['artistName'], // Id arbitraire : piste0, piste1, etc.
-                url: currentMusic['musicPath'],
-                whileplaying: this.drawMusicTime.bind(this),
-                volume: this.volume,
-                onfinish: this.next.bind(this)
-            });
-            this.sound.play();
-            playButton.classList.remove("play");
-            playButton.classList.add("pause");
-        }
-        //If a Sound is already set
-        else {
-            //Add 1 to the value of view if isn't done
-            this.addView();
-
-            //If it loaded and played or paused
-            if (this.sound.playState) {
-                if (this.sound.paused) {
-                    this.sound.resume();
-                    playButton.classList.remove("play");
-                    playButton.classList.add("pause");
-                }//If it's played
-                else {
-                    this.sound.pause();
-                    playButton.classList.remove("pause");
-                    playButton.classList.add("play");
-                }
-            }
-        }
-
-
+    if (volume.classList.contains('volume-on')) {
+        volume.classList.remove('volume-on');
+        volume.classList.add('volume-off');
+        if (this.sound !== null)
+            this.sound.setVolume(0);
     } else {
-        console.error("No music into the playlist !");
+        volume.classList.remove('volume-off');
+        volume.classList.add('volume-on');
+        if (this.sound !== null)
+            this.sound.setVolume(this.volume);
     }
-
 };
+
 
 /**
  * Will add a like to the database and add 1 to the number of like show
@@ -539,24 +561,59 @@ Player.prototype.goTo = function (newPosition) {
     }
 };
 
-
 /**
- * Toggle the sound or not
+ *  Use to set on play or on pause state the current music, if no current music is null, create it and launch it if
+ *  possible
  */
-Player.prototype.mute = function () {
-    let volume = document.querySelector(".audioplayer .controls .volume .volume_button");
+Player.prototype.play_pause = function () {
+    let currentMusic = this.playlist.getCurrentMusic();
 
-    if (volume.classList.contains('volume-on')) {
-        volume.classList.remove('volume-on');
-        volume.classList.add('volume-off');
-        if (this.sound !== null)
-            this.sound.setVolume(0);
+    //If not undefined
+    if (currentMusic != null) {
+        let playButton = document.querySelector(".audioplayer .play-pause");
+
+        //If don't have any current sound in play
+        if (this.sound == null) {
+            //Reset the waveform color in case of a new music
+            this.clearColorWave();
+
+            //Create a new Sound
+            this.sound = soundManager.createSound({
+                id: currentMusic['title'] + "-" + currentMusic['artistName'], // Id arbitraire : piste0, piste1, etc.
+                url: currentMusic['musicPath'],
+                whileplaying: this.drawMusicTime.bind(this),
+                volume: this.volume,
+                onfinish: this.next.bind(this)
+            });
+            this.sound.play();
+            playButton.classList.remove("play");
+            playButton.classList.add("pause");
+        }
+        //If a Sound is already set
+        else {
+            //Add 1 to the value of view if isn't done
+            this.addView();
+
+            //If it loaded and played or paused
+            if (this.sound.playState) {
+                if (this.sound.paused) {
+                    this.sound.resume();
+                    playButton.classList.remove("play");
+                    playButton.classList.add("pause");
+                }//If it's played
+                else {
+                    this.sound.pause();
+                    playButton.classList.remove("pause");
+                    playButton.classList.add("play");
+                }
+            }
+        }
+
+
     } else {
-        volume.classList.remove('volume-off');
-        volume.classList.add('volume-on');
-        if (this.sound !== null)
-            this.sound.setVolume(this.volume);
+        console.error("No music into the playlist !");
     }
+
 };
 
 /**
@@ -590,6 +647,8 @@ Player.prototype.previous = function () {
     this.repaint();
     this.play_pause();
 };
+
+
 
 /**
  * Will add 1 to the number of view of the music if the local cookie allow it

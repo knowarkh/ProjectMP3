@@ -10,25 +10,29 @@ var path = require('path');
 // Find by id
 router.get('/find/id/:id', function(req, res){
     Playlist.findOne({id: req.params.id}, function(err,playlist){
-        if(err){
+        if(err ){
             res.send(err);
-        }
-        let result = {};
-        let listIdMusicToSearch = playlist.listIdMusic;
-        let numberOfQueryFinished = 0;
+        }else if(playlist == null)
+            res.json({"error":"This playlist doesn't exist"});
+        else{
 
-        for(let i = 0; i < listIdMusicToSearch.length; i++){
-            Music.findOne({id:listIdMusicToSearch[i]},function(err,music){
-                result[listIdMusicToSearch[i]] = music;
+            let result = {};
+            let listIdMusicToSearch = playlist.listIdMusic;
+            let numberOfQueryFinished = 0;
 
-                //Use a counter to know if all query is finished
-                numberOfQueryFinished++;
+            for(let i = 0; i < listIdMusicToSearch.length; i++){
+                Music.findOne({id:listIdMusicToSearch[i]},function(err,music){
+                    result[listIdMusicToSearch[i]] = music;
 
-                if(numberOfQueryFinished === listIdMusicToSearch.length){
-                    res.json(result);
-                }
-            });
+                    //Use a counter to know if all query is finished
+                    numberOfQueryFinished++;
 
+                    if(numberOfQueryFinished === listIdMusicToSearch.length){
+                        res.json(result);
+                    }
+                });
+
+            }
         }
     });
 });
