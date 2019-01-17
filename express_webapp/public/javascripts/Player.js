@@ -232,7 +232,9 @@ function Player() {
     this.drawMusicData = function () {
         let currentMusic = this.playlist.getCurrentMusic();
         if (currentMusic != null) {
-            document.querySelector(".audioplayer .visuel").style.background = "url(" + currentMusic.coverPath + ")";
+            let q = " ------------ url(" + currentMusic.coverPath + ")";
+            console.log(q);
+            document.querySelector(".audioplayer .visuel").style.background = "url(\"" + currentMusic.coverPath + "\")";
             document.querySelector(".audioplayer .artiste").innerText = currentMusic.artistName;
             document.querySelector(".audioplayer .titre").innerText = currentMusic.title;
             document.querySelector(".audioplayer .total").innerText = PlayerUtils.secondsToReadableTime(currentMusic.duration);

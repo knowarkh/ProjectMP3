@@ -109,12 +109,12 @@ Playlist.prototype.previous = function(){
   }
 };
 
-Playlist.prototype.generatePlaylistBlock = function(){
+Playlist.prototype.generatePlaylistBlock = function(allMusic = false){
 
     if(this.musicList.length > 1){
         let playlistBlock;
-        if(document.querySelector(".audioplayer .playerlist") !== null){
-            playlistBlock = document.querySelector(".audioplayer .playerlist");
+        if(document.querySelector(".audioplayer .playlist") !== null){
+            playlistBlock = document.querySelector(".audioplayer .playlist");
             playlistBlock.innerHTML = "";
         }else{
             playlistBlock = document.createElement("div");
@@ -127,7 +127,8 @@ Playlist.prototype.generatePlaylistBlock = function(){
         let musicList = document.createElement("ol");
         musicList.classList.add("list");
 
-        for(let index = 0; index < this.musicList.length; index ++){
+        //Check if
+        for(let index = 0;index < this.musicList.length && (index < 5 || allMusic); index ++){
             let musicBlock = document.createElement("li");
             musicBlock.classList.add("element");
 
@@ -163,14 +164,30 @@ Playlist.prototype.generatePlaylistBlock = function(){
 
             musicList.appendChild(musicBlock);
         }
-
         if(this.musicList.length > 5){
             let moreBlock = document.createElement("a");
             moreBlock.classList.add("more");
             moreBlock.setAttribute("href","");
-            moreBlock.innerText("Afficher " + this.musicList.length-1 + " titres");
+
+            if(allMusic){
+                moreBlock.innerText = "Cacher " + (this.musicList.length - 5 ) + " titre(s)";
+
+                moreBlock.addEventListener("click", function(e){
+                    e.preventDefault();
+                    this.generatePlaylistBlock();
+                }.bind(this));
+            }else{
+                moreBlock.innerText = "Afficher les " + this.musicList.length + " titres";
+
+                moreBlock.addEventListener("click", function(e){
+                    e.preventDefault();
+                    this.generatePlaylistBlock(true);
+                }.bind(this));
+            }
+
             musicList.appendChild(moreBlock);
         }
+
 
         playlistBlock.appendChild(trackListBlock);
         trackListBlock.appendChild(musicList);

@@ -92,3 +92,4 @@ window.mobileAndTabletCheck = function() {
 };
 
 var PlayerUtils = new PlayerUtils();
+
