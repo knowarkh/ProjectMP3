@@ -109,6 +109,10 @@ Playlist.prototype.previous = function(){
   }
 };
 
+/**
+ * Will generate the block which contain the music into the playlist
+ * @param allMusic {boolean} - If more than 5 musics in the playlist, put "true" to show all, false by default
+ */
 Playlist.prototype.generatePlaylistBlock = function(allMusic = false){
 
     if(this.musicList.length > 1){
@@ -127,7 +131,7 @@ Playlist.prototype.generatePlaylistBlock = function(allMusic = false){
         let musicList = document.createElement("ol");
         musicList.classList.add("list");
 
-        //Check if
+        //Check if the playlist contains 5 music and if it allow, drawn all musics data
         for(let index = 0;index < this.musicList.length && (index < 5 || allMusic); index ++){
             let musicBlock = document.createElement("li");
             musicBlock.classList.add("element");
@@ -195,6 +199,18 @@ Playlist.prototype.generatePlaylistBlock = function(allMusic = false){
 
         document.querySelector(".audioplayer").appendChild(playlistBlock);
 
+    }
+
+};
+
+/**
+ * Will redrawn the number of views of each music into the playlist
+ */
+Playlist.prototype.repaintPlaylist = function(){
+    let tracklist = document.querySelectorAll(".audioplayer .playlist .tracklist .list li .stats");
+
+    for(let index = 0; index < tracklist.length; index++){
+        tracklist[index].innerText = this.musicList[index].numberView;
     }
 
 };

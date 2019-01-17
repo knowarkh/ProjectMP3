@@ -250,6 +250,7 @@ function Player() {
     this.repaint = function () {
         this.drawSpectrum();
         this.drawMusicData();
+        this.playlist.repaintPlaylist();
     };
 
     /**
@@ -672,9 +673,8 @@ Player.prototype.addView = function () {
     if (PlayerUtils.getCookie("song-" + currentMusic.id + "-alreadyView") === "") {
         Connexion.addNumberOfView(currentMusic.id, console.log);
 
-        let numberView = document.querySelector(".audioplayer .nb-lectures");
-        numberView.innerText = Number(numberView.innerText) + 1;
         currentMusic.numberView++;
+        this.repaint()
 
         PlayerUtils.setCookie("song-" + currentMusic.id + "-alreadyView", "true", 1);
     }
