@@ -116,8 +116,9 @@ router.post('/add', function(req,res){
         if(err) {
             res.send(err);
         }
-        res.send({message : 'Ajout de la Musique réussit !'})
-    });
+        res.send({message : 'Ajout de la musique réussit !'})
+    })
+
 });
 
 

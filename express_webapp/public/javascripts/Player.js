@@ -74,6 +74,7 @@ function Player() {
      */
     this.colorWaveToCurrentPos = function () {
         let hasBeenHoverBack = false;
+
         let waveform = document.querySelectorAll(".audioplayer .waveform .sprectrumContainer");
         let barPosition = Math.ceil(this.sound.position / this.sound.duration * waveform[0].childElementCount);
 
@@ -111,6 +112,7 @@ function Player() {
      * Will colorize to the current point of playing of the hovered point
      * @param pos {int} number of the bar hovered
      */
+
     this.colorWaveToHoverPos = function (pos) {
         let waveform = document.querySelectorAll(".audioplayer .waveform .sprectrumContainer");
         let waveformUp = waveform[0];
@@ -232,8 +234,6 @@ function Player() {
     this.drawMusicData = function () {
         let currentMusic = this.playlist.getCurrentMusic();
         if (currentMusic != null) {
-            let q = " ------------ url(" + currentMusic.coverPath + ")";
-            console.log(q);
             document.querySelector(".audioplayer .visuel").style.background = "url(\"" + currentMusic.coverPath + "\")";
             document.querySelector(".audioplayer .artiste").innerText = currentMusic.artistName;
             document.querySelector(".audioplayer .titre").innerText = currentMusic.title;
@@ -250,6 +250,7 @@ function Player() {
     this.repaint = function () {
         this.drawSpectrum();
         this.drawMusicData();
+        this.checkCookies();
         this.playlist.repaintPlaylist();
     };
 
@@ -415,7 +416,7 @@ function Player() {
                     this.addMusicObject(music);
 
                     if(music.id === currentMusicId){
-                        this.setPosition(Number(position) - 1);
+                        this.setPosition(Number(position));
                     }
 
                 }
@@ -435,6 +436,8 @@ function Player() {
 
         if(PlayerUtils.getCookie("song-" + currentMusic.id + "-alreadyLike") !== ""){
             document.querySelector(".audioplayer .like").classList.add("ilikeit");
+        }else{
+            document.querySelector(".audioplayer .like").classList.remove("ilikeit");
         }
     };
 
@@ -569,6 +572,7 @@ Player.prototype.share = function () {
  */
 Player.prototype.goTo = function (newPosition) {
     if (this.sound != null) {
+
         let percentile = (newPosition / document.querySelector(".audioplayer .waveform .sprectrumContainer").childElementCount);
         let newTime = percentile * this.sound.duration;
         this.currentTime = newTime / 1000;
@@ -576,7 +580,7 @@ Player.prototype.goTo = function (newPosition) {
         this.clearColorWave();
         this.colorWaveToCurrentPos();
         if(this.sound.paused)
-            this.sound.play();
+            this.play_pause();
     }
 };
 
@@ -605,8 +609,6 @@ Player.prototype.play_pause = function () {
         }
         //If a Sound is already set
         else {
-            //Add 1 to the value of view if isn't done
-            this.addView();
 
             //If it loaded and played or paused
             if (this.sound.playState) {
@@ -622,6 +624,9 @@ Player.prototype.play_pause = function () {
                 }
             }
         }
+        //Add 1 to the value of view if isn't done
+        this.addView();
+
 
 
     } else {
