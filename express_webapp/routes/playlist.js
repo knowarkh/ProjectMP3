@@ -20,9 +20,13 @@ router.get('/find/id/:id', function(req, res){
             let listIdMusicToSearch = playlist.listIdMusic;
             let numberOfQueryFinished = 0;
 
+            console.log(" list music id to search -- " +listIdMusicToSearch);
+
             for(let i = 0; i < listIdMusicToSearch.length; i++){
                 Music.findOne({id:listIdMusicToSearch[i]},function(err,music){
-                    result[listIdMusicToSearch[i]] = music;
+                    console.log("-- --  current id to search -- -- "+ listIdMusicToSearch[i]);
+                    console.log("-- -- -- current index of the list -- -- -- " + i);
+                    result[i] = music;
 
                     //Use a counter to know if all query is finished
                     numberOfQueryFinished++;
