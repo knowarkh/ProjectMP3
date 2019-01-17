@@ -45,17 +45,19 @@ function Player() {
         }
 
         let currentMusic = this.playlist.getCurrentMusic();
-
-        this.sound = soundManager.createSound({
-            id: currentMusic['title'] + "-" + currentMusic['artistName'], // Id arbitraire : piste0, piste1, etc.
-            url: currentMusic['musicPath'],
-            whileplaying: this.drawMusicTime.bind(this),
-            volume: this.volume,
-            onfinish: this.next.bind(this)
-        });
         
         if(soundManager.getSoundById(currentMusic.title+"-"+currentMusic.artistName) !== undefined){
+            this.sound = soundManager.getSoundById(currentMusic.title+"-"+currentMusic.artistName);
             this.sound.setVolume(this.volume);
+
+        }else{
+            this.sound = soundManager.createSound({
+                id: currentMusic['title'] + "-" + currentMusic['artistName'], // Id arbitraire : piste0, piste1, etc.
+                url: currentMusic['musicPath'],
+                whileplaying: this.drawMusicTime.bind(this),
+                volume: this.volume,
+                onfinish: this.next.bind(this)
+            });
 
         }
 
@@ -564,12 +566,14 @@ Player.prototype.share = function () {
  */
 Player.prototype.goTo = function (newPosition) {
     if (this.sound != null) {
-        let pourcentil = (newPosition / document.querySelector(".audioplayer .waveform .sprectrumContainer").childElementCount);
-        let newTime = pourcentil * this.sound.duration;
+        let percentile = (newPosition / document.querySelector(".audioplayer .waveform .sprectrumContainer").childElementCount);
+        let newTime = percentile * this.sound.duration;
         this.currentTime = newTime / 1000;
         this.sound.setPosition(newTime);
         this.clearColorWave();
         this.colorWaveToCurrentPos();
+        if(this.sound.paused)
+            this.sound.play();
     }
 };
 
