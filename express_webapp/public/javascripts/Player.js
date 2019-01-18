@@ -577,7 +577,7 @@ Player.prototype.goTo = function (newPosition) {
         this.clearColorWave();
         this.colorWaveToCurrentPos();
         if(this.sound.paused)
-            this.sound.play();
+            this.play_pause();
     }
 };
 
