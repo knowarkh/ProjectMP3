@@ -227,4 +227,5 @@ Connexion.prototype.getIdPlaylistParam = function(){
     return param;
 };
 
+
 var Connexion = new Connexion();

@@ -9,6 +9,10 @@ var indexRouter = require('./routes/index');
 var musicRouter = require('./routes/music');
 var playlistRouter = require('./routes/playlist');
 
+//upload MP3
+var adminRouter = require('./routes/admin');
+var fileUpload = require('express-fileupload');
+
 var app = express();
 
 // addView engine setup
@@ -19,12 +23,15 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(fileUpload());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
+
 app.use('/music', musicRouter);
+app.use('/admin', adminRouter);
 app.use('/playlist', playlistRouter);
 
 // catch 404 and forward to error handler

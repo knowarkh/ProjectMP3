@@ -74,6 +74,7 @@ function Player() {
      */
     this.colorWaveToCurrentPos = function () {
         let hasBeenHoverBack = false;
+
         let waveform = document.querySelectorAll(".audioplayer .waveform .sprectrumContainer");
         let barPosition = Math.ceil(this.sound.position / this.sound.duration * waveform[0].childElementCount);
 
@@ -111,6 +112,7 @@ function Player() {
      * Will colorize to the current point of playing of the hovered point
      * @param pos {int} number of the bar hovered
      */
+
     this.colorWaveToHoverPos = function (pos) {
         let waveform = document.querySelectorAll(".audioplayer .waveform .sprectrumContainer");
         let waveformUp = waveform[0];
@@ -569,6 +571,7 @@ Player.prototype.share = function () {
  */
 Player.prototype.goTo = function (newPosition) {
     if (this.sound != null) {
+
         let percentile = (newPosition / document.querySelector(".audioplayer .waveform .sprectrumContainer").childElementCount);
         let newTime = percentile * this.sound.duration;
         this.currentTime = newTime / 1000;

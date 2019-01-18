@@ -1,0 +1,56 @@
+doctype html
+html(lang='en')
+    head
+        meta(charset='UTF-8')
+        title admin
+        link(rel='stylesheet', type='text/css', href='/stylesheets/pageAdmin.css')
+        //script(type='text/javascript', src='pageAdmin.js')
+    body
+        h1 PAGE ADMINISTRATION
+        img#logo(src='/stylesheets/logoWIP.png', alt='Logo WIP', width='167', height='101')
+        form(ref='uploadForm', method='post', action='/admin', enctype='multipart/form-data')
+            div
+                h2 UPLOAD ZONE
+                #upload
+                    div
+                        span UPLOAD MUSIC
+                        input#mySound(name='foo', type='file')
+                        // <button class="button1" onclick="myFunction()">Upload1</button>
+                    div
+                        span UPLOAD COVER
+                        input#myCover(name='cover' type='file')
+                        // <button class="button1" onclick="myFunction()">Upload2</button>
+            #champs
+                h2 SAISIR LES INFORMATIONS SUIVANTES
+                div
+                    div
+                        label
+                            span TITRE
+                    div
+                        input(type='text', name='titre', value='Titre')
+                div
+                    div
+                        label
+                            span ALBUM
+                    div
+                        input(type='text', name='album', value='Album')
+                div
+                    div
+                        label
+                            span ARTISTE
+                    div
+                        input(type='text', name='artiste', value='Artiste')
+                div
+                    div
+                        label
+                            span GENRE
+                    div
+                        input(type='text', name='genre', value='Genre')
+                div
+                    div
+                        label
+                            span ANNEE
+                    div
+                        input(type='text', name='annee', value='Année')
+                div
+                    input#send(type='submit', value='Envoyer')
