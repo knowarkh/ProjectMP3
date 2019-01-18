@@ -232,8 +232,6 @@ function Player() {
     this.drawMusicData = function () {
         let currentMusic = this.playlist.getCurrentMusic();
         if (currentMusic != null) {
-            let q = " ------------ url(" + currentMusic.coverPath + ")";
-            console.log(q);
             document.querySelector(".audioplayer .visuel").style.background = "url(\"" + currentMusic.coverPath + "\")";
             document.querySelector(".audioplayer .artiste").innerText = currentMusic.artistName;
             document.querySelector(".audioplayer .titre").innerText = currentMusic.title;
@@ -250,6 +248,7 @@ function Player() {
     this.repaint = function () {
         this.drawSpectrum();
         this.drawMusicData();
+        this.checkCookies();
         this.playlist.repaintPlaylist();
     };
 
@@ -435,6 +434,8 @@ function Player() {
 
         if(PlayerUtils.getCookie("song-" + currentMusic.id + "-alreadyLike") !== ""){
             document.querySelector(".audioplayer .like").classList.add("ilikeit");
+        }else{
+            document.querySelector(".audioplayer .like").classList.remove("ilikeit");
         }
     };
 
