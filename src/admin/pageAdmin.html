@@ -3,31 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <title>admin</title>
-    <link rel="stylesheet" type="text/css" href="pageAdmin.css"/>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/pageAdmin.css"/>
     <script type="text/javascript" src="pageAdmin.js"></script>
 </head>
 <body>
 <h1>PAGE ADMINISTRATION</h1>
 
-<div>
-    <h2>UPLOAD ZONE</h2>
-    <div id="upload">
-        <div>
-            <span>UPLOAD COVER</span>
-            <input type="file" id="myCover">
-            <button class="button1" onclick="myFunction()">Test1</button>
-        </div>
-        <div>
-            <span>UPLOAD MUSIC</span>
-            <input type="file" id="mySound">
-            <button class="button1" onclick="myFunction()">Test2</button>
+
+<form name="myForm" method="post" action="/admin">
+    <div>
+        <h2>UPLOAD ZONE</h2>
+        <div id="upload">
+            <div>
+                <span>UPLOAD MUSIC</span>
+                <input name="foo" type="file" id="mySound">
+                <!--<button class="button1" onclick="myFunction()">Upload1</button>-->
+            </div>
+            <div>
+                <span>UPLOAD COVER</span>
+                <input type="file" id="myCover">
+                <!--<button class="button1" onclick="myFunction()">Upload2</button>-->
+            </div>
+
         </div>
     </div>
-</div>
 
-<div id="champs">
-    <h2>SAISIR LES INFORMATIONS SUIVANTES</h2>
-    <form name="myForm" method="POST">
+    <div id="champs">
+        <h2>SAISIR LES INFORMATIONS SUIVANTES</h2>
+
         <div>
             <div>
                 <label><span>TITRE</span></label>
@@ -74,11 +77,11 @@
         </div>
 
         <div>
-            <input id="send" type="button" value="Envoyer" onclick="console.log('Envoi des infos')">
+            <input id="send" type="submit" value="Envoyer">
         </div>
 
-    </form>
-</div>
+    </div>
+</form>
 
 </body>
 </html>

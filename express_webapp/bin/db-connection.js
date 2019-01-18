@@ -2,7 +2,8 @@
 var mongoose = require('mongoose');
 var options = {
     server: {socketOptions: {keepAlive: 300000, connectTimeoutMS: 30000}},
-    replset: {socketOptions: {keepAlive: 300000, connectTimeoutMS: 30000}}
+    replset: {socketOptions: {keepAlive: 300000, connectTimeoutMS: 30000}},
+    useNewUrlParser: true
 };
 var urlmongo = "mongodb://localhost:27017/player";
 mongoose.connect(urlmongo, options);
