@@ -415,7 +415,7 @@ function Player() {
                     this.addMusicObject(music);
 
                     if(music.id === currentMusicId){
-                        this.setPosition(Number(position) - 1);
+                        this.setPosition(Number(position));
                     }
 
                 }
