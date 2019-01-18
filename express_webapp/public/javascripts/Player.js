@@ -52,7 +52,7 @@ function Player() {
 
         }else{
             this.sound = soundManager.createSound({
-                id: currentMusic['title'] + "-" + currentMusic['artistName'], // Id arbitraire : piste0, piste1, etc.
+                id: currentMusic['title'] + "-" + currentMusic['artistName'], // Id arbitraire
                 url: currentMusic['musicPath'],
                 whileplaying: this.drawMusicTime.bind(this),
                 volume: this.volume,
@@ -496,7 +496,6 @@ Player.prototype.mute = function () {
 Player.prototype.like = function () {
     let currentMusic = this.playlist.getCurrentMusic();
 
-    //TODO like - Check si déja liké.
     if (PlayerUtils.getCookie("song-" + currentMusic.id + "-alreadyLike") === "") {
         Connexion.addLike(currentMusic.id, console.log);
         document.querySelector(".audioplayer .like").classList.add("ilikeit");
@@ -578,6 +577,7 @@ Player.prototype.goTo = function (newPosition) {
         this.colorWaveToCurrentPos();
         if(this.sound.paused)
             this.play_pause();
+
     }
 };
 
@@ -676,7 +676,7 @@ Player.prototype.addView = function () {
         Connexion.addNumberOfView(currentMusic.id, console.log);
 
         currentMusic.numberView++;
-        this.repaint()
+        this.repaint();
 
         PlayerUtils.setCookie("song-" + currentMusic.id + "-alreadyView", "true", 1);
     }
