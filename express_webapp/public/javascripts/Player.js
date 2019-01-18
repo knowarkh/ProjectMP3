@@ -606,8 +606,6 @@ Player.prototype.play_pause = function () {
         }
         //If a Sound is already set
         else {
-            //Add 1 to the value of view if isn't done
-            this.addView();
 
             //If it loaded and played or paused
             if (this.sound.playState) {
@@ -623,6 +621,9 @@ Player.prototype.play_pause = function () {
                 }
             }
         }
+        //Add 1 to the value of view if isn't done
+        this.addView();
+
 
 
     } else {
