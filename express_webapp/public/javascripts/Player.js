@@ -162,7 +162,7 @@ function Player() {
     this.clearHoverTime = function () {
         let currentTime = document.querySelector(".audioplayer .en-cours");
         currentTime.classList.remove("spectrumHoverTime");
-        currentTime.innerText = PlayerUtils.milliSecondsToReadableTime(this.sound.position);
+        currentTime.innerText = playerUtils.milliSecondsToReadableTime(this.sound.position);
     };
 
 
@@ -176,7 +176,7 @@ function Player() {
 
         if (!currentTime.classList.contains("spectrumHoverTime")) {
             let time = position / nbBarSpectrum * this.sound.duration;
-            currentTime.innerText = PlayerUtils.milliSecondsToReadableTime(time);
+            currentTime.innerText = playerUtils.milliSecondsToReadableTime(time);
             currentTime.classList.add("spectrumHoverTime");
         }
     };
@@ -220,7 +220,7 @@ function Player() {
 
             let currentTime = document.querySelector(".audioplayer .en-cours");
             if (!currentTime.classList.contains("spectrumHoverTime"))
-                currentTime.innerText = PlayerUtils.milliSecondsToReadableTime(this.sound.position);
+                currentTime.innerText = playerUtils.milliSecondsToReadableTime(this.sound.position);
 
             this.colorWaveToCurrentPos();
         }
@@ -237,7 +237,7 @@ function Player() {
             document.querySelector(".audioplayer .visuel").style.background = "url(\"" + currentMusic.coverPath + "\")";
             document.querySelector(".audioplayer .artiste").innerText = currentMusic.artistName;
             document.querySelector(".audioplayer .titre").innerText = currentMusic.title;
-            document.querySelector(".audioplayer .total").innerText = PlayerUtils.secondsToReadableTime(currentMusic.duration);
+            document.querySelector(".audioplayer .total").innerText = playerUtils.secondsToReadableTime(currentMusic.duration);
             document.querySelector(".audioplayer .nb-lectures").innerText = currentMusic.numberView;
             document.querySelector(".audioplayer .nb-commentaires").innerText = currentMusic.numberComment;
             document.querySelector(".audioplayer .like").innerText = currentMusic.numberLike;
@@ -268,7 +268,7 @@ function Player() {
         document.querySelector(".audioplayer .controls .volume input[type=range].volume-input-range").addEventListener("input", this.targetVolume.bind(this));
 
         //Applied a different listener in case of mobile version
-        if (window.mobileAndTabletCheck() || PlayerUtils.detectCompactSize()) {
+        if (window.mobileAndTabletCheck() || playerUtils.detectCompactSize()) {
             document.querySelector(".audioplayer .controls .volume .volume_button").addEventListener("click", this.volumeMouseOverCompact.bind(this));
             document.querySelector(".audioplayer .controls .volume .volume_button").addEventListener("click", this.volumeMouseOutCompact.bind(this));
         } else {
@@ -409,7 +409,7 @@ function Player() {
             if(newPlaylist !== null && newPlaylist !== "[]"){
                 this.playlist = new Playlist();
                 newPlaylist = JSON.parse(newPlaylist);
-                //Position = the given position of the
+                //Position = the index of music into the playlist
                 for (let position in newPlaylist){
                     let music = new Music(newPlaylist[position]);
                     this.addMusicObject(music);
@@ -433,7 +433,7 @@ function Player() {
     this.checkCookies = function(){
         let currentMusic = this.playlist.getCurrentMusic();
 
-        if(PlayerUtils.getCookie("song-" + currentMusic.id + "-alreadyLike") !== ""){
+        if(playerUtils.getCookie("song-" + currentMusic.id + "-alreadyLike") !== ""){
             document.querySelector(".audioplayer .like").classList.add("ilikeit");
         }
     };
@@ -496,7 +496,7 @@ Player.prototype.like = function () {
     let currentMusic = this.playlist.getCurrentMusic();
 
     //TODO like - Check si déja liké.
-    if (PlayerUtils.getCookie("song-" + currentMusic.id + "-alreadyLike") === "") {
+    if (playerUtils.getCookie("song-" + currentMusic.id + "-alreadyLike") === "") {
         Connexion.addLike(currentMusic.id, console.log);
         document.querySelector(".audioplayer .like").classList.add("ilikeit");
 
@@ -504,7 +504,7 @@ Player.prototype.like = function () {
         likeNumber.innerText = Number(likeNumber.innerText) + 1;
         currentMusic.numberLike++;
 
-        PlayerUtils.setCookie("song-" + currentMusic.id + "-alreadyLike", "true", 99);
+        playerUtils.setCookie("song-" + currentMusic.id + "-alreadyLike", "true", 99);
     } else {
         Connexion.removeLike(currentMusic.id, console.log);
         document.querySelector(".audioplayer .like").classList.remove("ilikeit");
@@ -513,7 +513,7 @@ Player.prototype.like = function () {
         likeNumber.innerText = Number(likeNumber.innerText) - 1;
         currentMusic.numberLike--;
 
-        PlayerUtils.setCookie("song-" + currentMusic.id + "-alreadyLike", "", 99);
+        playerUtils.setCookie("song-" + currentMusic.id + "-alreadyLike", "", 99);
     }
 };
 
@@ -524,10 +524,6 @@ Player.prototype.like = function () {
  */
 Player.prototype.addComment = function () {
     //TODO faire une vraie réponse
-    requestPost("/fasma/addLikeComment", {
-        id: this.playlist.getCurrentMusic().id,
-        comment: "test comment"
-    }, console.log);
     this.drawMusicData();
 };
 
@@ -670,13 +666,13 @@ Player.prototype.previous = function () {
 Player.prototype.addView = function () {
     let currentMusic = this.playlist.getCurrentMusic();
 
-    if (PlayerUtils.getCookie("song-" + currentMusic.id + "-alreadyView") === "") {
+    if (playerUtils.getCookie("song-" + currentMusic.id + "-alreadyView") === "") {
         Connexion.addNumberOfView(currentMusic.id, console.log);
 
         currentMusic.numberView++;
         this.repaint()
 
-        PlayerUtils.setCookie("song-" + currentMusic.id + "-alreadyView", "true", 1);
+        playerUtils.setCookie("song-" + currentMusic.id + "-alreadyView", "true", 1);
     }
 };
 
