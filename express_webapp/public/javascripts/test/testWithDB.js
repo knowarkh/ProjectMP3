@@ -1,7 +1,11 @@
 
 
-let manager = new Player();
 
+/*Connexion.getMusicById(1,function(music){
+    manager.addMusic(new Music(JSON.parse(music)));
+});
+
+/*
 Connexion.getAllMusics(function(musics){
   let res = JSON.parse( musics );
 
@@ -37,3 +41,4 @@ Connexion.getAllMusics(function(musics){
   //   sound.play();
    }
 );
+*/

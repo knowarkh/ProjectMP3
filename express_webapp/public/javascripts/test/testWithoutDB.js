@@ -1,5 +1,4 @@
 
-let manager = new Player();
 
 let music0 = new Music(JSON.parse({
     "id" : 0,
@@ -33,5 +32,5 @@ let music1 = new Music(JSON.parse({
     "nbPartage": 0
 }));
 
-manager.addMusic(music0);
-manager.addMusic(music1);
+manager.addMusicObject(music0);
+manager.addMusicObject(music1);

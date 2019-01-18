@@ -1,7 +1,7 @@
 import os
 import json
 import sys
-import apt
+#import apt
 from pprint import pprint
 
 # Method to get the duration in second of the mp3file
@@ -97,7 +97,7 @@ def install_mandatory_packages ():
 
 # Main function that is launched at the beginning of the script
 def main() :
-    install_mandatory_packages()
+    #install_mandatory_packages()
     filename = sys.argv[1]
     duration = get_duration(filename)
     stick_number = 400

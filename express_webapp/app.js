@@ -7,6 +7,7 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var musicRouter = require('./routes/music');
+var playlistRouter = require('./routes/playlist');
 
 //upload MP3
 var adminRouter = require('./routes/admin');
@@ -14,7 +15,7 @@ var fileUpload = require('express-fileupload');
 
 var app = express();
 
-// view engine setup
+// addView engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
@@ -31,6 +32,7 @@ app.use('/', indexRouter);
 
 app.use('/music', musicRouter);
 app.use('/admin', adminRouter);
+app.use('/playlist', playlistRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

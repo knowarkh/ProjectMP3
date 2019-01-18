@@ -10,7 +10,6 @@ mongoose.connect(urlmongo, options);
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'Erreur lors de la connexion'));
 db.once('open', function () {
-    // console.log("Connexion à la base OK");
 });
 
 var musicSchema = mongoose.Schema({
@@ -30,6 +29,14 @@ var musicSchema = mongoose.Schema({
     nbComment: Number
 });
 
+var playlistSchema = mongoose.Schema({
+    id : {type : Number, required : true},
+    name :  {type: String, required: true},
+    listIdMusic : { type : [Number], required : true}
+});
+
 var Musique = mongoose.model('Music', musicSchema);
 
-module.exports.Musique = Musique;
+var Playlist = mongoose.model('Playlist' ,playlistSchema);
+
+module.exports.database = {'Musique': Musique, 'Playlist' : Playlist};

@@ -1,12 +1,11 @@
 /**
  * Class used to control the playlist and the music
  */
-class Playlist {
-  constructor(){
+function Playlist() {
     this.musicList = [];
     this.currentPosition = 0;
     this.currentMusic = null;
-  }
+
 }
 
 /**
@@ -57,6 +56,7 @@ Playlist.prototype.addMusic = function(music){
   if(this.currentMusic == null)
     this.currentMusic = music;
   this.musicList.push(music);
+  this.generatePlaylistBlock();
 };
 
 /**
@@ -107,4 +107,110 @@ Playlist.prototype.previous = function(){
     this.currentPosition--;
     this.currentMusic = this.musicList[this.currentPosition];
   }
+};
+
+/**
+ * Will generate the block which contain the music into the playlist
+ * @param allMusic {boolean} - If more than 5 musics in the playlist, put "true" to show all, false by default
+ */
+Playlist.prototype.generatePlaylistBlock = function(allMusic = false){
+
+    if(this.musicList.length > 1){
+        let playlistBlock;
+        if(document.querySelector(".audioplayer .playlist") !== null){
+            playlistBlock = document.querySelector(".audioplayer .playlist");
+            playlistBlock.innerHTML = "";
+        }else{
+            playlistBlock = document.createElement("div");
+            playlistBlock.classList.add("playlist");
+        }
+
+        let trackListBlock = document.createElement("div");
+        trackListBlock.classList.add("tracklist");
+
+        let musicList = document.createElement("ol");
+        musicList.classList.add("list");
+
+        //Check if the playlist contains 5 music and if it allow, drawn all musics data
+        for(let index = 0;index < this.musicList.length && (index < 5 || allMusic); index ++){
+            let musicBlock = document.createElement("li");
+            musicBlock.classList.add("element");
+
+            let coverBlock = document.createElement("img");
+            coverBlock.classList.add("image");
+            coverBlock.setAttribute("src",this.musicList[index].coverPath);
+
+            let numberBlock = document.createElement("p");
+            numberBlock.classList.add("numero");
+            numberBlock.innerText = index+1;
+
+            let titleBlock = document.createElement("p");
+            titleBlock.classList.add("titre");
+            titleBlock.innerText = this.musicList[index].title;
+
+            let artistBlock = document.createElement("p");
+            artistBlock.classList.add("artiste");
+            artistBlock.innerText = this.musicList[index].artistName;
+
+            let statsBlock = document.createElement("p");
+            statsBlock.classList.add("stats");
+            statsBlock.innerText = this.musicList[index].numberView;
+
+            musicBlock.appendChild(coverBlock);
+            musicBlock.appendChild(numberBlock);
+            musicBlock.appendChild(titleBlock);
+            musicBlock.appendChild(artistBlock);
+            musicBlock.appendChild(statsBlock);
+            musicBlock.addEventListener("click",function(){
+                manager.setPosition(index);
+                manager.play_pause();
+            });
+
+            musicList.appendChild(musicBlock);
+        }
+        if(this.musicList.length > 5){
+            let moreBlock = document.createElement("a");
+            moreBlock.classList.add("more");
+            moreBlock.setAttribute("href","");
+
+            if(allMusic){
+                moreBlock.innerText = "Cacher " + (this.musicList.length - 5 ) + " titre(s)";
+
+                moreBlock.addEventListener("click", function(e){
+                    e.preventDefault();
+                    this.generatePlaylistBlock();
+                }.bind(this));
+            }else{
+                moreBlock.innerText = "Afficher les " + this.musicList.length + " titres";
+
+                moreBlock.addEventListener("click", function(e){
+                    e.preventDefault();
+                    this.generatePlaylistBlock(true);
+                }.bind(this));
+            }
+
+            musicList.appendChild(moreBlock);
+        }
+
+
+        playlistBlock.appendChild(trackListBlock);
+        trackListBlock.appendChild(musicList);
+
+
+        document.querySelector(".audioplayer").appendChild(playlistBlock);
+
+    }
+
+};
+
+/**
+ * Will redrawn the number of views of each music into the playlist
+ */
+Playlist.prototype.repaintPlaylist = function(){
+    let tracklist = document.querySelectorAll(".audioplayer .playlist .tracklist .list li .stats");
+
+    for(let index = 0; index < tracklist.length; index++){
+        tracklist[index].innerText = this.musicList[index].numberView;
+    }
+
 };

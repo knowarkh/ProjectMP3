@@ -48,7 +48,7 @@ function createWaveForm(dotsList, percentilePlayed = 0) {
     gradientBarUp.setAttribute("x1", "0");
     gradientBarUp.setAttribute("y1", "0");
     gradientBarUp.setAttribute("x2", "0");
-    gradientBarUp.setAttribute("y2", "70%");
+    gradientBarUp.setAttribute("y2", "100%");
     gradientBarUp.innerHTML = "<stop offset='0%' stop-color='#F0F0F0' />\n" +"<stop offset='100%' stop-color='#646464' />\n";
     defBlock.appendChild(gradientBarUp);
 
@@ -138,7 +138,8 @@ function createWaveForm(dotsList, percentilePlayed = 0) {
     primarySVG.setAttribute("width", primaryWaveWidth);
     primarySVG.setAttribute("height", primaryWaveHeight);
     //primarySVG.setAttribute("viewBox","0 0 " + primaryWaveWidth + " " + primaryWaveHeight);
-    primarySVG.classList.add("test");
+
+    primarySVG.classList.add("sprectrumContainer");
 
 
     reflectSVG.setAttribute("xmlns", svgns);
@@ -147,7 +148,8 @@ function createWaveForm(dotsList, percentilePlayed = 0) {
     reflectSVG.setAttribute("width", reflectWaveWidth);
     reflectSVG.setAttribute("height", reflectWaveHeight);
     //reflectSVG.setAttribute("viewBox","0 0 " + reflectWaveWidth + " " + reflectWaveHeight);
-    reflectSVG.classList.add("test");
+
+    reflectSVG.classList.add("sprectrumContainer");
 
     for (let i = 0; i < nbBars; i++) {
         /** Create and add every bar of the primary waveform*/
@@ -211,6 +213,7 @@ function createWaveForm(dotsList, percentilePlayed = 0) {
      * @returns the transformed value or null if the type ins't both "primary" or "reflect"
      */
     function getCorrectHeight(type, value) {
+        value = value === 0 ? 1 : value;
         value = (value * spectre.clientHeight) / maxSizeBar;
         if (type === "primary") {
             return value * 2 / 3;

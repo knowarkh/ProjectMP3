@@ -11,35 +11,61 @@ html
     link(rel='stylesheet', media="screen and (min-width: 600px)" href='/stylesheets/player.css')
     link(rel='stylesheet', media="screen and (max-width: 600px)" href='/stylesheets/player_mobile.css')
 
-    // HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries
-    //if lt IE 9
-      script(src='https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js')
-      script(src='https://oss.maxcdn.com/respond/1.4.2/respond.min.js')
+
   body
     .audioplayer
-      .visuel
-      .infos
-        .artiste Nom de l'artiste
-        .titre Nom du morceau
-      .waveform
-      .controls
-        button.prev Précédent
-        button.play-pause.play Lecture
-        button.next Suivant
-        span.volume
-          button.volume_button.volume-on(data-value='90') Volume
-          .volume_slider
-            .volume_sliderTotale
-              input.volume-input-range(type='range', min='0', max='100', value='0')
-      .temps
-        .en-cours 0:00
-        .total 3:11
-      .statistiques
-        .nb-lectures 16,5M
-        .nb-commentaires 280
-      .social
-        button.like 333K
-        button.share Partager
+      .player
+        .visuel
+        .infos
+          .artiste Nom de l'artiste
+          .titre Nom du morceau
+        .waveform
+        .controls
+          button.prev Précédent
+          button.play-pause.play Lecture
+          button.next Suivant
+          span.volume
+            button.volume_button.volume-on(data-value='90') Volume
+            .volume_slider
+              .volume_sliderTotale
+                input.volume-input-range(type='range', min='0', max='100', value='50')
+        .temps
+          .en-cours 0:00
+          .total 3:11
+        .statistiques
+          .nb-lectures 16,5M
+          .nb-commentaires 280
+        .social
+          button.like 333K
+          button.share Partager
+        // Modal
+        .modal
+          .modal-content
+            .modal-header
+              span.close ×
+              p Intégrer le player
+            .modal-body
+              p Code d'intégration :
+              input.share-input-text(type="text", value="", readonly='readonly')
+            .modal-footer
+              a Copier
+      //.playlist
+      //  .tracklist
+      //    ol.list
+      //      li.element
+      //        img.image(src="/images/Imagine_Dragons/Zero.jpg")
+      //        p.numero 1
+      //        p.titre Natural
+      //        p.artiste Imagine Dragons
+      //        p.stats 17k
+      //      li.element
+      //        img.image(src="/images/The_Chainsmokers_&_Coldplay/Something_Just_Like_This.jpg")
+      //        p.numero 2
+      //        p.titre Bird
+      //        p.artiste Imagine Dragons
+      //        p.stats 23.5k
+      //    a.more(href='') Afficher 15 titres
+
     script(src="/javascripts/script/soundmanager2.js")
     script(src='/javascripts/Utils.js')
     script(src='/javascripts/Connexion.js')
