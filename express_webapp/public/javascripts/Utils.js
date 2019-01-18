@@ -91,5 +91,5 @@ window.mobileAndTabletCheck = function() {
     return check;
 };
 
-var playerUtils = new PlayerUtils();
+var PlayerUtils = new PlayerUtils();
 
