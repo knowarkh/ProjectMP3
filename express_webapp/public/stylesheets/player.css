@@ -558,6 +558,7 @@ body {
 
 .audioplayer .playlist .tracklist .list .element .artiste {
     flex: 1;
+    color: #9b9b9b;
     color: var(--secondary);
     margin-right: 5px;
 }
@@ -583,14 +584,21 @@ body {
     text-align: center;
     display: block;
     padding: 5px 10px;
+    color: #9b9b9b;
     color: var(--secondary);
     text-decoration: none;
 }
 
 
 .audioplayer .playlist .tracklist .more:hover {
+    color: #f95800;
     color: var(--primary);
     background-color: #f2f2f2;
+}
+
+.audioplayer .playlist .tracklist .current {
+    color: #f95800 !important;
+    color: var(--primary) !important;
 }
 
 
