@@ -143,6 +143,7 @@ function Player() {
     this.clearColorWave = function () {
         document.querySelectorAll(".audioplayer .bar-up ,.audioplayer .bar-down").forEach(function(elem){
             elem.classList.remove("played");
+            elem.classList.remove("played-flash");
             elem.classList.remove("hover-front");
             elem.classList.remove("hover-back");
         });
@@ -213,7 +214,7 @@ function Player() {
                 this.clearColorHoverWave();
                 this.clearHoverTime();
             }.bind(this));
-        });
+        }.bind(this));
 
     };
 
