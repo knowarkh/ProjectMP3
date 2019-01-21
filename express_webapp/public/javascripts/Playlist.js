@@ -113,7 +113,10 @@ Playlist.prototype.previous = function(){
  * Will generate the block which contain the music into the playlist
  * @param allMusic {boolean} - If more than 5 musics in the playlist, put "true" to show all, false by default
  */
-Playlist.prototype.generatePlaylistBlock = function(allMusic = false){
+Playlist.prototype.generatePlaylistBlock = function(allMusic){
+
+    //Set a default parameter which work with IE11
+    allMusic = allMusic || false;
 
     if(this.musicList.length > 1){
         let playlistBlock;
@@ -168,6 +171,7 @@ Playlist.prototype.generatePlaylistBlock = function(allMusic = false){
 
             musicList.appendChild(musicBlock);
         }
+        //If more than 5 musics into the playlist add a button to show them all
         if(this.musicList.length > 5){
             let moreBlock = document.createElement("a");
             moreBlock.classList.add("more");

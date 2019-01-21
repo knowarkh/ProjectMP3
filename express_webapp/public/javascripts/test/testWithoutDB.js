@@ -34,6 +34,7 @@ window.onload = function(){
         "nbComment": 0
     });
 
+    manager = manager || new Player();
 
     manager.addMusicObject(music0);
     manager.addMusicObject(music1);

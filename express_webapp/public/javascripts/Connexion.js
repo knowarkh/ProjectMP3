@@ -12,7 +12,7 @@ Connexion.prototype.requestGet = function (url, callback) {
     xhttp.onreadystatechange = function () {
         //     if (this.readyState == 4 && this.status == 200) {
 
-        if (this.readyState == 4 && this.status == 200) {
+        if (this.readyState === 4 && this.status === 200) {
             callback(this.responseText);
         }
     };
@@ -30,7 +30,7 @@ Connexion.prototype.requestGet = function (url, callback) {
 Connexion.prototype.requestPost = function (url, values, callback) {
     let xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
+        if (this.readyState === 4 && this.status === 200) {
             callback(this.responseText);
         }
     };
@@ -50,7 +50,7 @@ Connexion.prototype.requestPost = function (url, values, callback) {
 Connexion.prototype.requestPut = function (url, values, callback) {
     let xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
+        if (this.readyState === 4 && this.status === 200) {
             callback(this.responseText);
         }
     };

@@ -3,7 +3,11 @@
  * @param {array} dotsList array of INT position to make the waveform
  * @param {int} percentilePlayed - percentile of the current music, if exist. Used to find the position of the bar which match with the position of the music on the spectrum
  */
-function createWaveForm(dotsList, percentilePlayed = 0) {
+function createWaveForm(dotsList, percentilePlayed) {
+
+    //Set a default parameter which work with IE11
+    percentilePlayed = percentilePlayed || 0;
+
     let spectre = document.querySelector(".audioplayer .waveform");
 
     /** Reset the content of the waveform */

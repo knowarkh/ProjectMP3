@@ -141,21 +141,22 @@ function Player() {
      * Will remove the class "played" and "hover" of all bars of the waveform
      */
     this.clearColorWave = function () {
-        for (let elem of document.querySelectorAll(".audioplayer .bar-up ,.audioplayer .bar-down")) {
+        document.querySelectorAll(".audioplayer .bar-up ,.audioplayer .bar-down").forEach(function(elem){
             elem.classList.remove("played");
             elem.classList.remove("hover-front");
             elem.classList.remove("hover-back");
-        }
+        });
+
     };
 
     /**
      * Will remove the class "hover" of all bars of the waveform
      */
     this.clearColorHoverWave = function () {
-        for (let elem of document.querySelectorAll(".audioplayer .bar-up.hover-front, .audioplayer .bar-up.hover-back , .audioplayer .bar-down.hover-front, .audioplayer .bar-down.hover-back")) {
+        document.querySelectorAll(".audioplayer .bar-up ,.audioplayer .bar-down").forEach(function(elem){
             elem.classList.remove("hover-front");
             elem.classList.remove("hover-back");
-        }
+        });
     };
 
     /**
@@ -198,7 +199,8 @@ function Player() {
             createWaveForm(this.playlist.getCurrentMusic().listPoints);
         }
 
-        for (let elem of document.querySelectorAll(".audioplayer .bar-up , .audioplayer .bar-down")) {
+        //Add event to each bar of the spectrum
+        document.querySelectorAll(".audioplayer .bar-up , .audioplayer .bar-down").forEach(function(elem){
             elem.addEventListener("click", function (target) {
                 this.clearColorWave();
                 this.goTo(Number(target.target.attributes.data_position.value));
@@ -211,7 +213,8 @@ function Player() {
                 this.clearColorHoverWave();
                 this.clearHoverTime();
             }.bind(this));
-        }
+        });
+
     };
 
     /**
@@ -404,13 +407,15 @@ function Player() {
      * @param idPlaylistToAdd {int} - id of the playlist into the database
      * @param currentMusicId {int} - if present set the current Music to this one
      */
-    this.addPlaylist = function(idPlaylistToAdd, currentMusicId = null){
+    this.addPlaylist = function(idPlaylistToAdd, currentMusicId){
+        //Set a default parameter which work with IE11
+        currentMusicId = currentMusicId || null;
 
         Connexion.getPlaylistById(idPlaylistToAdd,function(newPlaylist){
             if(newPlaylist !== null && newPlaylist !== "[]"){
                 this.playlist = new Playlist();
                 newPlaylist = JSON.parse(newPlaylist);
-                //Position = the given position of the
+                //Position = the given position of the music into the playlist ( {"1" : musicOne, "2" : musicTwo})
                 for (let position in newPlaylist){
                     let music = new Music(newPlaylist[position]);
                     this.addMusicObject(music);
