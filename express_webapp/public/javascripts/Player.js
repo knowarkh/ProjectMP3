@@ -27,9 +27,10 @@ function Player() {
 
         this.setListener();
 
-        //Use to apply the right color to the background of the input
-        let evt = new Event("input");
-        document.querySelector(".audioplayer .controls .volume input[type=range].volume-input-range").dispatchEvent(evt);
+        //Use to apply the right color to the background of the volume input
+        PlayerUtils.createNewEventAndUseOnATarget("input",document.querySelector(".audioplayer .controls .volume input[type=range].volume-input-range"));
+        //let evt = new Event("input");
+        //document.querySelector(".audioplayer .controls .volume input[type=range].volume-input-range").dispatchEvent(evt);
 
 
     }.bind(this);
