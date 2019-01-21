@@ -56,31 +56,35 @@ router.post('/', function(req, res, next) {
                     //console.log("  ---- cat exec musique.json ----");
                     //console.log(JSON.parse(dotList.stdout));
 
-                    //---creation of database object---
-                    var piste = new database.Musique();
+                    database.Musique.find({},function(musicIdMax){
 
-                    piste.id = 10;
-                    piste.titre = req.body.titre;
-                    piste.album = req.body.album;
-                    piste.artiste = req.body.artiste;
-                    piste.cheminMP3 = pathMP3+musicFileName;
-                    piste.cover = pathCover+coverFilename;
-                    piste.annee = req.body.annee;
-                    piste.duree = Math.round(metadata.format.duration);
-                    piste.genre = req.body.genre;
-                    piste.listePoint = JSON.parse(dotList.stdout);
-                    piste.nbEcoute = 0;
-                    piste.nbLike = 0;
-                    piste.nbPartage = 0;
-                    piste.nbComment = 0;
 
-                    //---save in mongoDB database---
-                    piste.save(function(err){
-                        if(err) {
-                            res.send(err);
-                        }
-                        res.render('redirAdmin', { title: 'Express' });
-                    })
+                        //---creation of database object---
+                        var piste = new database.Musique();
+
+                        piste.id = musicIdMax + 1;
+                        piste.titre = req.body.titre;
+                        piste.album = req.body.album;
+                        piste.artiste = req.body.artiste;
+                        piste.cheminMP3 = pathMP3+musicFileName;
+                        piste.cover = pathCover+coverFilename;
+                        piste.annee = req.body.annee;
+                        piste.duree = Math.round(metadata.format.duration);
+                        piste.genre = req.body.genre;
+                        piste.listePoint = JSON.parse(dotList.stdout);
+                        piste.nbEcoute = 0;
+                        piste.nbLike = 0;
+                        piste.nbPartage = 0;
+                        piste.nbComment = 0;
+
+                        //---save in mongoDB database---
+                        piste.save(function(err){
+                            if(err) {
+                                res.send(err);
+                            }
+                            res.render('redirAdmin', { title: 'Express' });
+                        });
+                    }).sort({id:-1}).limit(1);
 
                     //---data layout---
                     /*var piste = {
