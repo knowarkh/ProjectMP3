@@ -245,7 +245,11 @@ function createWaveForm(dotsList, percentilePlayed) {
          * @param begin - start of the section which be used
          * @param end - end od the section which be used
          */
-        function transformAvgDotList(dotList, numberOfDotsRemove, begin = 0, end = dotList.length - 1) {
+        function transformAvgDotList(dotList, numberOfDotsRemove, begin, end) {
+
+            begin = begin || 0;
+            end = end || dotList.length - 1;
+
             //Part which do the work
             if (numberOfDotsRemove === 1) {
                 if (end - begin % 2 === 0) {
