@@ -269,7 +269,7 @@ function Player() {
         document.querySelector(".audioplayer .controls .volume input[type=range].volume-input-range").addEventListener("input", this.targetVolume.bind(this));
 
         //Applied a different listener in case of mobile version
-        if (window.mobileAndTabletCheck() || PlayerUtils.detectCompactSize()) {
+        if (PlayerUtils.mobileAndTabletCheck() || PlayerUtils.detectCompactSize()) {
             document.querySelector(".audioplayer .controls .volume .volume_button").addEventListener("click", this.volumeMouseOverCompact.bind(this));
             document.querySelector(".audioplayer .controls .volume .volume_button").addEventListener("click", this.volumeMouseOutCompact.bind(this));
         } else {
