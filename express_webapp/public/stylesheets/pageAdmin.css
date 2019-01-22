@@ -1,73 +1,160 @@
-h1 {
-    font-family: arial, tahoma, verdana, "sans serif";
-    color: #2784cc;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    text-align: center;
+
+/* ==================================================== */
+/*                  Page d'administration               */
+/* ==================================================== */
+
+html {
+    overflow-x: hidden;
 }
 
-h2 {
-    font-family: arial, tahoma, verdana, "sans serif";
-    color: #cc7c29;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    text-align: center;
+body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #efefef;
 }
 
-form {
-    /* Uniquement centrer le formulaire sur la page */
-    margin: 0 auto;
-    width: 400px;
-    /* Encadré pour voir les limites du formulaire */
-    padding: 1em;
-    border: 1px solid #2784cc;
-    border-radius: 1em;
-}
+/* ========= HEADER ========= */
 
-input {
-    /* Pour que tous les champs texte aient la même dimension */
-    width: 350px;
-    box-sizing: border-box;
-    /* Pour harmoniser le look & feel des bordures des champs texte */
-    border: 1px solid #999;
-    border-radius: 0.5em;
-}
-
-input:focus {
-    /* Pour souligner légèrement les éléments actifs */
-    border-color: #cc7c29;
-}
-
-#send {
-    width: 350px;
-    box-sizing: border-box;
-    border: 1px solid #999;
-}
-
-#send:hover {
-    background-color: #2784cc; /* Green */
+.page-admin header {
+    background-color: black;
     color: white;
 }
 
-#myLink {
-    text-align: center;
-    color: #2784cc;
-    font-family: verdana;
-    font-size: 12px;
-    padding: 5px 20px;
-    text-decoration: none;
-    border: solid 1px #cc7c29;
-    border-radius: 5px;
+.page-admin header img{
+    width: 100px;
+    padding: 5px;
+    vertical-align: middle;
 }
 
-#myLink:hover {
-    background-position: bottom;
-    border: solid 1px #2784cc;
-    color: #cc7c29;
+.page-admin span.title {
+    font-size: 20px;
 }
 
-#logo {
-    display: block;
-    margin: auto;
-    padding-bottom: 5px;
+.page-admin span.version {
+    font-size: 16px;
+    float: right;
+    display: flex;
+    margin: 20px 20px 0 4px;
 }
+
+.page-admin span.version .num{
+    font-weight: bold;
+    padding-left: 5px;
+}
+
+
+/* ========= BODY ========= */
+
+.page-admin .body {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+/* ========= NAV ========= */
+
+.page-admin .body nav {
+    position: absolute;
+    background-color: #343131;
+    color: #b3b3b3;
+    width: 300px;
+    height: 100%;
+}
+
+.page-admin .body nav ul {
+    padding: 0;
+}
+
+
+.page-admin .body nav li {
+    list-style: none;
+    font-size: 90%;
+    padding: 5px 23px;
+    line-height: 18px;
+    cursor: pointer;
+}
+
+.page-admin .body nav li:hover {
+    background-color: #4e4a4a;
+}
+
+/* ========= SECTION ========= */
+
+.page-admin .body section {
+    margin-left: 300px;
+    background-color: white;
+    position: absolute;
+    width: 100%;
+}
+
+.page-admin .body section .content {
+    padding: 25px 50px;
+    font-size: 14px;
+}
+.page-admin .content .title {
+    font-size: 26px;
+    margin: 23px 0;
+    font-weight: bold;
+    color: #404040;
+}
+
+/* ========= PAGE-AJOUT ========= */
+
+.page-admin .content .page-ajout .champs {
+    position: relative;
+    margin: 24px 0;
+}
+
+.page-admin .content .page-ajout input[type=text]{
+    border: none;
+    border-bottom: 1px solid #ced4da;
+    background-color: transparent;
+    padding: 4.8px 0 8.8px 0;
+    color: #555;
+    font-size: 14px;
+    width: 40%;
+}
+
+.page-admin .content .page-ajout input[type=text]:focus {
+    border-bottom: 1px solid #5f96ef;
+}
+
+.page-admin .content .page-ajout .upload label {
+    font-size: 0.8em;
+    position: absolute;
+    top: -15px;
+    left: 0;
+    color: #757575;
+}
+
+.page-admin .content .page-ajout .champs-block label{
+    font-size: 0.8em;
+    position: absolute;
+    top: -8px;
+    left: 0;
+    color: #757575;
+}
+
+.page-admin .content .page-ajout .send {
+    cursor: pointer;
+    padding: 13px 34px;
+    background-color: #33b5e5;
+    color: white;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
+    border: 0;
+    width: 40%;
+    border-radius: 3px;
+}
+
+.page-admin .content .page-ajout .send:hover {
+    box-shadow: 0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15)
+
+}
+
+
+/*#myLink:hover {*/
+    /*background-position: bottom;*/
+    /*border: solid 1px #2784cc;*/
+    /*color: #cc7c29;*/
+/*}*/

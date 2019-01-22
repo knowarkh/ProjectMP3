@@ -1,0 +1,32 @@
+extends admin_template
+
+block content
+    .page-ajout
+        form(ref='uploadForm', method='post', action='/admin', enctype='multipart/form-data')
+            .upload
+                .title Upload Zone
+                .champs
+                    label Musique mp3
+                    input#mySound(name='foo', type='file', placeholder="Selectionner votre fichier")
+                .champs
+                    label Cover
+                    input#myCover(name='cover' type='file', placeholder="Selectionner votre cover")
+            .champs-block
+                .title Informations de la musique
+                .champs
+                    input(type='text', name='titre', placeholder='Titre')
+                    label Titre
+                .champs
+                    input(type='text', name='album', placeholder='Album')
+                    label Album
+                .champs
+                    input(type='text', name='artiste', placeholder='Artiste')
+                    label Artiste
+                .champs
+                    input(type='text', name='genre', placeholder='Genre')
+                    label Genre
+                .champs
+                    input(type='text', name='annee', placeholder='Année')
+                    label Année
+                .champs
+                    input.send(type='submit', placeholder='Envoyer')

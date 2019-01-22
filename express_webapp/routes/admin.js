@@ -12,11 +12,9 @@ var pathMP3 = 'public/musics/';
 var pathCover = 'public/images/';
 
 
-// TODO Attention au routes
-
 //---Render admin webpage---
 router.get('/', function(req, res, next) {
-    res.render('admin', { title: 'Express' });
+    res.render('admin_add', { title: 'Express' });
 });
 
 // POST form add track
@@ -82,7 +80,7 @@ router.post('/', function(req, res, next) {
                         if(err) {
                             res.send(err);
                         }
-                        res.render('redirAdmin', { title: 'Express' });
+                        res.render('admin_redirection', { title: 'Express' });
                     });
 
                     // Deleting temporary files for by the python script.

@@ -1,60 +1,60 @@
 doctype html
 html
-  head
-    meta(charset='UTF-8')
-    meta(http-equiv='X-UA-Compatible', content='IE=edge')
-    meta(name='viewport', content='width=device-width, initial-scale=1')
-    meta(name='description', content='PlayerMP3')
-    meta(name='author', content='Work in Progress')
-    title Fasma
-    // Custom styles for this template
-    link(rel='stylesheet', media="screen and (min-width: 600px)" href='/stylesheets/player.css')
-    link(rel='stylesheet', media="screen and (max-width: 600px)" href='/stylesheets/player_mobile.css')
+    head
+        meta(charset='UTF-8')
+        meta(http-equiv='X-UA-Compatible', content='IE=edge')
+        meta(name='viewport', content='width=device-width, initial-scale=1')
+        meta(name='description', content='PlayerMP3')
+        meta(name='author', content='Work in Progress')
+        title Fasma
+        // Custom styles for this template
+        link(rel='stylesheet', media="screen and (min-width: 600px)" href='/stylesheets/player.css')
+        link(rel='stylesheet', media="screen and (max-width: 600px)" href='/stylesheets/player_mobile.css')
 
 
-  body
-    .audioplayer
-      .player
-        .visuel
-        .infos
-          .artiste Nom de l'artiste
-          .titre Nom du morceau
-        .waveform
-        .controls
-          button.prev Précédent
-          button.play-pause.play Lecture
-          button.next Suivant
-          span.volume
-            button.volume_button.volume-on(data-value='90') Volume
-            .volume_slider
-              .volume_sliderTotale
-                input.volume-input-range(type='range', min='0', max='100', value='50')
-        .temps
-          .en-cours 0:00
-          .total 3:11
-        .statistiques
-          .nb-lectures 16,5M
-          .nb-commentaires 280
-        .social
-          button.like 333K
-          button.share Partager
-        // Modal
-        .modal
-          .modal-content
-            .modal-header
-              span.close ×
-              p Intégrer le player
-            .modal-body
-              p Code d'intégration :
-              input.share-input-text(type="text", value="", readonly='readonly')
-            .modal-footer
-              a Copier
+    body
+        .audioplayer
+            .player
+                .visuel
+                .infos
+                    .artiste Nom de l'artiste
+                    .titre Nom du morceau
+                .waveform
+                .controls
+                    button.prev Précédent
+                    button.play-pause.play Lecture
+                    button.next Suivant
+                    span.volume
+                        button.volume_button.volume-on(data-value='90') Volume
+                        .volume_slider
+                            .volume_sliderTotale
+                                input.volume-input-range(type='range', min='0', max='100', value='50')
+                .temps
+                    .en-cours 0:00
+                    .total 3:11
+                .statistiques
+                    .nb-lectures 16,5M
+                    .nb-commentaires 280
+                .social
+                    button.like 333K
+                    button.share Partager
+                // Modal
+                .modal
+                    .modal-content
+                        .modal-header
+                            span.close ×
+                            p Intégrer le player
+                        .modal-body
+                            p Code d'intégration :
+                            input.share-input-text(type="text", value="", readonly='readonly')
+                        .modal-footer
+                            a Copier
 
-    script(src="/javascripts/script/soundmanager2.js")
-    script(src='/javascripts/PlayerUtils.js')
-    script(src='/javascripts/Connexion.js')
-    script(src='/javascripts/spectre.js')
-    script(src='/javascripts/Music.js')
-    script(src='/javascripts/Playlist.js')
-    script(src='/javascripts/Player.js')
-    script(src='/javascripts/test/testWithDB.js')
+        script(src="/javascripts/script/soundmanager2.js")
+        script(src='/javascripts/PlayerUtils.js')
+        script(src='/javascripts/Connexion.js')
+        script(src='/javascripts/spectre.js')
+        script(src='/javascripts/Music.js')
+        script(src='/javascripts/Playlist.js')
+        script(src='/javascripts/Player.js')
+        script(src='/javascripts/test/testWithDB.js')
