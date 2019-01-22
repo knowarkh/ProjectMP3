@@ -6,7 +6,7 @@ var mm = require('music-metadata');
 var express = require('express');
 var router = express.Router();
 var shell = require('shelljs');
-var database = require('../bin/db-connection').database;
+var Music = require('../bin/db-connection').database.Musique;
 
 var pathMP3 = 'public/musics/';
 var pathCover = 'public/images/';
@@ -60,34 +60,41 @@ router.post('/', function(req, res, next) {
                     let dotList = shell.exec('cat musique.json');
 
                     //---creation of database object---
-                    var piste = new database.Musique();
+                    var piste = new Music();
 
-                    piste.id = 13;
-                    piste.titre = req.body.titre;
-                    piste.album = req.body.album;
-                    piste.artiste = req.body.artiste;
-                    piste.cheminMP3 = "/musics/" + musicFileName;
-                    piste.cover = "/images/" + coverFilename;
-                    piste.annee = req.body.annee;
-                    piste.duree = Math.round(metadata.format.duration);
-                    piste.genre = req.body.genre;
-                    piste.listePoint = JSON.parse(dotList.stdout);
-                    piste.nbEcoute = 0;
-                    piste.nbLike = 0;
-                    piste.nbPartage = 0;
-                    piste.nbComment = 0;
+                    Music.findOne({},{"id": true, "_id" : false},function(err, idMusicMax){
 
-                    //---save in mongoDB database---
-                    piste.save(function(err){
-                        if(err) {
-                            res.send(err);
+                            piste.id = idMusicMax.id + 1;
+                            piste.titre = req.body.titre;
+                            piste.album = req.body.album;
+                            piste.artiste = req.body.artiste;
+                            piste.cheminMP3 = "/musics/" + musicFileName;
+                            piste.cover = "/images/" + coverFilename;
+                            piste.annee = req.body.annee;
+                            piste.duree = Math.round(metadata.format.duration);
+                            piste.genre = req.body.genre;
+                            piste.listePoint = JSON.parse(dotList.stdout);
+                            piste.nbEcoute = 0;
+                            piste.nbLike = 0;
+                            piste.nbPartage = 0;
+                            piste.nbComment = 0;
+
+                            //---save in mongoDB database---
+                            piste.save(function(err){
+                                if(err) {
+                                    res.send(err);
+                                }
+                                res.render('redirAdmin', { title: 'Express' });
+                            });
+
+                            // Deleting temporary files for by the python script.
+                            shell.rm("musique.json");
+                            shell.rm("musique.txt");
+
                         }
-                        res.render('redirAdmin', { title: 'Express' });
-                    });
+                    ).sort({"id" : -1}).limit(1);
 
-                    // Deleting temporary files for by the python script.
-                    shell.rm("musique.json");
-                    shell.rm("musique.txt");
+
 
                     //---data layout---
                     /*var piste = {
