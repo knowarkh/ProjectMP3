@@ -70,7 +70,7 @@ function Player() {
     /** Private functions */
 
     /**
-     * Will colorize to the current point of playing
+     * Will colorize the current point of playing
      */
     this.colorWaveToCurrentPos = function () {
         let hasBeenHoverBack = false;
@@ -109,7 +109,7 @@ function Player() {
 
 
     /**
-     * Will colorize to the current point of playing of the hovered point
+     * Will colorize the current point of playing of the hovered point
      * @param pos {int} number of the bar hovered
      */
 
@@ -356,7 +356,7 @@ function Player() {
     /** Public functions */
 
     /**
-     * Go check in the database if a music match with the id, add the music and if this is the first, draw information about this music
+     * Go check into the database if a music match with the id, add the music and if this is the first, draw information about this music
      * @param idMusic {int} - id of the wanted music
      */
     this.addMusicById = function (idMusic) {
@@ -400,7 +400,7 @@ function Player() {
 
 
     /**
-     * Go search into the database to get all music of the wanted playlist and erase the older playlist/music in play
+     * Go check into the database to get all music of the wanted playlist and erase the older playlist/music in play
      * @param idPlaylistToAdd {int} - id of the playlist into the database
      * @param currentMusicId {int} - if present set the current Music to this one
      */
@@ -535,7 +535,7 @@ Player.prototype.addComment = function () {
 };
 
 /**
- * Will create and give a embed version of the player
+ * Will create and give an embed version of the player
  */
 Player.prototype.share = function () {
     var modal = document.querySelector('.audioplayer .modal');
@@ -670,7 +670,7 @@ Player.prototype.previous = function () {
 
 
 /**
- * Will add 1 to the number of view of the music if the local cookie allow it
+ * Will add 1 to the number of view of the music if the local cookie allows it
  */
 Player.prototype.addView = function () {
     let currentMusic = this.playlist.getCurrentMusic();

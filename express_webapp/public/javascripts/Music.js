@@ -1,5 +1,5 @@
 /**
- *
+ * Class Music
  */
 function Music(jsonFile){
 

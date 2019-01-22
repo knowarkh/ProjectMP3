@@ -1,11 +1,18 @@
 function PlayerUtils(){}
 
+/**
+ * The function pads a string to a new length
+ * @param string
+ * @param pad
+ * @param length
+ * @returns {string}
+ */
 PlayerUtils.prototype.str_pad_left = function(string,pad,length) {
     return (new Array(length+1).join(pad)+string).slice(-length);
 };
 
 /**
- * Transform the duration in a number of seconds to a readable text
+ * Transform the duration of a number in seconds to a readable text
  * @param duree {int} - number of seconds
  * @returns {string} - Text version of the time
  */
@@ -16,7 +23,7 @@ PlayerUtils.prototype.secondsToReadableTime = function(duree){
 };
 
 /**
- * Transform the duration in a number of milliseconds to a readable text
+ * Transform the duration of a number in milliseconds to a readable text
  * @param duree {int} - number of milliseconds
  * @returns {string} - Text version of the time
  */
@@ -74,7 +81,7 @@ PlayerUtils.prototype.getCookie = function(cname) {
 };
 
 /**
- * Used to know which css is used and do a different job
+ * Used to know which css is used and does a different job
  * @returns {boolean} if the current screen if smaller or not and so be a mobile version
  */
 PlayerUtils.prototype.detectCompactSize = function() {
