@@ -1,4 +1,7 @@
-// ========== ADMIN WEBPAGE ==========
+/**
+ * This file contains all routes related to the administration page.
+ */
+
 var mm = require('music-metadata');
 var express = require('express');
 var router = express.Router();
@@ -7,64 +10,64 @@ var database = require('../bin/db-connection').database;
 
 var pathMP3 = 'public/musics/';
 var pathCover = 'public/images/';
-var date =new Date();
-var ladate = date.getDate()+"_"+(date.getMonth()+1)+"_"+date.getFullYear();
 
+
+// TODO Attention au routes
 
 //---Render admin webpage---
 router.get('/', function(req, res, next) {
     res.render('admin', { title: 'Express' });
 });
 
-//---POST form add track---
+// POST form add track
 router.post('/', function(req, res, next) {
-    //console.log(req.body);
+
     if (Object.keys(req.files).length === 0) {
         return res.status(400).send('No files were uploaded.');
     }
 
-    //console.log(req.files);
-    let sampleFile = req.files.foo;
-    let coverFile = req.files.cover;
-    //let dotList = JSON.parse(musique.json);
-    //console.log(dotList);
-    var musicFileName = req.body.titre+"_"+ladate+".mp3";
-    var coverFilename = req.body.album+"_"+ladate+".jpg";
+    var sampleFile = req.files.foo;
+    var coverFile = req.files.cover;
+    var musicFileName = path(req.body.artiste, req.body.titre) + ".mp3";
+    var coverFilename = path(req.body.artiste, req.body.titre) + ".jpg";
+
+
+    // creation of folders in the right place to add music and cover
+    shell.mkdir(pathMP3 + underscore(req.body.artiste));
+    shell.mkdir(pathCover + underscore(req.body.artiste));
+
 
     //---get the MP3 file---
-     //Use the mv() method to place the file on the server
-    sampleFile.mv(pathMP3+musicFileName, function(err) {
-        if (err)
+    //Use the mv() method to place the file on the server
+    sampleFile.mv(pathMP3 + musicFileName, function(err) {
+        if (err) {
             return res.status(500).send(err);
+        }
         //---get the Cover image---
-        coverFile.mv(pathCover+coverFilename, function(err) {
+        coverFile.mv(pathCover + coverFilename, function(err) {
             if (err)
                 return res.status(500).send(err);
-            //res.send(' Music and Cover uploaded!');
+
             //---get metadata of the MP3 file---
-            mm.parseFile('public/musics/filename.mp3', {native: true})
+            mm.parseFile(pathMP3 + musicFileName, {native: true})
                 .then( metadata => {
-                    //console.log(util.inspect(metadata, { showHidden: false, depth: null }));
 
                     //---processing python script---
-                    if (shell.exec('python ./bin/audio.py public/musics/filename.mp3').code !== 0) {
+                    if (shell.exec('python ./bin/audio.py ' + pathMP3 + musicFileName).code !== 0) {
                         shell.echo('Error: script py failed !');
                         shell.exit(1);
                     }
-
                     let dotList = shell.exec('cat musique.json');
-                    //console.log("  ---- cat exec musique.json ----");
-                    //console.log(JSON.parse(dotList.stdout));
 
                     //---creation of database object---
                     var piste = new database.Musique();
 
-                    piste.id = 10;
+                    piste.id = 13;
                     piste.titre = req.body.titre;
                     piste.album = req.body.album;
                     piste.artiste = req.body.artiste;
-                    piste.cheminMP3 = pathMP3+musicFileName;
-                    piste.cover = pathCover+coverFilename;
+                    piste.cheminMP3 = "/musics/" + musicFileName;
+                    piste.cover = "/images/" + coverFilename;
                     piste.annee = req.body.annee;
                     piste.duree = Math.round(metadata.format.duration);
                     piste.genre = req.body.genre;
@@ -80,7 +83,11 @@ router.post('/', function(req, res, next) {
                             res.send(err);
                         }
                         res.render('redirAdmin', { title: 'Express' });
-                    })
+                    });
+
+                    // Deleting temporary files for by the python script.
+                    shell.rm("musique.json");
+                    shell.rm("musique.txt");
 
                     //---data layout---
                     /*var piste = {
@@ -104,5 +111,40 @@ router.post('/', function(req, res, next) {
         });
     });
 });
+
+
+/**
+ * Concatenates the artist's name and the title of the music to form a path.
+ * @param artiste - string - the name of the artist
+ * @param titre - string - the title of the music
+ * @returns string - the path
+ */
+function path(artiste, titre) {
+    return underscore(artiste) + "/" + underscore(titre);
+}
+
+/**
+ * Replaces spaces with underscores
+ * @param string - string - the name of the artist
+ * @returns string - the reformatted string
+ */
+function underscore(string) {
+    var res =  capitalizeFirstLetter(string);
+    return res.split(' ').join('_');
+}
+
+/**
+ * Capitalizes each letter of each word
+ * @param str - string - the title of the music
+ * @returns string - the reformatted string
+ */
+function capitalizeFirstLetter(str) {
+    return str.replace(
+        /\w\S*/g,
+        function(txt) {
+            return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+        }
+    );
+}
 
 module.exports = router;
