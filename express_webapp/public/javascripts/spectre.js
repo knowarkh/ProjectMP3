@@ -35,7 +35,7 @@ function createWaveForm(dotsList, percentilePlayed = 0) {
     let barWidth = 4;
     let barHeight = 0;
 
-    /** Define this fucking css rules */
+    /** Define the css rules */
 
     let defBlock = document.createElementNS(svgns, "defs");
 
@@ -207,10 +207,10 @@ function createWaveForm(dotsList, percentilePlayed = 0) {
 
 
     /**
-     * Get the height of a bar after a resize proportionally to the waveform's div
-     * @param type {string}- primary or reflect, define which algorithm will be used
-     * @param value {int}- the height of the bar, wanted to be resize
-     * @returns transformedValue {int} -the transformed value or null if the type ins't both "primary" or "reflect"
+     * Get the height of a bar after a proportionally resize of the waveform's div
+     * @param type - primary or reflect, define which algorithm will be used
+     * @param value - the height of the bar, wanted to be resize
+     * @returns the transformed value or null if the type ins't both "primary" or "reflect"
      */
     function getCorrectHeight(type, value) {
         value = value === 0 ? 1 : value;
@@ -225,21 +225,21 @@ function createWaveForm(dotsList, percentilePlayed = 0) {
     }
 
     /**
-     * Do a recursive deep course, which do a average and remove of a number of point given
-     * @param dotList {Array}- array of int, which represent the waveform
-     * @param numberOfDotsRemove {int}- Number of dot wanted to be removed
-     * @returns newDotList {Array} - a new array of int with the average value and the good number of dots
+     * Do a recursive deep course, which does an average and remove a number of point given
+     * @param dotList - array of int, which represent the waveform
+     * @param numberOfDotsRemove - Number of dot wanted to be removed
+     * @returns a new array of int with the average value and the good number of dots
      */
     function getAvgDotList(dotList, numberOfDotsRemove) {
         //Do a clone of the dotList given, to not edit it
         let res = JSON.parse(JSON.stringify(dotList));
 
         /**
-         * The recursive part of the function, will do the deep course and edit the dots
-         * @param dotList {Array}- array of dot given earlier
-         * @param numberOfDotsRemove {int} - number of dots given earlier
-         * @param begin {int} - start of the section which be used
-         * @param end {int} - end od the section which be used
+         * The recursive part of the function, will does the deep course and edit the dots
+         * @param dotList - array of dot given earlier
+         * @param numberOfDotsRemove - number of dots given earlier
+         * @param begin - start of the section which be used
+         * @param end - end od the section which be used
          */
         function transformAvgDotList(dotList, numberOfDotsRemove, begin = 0, end = dotList.length - 1) {
             //Part which do the work
