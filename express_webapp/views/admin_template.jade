@@ -4,18 +4,7 @@ html(lang='fr')
         meta(charset='UTF-8')
         title Page d'administration
         link(rel='stylesheet', type='text/css', href='/stylesheets/pageAdmin.css')
-        script(type='text/javascript').
-            function escapeHtml(unsafe){
-                var map = {
-                    '&': '&amp;',
-                    '<': '&lt;',
-                    '>': '&gt;',
-                    '"': '&quot;',
-                    "'": '&#039;'
-                };
-                return unsafe.replace(/[&<>"']/g, function(m) { return map[m]; });
-            };
-
+        //script(type='text/javascript', src='/javascripts/pageAdmin.js')
     body
         .page-admin
             header
@@ -39,5 +28,4 @@ html(lang='fr')
                 section.section
                     .content
                         block content
-
 

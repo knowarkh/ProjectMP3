@@ -24,6 +24,18 @@ block content
                     p.genre= val.genre
                     p.annee= val.annee
                     a.modif(href='/admin/' + val.id) Modification
-                    //a.suppr(href='/admin/del/' + val.id) Suppression
-                    form(method='post', action='/admin/del/' + val.id, enctype='multipart/form-data')
-                        input.suppr(type='submit', value='Suppression')
+                    a.suppr Supprimer
+
+                    //Modal
+                    .modal_suppr
+                        .modal-content
+                            .modal-header
+                                span.close ×
+                                p Attention
+                            .modal-body
+                                p Voulez-vous vraiment supprimer la musique ?
+                                button.annuler Annuler
+                                form(method='post', action='/admin/del/' + val.id, enctype='multipart/form-data')
+                                    input.suppr(type='submit', value='Supprimer')
+
+        script(type='text/javascript', src='/javascripts/pageAdmin.js')
