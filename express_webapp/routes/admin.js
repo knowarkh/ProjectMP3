@@ -25,7 +25,12 @@ router.get('/add', function(req, res, next) {
 
 
 router.get('/list', function(req, res, next) {
-    res.render('admin_list');
+    Music.find(function(err, music){
+        if (err){
+            console.log("ERROR= " +err);
+        }
+        res.render('admin_list', {data:music});
+    }).sort({"id" : 1});
 });
 
 

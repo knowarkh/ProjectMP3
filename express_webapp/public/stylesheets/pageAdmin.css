@@ -116,6 +116,11 @@ body {
     color: #404040;
 }
 
+
+/* ============================== */
+/*            PAGE ADD            */
+/* ============================== */
+
 /* ========= PAGE-AJOUT ========= */
 
 .page-admin .content .page-ajout .champs {
@@ -170,8 +175,138 @@ body {
 }
 
 
-/*#myLink:hover {*/
-    /*background-position: bottom;*/
-    /*border: solid 1px #2784cc;*/
-    /*color: #cc7c29;*/
-/*}*/
+
+/* ============================== */
+/*            PAGE LIST           */
+/* ============================== */
+
+.page-admin .content .page-list {
+    font-size: 12px;
+    margin-right: 30vw;
+}
+
+@media screen and (min-width: 1000px){
+    .page-admin .content .page-list {
+        margin-right: 300px;
+    }
+}
+
+.page-admin .content .page-list .list{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border: 1px solid #f2f2f2;
+    border-radius: 0 0 4px 4px;
+}
+
+.page-admin .content .page-list .list .element {
+    border-bottom: 1px solid #f2f2f2;
+    display: flex;
+}
+
+.page-admin .content .page-list .list .head{
+    background-color: #33b5e5;
+    border-bottom: 1px solid #f2f2f2;
+    display: flex;
+}
+
+.page-admin .content .page-list .list .element:hover {
+    background-color: #f2f2f2;
+}
+
+
+.page-admin .content .page-list .list .image {
+    margin: 9px 9px;
+    background-size: contain !important;
+    width: 20px;
+    height: 20px;
+}
+
+.page-admin .content .page-list .list .id {
+    flex: 0.2;
+    margin-right: 5px;
+}
+
+.page-admin .content .page-list .list .titre {
+    flex: 3;
+    margin-right: 3px;
+}
+
+.page-admin .content .page-list .list .artiste {
+    flex: 3;
+    margin-right: 3px;
+}
+
+
+.page-admin .content .page-list .list .album {
+    flex: 3;
+    margin-right: 3px;
+}
+
+
+.page-admin .content .page-list .list .genre {
+    flex: 5;
+    margin-right: 3px;
+}
+
+
+.page-admin .content .page-list .list .annee {
+    flex: 1;
+    margin-right: 3px;
+}
+
+.page-admin .content .page-list .list a {
+    cursor: pointer;
+    padding: 10px 20px;
+    background-color: #33b5e5;
+    color: white;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
+    border: 0;
+    border-radius: 3px;
+    margin: 10px;
+    height: 15px;
+}
+
+.page-admin .content .page-list .list a:hover {
+    box-shadow: 0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);
+}
+
+.page-admin .content .page-list .list .modif,
+.page-admin .content .page-list .list .suppr {
+    width: 140px;
+}
+
+.page-admin .content .page-list .list a.modif {
+    flex: 1;
+    background-color: #00c851;
+}
+
+.page-admin .content .page-list .list a.suppr {
+    flex: 1;
+    background-color: #ff3547;
+}
+
+.page-admin .content .page-list .list .element .image,
+.page-admin .content .page-list .list .element .id,
+.page-admin .content .page-list .list .element .titre,
+.page-admin .content .page-list .list .element .artiste,
+.page-admin .content .page-list .list .element .album,
+.page-admin .content .page-list .list .element .genre,
+.page-admin .content .page-list .list .element .annee {
+    padding-top: 9px;
+}
+
+
+@media screen and (max-width: 1300px){
+    .page-admin .content .page-list .list a {
+        padding: 10px 1vw;
+        margin: 1vw;
+    }
+
+    .page-admin .content .page-list .list .modif,
+    .page-admin .content .page-list .list .suppr {
+        flex: 4;
+    }
+
+}
+

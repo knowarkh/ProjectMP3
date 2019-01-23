@@ -2,3 +2,26 @@ extends admin_template
 
 block content
     .page-list
+        .title Liste des musiques
+        ul.list
+            li.head
+                p.image
+                p.id ID
+                p.titre Titre
+                p.artiste Artiste
+                p.album Album
+                p.genre Genre(s)
+                p.annee Année
+                p.modif
+                p.suppr
+            each val in data
+                li.element
+                    img.image(src=val.cover, alt= val.titre)
+                    p.id= val.id
+                    p.titre= val.titre
+                    p.artiste= val.artiste
+                    p.album= val.album
+                    p.genre= val.genre
+                    p.annee= val.annee
+                    a.modif Modification
+                    a.suppr Suppression
