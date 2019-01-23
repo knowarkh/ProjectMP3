@@ -36,7 +36,6 @@ body {
 
 .audioplayer .player .visuel {
     position: absolute;
-    background: url(../images/Imagine_Dragons/Zero.jpg) no-repeat;
     background-size: cover !important;
     background-position: 50% 50%;
     width: 100%;
@@ -260,6 +259,7 @@ body {
     box-shadow: 0 2px 10px 0 rgba(25,25,34,.24);
     padding: 10px 15px;
     border-radius: 4px;
+    display: flow-root;
 }
 
 .audioplayer .player .controls .volume input[type=range].volume-input-range {

@@ -85,6 +85,11 @@ body {
     background-color: #4e4a4a;
 }
 
+.page-admin .body nav a {
+    text-decoration: none;
+    color: #b3b3b3;
+}
+
 /* ========= SECTION ========= */
 
 .page-admin .body section {
