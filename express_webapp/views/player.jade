@@ -1,5 +1,5 @@
 doctype html
-html
+html(lang='fr')
     head
         meta(charset='UTF-8')
         meta(http-equiv='X-UA-Compatible', content='IE=edge')
@@ -26,8 +26,8 @@ html
                     button.next Suivant
                     span.volume
                         button.volume_button.volume-on(data-value='90') Volume
-                        .volume_slider
-                            .volume_sliderTotale
+                        span.volume_slider
+                            span.volume_sliderTotale
                                 input.volume-input-range(type='range', min='0', max='100', value='50')
                 .temps
                     .en-cours 0:00
