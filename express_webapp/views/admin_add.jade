@@ -26,7 +26,7 @@ block content
                     input(type='text', name='genre', required='required', placeholder='Genre')
                     label Genre *
                 .champs
-                    input(type='number', name='annee', required='required', placeholder='Année')
+                    input(type='number', name='annee', required='required', min='1900', max='2019', placeholder='Année')
                     label Année *
                 .champs
-                    input.send(type='submit', placeholder='Envoyer')
+                    input.send(type='submit', value='Envoyer')

@@ -22,7 +22,7 @@ router.get('/add', function(req, res, next) {
 });
 
 // POST form add track
-router.post('/add', function(req, res, next) {
+router.post('/', function(req, res, next) {
 
     if (Object.keys(req.files).length === 0) {
         return res.status(400).send('No files were uploaded.');
