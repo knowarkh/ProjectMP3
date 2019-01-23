@@ -119,44 +119,55 @@ Playlist.prototype.generatePlaylistBlock = function(allMusic){
     allMusic = allMusic || false;
 
     if(this.musicList.length > 1){
-        let playlistBlock;
+        var playlistBlock;
         if(document.querySelector(".audioplayer .playlist") !== null){
             playlistBlock = document.querySelector(".audioplayer .playlist");
             playlistBlock.innerHTML = "";
         }else{
             playlistBlock = document.createElement("div");
-            playlistBlock.classList.add("playlist");
+            //playlistBlock.classList.add("playlist");
+            PlayerUtils.addClass(playlistBlock,"playlist");
         }
 
-        let trackListBlock = document.createElement("div");
+        var trackListBlock = document.createElement("div");
         trackListBlock.classList.add("tracklist");
+        PlayerUtils.addClass(trackListBlock,"tracklist");
 
-        let musicList = document.createElement("ol");
+
+        var musicList = document.createElement("ol");
         musicList.classList.add("list");
+        PlayerUtils.addClass(musicList,"list");
+
 
         //Check if the playlist contains 5 music and if it allow, drawn all musics data
-        for(let index = 0;index < this.musicList.length && (index < 5 || allMusic); index ++){
-            let musicBlock = document.createElement("li");
-            musicBlock.classList.add("element");
+        for(var index = 0;index < this.musicList.length && (index < 5 || allMusic); index ++){
+            var musicBlock = document.createElement("li");
+            //musicBlock.classList.add("element");
+            PlayerUtils.addClass(musicBlock,"element");
 
-            let coverBlock = document.createElement("img");
-            coverBlock.classList.add("image");
+            var coverBlock = document.createElement("img");
+            //coverBlock.classList.add("image");
+            PlayerUtils.addClass(coverBlock,"image");
             coverBlock.setAttribute("src",this.musicList[index].coverPath);
 
-            let numberBlock = document.createElement("p");
-            numberBlock.classList.add("numero");
+            var numberBlock = document.createElement("p");
+            //numberBlock.classList.add("numero");
+            PlayerUtils.addClass(numberBlock,"numero");
             numberBlock.innerText = index+1;
 
-            let titleBlock = document.createElement("p");
-            titleBlock.classList.add("titre");
+            var titleBlock = document.createElement("p");
+            //titleBlock.classList.add("titre");
+            PlayerUtils.addClass(titleBlock,"titre");
             titleBlock.innerText = this.musicList[index].title;
 
-            let artistBlock = document.createElement("p");
-            artistBlock.classList.add("artiste");
+            var artistBlock = document.createElement("p");
+            //artistBlock.classList.add("artiste");
+            PlayerUtils.addClass(artistBlock,"artiste");
             artistBlock.innerText = this.musicList[index].artistName;
 
-            let statsBlock = document.createElement("p");
-            statsBlock.classList.add("stats");
+            var statsBlock = document.createElement("p");
+            //statsBlock.classList.add("stats");
+            PlayerUtils.addClass(statsBlock,"stats");
             statsBlock.innerText = this.musicList[index].numberView;
 
             musicBlock.appendChild(coverBlock);
@@ -165,7 +176,8 @@ Playlist.prototype.generatePlaylistBlock = function(allMusic){
             musicBlock.appendChild(artistBlock);
             musicBlock.appendChild(statsBlock);
             musicBlock.addEventListener("click",function(){
-                manager.setPosition(index);
+                var t = JSON.parse(JSON.stringify(index));
+                manager.setPosition(t);
                 manager.play_pause();
             });
 
@@ -173,8 +185,9 @@ Playlist.prototype.generatePlaylistBlock = function(allMusic){
         }
         //If more than 5 musics into the playlist add a button to show them all
         if(this.musicList.length > 5){
-            let moreBlock = document.createElement("a");
-            moreBlock.classList.add("more");
+            var moreBlock = document.createElement("a");
+            //moreBlock.classList.add("more");
+            PlayerUtils.addClass(moreBlock,"more");
             moreBlock.setAttribute("href","");
 
             if(allMusic){
@@ -211,9 +224,9 @@ Playlist.prototype.generatePlaylistBlock = function(allMusic){
  * Will redrawn the number of views of each music into the playlist
  */
 Playlist.prototype.repaintPlaylist = function(){
-    let tracklist = document.querySelectorAll(".audioplayer .playlist .tracklist .list li .stats");
+    var tracklist = document.querySelectorAll(".audioplayer .playlist .tracklist .list li .stats");
 
-    for(let index = 0; index < tracklist.length; index++){
+    for(var index = 0; index < tracklist.length; index++){
         tracklist[index].innerText = this.musicList[index].numberView;
     }
 

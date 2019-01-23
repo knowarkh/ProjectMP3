@@ -114,5 +114,76 @@ PlayerUtils.prototype.createNewEventAndUseOnTargets = function(eventName, target
     })
 };
 
+PlayerUtils.prototype.addClass = function(target,classToAdd){
+    
+    var cssClass = target.classList;
+    
+    if(cssClass != null && !cssClass.contains(classToAdd)){
+        target.classList.add(classToAdd);
+    }else{
+        if(!this.hasClass(target,classToAdd)){
+            var oldClass = target.getAttribute("class");
+
+            if(oldClass != null && oldClass != ""){
+                target.setAttribute("class",oldClass.toString() + " " + classToAdd);
+            }else{
+                target.setAttribute("class",classToAdd);
+            }
+        }
+            
+    }
+
+};
+
+PlayerUtils.prototype.removeClass = function(target, classToRemove){
+  
+  var cssClass = target.classList;
+    
+    if(this.hasClass(target,classToRemove)){
+        
+        if(cssClass != null){
+            target.classList.remove(classToRemove);
+        }else{
+            
+            if(target.getAttribute("class") != null){
+                var classlist = target.getAttribute("class").split(" ");
+                classlist.splice(classlist.indexOf(classToRemove));
+                
+                var newClassList = "";
+                for(var i = 0; i < classlist.length ; i++){
+                    if(i != classlist.length -1)
+                        newClassList += classlist[i] + " ";
+                    else
+                        newClassList += classlist[i];
+                }
+                target.setAttribute("class" , newClassList );
+                var l = target.getAttribute("class").split(" ");
+
+
+            }
+            
+        }
+    }
+};
+
+PlayerUtils.prototype.hasClass = function(target, classToCheck){
+  
+  var cssClass = target.classList;
+    
+    if(cssClass != null){
+        return target.classList.contains(classToCheck);
+    }else{
+        
+        if(target.getAttribute("class") != null){
+
+            var classlist = target.getAttribute("class").split(" ");
+            var t = classlist.indexOf(classToCheck) !== -1 
+            return t;
+    
+        }
+    }
+    
+};
+
 var PlayerUtils = new PlayerUtils();
 
