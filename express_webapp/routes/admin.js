@@ -28,7 +28,10 @@ router.post('/', function(req, res, next) {
         return res.status(400).send('No files were uploaded.');
     }
 
-    if (req.files.foo.name.substr(-4) !== ".mp3" && req.files.cover.name.substr(-4) !==".jpg") {
+    // SECU - Checking mimetype
+    var mimeTypeMp3 = req.files.foo.mimetype;
+    var mimeTypeJpg = req.files.cover.mimetype;
+    if (mimeTypeMp3 !== "audio/mpeg" && mimeTypeJpg !== "image/jpeg") {
         return res.status(400).send('Veuillez mettre un fichier .mp3 et un fichier .jpg');
     }
 
