@@ -3,46 +3,50 @@
  * @param {array} dotsList array of INT position to make the waveform
  * @param {int} percentilePlayed - percentile of the current music, if exist. Used to find the position of the bar which match with the position of the music on the spectrum
  */
-function createWaveForm(dotsList, percentilePlayed = 0) {
-    let spectre = document.querySelector(".audioplayer .waveform");
+function createWaveForm(dotsList, percentilePlayed) {
+
+    //Set a default parameter which work with IE11
+    percentilePlayed = percentilePlayed || 0;
+
+    var spectre = document.querySelector(".audioplayer .waveform");
 
     /** Reset the content of the waveform */
 
     spectre.innerHTML = "";
 
-    let svgns = "http://www.w3.org/2000/svg";
+    var svgns = "http://www.w3.org/2000/svg";
 
-    let primarySVG = document.createElementNS(svgns, "svg");
-    let reflectSVG = document.createElementNS(svgns, "svg");
-    let SVGRules = document.createElementNS(svgns, "svg");
+    var primarySVG = document.createElementNS(svgns, "svg");
+    var reflectSVG = document.createElementNS(svgns, "svg");
+    var SVGRules = document.createElementNS(svgns, "svg");
 
-    let primaryWaveWidth = spectre.clientWidth;
-    let primaryWaveHeight = Math.round(spectre.clientHeight * 2 / 3);
+    var primaryWaveWidth = spectre.clientWidth;
+    var primaryWaveHeight = Math.round(spectre.clientHeight * 2 / 3);
 
-    let reflectWaveWidth = primaryWaveWidth;
-    let reflectWaveHeight = Math.round(spectre.clientHeight / 3);
+    var reflectWaveWidth = primaryWaveWidth;
+    var reflectWaveHeight = Math.round(spectre.clientHeight / 3);
 
-    let className = "bar";
+    var className = "bar";
 
     //JSON data
-    let data = dotsList;
-    let maxSizeBar = Math.max.apply(null, dotsList);
+    var data = dotsList;
+    var maxSizeBar = Math.max.apply(null, dotsList);
 
-    let nbBars = dotsList.length;
-    let x_bar = 0;
-    let y_bar = 0;
+    var nbBars = dotsList.length;
+    var x_bar = 0;
+    var y_bar = 0;
 
-    let barWidth = 4;
-    let barHeight = 0;
+    var barWidth = 4;
+    var barHeight = 0;
 
     /** Define the css rules */
 
-    let defBlock = document.createElementNS(svgns, "defs");
+    var defBlock = document.createElementNS(svgns, "defs");
 
     /** Top part */
 
     //Define one time the linearGradient object then clone it
-    let gradientBarUp = document.createElementNS(svgns, "linearGradient");
+    var gradientBarUp = document.createElementNS(svgns, "linearGradient");
 
     gradientBarUp.setAttribute("id", "waveformStyleBarUp");
     gradientBarUp.setAttribute("x1", "0");
@@ -52,39 +56,39 @@ function createWaveForm(dotsList, percentilePlayed = 0) {
     gradientBarUp.innerHTML = "<stop offset='0%' stop-color='#F0F0F0' />\n" +"<stop offset='100%' stop-color='#646464' />\n";
     defBlock.appendChild(gradientBarUp);
 
-    let gradientBarUpPlayed = gradientBarUp.cloneNode();
+    var gradientBarUpPlayed = gradientBarUp.cloneNode();
     gradientBarUpPlayed.setAttribute("id", "waveformStyleBarUpPlayed");
     gradientBarUpPlayed.innerHTML = "<stop offset='0%' stop-color='#F0F0F0' />\n" + "<stop offset='100%' stop-color='#f95800' />\n";
     defBlock.appendChild(gradientBarUpPlayed);
         
-    let gradientBarUpHoverBack = gradientBarUp.cloneNode();
+    var gradientBarUpHoverBack = gradientBarUp.cloneNode();
     gradientBarUpHoverBack.setAttribute("id", "waveformStyleBarUpHoverBack");
     gradientBarUpHoverBack.innerHTML = "<stop offset='0%' stop-color='#F0F0F0' />\n" + "<stop offset='100%' stop-color='#c33900' />\n";
     defBlock.appendChild(gradientBarUpHoverBack);
 
-    let gradientBarUpHoverFront = gradientBarUp.cloneNode();
+    var gradientBarUpHoverFront = gradientBarUp.cloneNode();
     gradientBarUpHoverFront.setAttribute("id", "waveformStyleBarUpHoverFront");
     gradientBarUpHoverFront.innerHTML = "<stop offset='0%' stop-color='#F0F0F0' />\n" + "<stop offset='100%' stop-color='#993600' />\n";
     defBlock.appendChild(gradientBarUpHoverFront);
 
     /** Bottom part */
 
-    let gradientBarDown = gradientBarUp.cloneNode();
+    var gradientBarDown = gradientBarUp.cloneNode();
     gradientBarDown.setAttribute("id", "waveformStyleBarDown");
     gradientBarDown.innerHTML = "<stop offset='0%' stop-color='#676767' stop-opacity = 0.68 />\n" + "<stop offset='100%' stop-color='#F0F0F0' stop-opacity = 1/>\n";
     defBlock.appendChild(gradientBarDown);
 
-    let gradientBarDownPlayed = gradientBarDown.cloneNode();
+    var gradientBarDownPlayed = gradientBarDown.cloneNode();
     gradientBarDownPlayed.setAttribute("id", "waveformStyleBarDownPlayed");
     gradientBarDownPlayed.innerHTML = "<stop offset='0%' stop-color='#FF5B00' stop-opacity = 0.68 />\n" + "<stop offset='100%' stop-color='#F0F0F0' stop-opacity = 1/>\n";
     defBlock.appendChild(gradientBarDownPlayed);
 
-    let gradientBarDownHoverBack = gradientBarDown.cloneNode();
+    var gradientBarDownHoverBack = gradientBarDown.cloneNode();
     gradientBarDownHoverBack.setAttribute("id", "waveformStyleBarDownHoverBack");
     gradientBarDownHoverBack.innerHTML = "<stop offset='0%' stop-color='#C33400' stop-opacity = 0.68 />\n" + "<stop offset='100%' stop-color='#F0F0F0' stop-opacity = 1/>\n";
     defBlock.appendChild(gradientBarDownHoverBack);
 
-    let gradientBarDownHoverFront = gradientBarDown.cloneNode();
+    var gradientBarDownHoverFront = gradientBarDown.cloneNode();
     gradientBarDownHoverFront.setAttribute("id", "waveformStyleBarDownHoverFront");
     gradientBarDownHoverFront.innerHTML = "<stop offset='0%' stop-color='#993300' stop-opacity = 0.68 />\n" + "<stop offset='100%' stop-color='#F0F0F0' stop-opacity = 1/>\n";
     defBlock.appendChild(gradientBarDownHoverFront);
@@ -105,7 +109,7 @@ function createWaveForm(dotsList, percentilePlayed = 0) {
      * @Deprecated
      */
 
-    let possibleWidthBar = reflectWaveWidth / nbBars;
+    var possibleWidthBar = reflectWaveWidth / nbBars;
 
     // while(possibleWidthBar <= minSizeBar){
     //   nbBars--;
@@ -116,7 +120,7 @@ function createWaveForm(dotsList, percentilePlayed = 0) {
 
     /** Number of bar */
 
-    let numberOfBarToRemove = 0;
+    var numberOfBarToRemove = 0;
 
     while ((nbBars - numberOfBarToRemove) * barWidth > primaryWaveWidth) {
         numberOfBarToRemove++;
@@ -126,7 +130,7 @@ function createWaveForm(dotsList, percentilePlayed = 0) {
     nbBars -= numberOfBarToRemove;
 
     //Position which represent the current position of the music
-    let barPlayedPosition = Math.ceil(nbBars * percentilePlayed);
+    var barPlayedPosition = Math.ceil(nbBars * percentilePlayed);
 
     /**
      * Create the waveform
@@ -138,27 +142,32 @@ function createWaveForm(dotsList, percentilePlayed = 0) {
     primarySVG.setAttribute("width", primaryWaveWidth);
     primarySVG.setAttribute("height", primaryWaveHeight);
     //primarySVG.setAttribute("viewBox","0 0 " + primaryWaveWidth + " " + primaryWaveHeight);
+    
 
-    primarySVG.classList.add("sprectrumContainer");
-
+    //primarySVG.classList.add("sprectrumContainer");
+    PlayerUtils.addClass(primarySVG,"sprectrumContainer");
 
     reflectSVG.setAttribute("xmlns", svgns);
+
 
     //Set the rigth size of the reflect waveform
     reflectSVG.setAttribute("width", reflectWaveWidth);
     reflectSVG.setAttribute("height", reflectWaveHeight);
     //reflectSVG.setAttribute("viewBox","0 0 " + reflectWaveWidth + " " + reflectWaveHeight);
 
-    reflectSVG.classList.add("sprectrumContainer");
+    //reflectSVG.classList.add("sprectrumContainer");
+    PlayerUtils.addClass(reflectSVG,"sprectrumContainer");
 
-    for (let i = 0; i < nbBars; i++) {
+    for (var i = 0; i < nbBars; i++) {
         /** Create and add every bar of the primary waveform*/
-        let primaryRect = document.createElementNS(svgns, "rect");
+        var primaryRect = document.createElementNS(svgns, "rect");
         barHeight = getCorrectHeight("primary", data[i]);
 
         y_bar = primaryWaveHeight - barHeight;
 
-        primaryRect.classList.add(className + "-up");
+        //primaryRect.classList.add(className + "-up");
+        PlayerUtils.addClass(primaryRect,className + "-up");
+
         primaryRect.setAttributeNS(null, "data_position", i);
 
         primaryRect.setAttributeNS(null, "x", x_bar);
@@ -171,10 +180,12 @@ function createWaveForm(dotsList, percentilePlayed = 0) {
 
         /** Create and add every bar of the reflect waveform */
 
-        let reflectRect = document.createElementNS(svgns, "rect");
+        var reflectRect = document.createElementNS(svgns, "rect");
         barHeight = getCorrectHeight("reflect", data[i]);
 
-        reflectRect.classList.add(className + "-down");
+        //reflectRect.classList.add(className + "-down");
+        PlayerUtils.addClass(reflectRect,className + "-down");
+
 
         reflectRect.setAttributeNS(null, "data_position", i);
         reflectRect.setAttributeNS(null, "x", x_bar);
@@ -192,8 +203,12 @@ function createWaveForm(dotsList, percentilePlayed = 0) {
 
         //check if this position have been played or not, and add the "played-flash" class
         if (i <= barPlayedPosition) {
-            primaryRect.classList.add("played-flash");
-            reflectRect.classList.add("played-flash");
+            //primaryRect.classList.add("played-flash");
+            //reflectRect.classList.add("played-flash");
+
+            PlayerUtils.addClass(primaryRect,"played-flash");
+            PlayerUtils.addClass(reflectRect,"played-flash");
+
         }
 
     }
@@ -232,7 +247,7 @@ function createWaveForm(dotsList, percentilePlayed = 0) {
      */
     function getAvgDotList(dotList, numberOfDotsRemove) {
         //Do a clone of the dotList given, to not edit it
-        let res = JSON.parse(JSON.stringify(dotList));
+        var res = JSON.parse(JSON.stringify(dotList));
 
         /**
          * The recursive part of the function, will does the deep course and edit the dots
@@ -241,19 +256,23 @@ function createWaveForm(dotsList, percentilePlayed = 0) {
          * @param begin - start of the section which be used
          * @param end - end od the section which be used
          */
-        function transformAvgDotList(dotList, numberOfDotsRemove, begin = 0, end = dotList.length - 1) {
+        function transformAvgDotList(dotList, numberOfDotsRemove, begin, end) {
+
+            begin = begin || 0;
+            end = end || dotList.length - 1;
+
             //Part which do the work
             if (numberOfDotsRemove === 1) {
                 if (end - begin % 2 === 0) {
-                    let val1 = (dotList[end - 1] == null) ? dotList[end] : dotList[end - 1] * 0.9;
-                    let val2 = (dotList[end] == null) ? dotList[end - 1] : dotList[end] * 0.9;
-                    let avgValue = (val1 + val2) / 2;
+                    var val1 = (dotList[end - 1] == null) ? dotList[end] : dotList[end - 1] * 0.9;
+                    var val2 = (dotList[end] == null) ? dotList[end - 1] : dotList[end] * 0.9;
+                    var avgValue = (val1 + val2) / 2;
                     dotList[end] = null; //Instead of removing the value, put a null, this will not edit the dotList in action and prevent some bugs
                     dotList[end - 1] = avgValue;
                 } else {
-                    let val1 = (dotList[begin + 1] == null) ? dotList[begin] : dotList[begin + 1] * 0.9;
-                    let val2 = (dotList[begin] == null) ? dotList[begin + 1] : dotList[begin] * 0.9;
-                    let avgValue = (val1 + val2) / 2;
+                    var val1 = (dotList[begin + 1] == null) ? dotList[begin] : dotList[begin + 1] * 0.9;
+                    var val2 = (dotList[begin] == null) ? dotList[begin + 1] : dotList[begin] * 0.9;
+                    var avgValue = (val1 + val2) / 2;
                     dotList[begin] = null; //Instead of removing the value, put a null, this will not edit the dotList in action and prevent some bugs
                     dotList[begin + 1] = avgValue;
                 }
