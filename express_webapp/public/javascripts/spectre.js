@@ -6,7 +6,7 @@
 function createWaveForm(dotsList, percentilePlayed) {
 
     //Set a default parameter which work with IE11
-    percentilePlayed = percentilePlayed || 0;
+    percentilePlayed = percentilePlayed || -1;
 
     var spectre = document.querySelector(".audioplayer .waveform");
 

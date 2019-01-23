@@ -62,6 +62,10 @@ function Player() {
 
         }
 
+        if(this.sound.muted){
+            this.mute();
+        }
+
         this.sound.play();
         this.sound.pause();
         this.repaint();
@@ -544,7 +548,7 @@ Player.prototype.mute = function () {
         PlayerUtils.addClass(volume,"volume-off");
 
         if (this.sound !== null)
-            this.sound.setVolume(0);
+            this.sound.mute();
     } else {
         //volumeClass.remove('volume-off');
         //volume.classList.add('volume-on');
@@ -552,10 +556,14 @@ Player.prototype.mute = function () {
         PlayerUtils.addClass(volume,"volume-on");
 
         if (this.sound !== null)
-            this.sound.setVolume(this.volume);
+            this.sound.unmute();
     }
 };
 
+Player.prototype.playerIsMute = function(){
+    let volume = document.querySelector(".audioplayer .controls .volume .volume_button");
+    return PlayerUtils.hasClass(volume,'volume-off');
+};
 
 /**
  * Will add a like to the database and add 1 to the number of like show
@@ -702,6 +710,12 @@ Player.prototype.play_pause = function () {
                 }
             }
         }
+        if(this.playerIsMute()){
+            this.sound.mute();
+        }else{
+            this.sound.unmute();
+        }
+
         //Add 1 to the value of view if isn't done
         this.addView();
 
