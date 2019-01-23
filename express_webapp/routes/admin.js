@@ -14,11 +14,15 @@ var pathCover = 'public/images/';
 
 //---Render admin webpage---
 router.get('/', function(req, res, next) {
+    res.render('index', { title: 'Express' });
+});
+
+router.get('/add', function(req, res, next) {
     res.render('admin_add', { title: 'Express' });
 });
 
 // POST form add track
-router.post('/', function(req, res, next) {
+router.post('/add', function(req, res, next) {
 
     if (Object.keys(req.files).length === 0) {
         return res.status(400).send('No files were uploaded.');
