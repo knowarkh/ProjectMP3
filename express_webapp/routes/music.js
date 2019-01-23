@@ -1,7 +1,10 @@
+/**
+ * This file contains all routes related to the player.
+ */
+
 var express = require('express');
 var router = express.Router();
 var Music = require('../bin/db-connection').database.Musique;
-var path = require('path');
 
 /* GET music listing. */
 router.get('/', function(req, res, next) {

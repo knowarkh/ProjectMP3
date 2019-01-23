@@ -36,7 +36,7 @@ Playlist.prototype.getCurrentMusic = function(){
 };
 
 /**
- * Get a Music with a position to the playlist
+ * Get a Music with its position in the playlist
  * @param position - int - Position into the playlist
  * @returns {Music} - Music object
  */
@@ -74,7 +74,7 @@ Playlist.prototype.removeMusicByMusic = function(music){
 };
 
 /**
- * Remove a music with the position into the playlist
+ * Remove a music with its position into the playlist
  * @param position - position to remove
  * @returns {boolean} - true if success, else otherwise
  */
@@ -110,7 +110,7 @@ Playlist.prototype.previous = function(){
 };
 
 /**
- * Will generate the block which contain the music into the playlist
+ * Will generate the block which contains the musics into the playlist
  * @param allMusic {boolean} - If more than 5 musics in the playlist, put "true" to show all, false by default
  */
 Playlist.prototype.generatePlaylistBlock = function(allMusic){
@@ -137,7 +137,6 @@ Playlist.prototype.generatePlaylistBlock = function(allMusic){
         var musicList = document.createElement("ol");
         musicList.classList.add("list");
         PlayerUtils.addClass(musicList,"list");
-
 
         //Check if the playlist contains 5 music and if it allow, drawn all musics data
         for(var index = 0;index < this.musicList.length && (index < 5 || allMusic); index ++){
@@ -221,7 +220,7 @@ Playlist.prototype.generatePlaylistBlock = function(allMusic){
 };
 
 /**
- * Will redrawn the number of views of each music into the playlist
+ * Will redraw the number of views of each music into the playlist
  */
 Playlist.prototype.repaintPlaylist = function(){
     var tracklist = document.querySelectorAll(".audioplayer .playlist .tracklist .list li .stats");

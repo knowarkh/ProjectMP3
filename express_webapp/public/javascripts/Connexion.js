@@ -22,7 +22,7 @@ Connexion.prototype.requestGet = function (url, callback) {
 };
 
 /**
- * Will process a get request to the URL and applied the callback at the end of the request
+ * Will process a post request to the URL and applied the callback at the end of the request
  * @param url {string} - target of the request
  * @param values {JSON} - value as JSON format which be send to the server
  * @param callback {function} - function which be used at the end of the request
@@ -42,7 +42,7 @@ Connexion.prototype.requestPost = function (url, values, callback) {
 };
 
 /**
- * Will process a get request to the URL and applied the callback at the end of the request
+ * Will process a put request to the URL and applied the callback at the end of the request
  * @param url {string} - target of the request
  * @param values {JSON} - value as JSON format which be send to the server
  * @param callback {function} - function which be used at the end of the request
@@ -109,7 +109,7 @@ Connexion.prototype.getMusicByAlbum = function (albumName, callback) {
 };
 
 /**
- * Return the musics which match with the given genre's name
+ * Return the musics which match with the given type
  * @param genreName {String} - Name of the wanted genre
  * @param callback {function} - function which be called at the end of the request
  */
@@ -191,7 +191,6 @@ Connexion.prototype.addNumberOfShare = function (idMusic, callback) {
  */
 Connexion.prototype.addMusicToPlaylist = function (idPlaylist, idMusic, callback){
     this.requestPut("http://localhost:3000/playlist/maj/add/" + idPlaylist, JSON.parse('{"idMusic" : '+idMusic+'}'), callback);
-
 };
 
 /**
@@ -202,7 +201,6 @@ Connexion.prototype.addMusicToPlaylist = function (idPlaylist, idMusic, callback
  */
 Connexion.prototype.removeMusicToPlaylist = function (idPlaylist, idMusic, callback){
     this.requestPut("http://localhost:3000/playlist/maj/remove/" + idPlaylist, JSON.parse('{"idMusic" : '+idMusic+'}'), callback);
-
 };
 
 /**         Common part          */

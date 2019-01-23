@@ -39,7 +39,7 @@ function createWaveForm(dotsList, percentilePlayed) {
     var barWidth = 4;
     var barHeight = 0;
 
-    /** Define this fucking css rules */
+    /** Define the css rules */
 
     var defBlock = document.createElementNS(svgns, "defs");
 
@@ -222,7 +222,7 @@ function createWaveForm(dotsList, percentilePlayed) {
 
 
     /**
-     * Get the height of a bar after a resize proportionally to the waveform's div
+     * Get the height of a bar after a proportionally resize of the waveform's div
      * @param type - primary or reflect, define which algorithm will be used
      * @param value - the height of the bar, wanted to be resize
      * @returns the transformed value or null if the type ins't both "primary" or "reflect"
@@ -240,7 +240,7 @@ function createWaveForm(dotsList, percentilePlayed) {
     }
 
     /**
-     * Do a recursive deep course, which do a average and remove of a number of point given
+     * Do a recursive deep course, which does an average and remove a number of point given
      * @param dotList - array of int, which represent the waveform
      * @param numberOfDotsRemove - Number of dot wanted to be removed
      * @returns a new array of int with the average value and the good number of dots
@@ -250,7 +250,7 @@ function createWaveForm(dotsList, percentilePlayed) {
         var res = JSON.parse(JSON.stringify(dotList));
 
         /**
-         * The recursive part of the function, will do the deep course and edit the dots
+         * The recursive part of the function, will does the deep course and edit the dots
          * @param dotList - array of dot given earlier
          * @param numberOfDotsRemove - number of dots given earlier
          * @param begin - start of the section which be used

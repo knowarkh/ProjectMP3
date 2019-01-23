@@ -1,11 +1,18 @@
 function PlayerUtils(){}
 
+/**
+ * The function pads a string to a new length
+ * @param string
+ * @param pad
+ * @param length
+ * @returns {string}
+ */
 PlayerUtils.prototype.str_pad_left = function(string,pad,length) {
     return (new Array(length+1).join(pad)+string).slice(-length);
 };
 
 /**
- * Transform the duration in a number of seconds to a readable text
+ * Transform the duration of a number in seconds to a readable text
  * @param duree {int} - number of seconds
  * @returns {string} - Text version of the time
  */
@@ -16,7 +23,7 @@ PlayerUtils.prototype.secondsToReadableTime = function(duree){
 };
 
 /**
- * Transform the duration in a number of milliseconds to a readable text
+ * Transform the duration of a number in milliseconds to a readable text
  * @param duree {int} - number of milliseconds
  * @returns {string} - Text version of the time
  */
@@ -28,23 +35,23 @@ PlayerUtils.prototype.milliSecondsToReadableTime = function(duree){
  * Function use to get a value of a element put in the url
  * @param name {string} - name of the wanted value
  * @param url {string} - value of the url
- * @returns {*} - the current value or a empty string
+ * @returns {string} - the current value or a empty string
  */
 PlayerUtils.prototype.getParameterByName = function(name, url) {
     if (!url) url = window.location.href;
     name = name.replace(/[\[\]]/g, '\\$&');
     let regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
         results = regex.exec(url);
-    if (!results) return null;
+    if (!results) return '';
     if (!results[2]) return '';
     return decodeURIComponent(results[2].replace(/\+/g, ' '));
 };
 
 /**
  * Add a cookie value
- * @param cname
- * @param cvalue
- * @param exdays
+ * @param cname {string} - Name of the cookie
+ * @param cvalue {string} - Value to put into the cookie
+ * @param exdays {int} - Number of day before the cookie dies
  */
 PlayerUtils.prototype.setCookie = function(cname, cvalue, exdays) {
     let d = new Date();
@@ -55,8 +62,8 @@ PlayerUtils.prototype.setCookie = function(cname, cvalue, exdays) {
 
 /**
  * Allow to get a cookie value
- * @param cname
- * @returns {string}
+ * @param cname {string} - name of the wanted cookie
+ * @returns {string} - value of the wanted cookie
  */
 PlayerUtils.prototype.getCookie = function(cname) {
     let name = cname + "=";
@@ -74,7 +81,7 @@ PlayerUtils.prototype.getCookie = function(cname) {
 };
 
 /**
- * Used to know which css is used and do a different job
+ * Used to know which css is used and does a different job
  * @returns {boolean} if the current screen if smaller or not and so be a mobile version
  */
 PlayerUtils.prototype.detectCompactSize = function() {

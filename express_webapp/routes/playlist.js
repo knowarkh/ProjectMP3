@@ -1,3 +1,7 @@
+/**
+ * This file contains all routes related to the playlist.
+ */
+
 var express = require('express');
 var router = express.Router();
 var Playlist = require('../bin/db-connection').database.Playlist;
