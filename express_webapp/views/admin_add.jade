@@ -14,19 +14,19 @@ block content
             .champs-block
                 .title Informations de la musique
                 .champs
-                    input(type='text', name='titre', placeholder='Titre')
-                    label Titre
+                    input(type='text', name='titre', required='required', placeholder='Titre')
+                    label Titre *
                 .champs
                     input(type='text', name='album', placeholder='Album')
                     label Album
                 .champs
-                    input(type='text', name='artiste', placeholder='Artiste')
-                    label Artiste
+                    input(type='text', name='artiste', required='required', placeholder='Artiste')
+                    label Artiste *
                 .champs
-                    input(type='text', name='genre', placeholder='Genre')
-                    label Genre
+                    input(type='text', name='genre', required='required', placeholder='Genre')
+                    label Genre *
                 .champs
-                    input(type='text', name='annee', placeholder='Année')
-                    label Année
+                    input(type='number', name='annee', required='required', placeholder='Année')
+                    label Année *
                 .champs
                     input.send(type='submit', placeholder='Envoyer')
