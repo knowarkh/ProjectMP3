@@ -1,5 +1,5 @@
 doctype html
-html
+html(lang='fr')
     head
         meta(charset='UTF-8')
         title Page d'administration
@@ -11,15 +11,21 @@ html
                 img(src='/images/_icons/logoWIP.png', alt='Logo WIP')
                 span.title Administration
                 span.version Version :
-                    .num 0.1.2
+                    span.num 0.1.2
             .body
                 nav
                     ul
-                        li Tableau de bord
-                        li Liste des musiques
-                        li Ajouter une musique
+                        li
+                            a(href='/admin')
+                                .tab Tableau de bord
+                        li
+                            a(href='/admin/list')
+                                .tab Liste des musiques
+                        li
+                            a(href='/admin/add')
+                                .tab Ajouter une musique
 
-                section
+                section.section
                     .content
                         block content
 

@@ -14,12 +14,20 @@ var pathCover = 'public/images/';
 
 //---Render admin webpage---
 router.get('/', function(req, res, next) {
-    res.render('index', { title: 'Express' });
+    res.render('admin_home', { title: 'Express' });
 });
 
+
+
 router.get('/add', function(req, res, next) {
-    res.render('admin_add', { title: 'Express' });
+    res.render('admin_add');
 });
+
+
+router.get('/list', function(req, res, next) {
+    res.render('admin_list');
+});
+
 
 // POST form add track
 router.post('/', function(req, res, next) {

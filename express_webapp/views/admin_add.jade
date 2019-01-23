@@ -2,15 +2,15 @@ extends admin_template
 
 block content
     .page-ajout
-        form(ref='uploadForm', method='post', action='/admin', enctype='multipart/form-data')
+        form(method='post', action='/admin', enctype='multipart/form-data')
             .upload
                 .title Upload Zone
                 .champs
                     label Musique mp3
-                    input#mySound(name='foo', type='file', required='required', accept='audio/mpeg', placeholder="Selectionner votre fichier")
+                    input#mySound(name='foo', type='file', required='required', accept='audio/mpeg')
                 .champs
                     label Cover
-                    input#myCover(name='cover' type='file', required='required', accept='image/jpeg', placeholder="Selectionner votre cover")
+                    input#myCover(name='cover' type='file', required='required', accept='image/jpeg')
             .champs-block
                 .title Informations de la musique
                 .champs
