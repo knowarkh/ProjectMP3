@@ -1,0 +1,24 @@
+extends admin_template
+
+block content
+    .page-ajout
+        form(method='post', action='/admin/put/' + data[0].id, enctype='multipart/form-data')
+            .champs-block
+                .title Modification de la musique
+                .champs
+                    input(type='text', name='titre', required='required', placeholder='Titre', value=data[0].titre)
+                    label Titre *
+                .champs
+                    input(type='text', name='album', placeholder='Album', value=data[0].album)
+                    label Album
+                .champs
+                    input(type='text', name='artiste', required='required', placeholder='Artiste', value=data[0].artiste)
+                    label Artiste *
+                .champs
+                    input(type='text', name='genre', required='required', placeholder='Genre', value=data[0].genre)
+                    label Genre *
+                .champs
+                    input(type='number', name='annee', required='required', min='1900', max='2019', placeholder='Année', value=data[0].annee)
+                    label Année *
+                .champs
+                    input.send(type='submit', value='Envoyer')

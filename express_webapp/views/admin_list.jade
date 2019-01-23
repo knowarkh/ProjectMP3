@@ -23,5 +23,7 @@ block content
                     p.album= val.album
                     p.genre= val.genre
                     p.annee= val.annee
-                    a.modif Modification
-                    a.suppr Suppression
+                    a.modif(href='/admin/' + val.id) Modification
+                    //a.suppr(href='/admin/del/' + val.id) Suppression
+                    form(method='post', action='/admin/del/' + val.id, enctype='multipart/form-data')
+                        input.suppr(type='submit', value='Suppression')

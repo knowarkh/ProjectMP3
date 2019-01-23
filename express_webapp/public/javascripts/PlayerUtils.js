@@ -142,9 +142,9 @@ PlayerUtils.prototype.createNewEventAndUseOnTargets = function(eventName, target
  * @param classToAdd {String} - class wanted to be added
  */
 PlayerUtils.prototype.addClass = function(target,classToAdd){
-    
+
     var cssClass = target.classList;
-    
+
     if(cssClass != null && !cssClass.contains(classToAdd)){
         target.classList.add(classToAdd);
     }else{
@@ -157,7 +157,7 @@ PlayerUtils.prototype.addClass = function(target,classToAdd){
                 target.setAttribute("class",classToAdd);
             }
         }
-            
+
     }
 
 };
@@ -168,19 +168,19 @@ PlayerUtils.prototype.addClass = function(target,classToAdd){
  * @param classToRemove {String} - class wanted to be removed
  */
 PlayerUtils.prototype.removeClass = function(target, classToRemove){
-  
+
   var cssClass = target.classList;
-    
+
     if(this.hasClass(target,classToRemove)){
-        
+
         if(cssClass != null){
             target.classList.remove(classToRemove);
         }else{
-            
+
             if(target.getAttribute("class") != null){
                 var classlist = target.getAttribute("class").split(" ");
                 classlist.splice(classlist.indexOf(classToRemove));
-                
+
                 var newClassList = "";
                 for(var i = 0; i < classlist.length ; i++){
                     if(i !== classlist.length -1)
@@ -193,7 +193,7 @@ PlayerUtils.prototype.removeClass = function(target, classToRemove){
 
 
             }
-            
+
         }
     }
 };
@@ -205,13 +205,13 @@ PlayerUtils.prototype.removeClass = function(target, classToRemove){
  * @returns {boolean} - true if contains, false otherwise
  */
 PlayerUtils.prototype.hasClass = function(target, classToCheck){
-  
+
   var cssClass = target.classList;
-    
+
     if(cssClass != null){
         return target.classList.contains(classToCheck);
     }else{
-        
+
         if(target.getAttribute("class") != null){
 
             var classlist = target.getAttribute("class").split(" ");
@@ -219,7 +219,7 @@ PlayerUtils.prototype.hasClass = function(target, classToCheck){
 
         }
     }
-    
+
 };
 
 /**
@@ -228,12 +228,15 @@ PlayerUtils.prototype.hasClass = function(target, classToCheck){
  * @returns {String} - safe String
  */
 PlayerUtils.prototype.escapeHtml = function(unsafe){
-        return unsafe
-            .replace(/&/g, "&amp;")
-            .replace(/</g, "&lt;")
-            .replace(/>/g, "&gt;")
-            .replace(/"/g, "&quot;")
-            .replace(/'/g, "&#039;");
+    var map = {
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#039;'
+    };
+
+    return unsafe.replace(/[&<>"']/g, function(m) { return map[m]; });
 };
 
 var PlayerUtils = new PlayerUtils();

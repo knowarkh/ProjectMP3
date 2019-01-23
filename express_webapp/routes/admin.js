@@ -12,28 +12,26 @@ var pathMP3 = 'public/musics/';
 var pathCover = 'public/images/';
 
 
-//---Render admin webpage---
+
+/**
+ * Displaying home page of the administration page
+ */
 router.get('/', function(req, res, next) {
-    res.render('admin_home', { title: 'Express' });
+    res.render('admin_home');
 });
 
 
-
+/**
+ * Displaying a form to add music
+ */
 router.get('/add', function(req, res, next) {
     res.render('admin_add');
 });
 
 
-router.get('/list', function(req, res, next) {
-    Music.find(function(err, music){
-        if (err){
-            console.log("ERROR= " +err);
-        }
-        res.render('admin_list', {data:music});
-    }).sort({"id" : 1});
-});
-
-
+/**
+ * Add music
+ */
 // POST form add track
 router.post('/', function(req, res, next) {
 
@@ -127,6 +125,59 @@ router.post('/', function(req, res, next) {
 
 
 /**
+ * Retrieving music list
+ */
+router.get('/list', function(req, res, next) {
+    Music.find(function(err, music){
+        if (err){
+            console.log("ERROR= " +err);
+        }
+        res.render('admin_list', {data:music});
+    }).sort({"id" : 1});
+});
+
+
+
+/**
+ * Retrieving music by its ID
+ */
+router.get('/:id', function(req,res){
+    Music.find({id: req.params.id}, function(err, music) {
+        if (err) {
+            console.log("ERROR= " +err);
+        }
+        res.render('admin_modif', {data:music});
+    });
+});
+
+/**
+ * Edit music
+ */
+router.post('/put/:id', function(req, res) {
+    Music.update({id: req.params.id}, req.body, function(err, status) {
+        if (err) {
+            console.log("ERROR= " +err);
+        }
+        res.redirect('/admin/list');
+    });
+});
+
+
+/**
+ * Remove music
+ */
+router.post('/del/:id', function(req, res) {
+    Music.remove({id: req.params.id}, function(err, status) {
+        if (err) {
+            console.log("ERROR= " +err);
+        }
+        res.redirect('/admin/list');
+    });
+});
+
+
+
+/**
  * Concatenates the artist's name and the title of the music to form a path.
  * @param artiste - string - the name of the artist
  * @param titre - string - the title of the music
@@ -158,6 +209,24 @@ function capitalizeFirstLetter(str) {
             return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
         }
     );
+}
+
+
+/**
+ * Allows to replace the special characters of a string
+ * @param text - string - the text to be formatted
+ * @returns string - the reformatted string
+ */
+function escapeHtml(text) {
+    var map = {
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#039;'
+    };
+
+    return text.replace(/[&<>"']/g, function(m) { return map[m]; });
 }
 
 module.exports = router;
