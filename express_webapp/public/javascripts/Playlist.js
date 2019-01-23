@@ -139,7 +139,7 @@ Playlist.prototype.generatePlaylistBlock = function(allMusic){
         PlayerUtils.addClass(musicList,"list");
 
         //Check if the playlist contains 5 music and if it allow, drawn all musics data
-        for(var index = 0;index < this.musicList.length && (index < 5 || allMusic); index ++){
+        for(let index = 0;index < this.musicList.length && (index < 5 || allMusic); index ++){
             var musicBlock = document.createElement("li");
             //musicBlock.classList.add("element");
             PlayerUtils.addClass(musicBlock,"element");
@@ -167,7 +167,7 @@ Playlist.prototype.generatePlaylistBlock = function(allMusic){
             var statsBlock = document.createElement("p");
             //statsBlock.classList.add("stats");
             PlayerUtils.addClass(statsBlock,"stats");
-            statsBlock.innerText = this.musicList[index].numberView;
+            statsBlock.innerText = PlayerUtils.secondsToReadableTime(this.musicList[index].duration);
 
             musicBlock.appendChild(coverBlock);
             musicBlock.appendChild(numberBlock);
@@ -175,10 +175,9 @@ Playlist.prototype.generatePlaylistBlock = function(allMusic){
             musicBlock.appendChild(artistBlock);
             musicBlock.appendChild(statsBlock);
             musicBlock.addEventListener("click",function(){
-                var t = JSON.parse(JSON.stringify(index));
-                manager.setPosition(t);
+                manager.setPosition(index);
                 manager.play_pause();
-            });
+            }.bind(this));
 
             musicList.appendChild(musicBlock);
         }

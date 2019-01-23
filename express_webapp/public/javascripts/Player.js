@@ -4,6 +4,10 @@
 function Player() {
     //let soundManager;
 
+    /**
+     * Use to do all operations needed to use the player
+     * @namespace private
+     */
     let constructor = function () {
         this.currentTime = 0;
         this.volume = Number(document.querySelector(".audioplayer .controls .volume input[type=range].volume-input-range ").value);
@@ -37,6 +41,7 @@ function Player() {
 
     /**
      * Create a SoundManagerSound with the currentMusic in the playlist and reload the page
+     * @namespace private
      */
     this.loadMusic = function(){
         if(this.sound !== null){
@@ -62,6 +67,10 @@ function Player() {
 
         }
 
+        if(this.sound.muted){
+            this.mute();
+        }
+
         this.sound.play();
         this.sound.pause();
         this.repaint();
@@ -72,6 +81,7 @@ function Player() {
 
     /**
      * Will colorize the current point of playing
+     * @namespace private
      */
     this.colorWaveToCurrentPos = function () {
         let hasBeenHoverBack = false;
@@ -119,6 +129,7 @@ function Player() {
 
     /**
      * Will colorize the current point of playing of the hovered point
+     * @namespace private
      * @param pos {int} number of the bar hovered
      */
 
@@ -155,10 +166,11 @@ function Player() {
 
     /**
      * Will remove the class "played" and "hover" of all bars of the waveform
+     * @namespace private
      */
     this.clearColorWave = function () {
         let barsList = document.querySelectorAll(".audioplayer .bar-up ,.audioplayer .bar-down");
-        if(barsList.length != 0){
+        if(barsList.length !== 0){
             for(var index = 0; index < barsList.length; index++){
                 /*elem.classList.remove("played");
                 elem.classList.remove("played-flash");
@@ -178,6 +190,7 @@ function Player() {
 
     /**
      * Will remove the class "hover" of all bars of the waveform
+     * @namespace private
      */
     this.clearColorHoverWave = function () { 
         let barsList = document.querySelectorAll(".audioplayer .bar-up ,.audioplayer .bar-down");
@@ -193,6 +206,7 @@ function Player() {
 
     /**
      * Will remove the class "spectrumHoverTime" and clear the time
+     * @namespace private
      */
     this.clearHoverTime = function () {
         let currentTime = document.querySelector(".audioplayer .en-cours");        
@@ -203,6 +217,7 @@ function Player() {
 
     /**
      * Show the current time of the music according to the hovered position of the spectrum and add class "spectrumHoverTime"
+     * @namespace private
      * @param position
      */
     this.drawHoverTime = function (position) {
@@ -221,6 +236,7 @@ function Player() {
 
     /**
      * Will draw the waveform at this position
+     * @namespace private
      */
     this.drawSpectrum = function () {
         this.clearColorWave();
@@ -254,6 +270,7 @@ function Player() {
 
     /**
      * Will draw current time of the current music each second
+     * @namespace private
      */
     this.drawMusicTime = function () {
         if (this.sound != null) {
@@ -268,6 +285,7 @@ function Player() {
 
     /**
      * Draw all information about the music, called when the music is loaded
+     * @namespace private
      */
     this.drawMusicData = function () {
         let currentMusic = this.playlist.getCurrentMusic();
@@ -285,6 +303,7 @@ function Player() {
 
     /**
      * Call functions of "first" draw when a new music is loaded
+     * @namespace private
      */
     this.repaint = function () {
         this.drawSpectrum();
@@ -295,6 +314,7 @@ function Player() {
 
     /**
      * Set all listeners of each actions
+     * @namespace private
      */
     this.setListener = function () {
 
@@ -320,6 +340,7 @@ function Player() {
 
     /**
      * Set the position of the playlist to the given position and reload the right music
+     * @namespace private
      * @param position
      */
     this.setPosition = function(position){
@@ -329,6 +350,7 @@ function Player() {
 
     /**
      * Will show the pop-up volume
+     * @namespace private
      */
     this.volumeMouseOver = function () {
         //document.querySelector(".audioplayer .controls .volume").classList.add('is-active');
@@ -338,6 +360,7 @@ function Player() {
 
     /**
      * Will show the pop-up volume on compact/mobile version
+     * @namespace private
      */
     this.volumeMouseOverCompact = function () {
         let volumeButton = document.querySelector(".audioplayer .controls .volume");
@@ -358,6 +381,7 @@ function Player() {
 
     /**
      * Will hide the pop-up volume
+     * @namespace private
      */
     this.volumeMouseOut = function () {
         //document.querySelector(".audioplayer .controls .volume").classList.remove('is-active');
@@ -365,7 +389,8 @@ function Player() {
     };
 
     /**
-     * Will hide the pop-up volume on conpact/mobile version
+     * Will hide the pop-up volume on compact/mobile version
+     * @namespace private
      */
     this.volumeMouseOutCompact = function () {
         let volumeButton = document.querySelector(".audioplayer .controls .volume");
@@ -388,6 +413,7 @@ function Player() {
 
     /**
      * Modify the value of the volume bar and the volume of the music
+     * @namespace private
      * @param e {event}
      */
     this.targetVolume = function (e) { //TODO mettre le bon volume au chargement de la musique
@@ -404,10 +430,9 @@ function Player() {
         }
     };
 
-    /** Public functions */
-
     /**
      * Go check into the database if a music match with the id, add the music and if this is the first, draw information about this music
+     * @namespace private
      * @param idMusic {int} - id of the wanted music
      */
     this.addMusicById = function (idMusic) {
@@ -433,6 +458,7 @@ function Player() {
 
     /**
      * Will add a Music object to the player and playlist
+     * @namespace private
      * @param music {String} - JSON string which represent a Music Object to add
      */
     this.addMusicObject = function(music){
@@ -452,6 +478,7 @@ function Player() {
 
     /**
      * Go check into the database to get all music of the wanted playlist and erase the older playlist/music in play
+     * @namespace private
      * @param idPlaylistToAdd {int} - id of the playlist into the database
      * @param currentMusicId {int} - if present set the current Music to this one
      */
@@ -483,6 +510,7 @@ function Player() {
 
     /**
      * Check all the cookie and apply the correct modification to the player
+     * @namespace private
      */
     this.checkCookies = function(){
         let currentMusic = this.playlist.getCurrentMusic();
@@ -503,6 +531,7 @@ function Player() {
 
 /**
  * Set the new volume
+ * @namespace Player
  * @param {int} newVolume
  */
 Player.prototype.setVolume = function (newVolume) {
@@ -533,6 +562,7 @@ Player.prototype.setVolume = function (newVolume) {
 
 /**
  * Toggle the sound or not
+ * @namespace Player
  */
 Player.prototype.mute = function () {
     let volume = document.querySelector(".audioplayer .controls .volume .volume_button");
@@ -544,7 +574,7 @@ Player.prototype.mute = function () {
         PlayerUtils.addClass(volume,"volume-off");
 
         if (this.sound !== null)
-            this.sound.setVolume(0);
+            this.sound.mute();
     } else {
         //volumeClass.remove('volume-off');
         //volume.classList.add('volume-on');
@@ -552,14 +582,24 @@ Player.prototype.mute = function () {
         PlayerUtils.addClass(volume,"volume-on");
 
         if (this.sound !== null)
-            this.sound.setVolume(this.volume);
+            this.sound.unmute();
     }
 };
 
+/**
+ * Return if the player add the mute button enabled
+ * @namespace Player
+ * @returns {boolean} - if the player if muted
+ */
+Player.prototype.playerIsMute = function(){
+    let volume = document.querySelector(".audioplayer .controls .volume .volume_button");
+    return PlayerUtils.hasClass(volume,'volume-off');
+};
 
 /**
  * Will add a like to the database and add 1 to the number of like show
  * If a like button already been pressed, remove the like
+ * @namespace Player
  */
 Player.prototype.like = function () {
     let currentMusic = this.playlist.getCurrentMusic();
@@ -592,6 +632,7 @@ Player.prototype.like = function () {
 
 /**
  * Will add a comment to the database, the current screen and add 1 for the number of comments
+ * @namespace Player
  */
 Player.prototype.addComment = function () {
     //TODO faire une vraie réponse
@@ -604,6 +645,7 @@ Player.prototype.addComment = function () {
 
 /**
  * Will create and give an embed version of the player
+ * @namespace Player
  */
 Player.prototype.share = function () {
     var modal = document.querySelector('.audioplayer .modal');
@@ -636,6 +678,7 @@ Player.prototype.share = function () {
 
 /**
  * Set the new position of the music and change the CSS of the waveform's bars
+ * @namespace Player
  * @param newPosition {int} the position of the cursor when it's click
  */
 Player.prototype.goTo = function (newPosition) {
@@ -656,6 +699,7 @@ Player.prototype.goTo = function (newPosition) {
 /**
  *  Use to set on play or on pause state the current music, if no current music is null, create it and launch it if
  *  possible
+ *  @namespace Player
  */
 Player.prototype.play_pause = function () {
     let currentMusic = this.playlist.getCurrentMusic();
@@ -702,6 +746,12 @@ Player.prototype.play_pause = function () {
                 }
             }
         }
+        if(this.playerIsMute()){
+            this.sound.mute();
+        }else{
+            this.sound.unmute();
+        }
+
         //Add 1 to the value of view if isn't done
         this.addView();
 
@@ -715,6 +765,7 @@ Player.prototype.play_pause = function () {
 
 /**
  * Override the Playlist function to add the SoundManager's functions
+ * @namespace Player
  */
 Player.prototype.next = function () {
     this.playlist.next();
@@ -731,6 +782,7 @@ Player.prototype.next = function () {
 
 /**
  * Override the Playlist function to add the SoundManager's functions
+ * @namespace Player
  */
 Player.prototype.previous = function () {
     this.playlist.previous();
@@ -749,6 +801,7 @@ Player.prototype.previous = function () {
 
 /**
  * Will add 1 to the number of view of the music if the local cookie allows it
+ * @namespace Player
  */
 Player.prototype.addView = function () {
     let currentMusic = this.playlist.getCurrentMusic();

@@ -6,7 +6,7 @@
 function createWaveForm(dotsList, percentilePlayed) {
 
     //Set a default parameter which work with IE11
-    percentilePlayed = percentilePlayed || 0;
+    percentilePlayed = percentilePlayed || -1;
 
     var spectre = document.querySelector(".audioplayer .waveform");
 
@@ -41,66 +41,72 @@ function createWaveForm(dotsList, percentilePlayed) {
 
     /** Define the css rules */
 
-    var defBlock = document.createElementNS(svgns, "defs");
+    //Check if a defs blocks already exist and doesn't recreate this
+    if(document.querySelector('defs.svg-cssRules') == null){
 
-    /** Top part */
+        var defBlock = document.createElementNS(svgns, "defs");
+        PlayerUtils.addClass(defBlock, "svg-cssRules");
 
-    //Define one time the linearGradient object then clone it
-    var gradientBarUp = document.createElementNS(svgns, "linearGradient");
+        /** Top part */
 
-    gradientBarUp.setAttribute("id", "waveformStyleBarUp");
-    gradientBarUp.setAttribute("x1", "0");
-    gradientBarUp.setAttribute("y1", "0");
-    gradientBarUp.setAttribute("x2", "0");
-    gradientBarUp.setAttribute("y2", "100%");
-    gradientBarUp.innerHTML = "<stop offset='0%' stop-color='#F0F0F0' />\n" +"<stop offset='100%' stop-color='#646464' />\n";
-    defBlock.appendChild(gradientBarUp);
+            //Define one time the linearGradient object then clone it
+        var gradientBarUp = document.createElementNS(svgns, "linearGradient");
 
-    var gradientBarUpPlayed = gradientBarUp.cloneNode();
-    gradientBarUpPlayed.setAttribute("id", "waveformStyleBarUpPlayed");
-    gradientBarUpPlayed.innerHTML = "<stop offset='0%' stop-color='#F0F0F0' />\n" + "<stop offset='100%' stop-color='#f95800' />\n";
-    defBlock.appendChild(gradientBarUpPlayed);
-        
-    var gradientBarUpHoverBack = gradientBarUp.cloneNode();
-    gradientBarUpHoverBack.setAttribute("id", "waveformStyleBarUpHoverBack");
-    gradientBarUpHoverBack.innerHTML = "<stop offset='0%' stop-color='#F0F0F0' />\n" + "<stop offset='100%' stop-color='#c33900' />\n";
-    defBlock.appendChild(gradientBarUpHoverBack);
+        gradientBarUp.setAttribute("id", "waveformStyleBarUp");
+        gradientBarUp.setAttribute("x1", "0");
+        gradientBarUp.setAttribute("y1", "0");
+        gradientBarUp.setAttribute("x2", "0");
+        gradientBarUp.setAttribute("y2", "100%");
+        gradientBarUp.innerHTML = "<stop offset='0%' stop-color='#F0F0F0' />\n" +"<stop offset='100%' stop-color='#646464' />\n";
+        defBlock.appendChild(gradientBarUp);
 
-    var gradientBarUpHoverFront = gradientBarUp.cloneNode();
-    gradientBarUpHoverFront.setAttribute("id", "waveformStyleBarUpHoverFront");
-    gradientBarUpHoverFront.innerHTML = "<stop offset='0%' stop-color='#F0F0F0' />\n" + "<stop offset='100%' stop-color='#993600' />\n";
-    defBlock.appendChild(gradientBarUpHoverFront);
+        var gradientBarUpPlayed = gradientBarUp.cloneNode();
+        gradientBarUpPlayed.setAttribute("id", "waveformStyleBarUpPlayed");
+        gradientBarUpPlayed.innerHTML = "<stop offset='0%' stop-color='#F0F0F0' />\n" + "<stop offset='100%' stop-color='#f95800' />\n";
+        defBlock.appendChild(gradientBarUpPlayed);
 
-    /** Bottom part */
+        var gradientBarUpHoverBack = gradientBarUp.cloneNode();
+        gradientBarUpHoverBack.setAttribute("id", "waveformStyleBarUpHoverBack");
+        gradientBarUpHoverBack.innerHTML = "<stop offset='0%' stop-color='#F0F0F0' />\n" + "<stop offset='100%' stop-color='#c33900' />\n";
+        defBlock.appendChild(gradientBarUpHoverBack);
 
-    var gradientBarDown = gradientBarUp.cloneNode();
-    gradientBarDown.setAttribute("id", "waveformStyleBarDown");
-    gradientBarDown.innerHTML = "<stop offset='0%' stop-color='#676767' stop-opacity = 0.68 />\n" + "<stop offset='100%' stop-color='#F0F0F0' stop-opacity = 1/>\n";
-    defBlock.appendChild(gradientBarDown);
+        var gradientBarUpHoverFront = gradientBarUp.cloneNode();
+        gradientBarUpHoverFront.setAttribute("id", "waveformStyleBarUpHoverFront");
+        gradientBarUpHoverFront.innerHTML = "<stop offset='0%' stop-color='#F0F0F0' />\n" + "<stop offset='100%' stop-color='#993600' />\n";
+        defBlock.appendChild(gradientBarUpHoverFront);
 
-    var gradientBarDownPlayed = gradientBarDown.cloneNode();
-    gradientBarDownPlayed.setAttribute("id", "waveformStyleBarDownPlayed");
-    gradientBarDownPlayed.innerHTML = "<stop offset='0%' stop-color='#FF5B00' stop-opacity = 0.68 />\n" + "<stop offset='100%' stop-color='#F0F0F0' stop-opacity = 1/>\n";
-    defBlock.appendChild(gradientBarDownPlayed);
+        /** Bottom part */
 
-    var gradientBarDownHoverBack = gradientBarDown.cloneNode();
-    gradientBarDownHoverBack.setAttribute("id", "waveformStyleBarDownHoverBack");
-    gradientBarDownHoverBack.innerHTML = "<stop offset='0%' stop-color='#C33400' stop-opacity = 0.68 />\n" + "<stop offset='100%' stop-color='#F0F0F0' stop-opacity = 1/>\n";
-    defBlock.appendChild(gradientBarDownHoverBack);
+        var gradientBarDown = gradientBarUp.cloneNode();
+        gradientBarDown.setAttribute("id", "waveformStyleBarDown");
+        gradientBarDown.innerHTML = "<stop offset='0%' stop-color='#676767' stop-opacity = 0.68 />\n" + "<stop offset='100%' stop-color='#F0F0F0' stop-opacity = 1/>\n";
+        defBlock.appendChild(gradientBarDown);
 
-    var gradientBarDownHoverFront = gradientBarDown.cloneNode();
-    gradientBarDownHoverFront.setAttribute("id", "waveformStyleBarDownHoverFront");
-    gradientBarDownHoverFront.innerHTML = "<stop offset='0%' stop-color='#993300' stop-opacity = 0.68 />\n" + "<stop offset='100%' stop-color='#F0F0F0' stop-opacity = 1/>\n";
-    defBlock.appendChild(gradientBarDownHoverFront);
+        var gradientBarDownPlayed = gradientBarDown.cloneNode();
+        gradientBarDownPlayed.setAttribute("id", "waveformStyleBarDownPlayed");
+        gradientBarDownPlayed.innerHTML = "<stop offset='0%' stop-color='#FF5B00' stop-opacity = 0.68 />\n" + "<stop offset='100%' stop-color='#F0F0F0' stop-opacity = 1/>\n";
+        defBlock.appendChild(gradientBarDownPlayed);
 
-    //Add the def block - MUST BE BEFORE the other svg to be used AND in a svg
-    SVGRules.appendChild(defBlock);
+        var gradientBarDownHoverBack = gradientBarDown.cloneNode();
+        gradientBarDownHoverBack.setAttribute("id", "waveformStyleBarDownHoverBack");
+        gradientBarDownHoverBack.innerHTML = "<stop offset='0%' stop-color='#C33400' stop-opacity = 0.68 />\n" + "<stop offset='100%' stop-color='#F0F0F0' stop-opacity = 1/>\n";
+        defBlock.appendChild(gradientBarDownHoverBack);
 
-    SVGRules.setAttribute("width",0);
-    SVGRules.setAttribute("height",0);
+        var gradientBarDownHoverFront = gradientBarDown.cloneNode();
+        gradientBarDownHoverFront.setAttribute("id", "waveformStyleBarDownHoverFront");
+        gradientBarDownHoverFront.innerHTML = "<stop offset='0%' stop-color='#993300' stop-opacity = 0.68 />\n" + "<stop offset='100%' stop-color='#F0F0F0' stop-opacity = 1/>\n";
+        defBlock.appendChild(gradientBarDownHoverFront);
+
+        //Add the def block - MUST BE BEFORE the other svg to be used AND in a svg
+        SVGRules.appendChild(defBlock);
+
+        SVGRules.setAttribute("width",0);
+        SVGRules.setAttribute("height",0);
 
 
-    spectre.appendChild(SVGRules);
+        spectre.appendChild(SVGRules);
+
+    }
 
 
     /**Find the size and the number of bars show in the soundwave */
