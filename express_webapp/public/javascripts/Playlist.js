@@ -167,14 +167,13 @@ Playlist.prototype.generatePlaylistBlock = function(allMusic){
             var statsBlock = document.createElement("p");
             //statsBlock.classList.add("stats");
             PlayerUtils.addClass(statsBlock,"stats");
-            statsBlock.innerText = this.musicList[index].numberView;
+            statsBlock.innerText = PlayerUtils.secondsToReadableTime(this.musicList[index].duration);
 
             musicBlock.appendChild(coverBlock);
             musicBlock.appendChild(numberBlock);
             musicBlock.appendChild(titleBlock);
             musicBlock.appendChild(artistBlock);
             musicBlock.appendChild(statsBlock);
-            var t = JSON.parse(JSON.stringify(index));
             musicBlock.addEventListener("click",function(){
                 manager.setPosition(index);
                 manager.play_pause();

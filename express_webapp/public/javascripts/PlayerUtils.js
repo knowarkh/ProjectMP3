@@ -99,6 +99,11 @@ PlayerUtils.prototype.mobileAndTabletCheck = function() {
     return check;
 };
 
+/**
+ * Create and return a event, depending if the browser was IE or another
+ * @param eventName {String} - wanted event
+ * @returns {AnimationEvent | AnimationPlaybackEvent | AudioProcessingEvent | BeforeUnloadEvent | ClipboardEvent | CloseEvent | CompositionEvent | CustomEvent | DeviceLightEvent | DeviceMotionEvent | DeviceOrientationEvent | DragEvent | ErrorEvent | Event | FocusEvent | FocusNavigationEvent | GamepadEvent | HashChangeEvent | IDBVersionChangeEvent | KeyboardEvent | ListeningStateChangedEvent | MSGestureEvent | MSMediaKeyMessageEvent | MSMediaKeyNeededEvent | MSPointerEvent | MediaEncryptedEvent | MediaKeyMessageEvent | MediaQueryListEvent | MediaStreamErrorEvent | MediaStreamEvent | MediaStreamTrackEvent | MessageEvent | MouseEvent | MutationEvent | OfflineAudioCompletionEvent | OverflowEvent | PageTransitionEvent | PaymentRequestUpdateEvent | PermissionRequestedEvent | PointerEvent | PopStateEvent | ProgressEvent | PromiseRejectionEvent | RTCDTMFToneChangeEvent | RTCDataChannelEvent | RTCDtlsTransportStateChangedEvent | RTCErrorEvent | RTCIceCandidatePairChangedEvent | RTCIceGathererEvent | RTCIceTransportStateChangedEvent | RTCPeerConnectionIceErrorEvent | RTCPeerConnectionIceEvent | RTCSsrcConflictEvent | RTCStatsEvent | RTCTrackEvent | SVGZoomEvent | SecurityPolicyViolationEvent | ServiceWorkerMessageEvent | SpeechRecognitionError | SpeechRecognitionEvent | SpeechSynthesisErrorEvent | SpeechSynthesisEvent | StorageEvent | TextEvent | TouchEvent | TrackEvent | TransitionEvent | UIEvent | VRDisplayEvent | WebGLContextEvent | WheelEvent | Event}
+ */
 PlayerUtils.prototype.createNewEvent = function(eventName) {
     var event;
     if (typeof(Event) === 'function') {
@@ -110,17 +115,32 @@ PlayerUtils.prototype.createNewEvent = function(eventName) {
     return event;
 };
 
+/**
+ * Create a new event and apply it on a given target
+ * @param eventName {String} - wanted event
+ * @param target {HTMLObjectElement} - target
+ */
 PlayerUtils.prototype.createNewEventAndUseOnATarget = function(eventName, target){
     target.dispatchEvent(this.createNewEvent(eventName));
 };
 
+/**
+ * Create a new event and apply it on given targets
+ * @param eventName {String} - wanted event
+ * @param targets {NodeList} - targets
+ */
 PlayerUtils.prototype.createNewEventAndUseOnTargets = function(eventName, targets){
     let evt = this.createNewEvent(eventName);
-    targets.forEach(function(target){
-        target.dispatchEvent(evt);
-    })
+    for(var i = 0; i < targets.length ; i++){
+        targets[i].dispatchEvent(evt);
+    }
 };
 
+/**
+ * Add a class to the given target
+ * @param target {HTMLObjectElement} - object will be get the class
+ * @param classToAdd {String} - class wanted to be added
+ */
 PlayerUtils.prototype.addClass = function(target,classToAdd){
     
     var cssClass = target.classList;
@@ -142,6 +162,11 @@ PlayerUtils.prototype.addClass = function(target,classToAdd){
 
 };
 
+/**
+ * Remove a class to the given target
+ * @param target {HTMLObjectElement} - object will be lose the class
+ * @param classToRemove {String} - class wanted to be removed
+ */
 PlayerUtils.prototype.removeClass = function(target, classToRemove){
   
   var cssClass = target.classList;
@@ -158,7 +183,7 @@ PlayerUtils.prototype.removeClass = function(target, classToRemove){
                 
                 var newClassList = "";
                 for(var i = 0; i < classlist.length ; i++){
-                    if(i != classlist.length -1)
+                    if(i !== classlist.length -1)
                         newClassList += classlist[i] + " ";
                     else
                         newClassList += classlist[i];
@@ -173,6 +198,12 @@ PlayerUtils.prototype.removeClass = function(target, classToRemove){
     }
 };
 
+/**
+ * Return if the target get a given class
+ * @param target {HTMLObjectElement} - object will be check
+ * @param classToCheck {String} - class wanted to be checked
+ * @returns {boolean} - true if contains, false otherwise
+ */
 PlayerUtils.prototype.hasClass = function(target, classToCheck){
   
   var cssClass = target.classList;
@@ -184,12 +215,25 @@ PlayerUtils.prototype.hasClass = function(target, classToCheck){
         if(target.getAttribute("class") != null){
 
             var classlist = target.getAttribute("class").split(" ");
-            var t = classlist.indexOf(classToCheck) !== -1 
-            return t;
-    
+            return classlist.indexOf(classToCheck) !== -1 ;
+
         }
     }
     
+};
+
+/**
+ * Escape special html characters of a given string
+ * @param unsafe {String} - String wanted to be safe
+ * @returns {String} - safe String
+ */
+PlayerUtils.prototype.escapeHtml = function(unsafe){
+        return unsafe
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
 };
 
 var PlayerUtils = new PlayerUtils();
