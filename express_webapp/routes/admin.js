@@ -129,9 +129,6 @@ router.post('/', function(req, res, next) {
  */
 router.get('/list', function(req, res, next) {
     Music.find(function(err, music){
-        if (err){
-            console.log("ERROR= " +err);
-        }
         res.render('admin_list', {data:music});
     }).sort({"id" : 1});
 });
@@ -143,9 +140,6 @@ router.get('/list', function(req, res, next) {
  */
 router.get('/:id', function(req,res){
     Music.find({id: req.params.id}, function(err, music) {
-        if (err) {
-            console.log("ERROR= " +err);
-        }
         res.render('admin_modif', {data:music});
     });
 });
@@ -155,9 +149,6 @@ router.get('/:id', function(req,res){
  */
 router.post('/put/:id', function(req, res) {
     Music.update({id: req.params.id}, req.body, function(err, status) {
-        if (err) {
-            console.log("ERROR= " +err);
-        }
         res.redirect('/admin/list');
     });
 });
@@ -168,9 +159,6 @@ router.post('/put/:id', function(req, res) {
  */
 router.post('/del/:id', function(req, res) {
     Music.remove({id: req.params.id}, function(err, status) {
-        if (err) {
-            console.log("ERROR= " +err);
-        }
         res.redirect('/admin/list');
     });
 });

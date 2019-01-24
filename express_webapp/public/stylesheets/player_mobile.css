@@ -1,8 +1,6 @@
-
 /* ==================================================== */
 /*                    Version mobile                    */
 /* ==================================================== */
-
 
 body {
     font-family: sans-serif;
@@ -11,7 +9,7 @@ body {
 
 /* ========= COLORS ========= */
 
-:root{
+:root {
     --primary: #f95800;
 }
 
@@ -26,7 +24,7 @@ body {
     background-color: white;
     height: 100vh;
     width: 100%;
-    box-shadow: 0 4px 10px 0 rgba(0,0,0,0.2), 0 4px 20px 0 rgba(0,0,0,0.19);
+    box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2), 0 4px 20px 0 rgba(0, 0, 0, 0.19);
     padding-left: 0;
     z-index: 2;
     overflow: hidden;
@@ -160,7 +158,6 @@ body {
     cursor: pointer;
 }
 
-
 .audioplayer .player .controls .play {
     content: '';
     background-image: url("/images/_icons/play.svg");
@@ -215,7 +212,6 @@ body {
     margin-left: 10px;
 }
 
-
 .audioplayer .player .controls .volume .volume-off {
     content: '';
     background-image: url("/images/_icons/volume_off.svg");
@@ -256,10 +252,10 @@ body {
 .audioplayer .player .controls .volume_sliderTotale {
     background-color: white;
     border: 1px solid transparent;
-    box-shadow: 0 2px 10px 0 rgba(25,25,34,.24);
+    box-shadow: 0 2px 10px 0 rgba(25, 25, 34, .24);
     padding: 10px 15px;
     border-radius: 4px;
-    display: flow-root;
+    display: block;
 }
 
 .audioplayer .player .controls .volume input[type=range].volume-input-range {
@@ -311,7 +307,7 @@ body {
     border: 0;
     background: #f95800;
     border-radius: 100%;
-    box-shadow: 0 0 1px 0px rgba(0,0,0,0.1);
+    box-shadow: 0 0 1px 0px rgba(0, 0, 0, 0.1);
     -webkit-appearance: none;
 }
 
@@ -321,9 +317,8 @@ body {
     border: 0;
     background: #f95800;
     border-radius: 100%;
-    box-shadow: 0 0 1px 0px rgba(0,0,0,0.1);
+    box-shadow: 0 0 1px 0px rgba(0, 0, 0, 0.1);
 }
-
 
 .audioplayer .player .controls .volume input[type=range].volume-input-range::-ms-thumb { /* boule */
     width: 14px;
@@ -331,11 +326,11 @@ body {
     border: 0;
     background: #f95800;
     border-radius: 100%;
-    box-shadow: 0 0 1px 0px rgba(0,0,0,0.1);
+    box-shadow: 0 0 1px 0px rgba(0, 0, 0, 0.1);
 }
 
 .audioplayer .player .controls .volume input[type=range].volume-input-range::-ms-fill-lower {
-  background: #f95800;
+    background: #f95800;
 }
 
 /* ========= TEMPS ========= */
@@ -362,14 +357,13 @@ body {
     color: var(--primary);
 }
 
-.audioplayer .player .temps .en-cours::after{
+.audioplayer .player .temps .en-cours::after {
     content: '/';
     padding-left: 15px;
     color: #f95800;
     color: var(--primary);
     font-weight: bold;
 }
-
 
 /* ========= STATISTIQUES ========= */
 
@@ -384,8 +378,7 @@ body {
     padding: 3px 10px;
 }
 
-
-.audioplayer .player .statistiques .nb-lectures{
+.audioplayer .player .statistiques .nb-lectures {
     margin-right: 9px;
 }
 
@@ -408,7 +401,7 @@ body {
     font-size: 12px;
 }
 
-.audioplayer .player .social>button {
+.audioplayer .player .social > button {
     border: 1px solid #e5e5e5;
     padding: 2px 8px;
     cursor: pointer;
@@ -416,7 +409,7 @@ body {
     margin: 0 2px;
 }
 
-.audioplayer .player .social>button:hover {
+.audioplayer .player .social > button:hover {
     color: #333;
     outline: 0;
     border-color: #ccc;
@@ -442,7 +435,6 @@ body {
     padding-right: 5px;
 }
 
-
 /* ========= SHARE ========= */
 
 .audioplayer .player .modal {
@@ -455,8 +447,8 @@ body {
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgb(0,0,0);
-    background-color: rgba(0,0,0,0.4);
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
 }
 
 .audioplayer .player .modal .modal-content {
@@ -466,7 +458,7 @@ body {
     padding: 0;
     border: 1px solid #888;
     width: 75%;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     animation-name: animatetop;
     animation-duration: 0.4s
 }
@@ -507,17 +499,15 @@ body {
     text-align: right;
 
 }
+
 .audioplayer .player .modal .modal-footer a {
     cursor: pointer;
     padding: 5px;
 }
 
-
-
 /* ============================== */
 /*            Playlist            */
 /* ============================== */
-
 
 .audioplayer .playlist {
     display: none;

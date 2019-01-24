@@ -315,7 +315,7 @@ _:-ms-fullscreen, :root .audioplayer .player .waveform .bar-down.hover-front {
     box-shadow: 0 2px 10px 0 rgba(25,25,34,.24);
     padding: 10px 15px;
     border-radius: 4px;
-    display: flow-root;
+    display: block;
 }
 
 
