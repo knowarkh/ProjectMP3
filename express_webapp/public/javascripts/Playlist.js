@@ -119,7 +119,7 @@ Playlist.prototype.generatePlaylistBlock = function(allMusic){
     allMusic = allMusic || false;
 
     if(this.musicList.length > 1){
-        var playlistBlock;
+        let playlistBlock;
         if(document.querySelector(".audioplayer .playlist") !== null){
             playlistBlock = document.querySelector(".audioplayer .playlist");
             playlistBlock.innerHTML = "";
@@ -129,42 +129,42 @@ Playlist.prototype.generatePlaylistBlock = function(allMusic){
             PlayerUtils.addClass(playlistBlock,"playlist");
         }
 
-        var trackListBlock = document.createElement("div");
+        let trackListBlock = document.createElement("div");
         trackListBlock.classList.add("tracklist");
         PlayerUtils.addClass(trackListBlock,"tracklist");
 
 
-        var musicList = document.createElement("ol");
+        let musicList = document.createElement("ol");
         musicList.classList.add("list");
         PlayerUtils.addClass(musicList,"list");
 
         //Check if the playlist contains 5 music and if it allow, drawn all musics data
         for(let index = 0;index < this.musicList.length && (index < 5 || allMusic); index ++){
-            var musicBlock = document.createElement("li");
+            let musicBlock = document.createElement("li");
             //musicBlock.classList.add("element");
             PlayerUtils.addClass(musicBlock,"element");
 
-            var coverBlock = document.createElement("img");
+            let coverBlock = document.createElement("img");
             //coverBlock.classList.add("image");
             PlayerUtils.addClass(coverBlock,"image");
             coverBlock.setAttribute("src",this.musicList[index].coverPath);
 
-            var numberBlock = document.createElement("p");
+            let numberBlock = document.createElement("p");
             //numberBlock.classList.add("numero");
             PlayerUtils.addClass(numberBlock,"numero");
             numberBlock.innerText = index+1;
 
-            var titleBlock = document.createElement("p");
+            let titleBlock = document.createElement("p");
             //titleBlock.classList.add("titre");
             PlayerUtils.addClass(titleBlock,"titre");
             titleBlock.innerText = this.musicList[index].title;
 
-            var artistBlock = document.createElement("p");
+            let artistBlock = document.createElement("p");
             //artistBlock.classList.add("artiste");
             PlayerUtils.addClass(artistBlock,"artiste");
             artistBlock.innerText = this.musicList[index].artistName;
 
-            var statsBlock = document.createElement("p");
+            let statsBlock = document.createElement("p");
             //statsBlock.classList.add("stats");
             PlayerUtils.addClass(statsBlock,"stats");
             statsBlock.innerText = PlayerUtils.secondsToReadableTime(this.musicList[index].duration);
@@ -175,7 +175,7 @@ Playlist.prototype.generatePlaylistBlock = function(allMusic){
             musicBlock.appendChild(artistBlock);
             musicBlock.appendChild(statsBlock);
             musicBlock.addEventListener("click",function(){
-                manager.setPosition(index);
+                manager.setPosition(Number(numberBlock.innerText) - 1);//Use to get the good position (var outside effect problem, even with let)
                 manager.play_pause();
             }.bind(this));
 
@@ -183,7 +183,7 @@ Playlist.prototype.generatePlaylistBlock = function(allMusic){
         }
         //If more than 5 musics into the playlist add a button to show them all
         if(this.musicList.length > 5){
-            var moreBlock = document.createElement("a");
+            let moreBlock = document.createElement("a");
             //moreBlock.classList.add("more");
             PlayerUtils.addClass(moreBlock,"more");
             moreBlock.setAttribute("href","");
@@ -222,9 +222,9 @@ Playlist.prototype.generatePlaylistBlock = function(allMusic){
  * Will redraw the number of views of each music into the playlist
  */
 Playlist.prototype.repaintPlaylist = function(){
-    var tracklist = document.querySelectorAll(".audioplayer .playlist .tracklist .list li .stats");
+    let tracklist = document.querySelectorAll(".audioplayer .playlist .tracklist .list li .stats");
 
-    for(var index = 0; index < tracklist.length; index++){
+    for(let index = 0; index < tracklist.length; index++){
         tracklist[index].innerText = this.musicList[index].numberView;
     }
 

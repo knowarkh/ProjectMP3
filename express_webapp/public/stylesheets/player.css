@@ -75,6 +75,7 @@ body {
     margin: 10px;
 }
 
+
 .audioplayer .player .waveform .bar-up {
     border: solid black 1px !important;
     fill: #646464 !important;
@@ -140,6 +141,64 @@ body {
     transition: fill 1s ease-in-out;
     stroke: url(#waveformStyleBarDownHoverFront) !important;
 }
+
+/* IE part */
+
+_:-ms-fullscreen, :root .audioplayer .player .waveform .bar-up {
+    border: solid black 1px !important;
+    fill: #646464 !important;
+    stroke: #E0E0E0 !important;
+    stroke-width: 1px !important;
+}
+
+_:-ms-fullscreen, :root .audioplayer .player .waveform .bar-up.played {
+    border: solid black 1px !important;
+    fill: #f95800 !important;
+    transition: fill 1s ease-in-out, stroke 1s ease-in-out;
+}
+
+_:-ms-fullscreen, :root .audioplayer .player .waveform .bar-up.played-flash {
+    border: solid black 1px !important;
+    fill: #f95800 !important;
+}
+
+_:-ms-fullscreen, :root  .audioplayer .player .waveform .bar-up.hover-back {
+    border: solid black 1px !important;
+    fill: #c33900 !important;
+    transition: fill 1s ease-in-out;
+}
+
+_:-ms-fullscreen, :root .audioplayer .player .waveform .bar-up.hover-front {
+    border: solid black 1px !important;
+    fill: #993600 !important;
+    transition: fill 1s ease-in-out;
+}
+
+_:-ms-fullscreen, :root .audioplayer .player .waveform .bar-down {
+    fill : rgba(146, 146, 146, 0.8);
+    border: solid black 1px !important;
+    stroke: #E0E0E0 !important;
+}
+
+_:-ms-fullscreen, :root .audioplayer .player .waveform .bar-down.played {
+    fill: rgba(255, 91, 0, 0.68) !important;
+    transition: fill 1s ease-in-out;
+}
+
+_:-ms-fullscreen, :root .audioplayer .player .waveform .bar-down.played-flash {
+    fill: rgba(255, 91, 0, 0.68) !important;
+}
+
+_:-ms-fullscreen, :root .audioplayer .player .waveform .bar-down.hover-back {
+    fill: rgba(195, 52, 0, 0.68) !important;
+    transition: fill 1s ease-in-out;
+}
+
+_:-ms-fullscreen, :root .audioplayer .player .waveform .bar-down.hover-front {
+    fill: rgba(153, 51, 0, 0.68) !important;
+    transition: fill 1s ease-in-out;
+}
+
 
 /* ========= CONTROLS ========= */
 
