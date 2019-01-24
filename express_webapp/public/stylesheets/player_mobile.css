@@ -37,7 +37,7 @@ body {
 .audioplayer .player .visuel {
     position: absolute;
     background-size: cover !important;
-    background-position: 50% 50%;
+    background-position: 50% 50% !important;
     width: 100%;
     height: 100%;
     left: 0;
@@ -390,7 +390,7 @@ body {
 }
 
 .audioplayer .player .statistiques .nb-lectures::before {
-    content: url("/images/_icons/nb_lecture");
+    content: url("/images/_icons/nb_lecture.svg");
     vertical-align: top;
 }
 
