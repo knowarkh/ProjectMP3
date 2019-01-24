@@ -16,8 +16,9 @@ Connexion.prototype.requestGet = function (url, callback) {
             callback(this.responseText);
         }
     };
-    //xhttp.setRequestHeader("Access-Control-Allow-Origin","");
     xhttp.open("GET", url, true);
+    xhttp.setRequestHeader("Access-Control-Allow-Origin","*");
+    xhttp.setRequestHeader("Access-Control-Allow-Headers"," Authorization, Origin, X-Requested-With, Content-Type, Accept");
     xhttp.send();
 };
 
@@ -37,7 +38,7 @@ Connexion.prototype.requestPost = function (url, values, callback) {
 
     xhttp.open("POST", url, true);
     xhttp.setRequestHeader("Content-type", "application/json");
-    xhttp.setRequestHeader("Access-Control-Allow-Origin", "*");
+    xhttp.setRequestHeader("Access-Control-Allow-Headers"," Authorization, Origin, X-Requested-With, Content-Type, Accept");
     xhttp.send(values);
 };
 
@@ -58,6 +59,7 @@ Connexion.prototype.requestPut = function (url, values, callback) {
     xhttp.open("PUT", url, true);
     xhttp.setRequestHeader("Content-type", "application/json");
     xhttp.setRequestHeader("Access-Control-Allow-Origin", "*");
+    xhttp.setRequestHeader("Access-Control-Allow-Headers"," Authorization, Origin, X-Requested-With, Content-Type, Accept");
     xhttp.send(values);
 };
 
