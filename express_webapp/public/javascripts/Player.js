@@ -327,6 +327,8 @@ function Player() {
         document.querySelector(".audioplayer .like").addEventListener("click", this.like.bind(this));
         document.querySelector(".audioplayer .share").addEventListener("click", this.share.bind(this));
         document.querySelector(".audioplayer .controls .volume input[type=range].volume-input-range").addEventListener("input", this.targetVolume.bind(this));
+        //Use for IE
+        document.querySelector(".audioplayer .controls .volume input[type=range].volume-input-range").addEventListener("change", this.targetVolume.bind(this));
 
         //Applied a different listener in case of mobile version
         if (PlayerUtils.mobileAndTabletCheck() || PlayerUtils.detectCompactSize()) {
