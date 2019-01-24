@@ -11,9 +11,7 @@ function Player() {
     let constructor = function () {
         this.currentTime = 0;
         this.volume = Number(document.querySelector(".audioplayer .controls .volume input[type=range].volume-input-range ").value);
-        this.repeatMode = false;
         this.playlist = new Playlist();
-        this.currentUser = undefined;
         this.sound = null;
 
 
@@ -24,7 +22,7 @@ function Player() {
         if(idPlaylistToLoad !== 0 && idMusicToLoad !== 0){
             this.addPlaylist(idPlaylistToLoad, idMusicToLoad);
         }else if(idPlaylistToLoad !== 0){
-            this.addPlaylist(idPlaylistToLoad);
+            this.addPlaylist(idPlaylistToLoad,-1); // -1 is same way to put nothing
         }else if(idMusicToLoad !== 0){
             this.addMusicById(idMusicToLoad);
         }
@@ -194,7 +192,7 @@ function Player() {
      */
     this.clearColorHoverWave = function () { 
         let barsList = document.querySelectorAll(".audioplayer .bar-up ,.audioplayer .bar-down");
-        if(barsList.length != 0){
+        if(barsList.length !== 0){
             for(var index = 0; index < barsList.length; index++){
 
                 PlayerUtils.removeClass(barsList[index],"hover-front");
@@ -252,19 +250,22 @@ function Player() {
         //Add event to each bar of the spectrum
         var barsList = document.querySelectorAll(".audioplayer .bar-up , .audioplayer .bar-down");
         for(var index = 0; index < barsList.length ; index++){
-            barsList[index].addEventListener("click", function (target) {
+            barsList[index].addEventListener("click", function (evt) {
                 this.clearColorWave();
-                this.goTo(Number(target.target.attributes.data_position.value));
+                if(evt.target.attributes.hasOwnProperty("data_position"))
+                    this.goTo(Number(evt.target.attributes.data_position.value));
             }.bind(this));
-            barsList[index].addEventListener("mouseover", function (target) {
-                this.colorWaveToHoverPos(Number(target.target.attributes.data_position.value));
-                this.drawHoverTime(Number(target.target.attributes.data_position.value))
+            barsList[index].addEventListener("mouseover", function (evt) {
+                if(evt.target.attributes.hasOwnProperty("data_position")) {
+                    this.colorWaveToHoverPos(Number(evt.target.attributes.data_position.value));
+                    this.drawHoverTime(Number(evt.target.attributes.data_position.value))
+                }
             }.bind(this));
             barsList[index].addEventListener("mouseout", function () {
                 this.clearColorHoverWave();
                 this.clearHoverTime();
             }.bind(this));
-        };
+        }
 
     };
 
@@ -416,7 +417,7 @@ function Player() {
      * @namespace private
      * @param e {event}
      */
-    this.targetVolume = function (e) { //TODO mettre le bon volume au chargement de la musique
+    this.targetVolume = function (e) {
         //The target should be the volume bar
         let min = e.target.min,
             max = e.target.max,
@@ -459,7 +460,7 @@ function Player() {
     /**
      * Will add a Music object to the player and playlist
      * @namespace private
-     * @param music {String} - JSON string which represent a Music Object to add
+     * @param music {Music} - JSON string which represent a Music Object to add
      */
     this.addMusicObject = function(music){
         let firstMusic = this.playlist.getCurrentMusic() === null;
@@ -491,15 +492,17 @@ function Player() {
                 this.playlist = new Playlist();
                 newPlaylist = JSON.parse(newPlaylist);
                 //Position = the given position of the music into the playlist ( {"1" : musicOne, "2" : musicTwo})
-                for (let position in newPlaylist){
-                    let music = new Music(newPlaylist[position]);
-                    this.addMusicObject(music);
+                    for (let position in newPlaylist){
+                        if(newPlaylist.hasOwnProperty(position)){
 
-                    if(music.id === currentMusicId){
-                        this.setPosition(Number(position));
+                            let music = new Music(newPlaylist[position]);
+                            this.addMusicObject(music);
+
+                            if(music.id === currentMusicId){
+                                this.setPosition(Number(position));
+                            }
+                        }
                     }
-
-                }
 
                 this.checkCookies();
             }
@@ -635,8 +638,8 @@ Player.prototype.like = function () {
  * @namespace Player
  */
 Player.prototype.addComment = function () {
-    //TODO faire une vraie réponse
-    requestPost("/fasma/addLikeComment", {
+    //TODO faire une vraie action
+    Connexion.requestPost("/fasma/addLikeComment", {
         id: this.playlist.getCurrentMusic().id,
         comment: "test comment"
     }, console.log);
