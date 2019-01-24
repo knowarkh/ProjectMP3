@@ -108,22 +108,6 @@ function createWaveForm(dotsList, percentilePlayed) {
 
     }
 
-
-    /**Find the size and the number of bars show in the soundwave */
-
-    /** Size
-     * @Deprecated
-     */
-
-    var possibleWidthBar = reflectWaveWidth / nbBars;
-
-    // while(possibleWidthBar <= minSizeBar){
-    //   nbBars--;
-    //   possibleWidthBar = reflectWaveWidth/nbBars
-    // }
-
-    //barWidth = possibleWidthBar;
-
     /** Number of bar */
 
     var numberOfBarToRemove = 0;
@@ -147,10 +131,7 @@ function createWaveForm(dotsList, percentilePlayed) {
     //Set the rigth size of the primary waveform
     primarySVG.setAttribute("width", primaryWaveWidth);
     primarySVG.setAttribute("height", primaryWaveHeight);
-    //primarySVG.setAttribute("viewBox","0 0 " + primaryWaveWidth + " " + primaryWaveHeight);
 
-
-    //primarySVG.classList.add("sprectrumContainer");
     PlayerUtils.addClass(primarySVG, "sprectrumContainer");
 
     reflectSVG.setAttribute("xmlns", svgns);
@@ -159,9 +140,7 @@ function createWaveForm(dotsList, percentilePlayed) {
     //Set the rigth size of the reflect waveform
     reflectSVG.setAttribute("width", reflectWaveWidth);
     reflectSVG.setAttribute("height", reflectWaveHeight);
-    //reflectSVG.setAttribute("viewBox","0 0 " + reflectWaveWidth + " " + reflectWaveHeight);
 
-    //reflectSVG.classList.add("sprectrumContainer");
     PlayerUtils.addClass(reflectSVG, "sprectrumContainer");
 
     for (var i = 0; i < nbBars; i++) {
@@ -171,7 +150,6 @@ function createWaveForm(dotsList, percentilePlayed) {
 
         y_bar = primaryWaveHeight - barHeight;
 
-        //primaryRect.classList.add(className + "-up");
         PlayerUtils.addClass(primaryRect, className + "-up");
 
         primaryRect.setAttributeNS(null, "data_position", i);
@@ -189,7 +167,6 @@ function createWaveForm(dotsList, percentilePlayed) {
         var reflectRect = document.createElementNS(svgns, "rect");
         barHeight = getCorrectHeight("reflect", data[i]);
 
-        //reflectRect.classList.add(className + "-down");
         PlayerUtils.addClass(reflectRect, className + "-down");
 
 
@@ -209,9 +186,6 @@ function createWaveForm(dotsList, percentilePlayed) {
 
         //check if this position have been played or not, and add the "played-flash" class
         if (i <= barPlayedPosition) {
-            //primaryRect.classList.add("played-flash");
-            //reflectRect.classList.add("played-flash");
-
             PlayerUtils.addClass(primaryRect, "played-flash");
             PlayerUtils.addClass(reflectRect, "played-flash");
 

@@ -30,13 +30,13 @@ var musicSchema = mongoose.Schema({
 });
 
 var playlistSchema = mongoose.Schema({
-    id : {type : Number, required : true},
-    name :  {type: String, required: true},
-    listIdMusic : { type : [Number], required : true}
+    id: {type: Number, required: true},
+    name: {type: String, required: true},
+    listIdMusic: {type: [Number], required: true}
 });
 
 var Musique = mongoose.model('Music', musicSchema);
 
-var Playlist = mongoose.model('Playlist' ,playlistSchema);
+var Playlist = mongoose.model('Playlist', playlistSchema);
 
-module.exports.database = {'Musique': Musique, 'Playlist' : Playlist};
+module.exports.database = {'Musique': Musique, 'Playlist': Playlist};

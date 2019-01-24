@@ -2,8 +2,6 @@
  * Class will do every music based actions
  */
 function Player() {
-    //let soundManager;
-
     /**
      * Use to do all operations needed to use the player
      * @namespace private
@@ -31,8 +29,6 @@ function Player() {
 
         //Use to apply the right color to the background of the volume input
         PlayerUtils.createNewEventAndUseOnATarget("input", document.querySelector(".audioplayer .controls .volume input[type=range].volume-input-range"));
-        //let evt = new Event("input");
-        //document.querySelector(".audioplayer .controls .volume input[type=range].volume-input-range").dispatchEvent(evt);
 
 
     }.bind(this);
@@ -96,14 +92,10 @@ function Player() {
 
             //Check if the new position get the "hover-front" class, remove it
             if (PlayerUtils.hasClass(bar_up, "hover-front") || PlayerUtils.hasClass(bar_bottom, "hover-front")) {
-                //bar_up.classList.remove("hover-front");
-                //bar_bottom.classList.remove("hover-front");
                 PlayerUtils.removeClass(bar_up, "hover-front");
                 PlayerUtils.removeClass(bar_bottom, "hover-front");
             }
 
-            //bar_up.classList.add("played");
-            //bar_bottom.classList.add("played");
             PlayerUtils.addClass(bar_up, "played");
             PlayerUtils.addClass(bar_bottom, "played");
 
@@ -115,11 +107,8 @@ function Player() {
             //If one of the bar get the "hover-back" class, add it to all next bars
             if (hasBeenHoverBack)
                 if (!PlayerUtils.hasClass(bar_up, "hover-front") && !PlayerUtils.hasClass(bar_bottom, "hover-front")) {
-                    //bar_bottom.classList.add("hover-back");
-                    //bar_up.classList.add("hover-back");
                     PlayerUtils.addClass(bar_up, "hover-back");
                     PlayerUtils.addClass(bar_bottom, "hover-back");
-
                 }
         }
     };
@@ -143,18 +132,12 @@ function Player() {
         }
         if (barPosition <= pos) {
             for (let position = barPosition + 1; position <= pos; position++) {
-                //waveformUp.children[position].classList.add("hover-front");
-                //waveformDown.children[position].classList.add("hover-front");
-
                 PlayerUtils.addClass(waveformUp.childNodes[position], "hover-front");
                 PlayerUtils.addClass(waveformDown.childNodes[position], "hover-front");
 
             }
         } else {
             for (let position = pos; position <= barPosition; position++) {
-                //waveformUp.children[position].classList.add("hover-back");
-                //waveformDown.children[position].classList.add("hover-back");
-
                 PlayerUtils.addClass(waveformUp.childNodes[position], "hover-back");
                 PlayerUtils.addClass(waveformDown.childNodes[position], "hover-back");
             }
@@ -170,12 +153,6 @@ function Player() {
         let barsList = document.querySelectorAll(".audioplayer .bar-up ,.audioplayer .bar-down");
         if (barsList.length !== 0) {
             for (var index = 0; index < barsList.length; index++) {
-                /*elem.classList.remove("played");
-                elem.classList.remove("played-flash");
-                elem.classList.remove("hover-front");
-                elem.classList.remove("hover-back");
-                */
-
                 PlayerUtils.removeClass(barsList[index], "played");
                 PlayerUtils.removeClass(barsList[index], "played-flash");
                 PlayerUtils.removeClass(barsList[index], "hover-front");
@@ -225,7 +202,6 @@ function Player() {
         if (!PlayerUtils.hasClass(currentTime, "spectrumHoverTime")) {
             let time = position / nbBarSpectrum * this.sound.duration;
             currentTime.innerText = PlayerUtils.milliSecondsToReadableTime(time);
-            //currentTime.classList.add("spectrumHoverTime");
             PlayerUtils.addClass(currentTime, "spectrumHoverTime");
 
         }
@@ -356,7 +332,6 @@ function Player() {
      * @namespace private
      */
     this.volumeMouseOver = function () {
-        //document.querySelector(".audioplayer .controls .volume").classList.add('is-active');
         PlayerUtils.addClass(document.querySelector(".audioplayer .controls .volume"), "is-active");
 
     };
@@ -369,13 +344,10 @@ function Player() {
         let volumeButton = document.querySelector(".audioplayer .controls .volume");
 
         if (!PlayerUtils.hasClass(volumeButton, "volume-timed")) {
-            //volumeButton.classList.add('is-active');
             PlayerUtils.addClass(volumeButton, "is-active");
-
 
             //Little timeout to avoid a instant showing and hiding
             setTimeout(function () {
-                //volumeButton.classList.add('volume-timed');
                 PlayerUtils.addClass(volumeButton, "volume-timed");
 
             }, 200)
@@ -387,7 +359,6 @@ function Player() {
      * @namespace private
      */
     this.volumeMouseOut = function () {
-        //document.querySelector(".audioplayer .controls .volume").classList.remove('is-active');
         PlayerUtils.removeClass(document.querySelector(".audioplayer .controls .volume"), "is-active");
     };
 
@@ -399,16 +370,10 @@ function Player() {
         let volumeButton = document.querySelector(".audioplayer .controls .volume");
 
         if (PlayerUtils.hasClass(volumeButton, "volume-timed")) {
-            //volumeButton.classList.remove('is-active');
-
             PlayerUtils.removeClass(volumeButton, "is-active");
-
-            //Little timeout to avoid a instant showing and hiding
+            //Use to avoid a trigger of the two events at the same time
             setTimeout(function () {
-                //volumeButton.classList.remove('volume-timed');
-
                 PlayerUtils.removeClass(volumeButton, "volume-timed");
-
             }, 200)
         }
     };
@@ -521,7 +486,6 @@ function Player() {
         let currentMusic = this.playlist.getCurrentMusic();
 
         if (PlayerUtils.getCookie("song-" + currentMusic.id + "-alreadyLike") !== "") {
-            //document.querySelector(".audioplayer .like").classList.add("ilikeit");
             PlayerUtils.addClass(document.querySelector(".audioplayer .like"), "ilikeit");
 
 
@@ -549,10 +513,6 @@ Player.prototype.setVolume = function (newVolume) {
             if (PlayerUtils.hasClass(volume, 'volume-on')) {
                 PlayerUtils.removeClass(volume, "volume-on");
                 PlayerUtils.addClass(volume, "volume-off");
-
-                //volumeClass.remove('volume-on');
-                //volume.classList.add('volume-off');
-
             }
         } else {
             if (PlayerUtils.hasClass(volume, 'volume-off')) {
@@ -573,15 +533,11 @@ Player.prototype.mute = function () {
 
     if (PlayerUtils.hasClass(volume, 'volume-on')) {
         PlayerUtils.removeClass(volume, "volume-on");
-        //volumeClass.remove('volume-on');
-        //volume.classList.add('volume-off');
         PlayerUtils.addClass(volume, "volume-off");
 
         if (this.sound !== null)
             this.sound.mute();
     } else {
-        //volumeClass.remove('volume-off');
-        //volume.classList.add('volume-on');
         PlayerUtils.removeClass(volume, "volume-off");
         PlayerUtils.addClass(volume, "volume-on");
 
@@ -610,7 +566,6 @@ Player.prototype.like = function () {
 
     if (PlayerUtils.getCookie("song-" + currentMusic.id + "-alreadyLike") === "") {
         Connexion.addLike(currentMusic.id, console.log);
-        //document.querySelector(".audioplayer .like").classList.add("ilikeit");
         PlayerUtils.addClass(document.querySelector(".audioplayer .like"), "ilikeit");
 
 
@@ -621,7 +576,6 @@ Player.prototype.like = function () {
         PlayerUtils.setCookie("song-" + currentMusic.id + "-alreadyLike", "true", 99);
     } else {
         Connexion.removeLike(currentMusic.id, console.log);
-        //document.querySelector(".audioplayer .like").classList.remove("ilikeit");
         PlayerUtils.removeClass(document.querySelector(".audioplayer .like"), "ilikeit");
 
         let likeNumber = document.querySelector(".audioplayer .like");
@@ -731,18 +685,13 @@ Player.prototype.play_pause = function () {
             if (this.sound.playState) {
                 if (this.sound.paused) {
                     this.sound.resume();
-                    //playButton.classList.remove("play");
                     PlayerUtils.removeClass(playButton, "play");
-                    //playButton.classList.add("pause");
                     PlayerUtils.addClass(playButton, "pause");
 
                 }//If it's played
                 else {
                     this.sound.pause();
-                    //playButton.classList.remove("pause");
                     PlayerUtils.removeClass(playButton, "pause");
-
-                    //playButton.classList.add("play");
                     PlayerUtils.addClass(playButton, "play");
                 }
             }
@@ -755,7 +704,6 @@ Player.prototype.play_pause = function () {
 
         //Add 1 to the value of view if isn't done
         this.addView();
-
 
     } else {
         console.error("No music into the playlist !");

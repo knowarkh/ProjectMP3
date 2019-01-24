@@ -7,20 +7,20 @@ var router = express.Router();
 var Music = require('../bin/db-connection').database.Musique;
 
 /* GET music listing. */
-router.get('/', function(req, res, next) {
+router.get('/', function (req, res) {
     res.render('player');
 });
 
-router.get('/embed', function(req, res, next) {
+router.get('/embed', function (req, res) {
     res.render('embed');
 });
 
 // ========== GET ==========
 
 //Find all
-router.get('/findAll', function(req,res){
-	Music.find(function(err, music){
-        if (err){
+router.get('/findAll', function (req, res) {
+    Music.find(function (err, music) {
+        if (err) {
             res.send(err);
         }
         res.json(music);
@@ -28,8 +28,8 @@ router.get('/findAll', function(req,res){
 });
 
 // Find by ID
-router.get('/find/id/:id', function(req,res){
-	Music.find({id: req.params.id}, function(err, music) {
+router.get('/find/id/:id', function (req, res) {
+    Music.find({id: req.params.id}, function (err, music) {
         if (err) {
             res.send(err);
         }
@@ -39,9 +39,9 @@ router.get('/find/id/:id', function(req,res){
 
 // Find by titre
 
-router.get('/find/title/:title', function(req,res){
+router.get('/find/title/:title', function (req, res) {
     let title = new RegExp(req.params.title);
-	Music.find({titre: { $regex : title}}, function(err, music) {
+    Music.find({titre: {$regex: title}}, function (err, music) {
         if (err) {
             res.send(err);
         }
@@ -51,8 +51,8 @@ router.get('/find/title/:title', function(req,res){
 
 // Find by artiste
 
-router.get('/find/artiste/:artiste', function(req,res){
-	Music.find({artiste: req.params.artiste}, function(err, music) {
+router.get('/find/artiste/:artiste', function (req, res) {
+    Music.find({artiste: req.params.artiste}, function (err, music) {
         if (err) {
             res.send(err);
         }
@@ -62,8 +62,8 @@ router.get('/find/artiste/:artiste', function(req,res){
 
 // Find by album
 
-router.get('/find/album/:album', function(req,res){
-	Music.find({album: req.params.album}, function(err, music) {
+router.get('/find/album/:album', function (req, res) {
+    Music.find({album: req.params.album}, function (err, music) {
         if (err) {
             res.send(err);
         }
@@ -73,8 +73,8 @@ router.get('/find/album/:album', function(req,res){
 
 // Find by genre
 
-router.get('/find/genre/:genre', function(req,res){
-	Music.find({genre: req.params.genre}, function(err, music) {
+router.get('/find/genre/:genre', function (req, res) {
+    Music.find({genre: req.params.genre}, function (err, music) {
         if (err) {
             res.send(err);
         }
@@ -84,8 +84,8 @@ router.get('/find/genre/:genre', function(req,res){
 
 // Find by annee
 
-router.get('/find/annee/:annee', function(req,res){
-	Music.find({annee: req.params.annee}, function(err, music) {
+router.get('/find/annee/:annee', function (req, res) {
+    Music.find({annee: req.params.annee}, function (err, music) {
         if (err) {
             res.send(err);
         }
@@ -94,10 +94,9 @@ router.get('/find/annee/:annee', function(req,res){
 });
 
 
-
 // ========== POST ==========
 
-router.post('/add', function(req,res){
+router.post('/add', function (req, res) {
     var music = new Music();
 
     music.id = req.body.id;
@@ -115,11 +114,11 @@ router.post('/add', function(req,res){
     music.nbPartage = req.body.nbPartage;
     music.nbComment = req.body.nbComment;
 
-    music.save(function(err){
-        if(err) {
+    music.save(function (err) {
+        if (err) {
             res.send(err);
         }
-        res.send({message : 'Ajout de la musique réussit !'})
+        res.send({message: 'Ajout de la musique réussit !'})
     })
 
 });
@@ -128,19 +127,19 @@ router.post('/add', function(req,res){
 // ========== PUT ==========
 
 
-router.put('/maj/:id', function(req, res) {
-    Music.update({id: req.params.id}, req.body, function(err, status) {
+router.put('/maj/:id', function (req, res) {
+    Music.update({id: req.params.id}, req.body, function (err) {
         if (err) {
             res.send(err);
         }
-        res.json({message : 'MAJ réussite'});
+        res.json({message: 'MAJ réussite'});
     });
 });
 
 // addLike
 
-router.put('/maj/like/:id', function(req, res) {
-    Music.update({id: req.params.id}, {$inc:{nbLike : 1}}, function(err, status) {
+router.put('/maj/like/:id', function (req, res) {
+    Music.update({id: req.params.id}, {$inc: {nbLike: 1}}, function (err, status) {
         if (err) {
             res.send(err);
         }
@@ -151,8 +150,8 @@ router.put('/maj/like/:id', function(req, res) {
 
 // removeLike
 
-router.put('/maj/removeLike/:id', function(req, res) {
-    Music.update({id: req.params.id}, {$inc:{nbLike : -1}}, function(err, status) {
+router.put('/maj/removeLike/:id', function (req, res) {
+    Music.update({id: req.params.id}, {$inc: {nbLike: -1}}, function (err, status) {
         if (err) {
             res.send(err);
         }
@@ -163,8 +162,8 @@ router.put('/maj/removeLike/:id', function(req, res) {
 
 // addViews
 
-router.put('/maj/views/:id', function(req, res) {
-    Music.update({id: req.params.id}, {$inc:{nbEcoute : 1}}, function(err, status) {
+router.put('/maj/views/:id', function (req, res) {
+    Music.update({id: req.params.id}, {$inc: {nbEcoute: 1}}, function (err, status) {
         if (err) {
             res.send(err);
         }
@@ -174,8 +173,8 @@ router.put('/maj/views/:id', function(req, res) {
 
 // removeViews
 
-router.put('/maj/removeViews/:id', function(req, res) {
-    Music.update({id: req.params.id}, {$inc:{nbEcoute : -1}}, function(err, status) {
+router.put('/maj/removeViews/:id', function (req, res) {
+    Music.update({id: req.params.id}, {$inc: {nbEcoute: -1}}, function (err, status) {
         if (err) {
             res.send(err);
         }
@@ -185,12 +184,12 @@ router.put('/maj/removeViews/:id', function(req, res) {
 
 // ========== DELETE ==========
 
-router.delete('/remove/:id', function(req, res) {
-    Music.remove({id: req.params.id}, function(err, music){
-        if (err){
+router.delete('/remove/:id', function (req, res) {
+    Music.remove({id: req.params.id}, function (err) {
+        if (err) {
             res.send(err);
         }
-        res.json({message:"Musique supprimée"});
+        res.json({message: "Musique supprimée"});
     });
 });
 

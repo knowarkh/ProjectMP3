@@ -12,11 +12,10 @@ var pathMP3 = 'public/musics/';
 var pathCover = 'public/images/';
 
 
-
 /**
  * Displaying home page of the administration page
  */
-router.get('/', function(req, res, next) {
+router.get('/', function (req, res) {
     res.render('admin_home');
 });
 
@@ -24,7 +23,7 @@ router.get('/', function(req, res, next) {
 /**
  * Displaying a form to add music
  */
-router.get('/add', function(req, res, next) {
+router.get('/add', function (req, res) {
     res.render('admin_add');
 });
 
@@ -33,7 +32,7 @@ router.get('/add', function(req, res, next) {
  * Add music
  */
 // POST form add track
-router.post('/', function(req, res, next) {
+router.post('/', function (req, res) {
 
     if (Object.keys(req.files).length === 0) {
         return res.status(400).send('No files were uploaded.');
@@ -59,18 +58,18 @@ router.post('/', function(req, res, next) {
 
     //---get the MP3 file---
     //Use the mv() method to place the file on the server
-    sampleFile.mv(pathMP3 + musicFileName, function(err) {
+    sampleFile.mv(pathMP3 + musicFileName, function (err) {
         if (err) {
             return res.status(500).send(err);
         }
         //---get the Cover image---
-        coverFile.mv(pathCover + coverFilename, function(err) {
+        coverFile.mv(pathCover + coverFilename, function (err) {
             if (err)
                 return res.status(500).send(err);
 
             //---get metadata of the MP3 file---
             mm.parseFile(pathMP3 + musicFileName, {native: true})
-                .then( metadata => {
+                .then(metadata => {
 
                     //---processing python script---
                     if (shell.exec('python ./bin/audio.py ' + pathMP3 + musicFileName).code !== 0) {
@@ -82,7 +81,7 @@ router.post('/', function(req, res, next) {
                     //---creation of database object---
                     var piste = new Music();
 
-                    Music.findOne({},{"id": true, "_id" : false},function(err, idMusicMax){
+                    Music.findOne({}, {"id": true, "_id": false}, function (err, idMusicMax) {
 
                             piste.id = idMusicMax.id + 1;
                             piste.titre = req.body.titre;
@@ -100,11 +99,11 @@ router.post('/', function(req, res, next) {
                             piste.nbComment = 0;
 
                             //---save in mongoDB database---
-                            piste.save(function(err){
-                                if(err) {
+                            piste.save(function (err) {
+                                if (err) {
                                     res.send(err);
                                 }
-                                res.render('admin_redirection', { title: 'Express' });
+                                res.render('admin_redirection', {title: 'Express'});
                             });
 
                             // Deleting temporary files for by the python script.
@@ -112,11 +111,10 @@ router.post('/', function(req, res, next) {
                             shell.rm("musique.txt");
 
                         }
-
-                    ).sort({"id" : -1}).limit(1);
+                    ).sort({"id": -1}).limit(1);
 
                 })
-                .catch( err => {
+                .catch(err => {
                     console.error(err.message);
                 });
         });
@@ -127,28 +125,30 @@ router.post('/', function(req, res, next) {
 /**
  * Retrieving music list
  */
-router.get('/list', function(req, res, next) {
-    Music.find(function(err, music){
-        res.render('admin_list', {data:music});
-    }).sort({"id" : 1});
+router.get('/list', function (req, res) {
+    Music.find(function (err, music) {
+        res.render('admin_list', {data: music});
+    }).sort({"id": 1});
 });
-
 
 
 /**
  * Retrieving music by its ID
  */
-router.get('/:id', function(req,res){
-    Music.find({id: req.params.id}, function(err, music) {
-        res.render('admin_modif', {data:music});
+router.get('/:id', function (req, res) {
+    Music.find({id: req.params.id}, function (err, music) {
+        res.render('admin_modif', {data: music});
     });
 });
 
 /**
  * Edit music
  */
-router.post('/put/:id', function(req, res) {
-    Music.update({id: req.params.id}, req.body, function(err, status) {
+router.post('/put/:id', function (req, res) {
+    Music.update({id: req.params.id}, req.body, function (err) {
+        if (err) {
+            res.send(err);
+        }
         res.redirect('/admin/list');
     });
 });
@@ -157,12 +157,14 @@ router.post('/put/:id', function(req, res) {
 /**
  * Remove music
  */
-router.post('/del/:id', function(req, res) {
-    Music.remove({id: req.params.id}, function(err, status) {
+router.post('/del/:id', function (req, res) {
+    Music.remove({id: req.params.id}, function (err) {
+        if (err) {
+            res.send(err);
+        }
         res.redirect('/admin/list');
     });
 });
-
 
 
 /**
@@ -181,7 +183,7 @@ function path(artiste, titre) {
  * @returns string - the reformatted string
  */
 function underscore(string) {
-    var res =  capitalizeFirstLetter(string);
+    var res = capitalizeFirstLetter(string);
     return res.split(' ').join('_');
 }
 
@@ -193,7 +195,7 @@ function underscore(string) {
 function capitalizeFirstLetter(str) {
     return str.replace(
         /\w\S*/g,
-        function(txt) {
+        function (txt) {
             return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
         }
     );
@@ -214,7 +216,9 @@ function escapeHtml(text) {
         "'": '&#039;'
     };
 
-    return text.replace(/[&<>"']/g, function(m) { return map[m]; });
+    return text.replace(/[&<>"']/g, function (m) {
+        return map[m];
+    });
 }
 
 module.exports = router;
