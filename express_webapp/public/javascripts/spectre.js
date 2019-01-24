@@ -42,7 +42,7 @@ function createWaveForm(dotsList, percentilePlayed) {
     /** Define the css rules */
 
     //Check if a defs blocks already exist and doesn't recreate this
-    if(document.querySelector('defs.svg-cssRules') == null){
+    if (document.querySelector('defs.svg-cssRules') == null) {
 
         var defBlock = document.createElementNS(svgns, "defs");
         PlayerUtils.addClass(defBlock, "svg-cssRules");
@@ -57,7 +57,7 @@ function createWaveForm(dotsList, percentilePlayed) {
         gradientBarUp.setAttribute("y1", "0");
         gradientBarUp.setAttribute("x2", "0");
         gradientBarUp.setAttribute("y2", "100%");
-        gradientBarUp.innerHTML = "<stop offset='0%' stop-color='#F0F0F0' />\n" +"<stop offset='100%' stop-color='#646464' />\n";
+        gradientBarUp.innerHTML = "<stop offset='0%' stop-color='#F0F0F0' />\n" + "<stop offset='100%' stop-color='#646464' />\n";
         defBlock.appendChild(gradientBarUp);
 
         var gradientBarUpPlayed = gradientBarUp.cloneNode();
@@ -100,8 +100,8 @@ function createWaveForm(dotsList, percentilePlayed) {
         //Add the def block - MUST BE BEFORE the other svg to be used AND in a svg
         SVGRules.appendChild(defBlock);
 
-        SVGRules.setAttribute("width",0);
-        SVGRules.setAttribute("height",0);
+        SVGRules.setAttribute("width", 0);
+        SVGRules.setAttribute("height", 0);
 
 
         spectre.appendChild(SVGRules);
@@ -148,10 +148,10 @@ function createWaveForm(dotsList, percentilePlayed) {
     primarySVG.setAttribute("width", primaryWaveWidth);
     primarySVG.setAttribute("height", primaryWaveHeight);
     //primarySVG.setAttribute("viewBox","0 0 " + primaryWaveWidth + " " + primaryWaveHeight);
-    
+
 
     //primarySVG.classList.add("sprectrumContainer");
-    PlayerUtils.addClass(primarySVG,"sprectrumContainer");
+    PlayerUtils.addClass(primarySVG, "sprectrumContainer");
 
     reflectSVG.setAttribute("xmlns", svgns);
 
@@ -162,7 +162,7 @@ function createWaveForm(dotsList, percentilePlayed) {
     //reflectSVG.setAttribute("viewBox","0 0 " + reflectWaveWidth + " " + reflectWaveHeight);
 
     //reflectSVG.classList.add("sprectrumContainer");
-    PlayerUtils.addClass(reflectSVG,"sprectrumContainer");
+    PlayerUtils.addClass(reflectSVG, "sprectrumContainer");
 
     for (var i = 0; i < nbBars; i++) {
         /** Create and add every bar of the primary waveform*/
@@ -172,7 +172,7 @@ function createWaveForm(dotsList, percentilePlayed) {
         y_bar = primaryWaveHeight - barHeight;
 
         //primaryRect.classList.add(className + "-up");
-        PlayerUtils.addClass(primaryRect,className + "-up");
+        PlayerUtils.addClass(primaryRect, className + "-up");
 
         primaryRect.setAttributeNS(null, "data_position", i);
 
@@ -190,7 +190,7 @@ function createWaveForm(dotsList, percentilePlayed) {
         barHeight = getCorrectHeight("reflect", data[i]);
 
         //reflectRect.classList.add(className + "-down");
-        PlayerUtils.addClass(reflectRect,className + "-down");
+        PlayerUtils.addClass(reflectRect, className + "-down");
 
 
         reflectRect.setAttributeNS(null, "data_position", i);
@@ -212,8 +212,8 @@ function createWaveForm(dotsList, percentilePlayed) {
             //primaryRect.classList.add("played-flash");
             //reflectRect.classList.add("played-flash");
 
-            PlayerUtils.addClass(primaryRect,"played-flash");
-            PlayerUtils.addClass(reflectRect,"played-flash");
+            PlayerUtils.addClass(primaryRect, "played-flash");
+            PlayerUtils.addClass(reflectRect, "played-flash");
 
         }
 
@@ -224,7 +224,6 @@ function createWaveForm(dotsList, percentilePlayed) {
     spectre.appendChild(primarySVG);
     //Add to the div the reflect waveform
     spectre.appendChild(reflectSVG);
-
 
 
     /**

@@ -1,22 +1,21 @@
-
 var modals = document.querySelectorAll(".page-admin .content .page-list .modal_suppr");
 
-for(var mod of modals){
+for (var mod of modals) {
     var id = mod.parentNode.childNodes[1].innerText;
-    mod.classList.add("supr"+id);
+    mod.classList.add("supr" + id);
 }
 
 var btn_suppr = document.querySelectorAll(".page-admin .content .page-list .list a.suppr");
 
-for(var btn of btn_suppr){
-    btn.addEventListener("click",function(e){
+for (var btn of btn_suppr) {
+    btn.addEventListener("click", function (e) {
 
         var id = e.target.parentNode.childNodes[1].innerText;
         modalShare(id)
     });
 }
 
-function escapeHtml(unsafe){
+function escapeHtml(unsafe) {
     var map = {
         '&': '&amp;',
         '<': '&lt;',
@@ -24,7 +23,9 @@ function escapeHtml(unsafe){
         '"': '&quot;',
         "'": '&#039;'
     };
-    return unsafe.replace(/[&<>"']/g, function(m) { return map[m]; });
+    return unsafe.replace(/[&<>"']/g, function (m) {
+        return map[m];
+    });
 }
 
 function modalShare(id) {

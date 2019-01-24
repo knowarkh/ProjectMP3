@@ -1,4 +1,5 @@
-function Connexion() {}
+function Connexion() {
+}
 
 /**             Request constructor              */
 
@@ -17,8 +18,8 @@ Connexion.prototype.requestGet = function (url, callback) {
         }
     };
     xhttp.open("GET", url, true);
-    xhttp.setRequestHeader("Access-Control-Allow-Origin","*");
-    xhttp.setRequestHeader("Access-Control-Allow-Headers"," Authorization, Origin, X-Requested-With, Content-Type, Accept");
+    xhttp.setRequestHeader("Access-Control-Allow-Origin", "*");
+    xhttp.setRequestHeader("Access-Control-Allow-Headers", " Authorization, Origin, X-Requested-With, Content-Type, Accept");
     xhttp.send();
 };
 
@@ -38,7 +39,7 @@ Connexion.prototype.requestPost = function (url, values, callback) {
 
     xhttp.open("POST", url, true);
     xhttp.setRequestHeader("Content-type", "application/json");
-    xhttp.setRequestHeader("Access-Control-Allow-Headers"," Authorization, Origin, X-Requested-With, Content-Type, Accept");
+    xhttp.setRequestHeader("Access-Control-Allow-Headers", " Authorization, Origin, X-Requested-With, Content-Type, Accept");
     xhttp.send(values);
 };
 
@@ -59,7 +60,7 @@ Connexion.prototype.requestPut = function (url, values, callback) {
     xhttp.open("PUT", url, true);
     xhttp.setRequestHeader("Content-type", "application/json");
     xhttp.setRequestHeader("Access-Control-Allow-Origin", "*");
-    xhttp.setRequestHeader("Access-Control-Allow-Headers"," Authorization, Origin, X-Requested-With, Content-Type, Accept");
+    xhttp.setRequestHeader("Access-Control-Allow-Headers", " Authorization, Origin, X-Requested-With, Content-Type, Accept");
     xhttp.send(values);
 };
 
@@ -133,7 +134,7 @@ Connexion.prototype.getMusicByYear = function (year, callback) {
  * @param id {int} - Value of the id
  * @param callback {function} - function which be called at the end of the request
  */
-Connexion.prototype.getPlaylistById = function(id, callback){
+Connexion.prototype.getPlaylistById = function (id, callback) {
     this.requestGet("http://localhost:3000/playlist/find/id/" + id, callback);
 };
 
@@ -142,7 +143,7 @@ Connexion.prototype.getPlaylistById = function(id, callback){
  * @param name {string} - Value of the id
  * @param callback {function} - function which be called at the end of the request
  */
-Connexion.prototype.getPlaylistByName = function(name, callback){
+Connexion.prototype.getPlaylistByName = function (name, callback) {
     this.requestGet("http://localhost:3000/playlist/find/name/" + name, callback);
 };
 
@@ -191,8 +192,8 @@ Connexion.prototype.addNumberOfShare = function (idMusic, callback) {
  * @param idMusic {int} - id of the music wanted to add
  * @param callback {function} - function which be call after the request
  */
-Connexion.prototype.addMusicToPlaylist = function (idPlaylist, idMusic, callback){
-    this.requestPut("http://localhost:3000/playlist/maj/add/" + idPlaylist, JSON.parse('{"idMusic" : '+idMusic+'}'), callback);
+Connexion.prototype.addMusicToPlaylist = function (idPlaylist, idMusic, callback) {
+    this.requestPut("http://localhost:3000/playlist/maj/add/" + idPlaylist, JSON.parse('{"idMusic" : ' + idMusic + '}'), callback);
 };
 
 /**
@@ -201,8 +202,8 @@ Connexion.prototype.addMusicToPlaylist = function (idPlaylist, idMusic, callback
  * @param idMusic {int} - id of the music wanted to add
  * @param callback {function} - function which be call after the request
  */
-Connexion.prototype.removeMusicToPlaylist = function (idPlaylist, idMusic, callback){
-    this.requestPut("http://localhost:3000/playlist/maj/remove/" + idPlaylist, JSON.parse('{"idMusic" : '+idMusic+'}'), callback);
+Connexion.prototype.removeMusicToPlaylist = function (idPlaylist, idMusic, callback) {
+    this.requestPut("http://localhost:3000/playlist/maj/remove/" + idPlaylist, JSON.parse('{"idMusic" : ' + idMusic + '}'), callback);
 };
 
 /**         Common part          */
@@ -211,9 +212,9 @@ Connexion.prototype.removeMusicToPlaylist = function (idPlaylist, idMusic, callb
  * Allow to get the id (if exist) of the music put in the url
  * @returns {null |number}
  */
-Connexion.prototype.getIdMusicParam = function(){
+Connexion.prototype.getIdMusicParam = function () {
     let param = Number(PlayerUtils.getParameterByName("idMusic", window.location));
-    param = !isNaN(param)? param : null;
+    param = !isNaN(param) ? param : null;
     return param;
 };
 
@@ -221,9 +222,9 @@ Connexion.prototype.getIdMusicParam = function(){
  * Allow to get the id (if exist) of the playlist put in the url
  * @returns {null | number}
  */
-Connexion.prototype.getIdPlaylistParam = function(){
+Connexion.prototype.getIdPlaylistParam = function () {
     let param = Number(PlayerUtils.getParameterByName("idPlaylist", window.location));
-    param = !isNaN(param)? param : null;
+    param = !isNaN(param) ? param : null;
     return param;
 };
 

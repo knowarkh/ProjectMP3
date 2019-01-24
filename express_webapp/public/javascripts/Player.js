@@ -19,18 +19,18 @@ function Player() {
         let idMusicToLoad = Connexion.getIdMusicParam();
         let idPlaylistToLoad = Connexion.getIdPlaylistParam();
 
-        if(idPlaylistToLoad !== 0 && idMusicToLoad !== 0){
+        if (idPlaylistToLoad !== 0 && idMusicToLoad !== 0) {
             this.addPlaylist(idPlaylistToLoad, idMusicToLoad);
-        }else if(idPlaylistToLoad !== 0){
-            this.addPlaylist(idPlaylistToLoad,-1); // -1 is same way to put nothing
-        }else if(idMusicToLoad !== 0){
+        } else if (idPlaylistToLoad !== 0) {
+            this.addPlaylist(idPlaylistToLoad, -1); // -1 is same way to put nothing
+        } else if (idMusicToLoad !== 0) {
             this.addMusicById(idMusicToLoad);
         }
 
         this.setListener();
 
         //Use to apply the right color to the background of the volume input
-        PlayerUtils.createNewEventAndUseOnATarget("input",document.querySelector(".audioplayer .controls .volume input[type=range].volume-input-range"));
+        PlayerUtils.createNewEventAndUseOnATarget("input", document.querySelector(".audioplayer .controls .volume input[type=range].volume-input-range"));
         //let evt = new Event("input");
         //document.querySelector(".audioplayer .controls .volume input[type=range].volume-input-range").dispatchEvent(evt);
 
@@ -41,20 +41,20 @@ function Player() {
      * Create a SoundManagerSound with the currentMusic in the playlist and reload the page
      * @namespace private
      */
-    this.loadMusic = function(){
-        if(this.sound !== null){
+    this.loadMusic = function () {
+        if (this.sound !== null) {
             this.sound.stop();
             this.sound.unload();
 
         }
 
         let currentMusic = this.playlist.getCurrentMusic();
-        
-        if(soundManager.getSoundById(currentMusic.title+"-"+currentMusic.artistName) !== undefined){
-            this.sound = soundManager.getSoundById(currentMusic.title+"-"+currentMusic.artistName);
+
+        if (soundManager.getSoundById(currentMusic.title + "-" + currentMusic.artistName) !== undefined) {
+            this.sound = soundManager.getSoundById(currentMusic.title + "-" + currentMusic.artistName);
             this.sound.setVolume(this.volume);
 
-        }else{
+        } else {
             this.sound = soundManager.createSound({
                 id: currentMusic['title'] + "-" + currentMusic['artistName'], // Id arbitraire
                 url: currentMusic['musicPath'],
@@ -65,7 +65,7 @@ function Player() {
 
         }
 
-        if(this.sound.muted){
+        if (this.sound.muted) {
             this.mute();
         }
 
@@ -95,30 +95,30 @@ function Player() {
             bar_bottom = waveform[1].childNodes[position];
 
             //Check if the new position get the "hover-front" class, remove it
-            if (PlayerUtils.hasClass(bar_up,"hover-front") || PlayerUtils.hasClass(bar_bottom,"hover-front")) {
+            if (PlayerUtils.hasClass(bar_up, "hover-front") || PlayerUtils.hasClass(bar_bottom, "hover-front")) {
                 //bar_up.classList.remove("hover-front");
                 //bar_bottom.classList.remove("hover-front");
-                PlayerUtils.removeClass(bar_up,"hover-front");
-                PlayerUtils.removeClass(bar_bottom,"hover-front");
+                PlayerUtils.removeClass(bar_up, "hover-front");
+                PlayerUtils.removeClass(bar_bottom, "hover-front");
             }
 
             //bar_up.classList.add("played");
             //bar_bottom.classList.add("played");
-            PlayerUtils.addClass(bar_up,"played");
-            PlayerUtils.addClass(bar_bottom,"played");
+            PlayerUtils.addClass(bar_up, "played");
+            PlayerUtils.addClass(bar_bottom, "played");
 
 
             //Check if a "hover-back" class is set
-            if (PlayerUtils.hasClass(bar_up,"hover-back") || PlayerUtils.hasClass(bar_bottom,"hover-back"))
+            if (PlayerUtils.hasClass(bar_up, "hover-back") || PlayerUtils.hasClass(bar_bottom, "hover-back"))
                 hasBeenHoverBack = true;
 
             //If one of the bar get the "hover-back" class, add it to all next bars
             if (hasBeenHoverBack)
-                if (!PlayerUtils.hasClass(bar_up,"hover-front") && !PlayerUtils.hasClass(bar_bottom,"hover-front")) {
+                if (!PlayerUtils.hasClass(bar_up, "hover-front") && !PlayerUtils.hasClass(bar_bottom, "hover-front")) {
                     //bar_bottom.classList.add("hover-back");
                     //bar_up.classList.add("hover-back");
-                    PlayerUtils.addClass(bar_up,"hover-back");
-                    PlayerUtils.addClass(bar_bottom,"hover-back");
+                    PlayerUtils.addClass(bar_up, "hover-back");
+                    PlayerUtils.addClass(bar_bottom, "hover-back");
 
                 }
         }
@@ -145,18 +145,18 @@ function Player() {
             for (let position = barPosition + 1; position <= pos; position++) {
                 //waveformUp.children[position].classList.add("hover-front");
                 //waveformDown.children[position].classList.add("hover-front");
-                
-                PlayerUtils.addClass(waveformUp.childNodes[position],"hover-front");
-                PlayerUtils.addClass(waveformDown.childNodes[position],"hover-front");
+
+                PlayerUtils.addClass(waveformUp.childNodes[position], "hover-front");
+                PlayerUtils.addClass(waveformDown.childNodes[position], "hover-front");
 
             }
         } else {
             for (let position = pos; position <= barPosition; position++) {
                 //waveformUp.children[position].classList.add("hover-back");
                 //waveformDown.children[position].classList.add("hover-back");
-                
-                PlayerUtils.addClass(waveformUp.childNodes[position],"hover-back");
-                PlayerUtils.addClass(waveformDown.childNodes[position],"hover-back");
+
+                PlayerUtils.addClass(waveformUp.childNodes[position], "hover-back");
+                PlayerUtils.addClass(waveformDown.childNodes[position], "hover-back");
             }
         }
 
@@ -168,35 +168,35 @@ function Player() {
      */
     this.clearColorWave = function () {
         let barsList = document.querySelectorAll(".audioplayer .bar-up ,.audioplayer .bar-down");
-        if(barsList.length !== 0){
-            for(var index = 0; index < barsList.length; index++){
+        if (barsList.length !== 0) {
+            for (var index = 0; index < barsList.length; index++) {
                 /*elem.classList.remove("played");
                 elem.classList.remove("played-flash");
                 elem.classList.remove("hover-front");
                 elem.classList.remove("hover-back");
                 */
-                
-                PlayerUtils.removeClass(barsList[index],"played");
-                PlayerUtils.removeClass(barsList[index],"played-flash");
-                PlayerUtils.removeClass(barsList[index],"hover-front");
-                PlayerUtils.removeClass(barsList[index],"hover-back");
+
+                PlayerUtils.removeClass(barsList[index], "played");
+                PlayerUtils.removeClass(barsList[index], "played-flash");
+                PlayerUtils.removeClass(barsList[index], "hover-front");
+                PlayerUtils.removeClass(barsList[index], "hover-back");
             }
 
         }
-        
+
     };
 
     /**
      * Will remove the class "hover" of all bars of the waveform
      * @namespace private
      */
-    this.clearColorHoverWave = function () { 
+    this.clearColorHoverWave = function () {
         let barsList = document.querySelectorAll(".audioplayer .bar-up ,.audioplayer .bar-down");
-        if(barsList.length !== 0){
-            for(var index = 0; index < barsList.length; index++){
+        if (barsList.length !== 0) {
+            for (var index = 0; index < barsList.length; index++) {
 
-                PlayerUtils.removeClass(barsList[index],"hover-front");
-                PlayerUtils.removeClass(barsList[index],"hover-back");
+                PlayerUtils.removeClass(barsList[index], "hover-front");
+                PlayerUtils.removeClass(barsList[index], "hover-back");
             }
 
         }
@@ -207,8 +207,8 @@ function Player() {
      * @namespace private
      */
     this.clearHoverTime = function () {
-        let currentTime = document.querySelector(".audioplayer .en-cours");        
-        PlayerUtils.removeClass(currentTime,"spectrumHoverTime");
+        let currentTime = document.querySelector(".audioplayer .en-cours");
+        PlayerUtils.removeClass(currentTime, "spectrumHoverTime");
         currentTime.innerText = PlayerUtils.milliSecondsToReadableTime(this.sound.position);
     };
 
@@ -220,13 +220,13 @@ function Player() {
      */
     this.drawHoverTime = function (position) {
         let currentTime = document.querySelector(".audioplayer .en-cours");
-        let nbBarSpectrum = document.querySelectorAll(".audioplayer .waveform .sprectrumContainer")[0].childElementCount -1;
+        let nbBarSpectrum = document.querySelectorAll(".audioplayer .waveform .sprectrumContainer")[0].childElementCount - 1;
 
-        if (!PlayerUtils.hasClass(currentTime,"spectrumHoverTime")) {
+        if (!PlayerUtils.hasClass(currentTime, "spectrumHoverTime")) {
             let time = position / nbBarSpectrum * this.sound.duration;
             currentTime.innerText = PlayerUtils.milliSecondsToReadableTime(time);
             //currentTime.classList.add("spectrumHoverTime");
-            PlayerUtils.addClass(currentTime,"spectrumHoverTime");
+            PlayerUtils.addClass(currentTime, "spectrumHoverTime");
 
         }
     };
@@ -249,14 +249,14 @@ function Player() {
 
         //Add event to each bar of the spectrum
         var barsList = document.querySelectorAll(".audioplayer .bar-up , .audioplayer .bar-down");
-        for(var index = 0; index < barsList.length ; index++){
+        for (var index = 0; index < barsList.length; index++) {
             barsList[index].addEventListener("click", function (evt) {
                 this.clearColorWave();
-                if(evt.target.attributes.hasOwnProperty("data_position"))
+                if (evt.target.attributes.hasOwnProperty("data_position"))
                     this.goTo(Number(evt.target.attributes.data_position.value));
             }.bind(this));
             barsList[index].addEventListener("mouseover", function (evt) {
-                if(evt.target.attributes.hasOwnProperty("data_position")) {
+                if (evt.target.attributes.hasOwnProperty("data_position")) {
                     this.colorWaveToHoverPos(Number(evt.target.attributes.data_position.value));
                     this.drawHoverTime(Number(evt.target.attributes.data_position.value))
                 }
@@ -277,7 +277,7 @@ function Player() {
         if (this.sound != null) {
 
             let currentTime = document.querySelector(".audioplayer .en-cours");
-            if (!PlayerUtils.hasClass(currentTime,"spectrumHoverTime"))
+            if (!PlayerUtils.hasClass(currentTime, "spectrumHoverTime"))
                 currentTime.innerText = PlayerUtils.milliSecondsToReadableTime(this.sound.position);
 
             this.colorWaveToCurrentPos();
@@ -346,7 +346,7 @@ function Player() {
      * @namespace private
      * @param position
      */
-    this.setPosition = function(position){
+    this.setPosition = function (position) {
         this.playlist.setCurrentPosition(position);
         this.loadMusic();
     };
@@ -357,7 +357,7 @@ function Player() {
      */
     this.volumeMouseOver = function () {
         //document.querySelector(".audioplayer .controls .volume").classList.add('is-active');
-        PlayerUtils.addClass(document.querySelector(".audioplayer .controls .volume"),"is-active");
+        PlayerUtils.addClass(document.querySelector(".audioplayer .controls .volume"), "is-active");
 
     };
 
@@ -368,15 +368,15 @@ function Player() {
     this.volumeMouseOverCompact = function () {
         let volumeButton = document.querySelector(".audioplayer .controls .volume");
 
-        if (!PlayerUtils.hasClass(volumeButton,"volume-timed")) {
+        if (!PlayerUtils.hasClass(volumeButton, "volume-timed")) {
             //volumeButton.classList.add('is-active');
-            PlayerUtils.addClass(volumeButton,"is-active");
+            PlayerUtils.addClass(volumeButton, "is-active");
 
 
             //Little timeout to avoid a instant showing and hiding
             setTimeout(function () {
                 //volumeButton.classList.add('volume-timed');
-                PlayerUtils.addClass(volumeButton,"volume-timed");
+                PlayerUtils.addClass(volumeButton, "volume-timed");
 
             }, 200)
         }
@@ -388,7 +388,7 @@ function Player() {
      */
     this.volumeMouseOut = function () {
         //document.querySelector(".audioplayer .controls .volume").classList.remove('is-active');
-        PlayerUtils.removeClass(document.querySelector(".audioplayer .controls .volume"),"is-active");
+        PlayerUtils.removeClass(document.querySelector(".audioplayer .controls .volume"), "is-active");
     };
 
     /**
@@ -398,16 +398,16 @@ function Player() {
     this.volumeMouseOutCompact = function () {
         let volumeButton = document.querySelector(".audioplayer .controls .volume");
 
-        if (PlayerUtils.hasClass(volumeButton,"volume-timed")) {
+        if (PlayerUtils.hasClass(volumeButton, "volume-timed")) {
             //volumeButton.classList.remove('is-active');
-            
-            PlayerUtils.removeClass(volumeButton,"is-active");
+
+            PlayerUtils.removeClass(volumeButton, "is-active");
 
             //Little timeout to avoid a instant showing and hiding
             setTimeout(function () {
                 //volumeButton.classList.remove('volume-timed');
-                
-                PlayerUtils.removeClass(volumeButton,"volume-timed");
+
+                PlayerUtils.removeClass(volumeButton, "volume-timed");
 
             }, 200)
         }
@@ -441,7 +441,7 @@ function Player() {
     this.addMusicById = function (idMusic) {
         let firstMusic = this.playlist.getCurrentMusic() == null;
 
-        Connexion.getMusicById(idMusic, function(music){
+        Connexion.getMusicById(idMusic, function (music) {
             music = new Music(JSON.parse(music));
 
             this.playlist.addMusic(music);
@@ -464,7 +464,7 @@ function Player() {
      * @namespace private
      * @param music {Music} - JSON string which represent a Music Object to add
      */
-    this.addMusicObject = function(music){
+    this.addMusicObject = function (music) {
         let firstMusic = this.playlist.getCurrentMusic() === null;
 
         this.playlist.addMusic(music);
@@ -485,26 +485,26 @@ function Player() {
      * @param idPlaylistToAdd {int} - id of the playlist into the database
      * @param currentMusicId {int} - if present set the current Music to this one
      */
-    this.addPlaylist = function(idPlaylistToAdd, currentMusicId){
+    this.addPlaylist = function (idPlaylistToAdd, currentMusicId) {
         //Set a default parameter which work with IE11
         currentMusicId = currentMusicId || null;
 
-        Connexion.getPlaylistById(idPlaylistToAdd,function(newPlaylist){
-            if(newPlaylist !== null && newPlaylist !== "[]"){
+        Connexion.getPlaylistById(idPlaylistToAdd, function (newPlaylist) {
+            if (newPlaylist !== null && newPlaylist !== "[]") {
                 this.playlist = new Playlist();
                 newPlaylist = JSON.parse(newPlaylist);
                 //Position = the given position of the music into the playlist ( {"1" : musicOne, "2" : musicTwo})
-                    for (let position in newPlaylist){
-                        if(newPlaylist.hasOwnProperty(position)){
+                for (let position in newPlaylist) {
+                    if (newPlaylist.hasOwnProperty(position)) {
 
-                            let music = new Music(newPlaylist[position]);
-                            this.addMusicObject(music);
+                        let music = new Music(newPlaylist[position]);
+                        this.addMusicObject(music);
 
-                            if(music.id === currentMusicId){
-                                this.setPosition(Number(position));
-                            }
+                        if (music.id === currentMusicId) {
+                            this.setPosition(Number(position));
                         }
                     }
+                }
 
                 this.checkCookies();
             }
@@ -517,16 +517,16 @@ function Player() {
      * Check all the cookie and apply the correct modification to the player
      * @namespace private
      */
-    this.checkCookies = function(){
+    this.checkCookies = function () {
         let currentMusic = this.playlist.getCurrentMusic();
 
-        if(PlayerUtils.getCookie("song-" + currentMusic.id + "-alreadyLike") !== ""){
+        if (PlayerUtils.getCookie("song-" + currentMusic.id + "-alreadyLike") !== "") {
             //document.querySelector(".audioplayer .like").classList.add("ilikeit");
-            PlayerUtils.addClass(document.querySelector(".audioplayer .like"),"ilikeit");
+            PlayerUtils.addClass(document.querySelector(".audioplayer .like"), "ilikeit");
 
-            
-        }else{
-            PlayerUtils.removeClass(document.querySelector(".audioplayer .like"),"ilikeit");
+
+        } else {
+            PlayerUtils.removeClass(document.querySelector(".audioplayer .like"), "ilikeit");
         }
     };
 
@@ -546,23 +546,22 @@ Player.prototype.setVolume = function (newVolume) {
 
         let volume = document.querySelector(".audioplayer .controls .volume .volume_button");
         if (newVolume === 0) {
-            if (PlayerUtils.hasClass(volume,'volume-on')) {
-                PlayerUtils.removeClass(volume,"volume-on");
-                PlayerUtils.addClass(volume,"volume-off");
+            if (PlayerUtils.hasClass(volume, 'volume-on')) {
+                PlayerUtils.removeClass(volume, "volume-on");
+                PlayerUtils.addClass(volume, "volume-off");
 
                 //volumeClass.remove('volume-on');
                 //volume.classList.add('volume-off');
-                
+
             }
         } else {
-            if (PlayerUtils.hasClass(volume,'volume-off')) {
-                PlayerUtils.removeClass(volume,'volume-off');                
-                PlayerUtils.addClass(volume,"volume-on");
+            if (PlayerUtils.hasClass(volume, 'volume-off')) {
+                PlayerUtils.removeClass(volume, 'volume-off');
+                PlayerUtils.addClass(volume, "volume-on");
             }
         }
     }
 };
-
 
 
 /**
@@ -572,19 +571,19 @@ Player.prototype.setVolume = function (newVolume) {
 Player.prototype.mute = function () {
     let volume = document.querySelector(".audioplayer .controls .volume .volume_button");
 
-    if (PlayerUtils.hasClass(volume,'volume-on')) {
-        PlayerUtils.removeClass(volume,"volume-on");
+    if (PlayerUtils.hasClass(volume, 'volume-on')) {
+        PlayerUtils.removeClass(volume, "volume-on");
         //volumeClass.remove('volume-on');
         //volume.classList.add('volume-off');
-        PlayerUtils.addClass(volume,"volume-off");
+        PlayerUtils.addClass(volume, "volume-off");
 
         if (this.sound !== null)
             this.sound.mute();
     } else {
         //volumeClass.remove('volume-off');
         //volume.classList.add('volume-on');
-        PlayerUtils.removeClass(volume,"volume-off");
-        PlayerUtils.addClass(volume,"volume-on");
+        PlayerUtils.removeClass(volume, "volume-off");
+        PlayerUtils.addClass(volume, "volume-on");
 
         if (this.sound !== null)
             this.sound.unmute();
@@ -596,9 +595,9 @@ Player.prototype.mute = function () {
  * @namespace Player
  * @returns {boolean} - if the player if muted
  */
-Player.prototype.playerIsMute = function(){
+Player.prototype.playerIsMute = function () {
     let volume = document.querySelector(".audioplayer .controls .volume .volume_button");
-    return PlayerUtils.hasClass(volume,'volume-off');
+    return PlayerUtils.hasClass(volume, 'volume-off');
 };
 
 /**
@@ -612,7 +611,7 @@ Player.prototype.like = function () {
     if (PlayerUtils.getCookie("song-" + currentMusic.id + "-alreadyLike") === "") {
         Connexion.addLike(currentMusic.id, console.log);
         //document.querySelector(".audioplayer .like").classList.add("ilikeit");
-        PlayerUtils.addClass(document.querySelector(".audioplayer .like"),"ilikeit");
+        PlayerUtils.addClass(document.querySelector(".audioplayer .like"), "ilikeit");
 
 
         let likeNumber = document.querySelector(".audioplayer .like");
@@ -623,7 +622,7 @@ Player.prototype.like = function () {
     } else {
         Connexion.removeLike(currentMusic.id, console.log);
         //document.querySelector(".audioplayer .like").classList.remove("ilikeit");
-        PlayerUtils.removeClass(document.querySelector(".audioplayer .like"),"ilikeit");
+        PlayerUtils.removeClass(document.querySelector(".audioplayer .like"), "ilikeit");
 
         let likeNumber = document.querySelector(".audioplayer .like");
         likeNumber.innerText = Number(likeNumber.innerText) - 1;
@@ -632,7 +631,6 @@ Player.prototype.like = function () {
         PlayerUtils.setCookie("song-" + currentMusic.id + "-alreadyLike", "", 99);
     }
 };
-
 
 
 /**
@@ -695,7 +693,7 @@ Player.prototype.goTo = function (newPosition) {
         this.sound.setPosition(newTime);
         this.clearColorWave();
         this.colorWaveToCurrentPos();
-        if(this.sound.paused)
+        if (this.sound.paused)
             this.play_pause();
 
     }
@@ -734,30 +732,29 @@ Player.prototype.play_pause = function () {
                 if (this.sound.paused) {
                     this.sound.resume();
                     //playButton.classList.remove("play");
-                    PlayerUtils.removeClass(playButton,"play");
+                    PlayerUtils.removeClass(playButton, "play");
                     //playButton.classList.add("pause");
-                    PlayerUtils.addClass(playButton,"pause");
+                    PlayerUtils.addClass(playButton, "pause");
 
                 }//If it's played
                 else {
                     this.sound.pause();
                     //playButton.classList.remove("pause");
-                    PlayerUtils.removeClass(playButton,"pause");
+                    PlayerUtils.removeClass(playButton, "pause");
 
                     //playButton.classList.add("play");
-                    PlayerUtils.addClass(playButton,"play");
+                    PlayerUtils.addClass(playButton, "play");
                 }
             }
         }
-        if(this.playerIsMute()){
+        if (this.playerIsMute()) {
             this.sound.mute();
-        }else{
+        } else {
             this.sound.unmute();
         }
 
         //Add 1 to the value of view if isn't done
         this.addView();
-
 
 
     } else {
@@ -799,7 +796,6 @@ Player.prototype.previous = function () {
     this.repaint();
     this.play_pause();
 };
-
 
 
 /**
