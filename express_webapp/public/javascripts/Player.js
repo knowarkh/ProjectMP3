@@ -722,10 +722,8 @@ Player.prototype.play_pause = function () {
             this.loadMusic();
 
             this.sound.play();
-            //playButton.getAttribute("class").remove("play");
             PlayerUtils.removeClass(playButton, "play");
-            //playButton.classList.add("pause");
-            PlayerUtils.addClass(document.querySelector(".audioplayer .like"),"ilikeit");
+            PlayerUtils.addClass(playButton, "pause");
 
         }
         //If a Sound is already set
