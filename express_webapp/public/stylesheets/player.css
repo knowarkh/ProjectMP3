@@ -574,7 +574,7 @@ body {
 }
 
 .audioplayer .playlist .tracklist .list .element .stats::before {
-    content: url("/images/_icons/nb_lectures/svg");
+    content: url("/images/_icons/nb_lectures.svg");
     vertical-align: top;
 }
 
