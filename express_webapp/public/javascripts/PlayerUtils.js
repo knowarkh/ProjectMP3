@@ -118,7 +118,7 @@ PlayerUtils.prototype.createNewEvent = function(eventName) {
 /**
  * Create a new event and apply it on a given target
  * @param eventName {String} - wanted event
- * @param target {HTMLObjectElement} - target
+ * @param target {Node} - target
  */
 PlayerUtils.prototype.createNewEventAndUseOnATarget = function(eventName, target){
     target.dispatchEvent(this.createNewEvent(eventName));
@@ -138,7 +138,7 @@ PlayerUtils.prototype.createNewEventAndUseOnTargets = function(eventName, target
 
 /**
  * Add a class to the given target
- * @param target {HTMLObjectElement} - object will be get the class
+ * @param target {Node} - object will be get the class
  * @param classToAdd {String} - class wanted to be added
  */
 PlayerUtils.prototype.addClass = function(target,classToAdd){
@@ -164,7 +164,7 @@ PlayerUtils.prototype.addClass = function(target,classToAdd){
 
 /**
  * Remove a class to the given target
- * @param target {HTMLObjectElement} - object will be lose the class
+ * @param target {Node} - object will be lose the class
  * @param classToRemove {String} - class wanted to be removed
  */
 PlayerUtils.prototype.removeClass = function(target, classToRemove){
@@ -200,7 +200,7 @@ PlayerUtils.prototype.removeClass = function(target, classToRemove){
 
 /**
  * Return if the target get a given class
- * @param target {HTMLObjectElement} - object will be check
+ * @param target {Node} - object will be check
  * @param classToCheck {String} - class wanted to be checked
  * @returns {boolean} - true if contains, false otherwise
  */
