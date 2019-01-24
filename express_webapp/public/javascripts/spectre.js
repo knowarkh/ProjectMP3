@@ -242,22 +242,38 @@ function createWaveForm(dotsList, percentilePlayed) {
 
             //Part which do the work
             if (numberOfDotsRemove === 1) {
+                //If the section of work is even
                 if (end - begin % 2 === 0) {
+                    //If one the working value is null don't use it and take the other value instead
                     var val1 = (dotList[end - 1] == null) ? dotList[end] : dotList[end - 1];
                     var val2 = (dotList[end] == null) ? dotList[end - 1] : dotList[end];
+                    //Do the average between the 2 values
                     var avgValue = (val1 + val2) / 2;
-                    dotList[end] = null; //Instead of removing the value, put a null, this will not edit the dotList in action and prevent some bugs
+                    //Instead of removing the value, put a null, this will not edit the dotList in action and prevent some bugs
+                    dotList[end] = null;
+                    //Use to prevent the value to be null in other recursive call
                     dotList[end - 1] = avgValue;
                 } else {
+                    //If one the working value is null don't use it and take the other value instead
                     var val1 = (dotList[begin + 1] == null) ? dotList[begin] : dotList[begin + 1];
                     var val2 = (dotList[begin] == null) ? dotList[begin + 1] : dotList[begin];
+                    //Do the average between the 2 values
                     var avgValue = (val1 + val2) / 2;
-                    dotList[begin] = null; //Instead of removing the value, put a null, this will not edit the dotList in action and prevent some bugs
+                    //Instead of removing the value, put a null, this will not edit the dotList in action and prevent some bugs
+                    dotList[begin] = null;
+                    //Use to prevent the value to be null in other recursive call
                     dotList[begin + 1] = avgValue;
                 }
             }
             //Call part
             else if (numberOfDotsRemove >= 2) {
+                /* If the number of value to remove is even, split the array in 2 equals parts and they will
+                 * remove the number of dots to remove / 2
+                 */
+                /* Otherwise also split the array in 2 equals part
+                 * give to the first call the first half and half-1 dots to remove
+                 * give to the second call the first half and half dots to remove
+                 */
                 if (numberOfDotsRemove % 2 === 0) {
                     //Math.floor and Math.ceil is used to do a great division of the array
                     transformAvgDotList(dotList, numberOfDotsRemove / 2, begin, Math.floor(begin / 2) + Math.floor(end / 2));
