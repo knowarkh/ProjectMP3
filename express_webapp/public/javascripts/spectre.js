@@ -270,14 +270,14 @@ function createWaveForm(dotsList, percentilePlayed) {
             //Part which do the work
             if (numberOfDotsRemove === 1) {
                 if (end - begin % 2 === 0) {
-                    var val1 = (dotList[end - 1] == null) ? dotList[end] : dotList[end - 1] * 0.9;
-                    var val2 = (dotList[end] == null) ? dotList[end - 1] : dotList[end] * 0.9;
+                    var val1 = (dotList[end - 1] == null) ? dotList[end] : dotList[end - 1];
+                    var val2 = (dotList[end] == null) ? dotList[end - 1] : dotList[end];
                     var avgValue = (val1 + val2) / 2;
                     dotList[end] = null; //Instead of removing the value, put a null, this will not edit the dotList in action and prevent some bugs
                     dotList[end - 1] = avgValue;
                 } else {
-                    var val1 = (dotList[begin + 1] == null) ? dotList[begin] : dotList[begin + 1] * 0.9;
-                    var val2 = (dotList[begin] == null) ? dotList[begin + 1] : dotList[begin] * 0.9;
+                    var val1 = (dotList[begin + 1] == null) ? dotList[begin] : dotList[begin + 1];
+                    var val2 = (dotList[begin] == null) ? dotList[begin + 1] : dotList[begin];
                     var avgValue = (val1 + val2) / 2;
                     dotList[begin] = null; //Instead of removing the value, put a null, this will not edit the dotList in action and prevent some bugs
                     dotList[begin + 1] = avgValue;
