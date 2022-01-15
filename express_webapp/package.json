@@ -19,7 +19,7 @@
     "mongoose": "^5.7.5",
     "morgan": "~1.9.0",
     "music-metadata": "^3.5.0",
-    "shelljs": "^0.8.3",
+    "shelljs": "^0.8.5",
     "sinon": "^7.1.1",
     "soundmanager2": "^2.97.20170602"
   }
