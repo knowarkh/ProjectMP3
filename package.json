@@ -5,7 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "express-generator": "^4.16.0",
-    "body-parser": "^1.18.3"
+    "body-parser": "^1.20.1"
   },
   "devDependencies": {},
   "scripts": {
